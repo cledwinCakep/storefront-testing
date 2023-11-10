@@ -1,0 +1,80 @@
+variables:
+  DOCKER_IMAGE: beli-esim-web
+  DOCKER_CONTAINER: beli-esim-web-container
+  AWS_ECS_CLUSTER: chaca-ecs-cluster
+  AWS_ECS_SERVICE: beli-esim-web
+  AWS_ECS_TASK_DEFINITION: beli-esim-web-td
+  IMAGE_REPO: 427335784772.dkr.ecr.ap-southeast-1.amazonaws.com/beli-esim-web
+  CREATE_DEPLOYMENT_SCRIPT_URL: https://gitlab.coinsbill.com/public-repository/ci-cd/-/raw/main/create-deployment.sh
+
+stages:
+  - build
+  - deploy
+
+before_script:
+  - aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 427335784772.dkr.ecr.ap-southeast-1.amazonaws.com
+
+build-development:
+  stage: build
+  only:
+    - development
+  script:
+    - docker build
+      --build-arg NEXT_PUBLIC_HOST_API=$HOST_API
+      --build-arg NEXT_PUBLIC_GOOGLE_ID=$NEXT_PUBLIC_GOOGLE_ID
+      --build-arg NEXT_PUBLIC_SMARTLOOK=$NEXT_PUBLIC_SMARTLOOK
+      -t $DOCKER_IMAGE:dev .
+  tags:
+    - $DEV_RUNNER_TAG
+
+deploy-development:
+  stage: deploy
+  only:
+    - development
+  script:
+    - docker container rm $DOCKER_CONTAINER -f
+    - docker run -d -p 5037:3000
+      --name=$DOCKER_CONTAINER
+      --network=chaca-network
+      --hostname=$DOCKER_CONTAINER
+      -e HOST_API=$HOST_API
+      -e NEXT_PUBLIC_GOOGLE_ID=$NEXT_PUBLIC_GOOGLE_ID
+      -e NEXT_PUBLIC_SMARTLOOK=$NEXT_PUBLIC_SMARTLOOK
+      $DOCKER_IMAGE:dev
+    - docker image prune --force
+  tags:
+    - $DEV_RUNNER_TAG
+
+build-production:
+  stage: build
+  only:
+    - main
+  script:
+    - docker build 
+      --build-arg NEXT_PUBLIC_HOST_API=$PROD_HOST_API
+      --build-arg NEXT_PUBLIC_GOOGLE_ID=$NEXT_PUBLIC_GOOGLE_ID
+      --build-arg NEXT_PUBLIC_SMARTLOOK=$NEXT_PUBLIC_SMARTLOOK
+      -t $DOCKER_IMAGE:latest .
+    - docker tag $DOCKER_IMAGE:latest $IMAGE_REPO:latest
+    - docker push $IMAGE_REPO:latest
+    - docker image rm $DOCKER_IMAGE:latest
+  tags:
+    - $DEV_RUNNER_TAG
+
+deploy-production:
+  stage: deploy
+  when: manual
+  only:
+    - main
+  script:
+    - ECS_DEPLOYMENT_ID=$(aws ecs update-service --cluster $AWS_ECS_CLUSTER
+      --service $AWS_ECS_SERVICE --task-definition $AWS_ECS_TASK_DEFINITION --force-new-deployment
+      --output text --query 'service.deployments[?status==`PRIMARY`].id')
+    - curl $CREATE_DEPLOYMENT_SCRIPT_URL -o create-deployment.sh
+    - bash create-deployment.sh $ECS_DEPLOYMENT_ID
+  retry:
+    when:
+      - always
+    max: 2
+  tags:
+    - $DEV_RUNNER_TAG

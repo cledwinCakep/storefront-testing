@@ -1,0 +1,167 @@
+import Image from "next/image";
+
+// context
+import Anchor from "@/components/atoms/Anchor/Anchor";
+import { useEffect, useState } from "react";
+import Text from "@/components/atoms/Text/Text";
+import { ChevronDown, ChevronUp, X } from "react-feather";
+import Button from "@/components/atoms/Button/Button";
+import Whatsapp from "@/components/icons/Whatsapp";
+import { useTranslations } from "next-intl";
+import { usePathname } from "next-intl/client";
+import { Translation } from "@/components/icons/Translation";
+import Link from "next-intl/link";
+
+export const NavbarMobileMenu = ({
+  params,
+}: {
+  params: { locale: string };
+}) => {
+  const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState<boolean>(true);
+  const t = useTranslations("Navbar");
+  const [isOpen, setOpen] = useState(false);
+  const pathname = usePathname();
+  const url = new URL(window.location.href);
+  const test = new URLSearchParams(url.search);
+
+  const plan = test.get("plan");
+  const data = test.get("data");
+  const duration = test.get("duration");
+
+  function handleChangeLanguage() {
+    setOpen(!isOpen);
+  }
+  const handleHamburgerMenuState = () => {
+    setIsHamburgerMenuOpen(!isHamburgerMenuOpen);
+  };
+
+  useEffect(() => {
+    setIsHamburgerMenuOpen(false);
+  }, []);
+
+  return (
+    <div className="relative z-50 flex  w-full items-center justify-center border-b-[1px] border-stone-200 bg-white px-4 py-3 lg:hidden ">
+      <div className="flex w-full flex-row justify-between md:max-w-[1180px]">
+        <Anchor href="/" className="px-[0px] py-[0px]">
+          <Image
+            src="/logo-beliesim.svg"
+            alt="beliesim"
+            width={142}
+            height={48}
+          />
+        </Anchor>
+
+        <button
+          className="[&>div:nth-child(2)]:my-1 [&>div]:h-[2px] [&>div]:w-6 [&>div]:rounded-2xl [&>div]:bg-[#333]"
+          onClick={handleHamburgerMenuState}
+        >
+          <div></div>
+          <div></div>
+          <div></div>
+        </button>
+      </div>
+
+      <div
+        className={`${
+          isHamburgerMenuOpen ? "block " : "hidden"
+        } fixed bottom-0 left-0 right-0 top-0 z-10  w-full overflow-auto bg-white `}
+      >
+        <div className="flex flex-col ">
+          <div className="flex flex-row items-center justify-between  px-6 py-6">
+            <Text as="subHeading1" className="font-bold">
+              Menu
+            </Text>
+            <X onClick={handleHamburgerMenuState} />
+          </div>
+          <div className="flex flex-col gap-3 border-b-[1px] border-stone-200  px-6 py-6">
+            <Link
+              href={
+                "https://api.whatsapp.com/send?phone=6282339909564&text=Hallo%20min%2C%20saya%20mau%20beli%20eSIM%20untuk%20traveling"
+              }
+              className="w-full"
+            >
+              <Button
+                color="black"
+                size="xs"
+                iconLeft={<Whatsapp color="white" />}
+                className="w-full"
+              >
+                {t("navbar_contactUs")}
+              </Button>
+            </Link>
+            <div
+              className="flex w-full cursor-pointer flex-row justify-between rounded-[124px] border-[1px] border-stone-300 p-4"
+              onClick={handleChangeLanguage}
+            >
+              <div className="flex max-w-[179px] flex-row items-center justify-center">
+                <Translation />
+                <Text as="body2" className="mx-2 font-bold">
+                  {params.locale == "id" ? "Indonesia" : "English"}
+                </Text>
+              </div>
+              {isOpen ? <ChevronDown /> : <ChevronUp />}
+            </div>
+            <div
+              className={` h-full flex-col ${
+                isOpen ? "flex" : "hidden"
+              } left-0 top-[50px] z-50 rounded-[4px] bg-zinc-100 transition-all ease-in-out`}
+            >
+              <Link
+                locale="en"
+                href={`${
+                  pathname.split("/").includes("plans")
+                    ? pathname +
+                      "?" +
+                      `plan=${plan}&data=${data}&duration=${duration}`
+                    : pathname
+                }`}
+              >
+                <div className="w-full cursor-pointer p-[20px] hover:bg-[#DDDDDE]">
+                  English
+                </div>
+              </Link>
+              <Link
+                locale="id"
+                href={`${
+                  pathname.split("/").includes("plans")
+                    ? pathname +
+                      "?" +
+                      `plan=${plan}&data=${data}&duration=${duration}`
+                    : pathname
+                }`}
+              >
+                <div className="w-full cursor-pointer p-[20px] hover:bg-[#DDDDDE]">
+                  Indonesia
+                </div>
+              </Link>
+            </div>
+          </div>
+          <div
+            className="flex flex-col border-b-[1px] border-stone-200 "
+            onClick={handleHamburgerMenuState}
+          >
+            <Anchor href={pathname.split("/")[1] != "" ? "/" : "#destination"}>
+              {t("navbar_destination")}
+            </Anchor>
+          </div>
+          <div
+            className="flex flex-col border-b-[1px] border-stone-200 "
+            onClick={handleHamburgerMenuState}
+          >
+            <Anchor href={pathname.split("/")[1] != "" ? "/" : "#payment"}>
+              {t("navbar_payment")}
+            </Anchor>
+          </div>
+          <div
+            className="flex flex-col border-b-[1px] border-stone-200"
+            onClick={handleHamburgerMenuState}
+          >
+            <Anchor href={pathname.split("/")[1] != "" ? "/" : "#how-it-works"}>
+              {t("navbar_howItWorks")}
+            </Anchor>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
