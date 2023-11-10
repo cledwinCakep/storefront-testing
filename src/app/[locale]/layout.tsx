@@ -75,7 +75,7 @@ export default function RootLayout({
         />
       </head>
 
-      <body>
+      <body className="bg-black">
         <GoogleAnalytics keys={process.env.NEXT_PUBLIC_GOOGLE_ID} />
         <NextIntlClientProvider locale={params.locale} messages={messages}>
           {children}

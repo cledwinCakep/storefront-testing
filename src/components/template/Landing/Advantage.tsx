@@ -18,8 +18,8 @@ import { useTranslations } from "next-intl";
 const Partners = () => {
   const t = useTranslations("Homepage");
   return (
-    <div className="h-full w-full bg-orange-100 py-14">
-      <Layout className="grid grid-cols-2 gap-[10px] sm:grid-cols-2 md:grid-cols-4">
+    <div className="h-full w-full bg-black border-b-[1px] border-gray-600 py-10">
+      <Layout className="grid grid-cols-2 gap-[10px] sm:grid-cols-2 md:grid-cols-4 bg-black">
         <AdvantageCard
           icon={<Rocket />}
           title={t("hero_benefitOneTitle")}

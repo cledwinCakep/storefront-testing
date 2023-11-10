@@ -215,14 +215,13 @@ const Guide = () => {
       <div
         id="how-it-works"
         className="bg-lightgray flex h-full w-full flex-col bg-cover bg-bottom bg-no-repeat px-2"
-        style={{ backgroundImage: "url(/bg-footer.png)" }}
       >
         <div className="flex flex-col items-center justify-center gap-12 py-[80px]">
           <div className="gap-8 space-y-8">
-            <Text as="h3" className="text-center font-bold sm:text-[44px]">
+            <Text as="h3" className="text-center font-bold sm:text-[44px] text-gray-100">
               {t("cta_howToUseTitle")}
             </Text>
-            <Text as="body1" className="text-center font-medium text-stone-600">
+            <Text as="body1" className="text-center font-medium text-gray-300">
               {t("cta_howToUseDesc")}
             </Text>
           </div>

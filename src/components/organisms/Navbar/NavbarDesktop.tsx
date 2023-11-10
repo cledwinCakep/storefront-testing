@@ -33,15 +33,15 @@ const NavbarDesktop = ({ params }: { params: { locale: string } }) => {
   const duration = test.get("duration");
 
   return (
-    <div className="hidden w-full items-center justify-center border-b-[1px] border-stone-200 bg-white px-4 py-3 lg:flex ">
+    <div className="hidden w-full items-center justify-center border-b-[1px] border-gray-600 bg-black px-4 py-3 lg:flex ">
       <div className="flex w-full flex-row justify-between md:max-w-[1180px]">
         <div className="flex flex-row gap-14">
-          <Anchor href="/" className="px-[0px] py-[0px]">
+          <Anchor href="/" className="px-[0px] py-[0px] flex">
             <Image
-              src="/logo-beliesim.svg"
+              src="/logo-superalink.svg"
               alt="beliesim"
-              width={142}
-              height={48}
+              width={151.77}
+              height={21.95}
             />
           </Anchor>
           <div className=" flex  flex-row items-center justify-center gap-6">

@@ -46,7 +46,7 @@ const Button = ({
       className={twMerge(
         `${BUTTON_COLORS[color as keyof typeof BUTTON_COLORS]} ${
           BUTTON_SIZES[size as keyof typeof BUTTON_SIZES]
-        } group flex items-center justify-center gap-2 rounded-[40px] border-[1.33px] px-6 font-bold`,
+        } group flex items-center justify-center gap-2 rounded-[40px] px-6 font-bold`,
         className
       )}
     >

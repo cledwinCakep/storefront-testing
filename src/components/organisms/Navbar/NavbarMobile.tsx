@@ -40,19 +40,19 @@ export const NavbarMobileMenu = ({
   }, []);
 
   return (
-    <div className="relative z-50 flex  w-full items-center justify-center border-b-[1px] border-stone-200 bg-white px-4 py-3 lg:hidden ">
-      <div className="flex w-full flex-row justify-between md:max-w-[1180px]">
+    <div className="relative z-50 flex h-[78px] w-full items-center justify-center border-b-[1px]  border-gray-600 bg-black px-4 py-3 lg:hidden ">
+      <div className="flex h-full w-full flex-row justify-between md:max-w-[1180px] items-center">
         <Anchor href="/" className="px-[0px] py-[0px]">
           <Image
-            src="/logo-beliesim.svg"
+            src="/logo-superalink.svg"
             alt="beliesim"
-            width={142}
-            height={48}
+            width={151.77}
+            height={21.95}
           />
         </Anchor>
 
         <button
-          className="[&>div:nth-child(2)]:my-1 [&>div]:h-[2px] [&>div]:w-6 [&>div]:rounded-2xl [&>div]:bg-[#333]"
+          className="[&>div:nth-child(2)]:my-1 [&>div]:h-[2px] [&>div]:w-6 [&>div]:rounded-2xl [&>div]:bg-gray-100"
           onClick={handleHamburgerMenuState}
         >
           <div></div>
@@ -64,14 +64,14 @@ export const NavbarMobileMenu = ({
       <div
         className={`${
           isHamburgerMenuOpen ? "block " : "hidden"
-        } fixed bottom-0 left-0 right-0 top-0 z-10  w-full overflow-auto bg-white `}
+        } fixed bottom-0 left-0 right-0 top-0 z-10  w-full overflow-auto bg-black `}
       >
         <div className="flex flex-col ">
           <div className="flex flex-row items-center justify-between  px-6 py-6">
-            <Text as="subHeading1" className="font-bold">
+            <Text as="subHeading1" className="font-bold text-white">
               Menu
             </Text>
-            <X onClick={handleHamburgerMenuState} />
+            <X onClick={handleHamburgerMenuState} className="text-white" />
           </div>
           <div className="flex flex-col gap-3 border-b-[1px] border-stone-200  px-6 py-6">
             <Link
@@ -90,7 +90,7 @@ export const NavbarMobileMenu = ({
               </Button>
             </Link>
             <div
-              className="flex w-full cursor-pointer flex-row justify-between rounded-[124px] border-[1px] border-stone-300 p-4"
+              className="flex w-full cursor-pointer flex-row justify-between rounded-[124px] border-[1px] border-stone-300 p-4 text-white "
               onClick={handleChangeLanguage}
             >
               <div className="flex max-w-[179px] flex-row items-center justify-center">
@@ -102,9 +102,9 @@ export const NavbarMobileMenu = ({
               {isOpen ? <ChevronDown /> : <ChevronUp />}
             </div>
             <div
-              className={` h-full flex-col ${
+              className={`h-full flex-col ${
                 isOpen ? "flex" : "hidden"
-              } left-0 top-[50px] z-50 rounded-[4px] bg-zinc-100 transition-all ease-in-out`}
+              } left-0 top-[50px] z-50 rounded-[4px] bg-[#555] text-white transition-all ease-in-out`}
             >
               <Link
                 locale="en"
@@ -116,7 +116,7 @@ export const NavbarMobileMenu = ({
                     : pathname
                 }`}
               >
-                <div className="w-full cursor-pointer p-[20px] hover:bg-[#DDDDDE]">
+                <div className="w-full cursor-pointer p-[20px] hover:bg-[#DDDDDE] hover:text-black">
                   English
                 </div>
               </Link>
@@ -130,7 +130,7 @@ export const NavbarMobileMenu = ({
                     : pathname
                 }`}
               >
-                <div className="w-full cursor-pointer p-[20px] hover:bg-[#DDDDDE]">
+                <div className="w-full cursor-pointer p-[20px] hover:bg-[#DDDDDE] hover:text-black">
                   Indonesia
                 </div>
               </Link>
