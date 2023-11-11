@@ -164,7 +164,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
           />
         </div>
 
-        <div className="relative sticky top-0 hidden h-full sm:col-start-3 sm:row-start-1 sm:block md:col-start-4   ">
+        <div className="sticky top-0 hidden h-full sm:col-start-3 sm:row-start-1 sm:block md:col-start-4   ">
           <div className="sticky top-2 w-full rounded-lg border-[1px] border-stone-300 bg-white px-4 py-5">
             <div className="space-y-6">
               <Text as="subHeading2" className="font-bold text-stone-900">

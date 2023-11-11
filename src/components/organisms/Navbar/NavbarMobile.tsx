@@ -41,7 +41,7 @@ export const NavbarMobileMenu = ({
 
   return (
     <div className="relative z-50 flex h-[78px] w-full items-center justify-center border-b-[1px]  border-gray-600 bg-black px-4 py-3 lg:hidden ">
-      <div className="flex h-full w-full flex-row justify-between md:max-w-[1180px] items-center">
+      <div className="flex h-full w-full flex-row items-center justify-between md:max-w-[1180px]">
         <Anchor href="/" className="px-[0px] py-[0px]">
           <Image
             src="/logo-superalink.svg"
@@ -81,7 +81,7 @@ export const NavbarMobileMenu = ({
               className="w-full"
             >
               <Button
-                color="black"
+                color="orange"
                 size="xs"
                 iconLeft={<Whatsapp color="white" />}
                 className="w-full"
