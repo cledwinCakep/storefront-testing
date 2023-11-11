@@ -4,7 +4,7 @@ interface iconProps {
 
 const Whatsapp = ({ color }: iconProps) => {
   const ICON_COLORS = {
-    white: { stroke: "orange", fill: "white" },
+    white: { stroke: "#F97316", fill: "white" },
     black: { stroke: "white", fill: "black" },
   };
 

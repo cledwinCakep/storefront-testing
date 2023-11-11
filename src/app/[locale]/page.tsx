@@ -2,7 +2,7 @@ import React from "react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "BELIESIM – eSIM Luar Negeri Beli di Indonesia",
+  title: "Supera link – eSIM Luar Negeri Beli di Indonesia",
   description:
     "Beli SIM card (eSIM) travel untuk internetan di luar negeri lebih mudah dan praktis. Mau ke Luar Negeri? Beli eSIMnya di BELIESIM dong!",
   openGraph: {

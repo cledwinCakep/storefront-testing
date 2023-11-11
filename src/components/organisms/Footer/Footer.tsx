@@ -14,7 +14,7 @@ const Footer = () => {
       <Layout className="flex w-full flex-col-reverse items-center justify-between gap-2 py-6 md:flex-row">
         <Text
           as="body1"
-          className="text-wrap text-center font-medium text-stone-400"
+          className="text-wrap text-center font-medium text-gray-500"
         >
           &copy; {new Date().getFullYear()}. PT. Cakeplabs Global Teknologi
         </Text>
