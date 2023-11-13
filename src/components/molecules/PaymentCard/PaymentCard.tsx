@@ -15,14 +15,14 @@ export const PaymentCardSuccess = () => {
     <>
       <div className="max-w-[445px] rounded-md bg-white px-11 py-14">
         <div className="flex flex-col items-center justify-center gap-14">
-          <div className=" flex w-max items-center justify-center rounded-md bg-zinc-100 p-3">
+          <div className=" flex w-max items-center justify-center rounded-md bg-gray-100 p-3">
             <CheckmarkSucess />
           </div>
           <div className="flex flex-col gap-3">
             <Text as="subHeading1" className="text-center font-bold">
               {t("payment_paymentSuccessTitle")}
             </Text>
-            <Text as="body1" className="text-center text-stone-500">
+            <Text as="body1" className="text-center text-gray-500">
               {t("payment_paymentSuccessDesc")}
             </Text>
           </div>
@@ -32,7 +32,7 @@ export const PaymentCardSuccess = () => {
             </Button>
           </Link>
           <div className="max-w-[300px]">
-            <Text as="body1" className="text-center text-stone-500">
+            <Text as="body1" className="text-center text-gray-500">
               {t("payment_detailsContactUs")}{" "}
               <Link
                 href={
@@ -57,14 +57,14 @@ export const PaymentCardFailed = () => {
     <>
       <div className="max-w-[445px] rounded-md bg-white px-11 py-14">
         <div className="flex flex-col items-center justify-center gap-14">
-          <div className=" flex w-max items-center justify-center rounded-md bg-zinc-100 p-3">
+          <div className=" flex w-max items-center justify-center rounded-md bg-gray-100 p-3">
             <CheckmarkFailed />
           </div>
           <div className="flex flex-col gap-3">
             <Text as="subHeading1" className="text-center font-bold">
               {t("payment_paymentFailedTitle")}
             </Text>
-            <Text as="body1" className="text-center text-stone-500">
+            <Text as="body1" className="text-center text-gray-500">
               {t("payment_paymentFailedDesc")}
             </Text>
           </div>

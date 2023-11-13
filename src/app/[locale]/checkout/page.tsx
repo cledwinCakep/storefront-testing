@@ -206,7 +206,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
               <Text as="body1" className="mb-3 mt-6 font-bold">
                 {t("checkout_orderEmptyTitle")}
               </Text>
-              <Text as="body2" className="mb-8 text-center text-stone-500">
+              <Text as="body2" className="mb-8 text-center text-gray-500">
                 {t("checkout_orderEmptyDesc")}
               </Text>
               <Button

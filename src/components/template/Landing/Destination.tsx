@@ -39,10 +39,10 @@ const Partners = () => {
     <Layout id="destination">
       <div className="flex h-full flex-col items-center justify-center gap-10 py-20">
         <div className="flex flex-col gap-8">
-          <Text as="h3" className="text-center font-bold sm:text-[2.75rem]">
+          <Text as="h3" className="text-center font-bold sm:text-[2.75rem] text-gray-100">
             {t("hero_destinationTitle")}
           </Text>
-          <Text as="body1" className="text-center">
+          <Text as="body1" className="text-center text-gray-300">
             {t("hero_destinationDesc")}
           </Text>
         </div>

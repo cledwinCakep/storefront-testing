@@ -19,22 +19,22 @@ const PriceInfo = ({ image, title, price }: PriceInfoProps) => {
     <div className="relative flex w-full items-center gap-5 sm:flex-col sm:items-start">
       <Image src={image} alt={image} width={64} height={64} />
       <div>
-        <Text as="subHeading1" className="mb-6 font-medium">
+        <Text as="subHeading1" className="mb-6 font-medium text-gray-200">
           {title}
         </Text>
-        <Text as="small" className="mb-3 font-normal text-stone-400">
+        <Text as="small" className="mb-3 font-normal text-gray-400">
           {t("hero_destinationStart")}
         </Text>
         <span className="flex items-end gap-x-1">
-          <Text as="subHeading2" className="font-black">
+          <Text as="subHeading2" className="font-black text-gray-100">
             {price}
           </Text>
-          <Text as="body2" className="font-normal uppercase text-stone-400">
+          <Text as="body2" className="font-normal uppercase text-gray-400">
             IDR
           </Text>
         </span>
       </div>
-      <ArrowRight size={24} className="absolute right-0 top-0 text-stone-600" />
+      <ArrowRight size={24} className="absolute right-0 top-0 text-gray-200" />
     </div>
   );
 };

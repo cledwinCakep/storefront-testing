@@ -73,7 +73,7 @@ export const NavbarMobileMenu = ({
             </Text>
             <X onClick={handleHamburgerMenuState} className="text-white" />
           </div>
-          <div className="flex flex-col gap-3 border-b-[1px] border-stone-200  px-6 py-6">
+          <div className="flex flex-col gap-3 border-b-[1px] border-gray-200  px-6 py-6">
             <Link
               href={
                 "https://api.whatsapp.com/send?phone=6282339909564&text=Hallo%20min%2C%20saya%20mau%20beli%20eSIM%20untuk%20traveling"
@@ -90,7 +90,7 @@ export const NavbarMobileMenu = ({
               </Button>
             </Link>
             <div
-              className="flex w-full cursor-pointer flex-row justify-between rounded-[124px] border-[1px] border-stone-300 p-4 text-white "
+              className="flex w-full cursor-pointer flex-row justify-between rounded-[124px] border-[1px] border-gray-300 p-4 text-white "
               onClick={handleChangeLanguage}
             >
               <div className="flex max-w-[179px] flex-row items-center justify-center">
@@ -137,7 +137,7 @@ export const NavbarMobileMenu = ({
             </div>
           </div>
           <div
-            className="flex flex-col border-b-[1px] border-stone-200 "
+            className="flex flex-col border-b-[1px] border-gray-200 "
             onClick={handleHamburgerMenuState}
           >
             <Anchor href={pathname.split("/")[1] != "" ? "/" : "#destination"}>
@@ -145,7 +145,7 @@ export const NavbarMobileMenu = ({
             </Anchor>
           </div>
           <div
-            className="flex flex-col border-b-[1px] border-stone-200 "
+            className="flex flex-col border-b-[1px] border-gray-200 "
             onClick={handleHamburgerMenuState}
           >
             <Anchor href={pathname.split("/")[1] != "" ? "/" : "#payment"}>
@@ -153,7 +153,7 @@ export const NavbarMobileMenu = ({
             </Anchor>
           </div>
           <div
-            className="flex flex-col border-b-[1px] border-stone-200"
+            className="flex flex-col border-b-[1px] border-gray-200"
             onClick={handleHamburgerMenuState}
           >
             <Anchor href={pathname.split("/")[1] != "" ? "/" : "#how-it-works"}>

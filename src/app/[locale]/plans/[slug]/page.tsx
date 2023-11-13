@@ -27,9 +27,9 @@ const PlanDetail = ({ params }: { params: any }) => {
   const t = useTranslations("PlanDetail");
   return (
     <PlanContext.Provider value={planHook}>
-      <div className="relative space-y-6 pb-[152px] sm:pb-0">
+      <div className="relative space-y-6 pb-[152px] sm:pb-0 ">
         <Navbar params={params} />
-        <div className="pt-[80px]">
+        <div className="pt-[54px]">
           <Layout>
             <Breadcrumb>
               <BreadcrumbItem isHome />

@@ -26,14 +26,14 @@ const Device = ({ data }: DeviceProps) => {
 
   return (
     <div className="w-full">
-      <div className="flex w-full border-b-[1px] border-b-zinc-200 text-zinc-400">
+      <div className="flex w-full border-b-[1px] border-b-gray-200 text-gray-400">
         {data.map((data, i) => (
           <button
             key={i}
             className={`w-full py-6 font-bold ${
               i === currentlySelected
-                ? "border-b-2 border-stone-900 text-stone-900"
-                : "border-b-[1px] border-b-zinc-200 text-zinc-400"
+                ? "border-b-2 border-gray-900 text-gray-900"
+                : "border-b-[1px] border-b-gray-200 text-gray-400"
             }`}
             onClick={() => handleCurrentlyActiveTab(i)}
           >

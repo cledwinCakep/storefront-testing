@@ -71,7 +71,7 @@ const NavbarDesktop = ({ params }: { params: { locale: string } }) => {
             <div
               className={`absolute flex-col ${
                 isOpen ? "flex" : "hidden"
-              } left-0 top-[40px] z-50 rounded-[4px] bg-zinc-100 transition-all ease-in-out`}
+              } left-0 top-[40px] z-50 rounded-[4px] bg-gray-100 transition-all ease-in-out`}
             >
               <Link
                 locale="en"

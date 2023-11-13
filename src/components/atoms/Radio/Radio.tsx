@@ -44,15 +44,15 @@ const Radio = ({
         }`}
       />
       <span
-        className={`absolute left-0 top-0 z-0 h-full w-full rounded-lg border-[1px] peer-checked/radio:border-orange-500 peer-checked/radio:bg-orange-50 peer-hover/radio:border-orange-500 ${
-          isDisabled ? "border-0 bg-zinc-200" : "border-stone-500"
+        className={`absolute left-0 top-0 z-0 h-full w-full rounded-lg border-[1px] peer-checked/radio:border-gray-500 peer-checked/radio:bg-gray-700 peer-hover/radio:border-gray-500 ${
+          isDisabled ? "border-0 bg-gray-700" : "border-gray-500"
         }`}
       />
 
       <label
         htmlFor={label}
-        className={`z-10 cursor-pointer whitespace-nowrap font-medium peer-checked/radio:text-orange-500 peer-hover/radio:text-orange-500 ${
-          isDisabled ? "text-zinc-500" : "text-zinc-700"
+        className={`z-10 cursor-pointer whitespace-nowrap font-medium peer-checked/radio:text-gray-100 peer-hover/radio:text-gray-100 ${
+          isDisabled ? "text-gray-100" : "text-gray-500"
         }`}
       >
         <Text as="body1">{label}</Text>
@@ -60,11 +60,11 @@ const Radio = ({
 
       <span
         className={`relative block h-4 w-4 rounded-full border-[1px] p-1 peer-checked/radio:hidden peer-hover/radio:border-orange-500 ${
-          isDisabled ? "border-zinc-500" : "border-stone-700"
+          isDisabled ? "border-gray-500" : "border-gray-400"
         }`}
       />
 
-      <span className="relative hidden h-4 w-4 rounded-full border-[1px] border-stone-500 p-1 peer-checked/radio:block peer-checked/radio:border-orange-500 peer-hover/radio:border-orange-500">
+      <span className="relative hidden h-4 w-4 rounded-full border-[1px] border-gray-500 p-1 peer-checked/radio:block peer-checked/radio:border-orange-500 peer-hover/radio:border-orange-500">
         <span className="absolute left-1/2 top-1/2 h-[10px] w-[10px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-orange-500" />
       </span>
     </div>

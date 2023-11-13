@@ -19,18 +19,18 @@ const CheckoutCard = ({
 }: CheckoutCardProps) => {
   const t = useTranslations("Checkout");
   return (
-    <div className="flex w-full max-w-[380px] flex-col flex-col rounded-lg border border-stone-300 px-4 py-5">
+    <div className="flex w-full max-w-[380px] flex-col flex-col rounded-lg border border-gray-300 px-4 py-5">
       <input
         placeholder={t("checkout_email")}
         onChange={(e) => handleInputEmail(e)}
         className={
           isEmpty
             ? "mb-4 rounded-md border border-red-500 px-3 py-2"
-            : "mb-4 rounded-md border border-stone-400 px-3 py-2"
+            : "mb-4 rounded-md border border-gray-400 px-3 py-2"
         }
       />
       {isEmpty && <div className="px-2 text-red-500">{isEmpty}</div>}
-      <Text as="body2" className=" mt-4 px-2 text-stone-500">
+      <Text as="body2" className=" mt-4 px-2 text-gray-500">
         {t("checkout_emailDesc")}
       </Text>
       <Button
@@ -41,7 +41,7 @@ const CheckoutCard = ({
       >
         {t("checkout_continueToPayment")}
       </Button>
-      <Text as="small" className="mb-3 text-zinc-400">
+      <Text as="small" className="mb-3 text-gray-400">
         {t("checkout_checkoutSecurely")}
       </Text>
       <div className="max-w-[384px]">

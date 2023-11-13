@@ -38,7 +38,7 @@ const Purchaseinfo = ({
           style={{ objectFit: "contain", maxHeight: "100px" }}
         />
         <div className="flex flex-col">
-          <Text as="body2" className="text-stone-500">
+          <Text as="body2" className="text-gray-500">
             {destination}
           </Text>
           <Text

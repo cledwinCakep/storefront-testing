@@ -27,9 +27,9 @@ const Button = ({
     orange:
       "bg-orange-500 text-slate-50 hover:bg-transparent hover:border-orange-500 hover:text-orange-500",
     black:
-      "bg-stone-800 text-slate-50 hover:bg-stone-700 border-stone-800 hover:border-stone-700",
+      "bg-gray-800 text-slate-50 hover:bg-gray-700 border-gray-800 hover:border-gray-700",
     white:
-      "bg-slate-50 text-stone-900 hover:bg-slate-50 border-slate-50 hover:border-slate-50",
+      "bg-slate-50 text-gray-900 hover:bg-slate-50 border-slate-50 hover:border-slate-50",
   };
 
   const BUTTON_SIZES = {

@@ -45,7 +45,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
         }}
       />
       <Layout className="space-y-8 sm:grid sm:grid-cols-3 sm:gap-5 sm:space-y-0 md:grid-cols-4">
-        <div className="relative hidden h-full w-full  border-stone-300 sm:col-span-2 sm:col-start-1 sm:block md:col-span-1 md:col-start-1 md:row-start-1 md:h-[430px] md:w-full">
+        <div className="relative hidden h-full w-full  border-gray-300 sm:col-span-2 sm:col-start-1 sm:block md:col-span-1 md:col-start-1 md:row-start-1 md:h-[430px] md:w-full">
           <Image
             src={`/${country?.toLowerCase()}_plan.png`}
             alt={country?.toLowerCase()}
@@ -59,10 +59,10 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
 
         <div className="space-y-8 sm:col-span-2 sm:col-start-1 md:col-span-2 md:col-start-2 md:row-start-1">
           <div className="sm:mt-8 md:mt-0">
-            <Text as="subHeading1" className="font-bold text-stone-700">
+            <Text as="subHeading1" className="font-bold text-gray-100">
               {country} eSim Data Plan
             </Text>
-            <Text as="small" className="font-medium text-stone-500">
+            <Text as="small" className="font-medium text-gray-400">
               {t("planDetail_detailDesc")}
             </Text>
           </div>
@@ -165,12 +165,12 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
         </div>
 
         <div className="sticky top-0 hidden h-full sm:col-start-3 sm:row-start-1 sm:block md:col-start-4   ">
-          <div className="sticky top-2 w-full rounded-lg border-[1px] border-stone-300 bg-white px-4 py-5">
+          <div className="sticky top-2 w-full rounded-lg border-[1px] border-gray-300 bg-white px-4 py-5">
             <div className="space-y-6">
-              <Text as="subHeading2" className="font-bold text-stone-900">
+              <Text as="subHeading2" className="font-bold text-gray-900">
                 {t("planDetail_orderInformation")}
               </Text>
-              <Text as="small" className="font-medium text-stone-500">
+              <Text as="small" className="font-medium text-gray-500">
                 {`${
                   currentSelected.plan.value === "UNLIMITED"
                     ? "Daily Unlimited Plan"
@@ -215,10 +215,10 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
               </div>
 
               <div className="flex w-full flex-col justify-between lg:flex-row lg:items-center">
-                <Text as="body1" className="font-medium text-stone-500">
+                <Text as="body1" className="font-medium text-gray-500">
                   Subtotal
                 </Text>
-                <Text as="body1" className="text-xl font-black text-stone-900">
+                <Text as="body1" className="text-xl font-black text-gray-900">
                   {subtotal.toLocaleString("id-ID", {
                     style: "currency",
                     currency: "IDR",
