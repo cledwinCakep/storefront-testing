@@ -33,7 +33,7 @@ const Partners = () => {
               color="orange"
               size="lg"
               iconRight={<ArrowRight size={24} />}
-              className="w-max sm:mr-auto"
+              className="w-max sm:mr-auto h-12"
             >
               {t("hero_heroButton")}
             </Button>
@@ -44,6 +44,7 @@ const Partners = () => {
           alt="Hero Illust"
           width={480}
           height={480}
+          priority
         />
       </div>
     </Layout>

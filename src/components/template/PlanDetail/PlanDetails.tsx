@@ -43,12 +43,14 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
         style={{
           objectFit: "cover",
         }}
+        priority
       />
       <Layout className="space-y-8 sm:grid sm:grid-cols-3 sm:gap-5 sm:space-y-0 md:grid-cols-4">
         <div className="relative hidden h-full w-full  border-gray-300 sm:col-span-2 sm:col-start-1 sm:block md:col-span-1 md:col-start-1 md:row-start-1 md:h-[430px] md:w-full">
           <Image
             src={`/${country?.toLowerCase()}_plan.png`}
             alt={country?.toLowerCase()}
+            priority
             fill
             style={{
               objectFit: "cover",
