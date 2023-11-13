@@ -17,7 +17,7 @@ const PriceInfo = ({ image, title, price }: PriceInfoProps) => {
   const t = useTranslations("Homepage");
   return (
     <div className="relative flex w-full items-center gap-5 sm:flex-col sm:items-start">
-      <Image src={image} alt={image} width={64} height={64} />
+      <Image src={image} alt={image} width={64} height={64} priority/>
       <div>
         <Text as="subHeading1" className="mb-6 font-medium text-gray-200">
           {title}

@@ -36,6 +36,7 @@ const Purchaseinfo = ({
           width={100}
           height={100}
           style={{ objectFit: "contain", maxHeight: "100px" }}
+          priority
         />
         <div className="flex flex-col">
           <Text as="body2" className="text-gray-500">
@@ -72,7 +73,7 @@ const Purchaseinfo = ({
             {order}
           </Text>
           <button
-            className={`flex  h-6 w-6 items-center justify-center rounded-md font-bold font-bold ${"bg-orange-500"} text-white`}
+            className={`flex  h-6 w-6 items-center justify-center rounded-md font-bold ${"bg-orange-500"} text-white`}
             onClick={() => handleOrder("increase")}
           >
             <Text as="body1">+</Text>
