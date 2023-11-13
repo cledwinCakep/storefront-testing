@@ -42,6 +42,7 @@ const Partnerbanner = ({
             alt={`${dt} icon`}
             width={width}
             height={height}
+            priority
           />
         ))}
       </div>
@@ -53,6 +54,7 @@ const Partnerbanner = ({
           width={398}
           height={192}
           style={{ width: "100%", objectFit: "cover" }}
+          priority
         />
       </div>
     </>

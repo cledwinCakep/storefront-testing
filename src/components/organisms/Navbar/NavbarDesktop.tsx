@@ -42,6 +42,7 @@ const NavbarDesktop = ({ params }: { params: { locale: string } }) => {
               alt="beliesim"
               width={151.77}
               height={21.95}
+              priority
             />
           </Anchor>
           <div className=" flex  flex-row items-center justify-center gap-6">

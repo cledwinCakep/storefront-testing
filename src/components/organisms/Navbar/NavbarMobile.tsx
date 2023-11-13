@@ -48,6 +48,7 @@ export const NavbarMobileMenu = ({
             alt="beliesim"
             width={151.77}
             height={21.95}
+            priority
           />
         </Anchor>
 
