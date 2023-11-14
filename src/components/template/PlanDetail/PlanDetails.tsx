@@ -45,7 +45,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
         }}
         priority
       />
-      <Layout className="space-y-8 sm:grid sm:grid-cols-3 sm:gap-5 sm:space-y-0 md:grid-cols-4">
+      <Layout className="space-y-8 sm:grid sm:grid-cols-3 sm:gap-5 sm:space-y-0 md:grid-cols-4 border-b-[1px] border-gray-500">
         <div className="relative hidden h-full w-full  border-gray-300 sm:col-span-2 sm:col-start-1 sm:block md:col-span-1 md:col-start-1 md:row-start-1 md:h-[430px] md:w-full">
           <Image
             src={`/${country?.toLowerCase()}_plan.png`}
@@ -195,7 +195,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
               <div className="flex items-center gap-4">
                 <button
                   className={`flex items-center rounded-lg px-3 py-1 font-bold ${
-                    order <= 1 ? "bg-orange-200" : "bg-orange-500"
+                    order <= 1 ? "bg-gray-300" : "bg-orange-500"
                   } text-white`}
                   disabled={order <= 1 ? true : false}
                   onClick={() => handleOrder("decrease")}
@@ -207,7 +207,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
                 </Text>
                 <button
                   className={`flex items-center rounded-lg px-3 py-1 font-bold ${
-                    increaseButton ? "bg-orange-200" : "bg-orange-500"
+                    increaseButton ? "bg-gray-300" : "bg-orange-500"
                   } text-white`}
                   disabled={increaseButton ? true : false}
                   onClick={() => handleOrder("increase")}
