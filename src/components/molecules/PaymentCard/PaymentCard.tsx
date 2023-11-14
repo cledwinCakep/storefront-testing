@@ -55,16 +55,16 @@ export const PaymentCardFailed = () => {
   const t = useTranslations("Payment");
   return (
     <>
-      <div className="max-w-[445px] rounded-md bg-white px-11 py-14">
+      <div className="max-w-[445px] rounded-md bg-gray-700 px-11 py-14">
         <div className="flex flex-col items-center justify-center gap-14">
-          <div className=" flex w-max items-center justify-center rounded-md bg-gray-100 p-3">
+          <div className=" flex w-max items-center justify-center rounded-full bg-gray-700 p-3 border border-gray-500">
             <CheckmarkFailed />
           </div>
           <div className="flex flex-col gap-3">
-            <Text as="subHeading1" className="text-center font-bold">
+            <Text as="subHeading1" className="text-center font-bold text-gray-100">
               {t("payment_paymentFailedTitle")}
             </Text>
-            <Text as="body1" className="text-center text-gray-500">
+            <Text as="body1" className="text-center text-gray-300">
               {t("payment_paymentFailedDesc")}
             </Text>
           </div>
@@ -73,17 +73,18 @@ export const PaymentCardFailed = () => {
               href={
                 " https://api.whatsapp.com/send?phone=6282339909564&text=Hallo%20min%2C%20saya%20mau%20beli%20eSIM%20untuk%20traveling"
               }
+              className="w-full"
             >
-              <Button color="orange" size="sm" className="w-full">
+              <Button color="orange" size="sm" className="w-full h-12">
                 {t("payment_contactUs")}
               </Button>
             </Link>
             <Link href="/">
               <div className="flex flex-row gap-2">
-                <ArrowLeft color="#3B82F6" />
+                <ArrowLeft color="#F9F9F9" />
                 <Text
                   as="body1"
-                  className="text-center font-bold text-blue-500"
+                  className="text-center font-bold text-gray-100"
                 >
                   {t("payment_backHomeButton")}
                 </Text>
