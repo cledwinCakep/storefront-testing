@@ -16,7 +16,7 @@ interface AdvantageCardProps {
 const AdvantageCard = ({ icon, title, description }: AdvantageCardProps) => {
   return (
     <div className="mx-auto flex max-w-[230px] flex-col items-center justify-center gap-6 py-4 text-center">
-      <div className="bg-gray-700 rounded-full border border-gray-500 flex items-center justify-center p-2">{icon}</div>
+      <div className="bg-gray-900 rounded-full border border-gray-500 flex items-center justify-center p-2">{icon}</div>
       <Text as="subHeading2" className="font-bold text-gray-100 sm:text-2xl">
         {title}
       </Text>

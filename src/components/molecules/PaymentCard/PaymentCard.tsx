@@ -13,9 +13,9 @@ export const PaymentCardSuccess = () => {
   const t = useTranslations("Payment");
   return (
     <>
-      <div className="max-w-[445px] rounded-md bg-gray-700 px-11 py-14">
+      <div className="max-w-[445px] rounded-md bg-gray-900 px-11 py-14">
         <div className="flex flex-col items-center justify-center gap-14">
-          <div className=" flex w-max items-center justify-center rounded-full bg-gray-700 p-3 border border-gray-500">
+          <div className=" flex w-max items-center justify-center rounded-full bg-gray-900 p-3 border border-gray-500">
             <CheckmarkSucess />
           </div>
           <div className="flex flex-col gap-3">
@@ -55,9 +55,9 @@ export const PaymentCardFailed = () => {
   const t = useTranslations("Payment");
   return (
     <>
-      <div className="max-w-[445px] rounded-md bg-gray-700 px-11 py-14">
+      <div className="max-w-[445px] rounded-md bg-gray-900 px-11 py-14">
         <div className="flex flex-col items-center justify-center gap-14">
-          <div className=" flex w-max items-center justify-center rounded-full bg-gray-700 p-3 border border-gray-500">
+          <div className=" flex w-max items-center justify-center rounded-full bg-gray-900 p-3 border border-gray-500">
             <CheckmarkFailed />
           </div>
           <div className="flex flex-col gap-3">

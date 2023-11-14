@@ -27,7 +27,7 @@ const Button = ({
     orange:
       "bg-orange-500 text-slate-50 hover:bg-transparent hover:border-orange-500 hover:text-orange-500",
     black:
-      "bg-gray-800 text-slate-50 hover:bg-gray-700 border-gray-800 hover:border-gray-700",
+      "bg-gray-800 text-slate-50 hover:bg-gray-900 border-gray-800 hover:border-gray-900",
     white:
       "bg-slate-50 text-gray-900 hover:bg-slate-50 border-slate-50 hover:border-slate-50",
   };

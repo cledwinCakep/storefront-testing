@@ -26,7 +26,7 @@ const PriceInfoCards = ({ data }: PriceInfoCardsProps) => {
         >
           <div
             key={data.title}
-            className="w-full rounded-lg bg-gray-700 p-6 transition-all duration-200 ease-in-out hover:border-orange-500 hover:shadow-md hover:shadow-gray-600 md:min-w-[272px]"
+            className="w-full rounded-lg bg-gray-900 p-6 transition-all duration-200 ease-in-out hover:border-orange-500 hover:shadow-md hover:shadow-gray-600 md:min-w-[272px]"
           >
             <PriceInfo
               image={data.image}

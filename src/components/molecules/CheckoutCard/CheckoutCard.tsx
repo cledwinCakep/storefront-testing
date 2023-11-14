@@ -19,7 +19,7 @@ const CheckoutCard = ({
 }: CheckoutCardProps) => {
   const t = useTranslations("Checkout");
   return (
-    <div className="flex w-full max-w-[380px] flex-col bg-gray-700 rounded-lg border border-gray-600 px-4 py-5">
+    <div className="flex w-full max-w-[380px] flex-col bg-gray-900 rounded-lg border border-gray-600 px-4 py-5">
       <input
         placeholder={t("checkout_email")}
         onChange={(e) => handleInputEmail(e)}
