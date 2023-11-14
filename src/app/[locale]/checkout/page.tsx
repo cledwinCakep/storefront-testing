@@ -170,7 +170,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
         </Text>
         {!isLoading ? (
           retrievedData ? (
-            <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row md:items-start">
+            <div className="flex w-full flex-col items-center justify-center gap-16 md:flex-row md:items-start">
               <div className="flex w-full flex-col">
                 <Text as="subHeading2" className="font-bold text-gray-100">
                   {t("checkout_purchasedItems")}

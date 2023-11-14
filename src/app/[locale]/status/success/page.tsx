@@ -18,7 +18,7 @@ export default function Status({ params }: { params: { locale: string } }) {
   return (
     <>
       <Navbar params={params} />
-      <div className="flex h-full items-center justify-center bg-gray-100 px-4 pb-[135px] pt-[149px]">
+      <div className="flex h-full items-center justify-center bg-black px-4 pb-[135px] pt-[149px]">
         <PaymentCardSuccess />
       </div>
       <CTA CtaSection={false} />
