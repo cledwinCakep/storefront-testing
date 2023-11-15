@@ -14,14 +14,13 @@ import { pageview } from "../../../gtag";
 export const dynamic = "force-dynamic";
 
 export async function generateStaticParams() {
-  return ["en", "id"].map((locale) => ({ locale }));
+  return ["en"].map((locale) => ({ locale }));
 }
 
 const dictionaries: {
-  [key: string]: typeof en | typeof id;
+  [key: string]: typeof en;
 } = {
   en,
-  id,
 };
 
 function getMessages(locale: string) {
@@ -77,7 +76,7 @@ export default function RootLayout({
 
       <body className="bg-black">
         <GoogleAnalytics keys={process.env.NEXT_PUBLIC_GOOGLE_ID} />
-        <NextIntlClientProvider locale={params.locale} messages={messages}>
+        <NextIntlClientProvider locale={"en"} messages={messages}>
           {children}
         </NextIntlClientProvider>
         <ProgressBar

@@ -25,7 +25,7 @@ const Button = ({
 }: ButtonProps) => {
   const BUTTON_COLORS = {
     orange:
-      "bg-orange-500 text-slate-50 hover:bg-transparent hover:border-orange-500 hover:text-orange-500",
+      "bg-orange-500 text-slate-50 hover:bg-orange-500/90 hover:border-orange-500",
     black:
       "bg-gray-800 text-slate-50 hover:bg-gray-900 border-gray-800 hover:border-gray-900",
     white:
@@ -65,9 +65,7 @@ const Button = ({
       {iconRight && (
         <span
           className={`${
-            color === "orange"
-              ? "text-slate-50 group-hover:text-orange-500"
-              : "text-slate-50"
+            color === "orange" ? "text-slate-50 " : "text-slate-50"
           }`}
         >
           {iconRight}

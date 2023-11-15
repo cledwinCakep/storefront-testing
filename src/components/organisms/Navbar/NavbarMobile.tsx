@@ -90,7 +90,7 @@ export const NavbarMobileMenu = ({
                 {t("navbar_contactUs")}
               </Button>
             </Link>
-            <div
+            {/* <div
               className="flex w-full cursor-pointer flex-row justify-between rounded-[124px] border-[1px] border-gray-300 p-4 text-white "
               onClick={handleChangeLanguage}
             >
@@ -101,7 +101,7 @@ export const NavbarMobileMenu = ({
                 </Text>
               </div>
               {isOpen ? <ChevronDown /> : <ChevronUp />}
-            </div>
+            </div> */}
             <div
               className={`h-full flex-col ${
                 isOpen ? "flex" : "hidden"

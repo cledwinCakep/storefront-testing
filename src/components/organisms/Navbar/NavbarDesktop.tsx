@@ -59,7 +59,7 @@ const NavbarDesktop = ({ params }: { params: { locale: string } }) => {
         </div>
         <div className="hidden w-1/4 flex-row items-center gap-6 lg:flex">
           <div className="relative w-1/4">
-            <div
+            {/* <div
               className="flex w-full cursor-pointer flex-row justify-between"
               onClick={handleChangeLanguage}
             >
@@ -68,7 +68,7 @@ const NavbarDesktop = ({ params }: { params: { locale: string } }) => {
                 {params.locale.toUpperCase()}
               </Text>
               {isOpen ? <ChevronDown /> : <ChevronUp />}
-            </div>
+            </div> */}
             <div
               className={`absolute flex-col ${
                 isOpen ? "flex" : "hidden"
