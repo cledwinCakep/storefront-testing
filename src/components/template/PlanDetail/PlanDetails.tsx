@@ -13,9 +13,9 @@ import Button from "@/components/atoms/Button/Button";
 import RadioPlan from "@/components/molecules/RadioPlan/RadioPlan";
 
 // utils
-import { capitalizeSentences } from "@/lib/utils/capitalize";
 import { usePlanContext } from "@/lib/context/plan";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/router";
 
 const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
   const {
@@ -31,12 +31,25 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     country,
   } = usePlanContext();
   const t = useTranslations("PlanDetail");
+  const router = location.pathname;
+  const country_code = router.split("/")[2];
+
+  const i: any = {
+    CN: "China",
+    SG: "Singapore",
+    MY: "Malaysia",
+    TH: "Thailand",
+    JP: "Japan",
+    KR: "Korea",
+  };
+
+  const countryName = i[country_code];
 
   return (
     <div className="sm:relative">
       <Image
-        src={`/${country?.toLowerCase()}_plan.png`}
-        alt={country?.toLowerCase()}
+        src={`/${countryName}_plan.png`}
+        alt={countryName?.toLowerCase()}
         width={600}
         height={280}
         className="max-h-[280px] sm:hidden"
@@ -45,11 +58,11 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
         }}
         priority
       />
-      <Layout className="space-y-8 sm:grid sm:grid-cols-3 sm:gap-5 sm:space-y-0 md:grid-cols-4 border-b-[1px] border-gray-500">
+      <Layout className="space-y-8 border-b-[1px] border-gray-500 sm:grid sm:grid-cols-3 sm:gap-5 sm:space-y-0 md:grid-cols-4">
         <div className="relative hidden h-full w-full  border-gray-300 sm:col-span-2 sm:col-start-1 sm:block md:col-span-1 md:col-start-1 md:row-start-1 md:h-[430px] md:w-full">
           <Image
-            src={`/${country?.toLowerCase()}_plan.png`}
-            alt={country?.toLowerCase()}
+            src={`/${countryName?.toLowerCase()}_plan.png`}
+            alt={countryName?.toLowerCase()}
             priority
             fill
             style={{
@@ -62,7 +75,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
         <div className="space-y-8 sm:col-span-2 sm:col-start-1 md:col-span-2 md:col-start-2 md:row-start-1">
           <div className="sm:mt-8 md:mt-0">
             <Text as="subHeading1" className="font-bold text-gray-100">
-              {country} eSim Data Plan
+              {countryName} eSim Data Plan
             </Text>
             <Text as="small" className="font-medium text-gray-400">
               {t("planDetail_detailDesc")}
@@ -104,7 +117,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
           )}
           <Tabs
             data={
-              country?.toLowerCase() == "china"
+              countryName?.toLowerCase() == "china"
                 ? [
                     {
                       label: t("planDetail_descriptionTitle"),
@@ -144,7 +157,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
                         "planDetail_descriptionSix"
                       )}`,
                     },
-                  
+
                     {
                       label: t("planDetail_howtouseTitle"),
                       content: `${t("planDetail_howtouseOne")}${t(

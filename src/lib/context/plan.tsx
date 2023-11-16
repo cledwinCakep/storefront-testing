@@ -48,7 +48,7 @@ export interface PlanHooks {
   country: string;
 }
 
-export const PlanContext = createContext<PlanHooks | undefined>(undefined);
+export const PlanContext = createContext<PlanHooks>(undefined!);
 
 export const usePlanContext = () => {
   const context = useContext(PlanContext);
