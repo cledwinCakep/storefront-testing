@@ -18,13 +18,13 @@ const Partners = () => {
         <div className="flex max-w-[580px] flex-col items-center justify-center gap-[40px] md:items-start ">
           <Text
             as="h1"
-            className="text-center text-[2.75rem] font-bold text-gray-100 sm:text-start md:text-[56px]"
+            className="text-center text-[2.75rem] leading-[56px] font-bold text-gray-100 sm:text-start md:text-[56px]"
           >
             {t("hero_heroTitle")}
           </Text>
           <Text
             as="body1"
-            className="text-center font-medium text-gray-300 sm:text-start md:text-xl"
+            className="text-center font-regular leading-[24px] text-gray-300 sm:text-start md:text-xl"
           >
             {t("hero_heroDesc")}
           </Text>

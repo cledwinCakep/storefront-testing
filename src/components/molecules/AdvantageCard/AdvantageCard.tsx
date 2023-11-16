@@ -19,9 +19,11 @@ const AdvantageCard = ({ icon, title, description }: AdvantageCardProps) => {
       <div className="flex items-center justify-center rounded-full border border-gray-800 bg-gray-900 p-2">
         {icon}
       </div>
-      <Text as="subHeading2" className="font-bold text-gray-100 sm:text-2xl">
-        {title}
+     <div className="h-full">
+     <Text as="subHeading2" className="font-bold text-gray-100 sm:text-2xl">
+        {title} 
       </Text>
+     </div>
       <Text as="body1" className="h-9font-medium text-gray-400">
         {description}
       </Text>

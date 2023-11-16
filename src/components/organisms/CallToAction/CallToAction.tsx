@@ -18,7 +18,7 @@ const CallToAction = () => {
     >
       <Layout className="flex flex-col items-center justify-between gap-10 py-20 md:flex-row">
         <Text
-          as="h2"
+          as="h3"
           className="max-w-[628px] text-center font-bold text-gray-100 md:text-start"
         >
           {t("cta_ctaTitle")}

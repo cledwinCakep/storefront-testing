@@ -18,9 +18,9 @@ const PriceInfo = ({ image, title, price }: PriceInfoProps) => {
   return (
     <div className="flex w-full items-center justify-between">
       <div className="flex items-center gap-2">
-        <Image src={image} alt={image} width={64} height={64} priority />
+        <Image src={image} alt={image} width={40} height={40} priority />
         <div>
-          <Text as="subHeading1" className="font-medium text-gray-200">
+          <Text as="subHeading2" className="font-medium text-gray-200">
             {title}
           </Text>
         </div>
@@ -36,7 +36,7 @@ const PriceInfo = ({ image, title, price }: PriceInfoProps) => {
           </Text>
         </span> */}
       </div>
-      <ArrowRight size={24} className=" text-gray-200" />
+      <ArrowRight size={24} className=" text-gray-500" />
     </div>
   );
 };

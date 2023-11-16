@@ -221,7 +221,7 @@ const Guide = () => {
             <Text as="h3" className="text-center font-bold sm:text-[44px] text-gray-100">
               {t("cta_howToUseTitle")}
             </Text>
-            <Text as="body1" className="text-center font-medium text-gray-300">
+            <Text as="body1" className="text-center font-regular text-gray-300">
               {t("cta_howToUseDesc")}
             </Text>
           </div>
