@@ -40,7 +40,8 @@ const Partners = () => {
           </a>
         </div>
         <Image
-          src="/illustratio Hero eSIM.png"
+          className=""
+          src="/esim_3d_superalink-min.png"
           alt="Hero Illust"
           width={480}
           height={480}

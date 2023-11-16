@@ -45,7 +45,7 @@ export const NavbarMobileMenu = ({
         <Anchor href="/" className="px-[0px] py-[0px]">
           <Image
             src="/logo-superalink.svg"
-            alt="beliesim"
+            alt="superalink logo"
             width={151.77}
             height={21.95}
             priority

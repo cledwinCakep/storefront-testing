@@ -6,12 +6,11 @@ import { PaymentCardSuccess } from "@/components/molecules/PaymentCard/PaymentCa
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title:
-    "BELIESIM – eSIM Luar Negeri Beli di Indonesia – Beli eSIM Luar Negeri? belinya di BELIESIM dong!",
+  title: "Superalink – Local eSIM for Traveler",
   description:
-    "Beli SIM card (eSIM) travel untuk internetan di luar negeri lebih mudah dan praktis. Mau ke Luar Negeri? Beli eSIMnya di BELIESIM dong!",
+    "Data packs with local rates. Buy the affordable eSIM package in Superalink.",
   openGraph: {
-    images: "/base_thumbnail.png",
+    images: "https://i.ibb.co/RY2Gz3H/Base-Thumbnail.jpg",
   },
 };
 export default function Status({ params }: { params: { locale: string } }) {

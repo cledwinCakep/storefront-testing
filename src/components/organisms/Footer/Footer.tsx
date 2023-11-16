@@ -19,10 +19,16 @@ const Footer = () => {
           &copy; {new Date().getFullYear()}. PT. Cakeplabs Global Teknologi
         </Text>
         <div className="flex flex-row gap-8">
-          <Link href={"https://www.tiktok.com/@adminbeliesim"} className="p-2 border border-gray-400 rounded-full">
+          <Link
+            href={"https://www.tiktok.com/@adminbeliesim"}
+            className="rounded-full border border-gray-400 p-2"
+          >
             <Tiktok />
           </Link>
-          <Link href={"https://www.instagram.com/beliesim/"} className="p-2 border border-gray-400 rounded-full">
+          <Link
+            href={"https://www.instagram.com/beliesim/"}
+            className="rounded-full border border-gray-400 p-2"
+          >
             <Instagram />
           </Link>
         </div>

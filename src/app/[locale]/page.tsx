@@ -2,11 +2,11 @@ import React from "react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Supera link – eSIM Luar Negeri Beli di Indonesia",
+  title: "Superalink – Local eSIM for Traveler",
   description:
-    "Beli SIM card (eSIM) travel untuk internetan di luar negeri lebih mudah dan praktis. Mau ke Luar Negeri? Beli eSIMnya di BELIESIM dong!",
+    "Data packs with local rates. Buy the affordable eSIM package in Superalink.",
   openGraph: {
-    images: "https://i.ibb.co/1n9y1r6/base-thumbnail.jpg",
+    images: "https://i.ibb.co/RY2Gz3H/Base-Thumbnail.jpg",
   },
 };
 
