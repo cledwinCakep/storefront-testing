@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: docker context use development
-      - run: docker build -t ${{ env.DOCKER_IMAGE }}:dev .
+      - run: docker build --build-arg NEXT_PUBLIC_HOST_API=${{ vars.NEXT_PUBLIC_HOST_API }} -t ${{ env.DOCKER_IMAGE }}:dev .
   Deploy-Development:
     name: Deploy Development
     runs-on: self-hosted
