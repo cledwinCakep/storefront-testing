@@ -11,7 +11,7 @@ const Partners = () => {
   return (
     <div className="h-full bg-gray-900" id="payment">
       <Layout className="flex flex-col items-center justify-center gap-12 py-10">
-        <Text as="subHeading2" className="text-center text-gray-100 ">
+        <Text as="subHeading1" className="font-medium leading-[32px] text-center text-gray-100 ">
           {t("hero_paymentMethodTitle")}
         </Text>
 
