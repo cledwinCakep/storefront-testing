@@ -28,7 +28,7 @@ const Purchaseinfo = ({
   handleDelete,
 }: PurchaseInfoProps) => {
   return (
-    <div className="mt-8 flex flex-col border-b px-1 pb-6">
+    <div className="mt-8 flex flex-col border-b-[1px] border-gray-600 px-1 pb-6">
       <div className="mb-4 flex flex-row gap-3">
         <Image
           src={image}
@@ -36,18 +36,19 @@ const Purchaseinfo = ({
           width={100}
           height={100}
           style={{ objectFit: "contain", maxHeight: "100px" }}
+          priority
         />
         <div className="flex flex-col">
-          <Text as="body2" className="text-stone-500">
+          <Text as="body2" className="text-gray-400">
             {destination}
           </Text>
           <Text
             as="body1"
-            className="mb-6 mt-3 font-medium sm:text-xl sm:leading-none"
+            className="mb-6 mt-3 font-medium sm:text-xl sm:leading-none text-gray-100"
           >
             {packages}
           </Text>
-          <Text as="body1" className="font-bold sm:text-xl">
+          <Text as="body1" className="font-bold sm:text-xl text-gray-100">
             {price}
           </Text>
         </div>
@@ -57,22 +58,22 @@ const Purchaseinfo = ({
           <Trash />
         </div>
 
-        <span className="mx-4 border-[1px] border-slate-200" />
+        <span className="mx-4 border-[1px] border-gray-600" />
         <div className="flex items-center gap-4">
           <button
             className={`flex h-6 w-6 items-center justify-center rounded-md font-bold ${
-              order <= 1 ? "bg-orange-200" : "bg-orange-500"
-            } text-white`}
+              order <= 1 ? "bg-gray-300" : "bg-orange-500"
+            } text-black`}
             disabled={order <= 1 ? true : false}
             onClick={() => handleOrder("decrease")}
           >
             <Text as="body1">-</Text>
           </button>
-          <Text as="body1" className="flex w-1 justify-center font-bold">
+          <Text as="body1" className="flex w-1 justify-center font-bold text-gray-100">
             {order}
           </Text>
           <button
-            className={`flex  h-6 w-6 items-center justify-center rounded-md font-bold font-bold ${"bg-orange-500"} text-white`}
+            className={`flex  h-6 w-6 items-center justify-center rounded-md font-bold ${"bg-orange-500"} text-black`}
             onClick={() => handleOrder("increase")}
           >
             <Text as="body1">+</Text>

@@ -129,7 +129,7 @@ const Guide = () => {
                           {Apple.map((dt) => (
                             <div
                               key={dt}
-                              className="border-b-[1px] border-stone-200 py-5"
+                              className="border-b-[1px] border-gray-200 py-5"
                             >
                               <Text as="body1" className="font-medium">
                                 {dt}
@@ -151,7 +151,7 @@ const Guide = () => {
                           {Samsung.map((dt) => (
                             <div
                               key={dt}
-                              className="border-b-[1px] border-stone-200 py-5"
+                              className="border-b-[1px] border-gray-200 py-5"
                             >
                               <Text as="body1" className="font-medium">
                                 {dt}
@@ -173,7 +173,7 @@ const Guide = () => {
                           {Huawei.map((dt) => (
                             <div
                               key={dt}
-                              className="border-b-[1px] border-stone-200 py-5"
+                              className="border-b-[1px] border-gray-200 py-5"
                             >
                               <Text as="body1" className="font-medium">
                                 {dt}
@@ -195,7 +195,7 @@ const Guide = () => {
                           {Oppo.map((dt) => (
                             <div
                               key={dt}
-                              className="border-b-[1px] border-stone-200 py-5"
+                              className="border-b-[1px] border-gray-200 py-5"
                             >
                               <Text as="body1" className="font-medium">
                                 {dt}
@@ -215,14 +215,13 @@ const Guide = () => {
       <div
         id="how-it-works"
         className="bg-lightgray flex h-full w-full flex-col bg-cover bg-bottom bg-no-repeat px-2"
-        style={{ backgroundImage: "url(/bg-footer.png)" }}
       >
         <div className="flex flex-col items-center justify-center gap-12 py-[80px]">
           <div className="gap-8 space-y-8">
-            <Text as="h3" className="text-center font-bold sm:text-[44px]">
+            <Text as="h3" className="text-center font-bold sm:text-[44px] text-gray-100">
               {t("cta_howToUseTitle")}
             </Text>
-            <Text as="body1" className="text-center font-medium text-stone-600">
+            <Text as="body1" className="text-center font-medium text-gray-300">
               {t("cta_howToUseDesc")}
             </Text>
           </div>
@@ -234,16 +233,16 @@ const Guide = () => {
                 subtitle={t("cta_tutorDescOne")}
                 additional={
                   <div
-                    className="flex flex-row items-center justify-center gap-3 hover:cursor-pointer"
+                    className="flex flex-row items-center justify-center gap-3 hover:cursor-pointer h-12  bg-orange-500 rounded-full"
                     onClick={openModal}
                   >
                     <Text
                       as="body1"
-                      className="text-center font-bold underline decoration-solid"
+                      className="text-center font-bold h-12 flex items-center justify-center text-slate-50"
                     >
-                      {t("cta_tutorTitleOne")}
+                      {t("cta_checkCompabilityButton")}
                     </Text>
-                    <ArrowRight size={24} />
+                    <ArrowRight size={24} className="text-slate-50"/>
                   </div>
                 }
               />

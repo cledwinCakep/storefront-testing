@@ -9,9 +9,9 @@ import { useTranslations } from "next-intl";
 const Partners = () => {
   const t = useTranslations("Homepage");
   return (
-    <div className="h-full bg-zinc-100" id="payment">
+    <div className="h-full bg-gray-900" id="payment">
       <Layout className="flex flex-col items-center justify-center gap-12 py-10">
-        <Text as="subHeading2" className="text-center ">
+        <Text as="subHeading2" className="text-center text-gray-100 ">
           {t("hero_paymentMethodTitle")}
         </Text>
 

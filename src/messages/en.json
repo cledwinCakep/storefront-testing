@@ -8,9 +8,9 @@
   "CTA": {
     "cta_howToUseTitle": "How our eSIM works",
     "cta_howToUseDesc": "Don't worry, here's a quick and easy installation guide with a list of supported eSIM devices.",
-    "cta_tutorTitleOne": "Check device compatibility",
+    "cta_tutorTitleOne": "Check compatibility",
     "cta_tutorDescOne": "Make sure your smartphone supports eSIM technology",
-    "cta_checkCompabilityButton": "Check device",
+    "cta_checkCompabilityButton": "Check your device",
     "cta_tutorTitleTwo": "Choose a plan",
     "cta_tutorDescTwo": "Once confirmed, choose your destination and select a suitable data plan.",
     "cta_tutorTitleThree": "Scan QR code",

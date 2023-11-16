@@ -25,11 +25,11 @@ const Button = ({
 }: ButtonProps) => {
   const BUTTON_COLORS = {
     orange:
-      "bg-orange-500 text-slate-50 hover:bg-transparent hover:border-orange-500 hover:text-orange-500",
+      "bg-orange-500 text-slate-50 hover:bg-orange-500/90 hover:border-orange-500",
     black:
-      "bg-stone-800 text-slate-50 hover:bg-stone-700 border-stone-800 hover:border-stone-700",
+      "bg-gray-800 text-slate-50 hover:bg-gray-900 border-gray-800 hover:border-gray-900",
     white:
-      "bg-slate-50 text-stone-900 hover:bg-slate-50 border-slate-50 hover:border-slate-50",
+      "bg-slate-50 text-gray-900 hover:bg-slate-50 border-slate-50 hover:border-slate-50",
   };
 
   const BUTTON_SIZES = {
@@ -46,7 +46,7 @@ const Button = ({
       className={twMerge(
         `${BUTTON_COLORS[color as keyof typeof BUTTON_COLORS]} ${
           BUTTON_SIZES[size as keyof typeof BUTTON_SIZES]
-        } group flex items-center justify-center gap-2 rounded-[40px] border-[1.33px] px-6 font-bold`,
+        } group flex items-center justify-center gap-2 rounded-[40px] px-6 font-bold`,
         className
       )}
     >
@@ -65,9 +65,7 @@ const Button = ({
       {iconRight && (
         <span
           className={`${
-            color === "orange"
-              ? "text-slate-50 group-hover:text-orange-500"
-              : "text-slate-50"
+            color === "orange" ? "text-slate-50 " : "text-slate-50"
           }`}
         >
           {iconRight}

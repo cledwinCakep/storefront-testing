@@ -19,6 +19,7 @@ import Box from "@/components/icons/Box";
 import { utilityApi } from "@/lib/api/GetApi";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
+import Divider from "@/components/atoms/Divider/Divider";
 
 export default function Checkout({ params }: { params: { locale: string } }) {
   const router = useRouter();
@@ -153,7 +154,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
         </div>
       </Dialog>*/}
       <Navbar params={params} />
-      <Layout className="mb-20 mt-[160px] flex h-full flex-col">
+      <Layout className="mb-20 mt-20 flex h-full flex-col">
         <Breadcrumb>
           <BreadcrumbItem isHome />
 
@@ -161,18 +162,17 @@ export default function Checkout({ params }: { params: { locale: string } }) {
 
           <BreadcrumbItem isCurrentlyActive>Checkout</BreadcrumbItem>
         </Breadcrumb>
-
         <Text
           as="h1"
-          className="mb-10 mt-7 text-center text-[36px] font-bold sm:mb-14 "
+          className="mb-10 mt-7 text-[26px] font-bold sm:mb-14 text-gray-100"
         >
           {t("checkout_checkoutTitle")}
         </Text>
         {!isLoading ? (
           retrievedData ? (
-            <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row md:items-start">
+            <div className="flex w-full flex-col items-center justify-center gap-16 md:flex-row md:items-start">
               <div className="flex w-full flex-col">
-                <Text as="subHeading2" className="font-bold">
+                <Text as="subHeading2" className="font-bold text-gray-100">
                   {t("checkout_purchasedItems")}
                 </Text>
                 <Purchaseinfo
@@ -206,7 +206,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
               <Text as="body1" className="mb-3 mt-6 font-bold">
                 {t("checkout_orderEmptyTitle")}
               </Text>
-              <Text as="body2" className="mb-8 text-center text-stone-500">
+              <Text as="body2" className="mb-8 text-center text-gray-500">
                 {t("checkout_orderEmptyDesc")}
               </Text>
               <Button
