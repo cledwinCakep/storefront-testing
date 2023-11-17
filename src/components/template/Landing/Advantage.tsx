@@ -26,12 +26,12 @@ const Partners = () => {
           description={t("hero_benefitOneDesc")}
         />
         <AdvantageCard
-          icon={<Money />}
+          icon={<Simcard />}
           title={t("hero_benefitTwoTitle")}
           description={t("hero_benefitTwoDesc")}
         />
         <AdvantageCard
-          icon={<Simcard />}
+          icon={<Money />}
           title={t("hero_benefitThreeTitle")}
           description={t("hero_benefitThreeDesc")}
         />
