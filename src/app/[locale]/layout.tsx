@@ -8,7 +8,6 @@ import "./globals.css";
 import { redirect } from "next/navigation";
 import { useState } from "react";
 import GoogleAnalytics from "../../../GoogleAnalytics";
-import Smartlook from "smartlook-client";
 import { pageview } from "../../../gtag";
 
 export const dynamic = "force-dynamic";
@@ -44,7 +43,6 @@ export default function RootLayout({
   children?: React.ReactNode;
   params: { locale: string };
 }) {
-  Smartlook.init(process.env.NEXT_PUBLIC_SMARTLOOK!);
 
   const [messages, setMessages] = useState(getMessages(params.locale));
   return (
@@ -75,7 +73,7 @@ export default function RootLayout({
       </head>
 
       <body className="bg-black">
-        <GoogleAnalytics keys={process.env.NEXT_PUBLIC_GOOGLE_ID} />
+        {/* <GoogleAnalytics keys={process.env.NEXT_PUBLIC_GOOGLE_ID} /> */}
         <NextIntlClientProvider locale={"en"} messages={messages}>
           {children}
         </NextIntlClientProvider>
