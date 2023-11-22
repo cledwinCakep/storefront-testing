@@ -34,12 +34,27 @@ export default function Checkout({ params }: { params: { locale: string } }) {
   //   setIsOpen(true);
   // }
 
-  const [retrievedData, setRetrievedData] = useState(null);
+  const [retrievedData, setRetrievedData] = useState({
+    country_code: "",
+    country_name: "",
+    created_at: "",
+    data_amount: 0,
+    data_unit: "",
+    duration_in_days: 0,
+    id: 0,
+    idr_price: 0,
+    option_id: "",
+    plan_option: "",
+    updated_at: "",
+  });
   const [subtotal, setSubtotal] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [order, setOrder] = useState<number>(1);
   const [email, setEmail] = useState<string>("");
   const [emailError, setEmailError] = useState("");
+
+  const code = localStorage.getItem("affiliate_code")
+
   useEffect(() => {
     // Retrieve the JSON string from localStorage
     const storedData = localStorage.getItem("buy");
@@ -76,6 +91,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
         esim_id: id,
         quantity: order,
         email: email,
+        user_code: code,
       };
       utilityApi.postBuyesim(body).then((response) => {
         // Handle the response here
@@ -110,7 +126,19 @@ export default function Checkout({ params }: { params: { locale: string } }) {
   }
 
   function handleDelete() {
-    setRetrievedData(null);
+    setRetrievedData({
+      country_code: "",
+      country_name: "",
+      created_at: "",
+      data_amount: 0,
+      data_unit: "",
+      duration_in_days: 0,
+      id: 0,
+      idr_price: 0,
+      option_id: "",
+      plan_option: "",
+      updated_at: "",
+    });
   }
   return (
     <>
@@ -164,7 +192,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
         </Breadcrumb>
         <Text
           as="h1"
-          className="mb-10 mt-7 text-[26px] font-bold sm:mb-14 text-gray-100"
+          className="mb-10 mt-7 text-[26px] font-bold text-gray-100 sm:mb-14"
         >
           {t("checkout_checkoutTitle")}
         </Text>
@@ -179,8 +207,12 @@ export default function Checkout({ params }: { params: { locale: string } }) {
                   handleDelete={handleDelete}
                   order={order}
                   handleOrder={handleOrder}
-                  image="/purchased-placeholder.png"
-                  destination={`${retrievedData["country_name"]["String"]} eSim data plans`}
+                  image={`${
+                    retrievedData.country_name
+                      ? `/${retrievedData.country_name.toLowerCase()}_plan.png`
+                      : "/purchased-placeholder.png"
+                  }`}
+                  destination={`${retrievedData.country_name} eSim data plans`}
                   packages={`${
                     retrievedData!["plan_option"] == "UNLIMITED"
                       ? "Daily Unlimited"
@@ -198,6 +230,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
                 isEmpty={emailError}
                 handlePayment={handlePayment}
                 handleInputEmail={handleInputEmail}
+                code={code}
               />
             </div>
           ) : (

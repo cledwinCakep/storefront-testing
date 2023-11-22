@@ -16,7 +16,7 @@ const Footer = () => {
           as="body1"
           className="text-wrap text-center font-medium text-gray-500"
         >
-          &copy; {new Date().getFullYear()}. Gadget Korea INC. ALL RIGHTS RESERVED
+          &copy; {new Date().getFullYear()}. Gadgetkorea INC. ALL RIGHTS RESERVED
         </Text>
         <div className="flex flex-row gap-8">
           <Link

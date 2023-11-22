@@ -234,6 +234,7 @@ const usePlanHook = (params: { slug: string }) => {
     localStorage.setItem("buy", jsonString);
     localStorage.setItem("order", order.toString());
     window.location.href = "/checkout";
+    
   }
 
   return {

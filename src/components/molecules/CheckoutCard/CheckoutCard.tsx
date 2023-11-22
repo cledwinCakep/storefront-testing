@@ -10,12 +10,14 @@ type CheckoutCardProps = {
   handlePayment: () => void;
   handleInputEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isEmpty: string;
+  code:string |null,
 };
 
 const CheckoutCard = ({
   isEmpty,
   handlePayment,
   handleInputEmail,
+  code
 }: CheckoutCardProps) => {
   const t = useTranslations("Checkout");
   return (
@@ -29,6 +31,9 @@ const CheckoutCard = ({
             : "mb-4 rounded-md border border-gray-400 px-3 py-2"
         }`}
       />
+      <Text as="body2" className=" mt-4 px-2 text-gray-300 ">
+        Affiliate Code: <span className="font-bold uppercase">{code}</span>
+      </Text>
       {isEmpty && <div className="px-2 text-red-500">{isEmpty}</div>}
       <Text as="body2" className=" mt-4 px-2 text-gray-300">
         {t("checkout_emailDesc")}

@@ -28,7 +28,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     increaseButton,
     currentSelected,
     handleBuy,
-    // country,
+    country,
   } = usePlanContext();
   const t = useTranslations("PlanDetail");
   const router = location.pathname;
@@ -47,35 +47,63 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
 
   return (
     <div className="sm:relative">
-      <Image
-        src={`/${countryName.toLowerCase()}_plan.png`}
-        alt={countryName.toLowerCase()}
-        width={600}
-        height={280}
-        className="max-h-[280px] sm:hidden"
-        style={{
-          objectFit: "cover",
-        }}
-        priority
-      />
+      {countryName ? (
+        <Image
+          src={`/${countryName}_plan.png`}
+          alt={countryName}
+          width={600}
+          height={280}
+          className="max-h-[280px] sm:hidden"
+          style={{
+            objectFit: "cover",
+          }}
+          priority
+        />
+      ) : (
+        <Image
+          src={``}
+          alt={"country.png"}
+          width={600}
+          height={280}
+          className="max-h-[280px] sm:hidden"
+          style={{
+            objectFit: "cover",
+          }}
+          priority
+        />
+      )}
       <Layout className="space-y-8 border-b-[1px] border-gray-500 sm:grid sm:grid-cols-3 sm:gap-5 sm:space-y-0 md:grid-cols-4">
         <div className="relative hidden h-full w-full  border-gray-300 sm:col-span-2 sm:col-start-1 sm:block md:col-span-1 md:col-start-1 md:row-start-1 md:h-[430px] md:w-full">
-          <Image
-            src={`/${countryName.toLowerCase()}_plan.png`}
-            alt={countryName.toLowerCase()}
-            priority
-            fill
-            style={{
-              objectFit: "cover",
-            }}
-            className="rounded-3xl"
-          />
+          {countryName ? (
+            <Image
+              src={`/${countryName}_plan.png`}
+              alt={countryName}
+              priority
+              fill
+              style={{
+                objectFit: "cover",
+              }}
+              className="rounded-3xl"
+            />
+          ) : (
+            <Image
+              src={``}
+              alt={"country.png"}
+              width={600}
+              height={280}
+              className="max-h-[280px] sm:hidden"
+              style={{
+                objectFit: "cover",
+              }}
+              priority
+            />
+          )}
         </div>
 
         <div className="space-y-8 sm:col-span-2 sm:col-start-1 md:col-span-2 md:col-start-2 md:row-start-1">
           <div className="sm:mt-8 md:mt-0">
             <Text as="subHeading1" className="font-bold text-gray-100">
-              {countryName} eSim Data Plan
+              {countryName ? countryName : ""} eSim Data Plan
             </Text>
             <Text as="small" className="font-medium text-gray-400">
               {t("planDetail_detailDesc")}
@@ -117,35 +145,65 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
           )}
           <Tabs
             data={
-              countryName.toLowerCase()  == "china"
-                ? [
-                    {
-                      label: t("planDetail_descriptionTitle"),
-                      content: `${t("planDetail_descriptionCNOne")}${t(
-                        "planDetail_descriptionCNTwo"
-                      )}${t("planDetail_descriptionCNThree")}${t(
-                        "planDetail_descriptionCNFour"
-                      )}${t("planDetail_descriptionCNFive")}${t(
-                        "planDetail_descriptionCNSix"
-                      )}${t("planDetail_descriptionCNSeven")}`,
-                    },
-                    {
-                      label: t("planDetail_howtouseTitle"),
-                      content: `${t("planDetail_howtouseOne")}${t(
-                        "planDetail_howtouseTwo"
-                      )}${t("planDetail_howtouseThree")}${t(
-                        "planDetail_howtouseFour"
-                      )}${t("planDetail_howtouseFive")}${t(
-                        "planDetail_howtouseSix"
-                      )}${t("planDetail_howtouseSeven")}`,
-                    },
-                    {
-                      label: t("planDetail_policyTitle"),
-                      content: `${t("planDetail_policyOne")}${t(
-                        "planDetail_policyTwo"
-                      )}`,
-                    },
-                  ]
+              countryName
+                ? countryName == "china"
+                  ? [
+                      {
+                        label: t("planDetail_descriptionTitle"),
+                        content: `${t("planDetail_descriptionCNOne")}${t(
+                          "planDetail_descriptionCNTwo"
+                        )}${t("planDetail_descriptionCNThree")}${t(
+                          "planDetail_descriptionCNFour"
+                        )}${t("planDetail_descriptionCNFive")}${t(
+                          "planDetail_descriptionCNSix"
+                        )}${t("planDetail_descriptionCNSeven")}`,
+                      },
+                      {
+                        label: t("planDetail_howtouseTitle"),
+                        content: `${t("planDetail_howtouseOne")}${t(
+                          "planDetail_howtouseTwo"
+                        )}${t("planDetail_howtouseThree")}${t(
+                          "planDetail_howtouseFour"
+                        )}${t("planDetail_howtouseFive")}${t(
+                          "planDetail_howtouseSix"
+                        )}${t("planDetail_howtouseSeven")}`,
+                      },
+                      {
+                        label: t("planDetail_policyTitle"),
+                        content: `${t("planDetail_policyOne")}${t(
+                          "planDetail_policyTwo"
+                        )}`,
+                      },
+                    ]
+                  : [
+                      {
+                        label: t("planDetail_descriptionTitle"),
+                        content: `${t("planDetail_descriptionOne")}${t(
+                          "planDetail_descriptionTwo"
+                        )}${t("planDetail_descriptionThree")}${t(
+                          "planDetail_descriptionFour"
+                        )}${t("planDetail_descriptionFive")}${t(
+                          "planDetail_descriptionSix"
+                        )}`,
+                      },
+
+                      {
+                        label: t("planDetail_howtouseTitle"),
+                        content: `${t("planDetail_howtouseOne")}${t(
+                          "planDetail_howtouseTwo"
+                        )}${t("planDetail_howtouseThree")}${t(
+                          "planDetail_howtouseFour"
+                        )}${t("planDetail_howtouseFive")}${t(
+                          "planDetail_howtouseSix"
+                        )}${t("planDetail_howtouseSeven")}`,
+                      },
+                      {
+                        label: t("planDetail_policyTitle"),
+                        content: `${t("planDetail_policyOne")}${t(
+                          "planDetail_policyTwo"
+                        )}`,
+                      },
+                    ]
                 : [
                     {
                       label: t("planDetail_descriptionTitle"),

@@ -18,13 +18,21 @@ class UtilityAPI extends API {
     });
   }
   postBuyesim(body: {
-    esim_id: string;
+    esim_id: number;
     quantity: number;
     email: string;
+    user_code: string |null,
   }): Promise<AxiosResponse<any>> {
     return this.publicRoute<any>({
       url: "orders/",
       method: "post",
+      data: body,
+    });
+  }
+  searchCountry(body: { name: string }): Promise<AxiosResponse<any>> {
+    return this.publicRoute<any>({
+      url: "countries/search",
+      method: "POST",
       data: body,
     });
   }

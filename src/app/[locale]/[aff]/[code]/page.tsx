@@ -1,5 +1,9 @@
+"use client";
+
 import React from "react";
 import type { Metadata } from "next";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 export const metadata: Metadata = {
   title: "Superalink – Local eSIM for Traveler",
@@ -20,6 +24,12 @@ import Advantage from "@/components/template/Landing/Advantage";
 import Hero from "@/components/template/Landing/Hero";
 
 export default function AffLink({ params }: { params: { locale: string } }) {
+  
+  const code = location.pathname.split("/aff/")[1];
+  useEffect(() => {
+    localStorage.setItem("affiliate_code", code)
+  }, [code]);
+
   return (
     <>
       <Navbar params={params} />
@@ -27,7 +37,7 @@ export default function AffLink({ params }: { params: { locale: string } }) {
       <Advantage />
       <Destination />
       <Partners />
-      <Guide /> 
+      <Guide />
       <CTA />
     </>
   );
