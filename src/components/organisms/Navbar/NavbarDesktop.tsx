@@ -25,7 +25,7 @@ const NavbarDesktop = ({ params }: { params: { locale: string } }) => {
   function handleChangeLanguage() {
     setOpen(!isOpen);
   }
-  const url = new URL(window.location.href);
+  const url = new URL(location.href);
   const test = new URLSearchParams(url.search);
 
   const plan = test.get("plan");

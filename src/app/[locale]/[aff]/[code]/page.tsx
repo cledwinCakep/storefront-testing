@@ -1,16 +1,18 @@
+"use client";
+
 import React from "react";
 import type { Metadata } from "next";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 
-export const metadata: Metadata = {
-  title: "Superalink – Local eSIM for Traveler",
-  description:
-    "Data packs with local rates. Buy the affordable eSIM package in Superalink.",
-  openGraph: {
-    images: "https://i.ibb.co/RY2Gz3H/Base-Thumbnail.jpg",
-  },
-};
+// export const metadata: Metadata = {
+//   title: "Superalink – Local eSIM for Traveler",
+//   description:
+//     "Data packs with local rates. Buy the affordable eSIM package in Superalink.",
+//   openGraph: {
+//     images: "https://i.ibb.co/RY2Gz3H/Base-Thumbnail.jpg",
+//   },
+// };
 
 //Component
 import Navbar from "@/components/organisms/Navbar/Navbar";
@@ -24,6 +26,7 @@ import Hero from "@/components/template/Landing/Hero";
 export default function AffLink({ params }: { params: { locale: string } }) {
   
   const code = location.pathname.split("/aff/")[1];
+  
   useEffect(() => {
     localStorage.setItem("affiliate_code", code)
   }, [code]);
