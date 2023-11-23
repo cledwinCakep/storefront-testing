@@ -10,7 +10,7 @@ const Partners = () => {
   const t = useTranslations("Homepage");
   return (
     <div className="h-full bg-[#121417]" id="payment">
-      <Layout className="flex flex-col items-center justify-center gap-12 py-10">
+      <Layout className="flex flex-col items-center justify-center gap-12 py-14">
         <Text
           as="subHeading1"
           className="text-center font-medium leading-[32px] text-gray-100 "
@@ -18,7 +18,7 @@ const Partners = () => {
           {t("hero_paymentMethodTitle")}
         </Text>
 
-        <Partnerbanner width={96} height={48} spacing={10} justify="center" />
+        <Partnerbanner width={100} height={48} spacing={10} justify="center" />
       </Layout>
     </div>
   );

@@ -218,10 +218,16 @@ const Guide = () => {
       >
         <div className="flex flex-col items-center justify-center gap-12 py-[80px]">
           <div className="gap-8 space-y-8">
-            <Text as="h3" className="text-center font-bold sm:text-[44px] text-gray-100">
+            <Text
+              as="h3"
+              className="text-center font-bold text-gray-100 sm:text-[44px]"
+            >
               {t("cta_howToUseTitle")}
             </Text>
-            <Text as="body1" className="text-center font-regular text-gray-300">
+            <Text
+              as="body1"
+              className="font-regular text-center text-[#BDBDBD]"
+            >
               {t("cta_howToUseDesc")}
             </Text>
           </div>
@@ -233,16 +239,16 @@ const Guide = () => {
                 subtitle={t("cta_tutorDescOne")}
                 additional={
                   <div
-                    className="flex flex-row items-center justify-center gap-3 hover:cursor-pointer h-12  bg-orange-500 rounded-full"
+                    className="flex h-12 w-fit flex-row items-center justify-center gap-3 rounded-lg bg-orange-500  px-5 hover:cursor-pointer"
                     onClick={openModal}
                   >
                     <Text
                       as="body1"
-                      className="text-center font-bold h-12 flex items-center justify-center text-slate-50"
+                      className="flex h-12 items-center justify-center text-center font-bold text-slate-50"
                     >
                       {t("cta_checkCompabilityButton")}
                     </Text>
-                    <ArrowRight size={24} className="text-slate-50"/>
+                    <ArrowRight size={24} className="text-slate-50" />
                   </div>
                 }
               />

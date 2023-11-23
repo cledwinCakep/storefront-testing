@@ -74,22 +74,7 @@ export const NavbarMobileMenu = ({
             </Text>
             <X onClick={handleHamburgerMenuState} className="text-white" />
           </div>
-          <div className="flex flex-col gap-3 border-b-[1px] border-gray-200  px-6 py-6">
-            <Link
-              href={
-                "https://api.whatsapp.com/send?phone=6282339909564&text=Hallo%20min%2C%20saya%20mau%20beli%20eSIM%20untuk%20traveling"
-              }
-              className="w-full"
-            >
-              <Button
-                color="orange"
-                size="xs"
-                iconLeft={<Whatsapp color="white" />}
-                className="w-full"
-              >
-                {t("navbar_contactUs")}
-              </Button>
-            </Link>
+          <div className="flex flex-col gap-3  border-gray-200  px-6 py-6">
             {/* <div
               className="flex w-full cursor-pointer flex-row justify-between rounded-[124px] border-[1px] border-gray-300 p-4 text-white "
               onClick={handleChangeLanguage}
@@ -161,6 +146,23 @@ export const NavbarMobileMenu = ({
               {t("navbar_howItWorks")}
             </Anchor>
           </div>
+          <Link
+            href={
+              "https://api.whatsapp.com/send?phone=6282339909564&text=Hallo%20min%2C%20saya%20mau%20beli%20eSIM%20untuk%20traveling"
+            }
+            className="w-full"
+          >
+            <div className="mt-6 px-5">
+              <Button
+                color="transparent"
+                size="xs"
+                iconLeft={<Whatsapp color="white" />}
+                className="w-full"
+              >
+                {t("navbar_contactUs")}
+              </Button>
+            </div>
+          </Link>
         </div>
       </div>
     </div>

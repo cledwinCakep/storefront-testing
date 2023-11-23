@@ -19,7 +19,7 @@ const CardInfo = ({ image, title, subtitle, additional }: CardInfoProps) => {
         <Text as="subHeading1" className="text-center font-bold text-gray-100">
           {title}
         </Text>
-        <Text as="body1" className="py-6 text-center text-gray-300">
+        <Text as="body1" className="py-6 text-center text-[#BDBDBD]">
           {subtitle}
         </Text>
         {additional}

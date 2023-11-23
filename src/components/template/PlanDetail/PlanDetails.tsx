@@ -238,12 +238,12 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
         </div>
 
         <div className="sticky top-0 hidden h-full sm:col-start-3 sm:row-start-1 sm:block md:col-start-4   ">
-          <div className="sticky top-2 w-full rounded-lg border-[1px] border-gray-300 bg-white px-4 py-5">
+          <div className="sticky top-2 w-full rounded-lg border-[1px] border-[#222] bg-[#121417] px-4 py-5">
             <div className="space-y-6">
-              <Text as="subHeading2" className="font-bold text-gray-900">
+              <Text as="subHeading2" className="font-bold text-[#F9F9F9]">
                 {t("planDetail_orderInformation")}
               </Text>
-              <Text as="small" className="font-medium text-gray-500">
+              <Text as="small" className="font-medium text-[#9CA3AF]">
                 {`${
                   currentSelected.plan.value === "UNLIMITED"
                     ? "Daily Unlimited Plan"
@@ -266,20 +266,23 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
               <div className="flex items-center gap-4">
                 <button
                   className={`flex items-center rounded-lg px-3 py-1 font-bold ${
-                    order <= 1 ? "bg-gray-300" : "bg-orange-500"
-                  } text-white`}
+                    order <= 1 ? "bg-[#BDBDBD]" : "bg-[#FD9B62]"
+                  } select-none text-black`}
                   disabled={order <= 1 ? true : false}
                   onClick={() => handleOrder("decrease")}
                 >
                   <Text as="body1">-</Text>
                 </button>
-                <Text as="body1" className="flex w-1 justify-center font-bold">
+                <Text
+                  as="body1"
+                  className="flex w-1 justify-center font-bold text-white"
+                >
                   {order}
                 </Text>
                 <button
                   className={`flex items-center rounded-lg px-3 py-1 font-bold ${
-                    increaseButton ? "bg-gray-300" : "bg-orange-500"
-                  } text-white`}
+                    increaseButton ? "bg-[#BDBDBD]" : "bg-[#FD9B62]"
+                  } select-none text-black`}
                   disabled={increaseButton ? true : false}
                   onClick={() => handleOrder("increase")}
                 >
@@ -291,7 +294,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
                 <Text as="body1" className="font-medium text-gray-500">
                   Subtotal
                 </Text>
-                <Text as="body1" className="text-xl font-black text-gray-900">
+                <Text as="body1" className="text-xl font-black text-[#F9F9F9]">
                   {subtotal.toLocaleString("id-ID", {
                     style: "currency",
                     currency: "IDR",

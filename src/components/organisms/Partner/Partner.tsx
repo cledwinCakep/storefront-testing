@@ -14,22 +14,7 @@ const Partnerbanner = ({
   spacing,
   justify,
 }: PartnerBannerData) => {
-  const partnerBank = [
-    "bca",
-    "bni",
-    "bri",
-    "mandiri",
-    "bjb",
-    "permata",
-    "visa",
-    "mastercard",
-    "jcb",
-    "dana",
-    "ovo",
-    "shopeepay",
-    "linkaja",
-    "qris",
-  ];
+  const partnerBank = ["mastercard", "paypal", "visa"];
   return (
     <>
       <div
