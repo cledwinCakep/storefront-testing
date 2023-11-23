@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 
 // components
 import Text from "@/components/atoms/Text/Text";
@@ -11,6 +12,14 @@ import { useTranslations } from "next-intl";
 
 export const PaymentCardSuccess = () => {
   const t = useTranslations("Payment");
+  const [code, setCode] = useState<string | null>("");
+
+  useEffect(() => {
+    if (window) {
+      setCode(window.localStorage.getItem("affiliate_code"));
+    }
+  });
+  
   return (
     <>
       <div className="max-w-[445px] rounded-md bg-[#121417] px-11 py-14">
@@ -29,7 +38,7 @@ export const PaymentCardSuccess = () => {
               {t("payment_paymentSuccessDesc")}
             </Text>
           </div>
-          <Link href="/" className="w-full">
+          <Link href={`${code ? `/aff/${code}` : `/`}`} className="w-full">
             <Button color="orange" size="sm" className="h-12 w-full">
               {t("payment_backHomeButton")}
             </Button>

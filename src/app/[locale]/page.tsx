@@ -1,4 +1,6 @@
-import React from "react";
+"use client"
+
+import React, { useEffect } from "react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -20,6 +22,11 @@ import Advantage from "@/components/template/Landing/Advantage";
 import Hero from "@/components/template/Landing/Hero";
 
 export default function Home({ params }: { params: { locale: string } }) {
+  useEffect(() => {
+    if (localStorage.getItem("affiliate_code")) {
+      localStorage.removeItem("affiliate_code");
+    }
+  }, []);
   return (
     <>
       <Navbar params={params} />
