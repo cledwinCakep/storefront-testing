@@ -45,7 +45,7 @@ const MobileCheckout = () => {
         <div className="flex items-center gap-4">
           <button
             className={`flex items-center rounded-lg px-3 py-1 font-bold ${
-              order <= 1 ? "bg-[#BDBDBD]" : "bg-orange-500"
+              order <= 1 ? "bg-[#BDBDBD]" : "bg-[#FD9B62]"
             } select-none text-black`}
             disabled={order <= 1 ? true : false}
             onClick={() => handleOrder("decrease")}
@@ -57,7 +57,7 @@ const MobileCheckout = () => {
           </Text>
           <button
             className={`flex items-center rounded-lg px-3 py-1 font-bold ${
-              increaseButton ? "bg-[#BDBDBD]" : "bg-orange-500"
+              increaseButton ? "bg-[#BDBDBD]" : "bg-[#FD9B62]"
             } select-none text-black`}
             disabled={increaseButton ? true : false}
             onClick={() => handleOrder("increase")}

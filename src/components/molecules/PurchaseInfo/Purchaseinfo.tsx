@@ -44,11 +44,11 @@ const Purchaseinfo = ({
           </Text>
           <Text
             as="body1"
-            className="mb-6 mt-3 font-medium sm:text-xl sm:leading-none text-gray-100"
+            className="mb-6 mt-3 font-medium text-gray-100 sm:text-xl sm:leading-none"
           >
             {packages}
           </Text>
-          <Text as="body1" className="font-bold sm:text-xl text-gray-100">
+          <Text as="body1" className="font-bold text-gray-100 sm:text-xl">
             {price}
           </Text>
         </div>
@@ -62,18 +62,21 @@ const Purchaseinfo = ({
         <div className="flex items-center gap-4">
           <button
             className={`flex h-6 w-6 items-center justify-center rounded-md font-bold ${
-              order <= 1 ? "bg-gray-300" : "bg-orange-500"
+              order <= 1 ? "bg-gray-300" : "bg-[#FD9B62]"
             } text-black`}
             disabled={order <= 1 ? true : false}
             onClick={() => handleOrder("decrease")}
           >
             <Text as="body1">-</Text>
           </button>
-          <Text as="body1" className="flex w-1 justify-center font-bold text-gray-100">
+          <Text
+            as="body1"
+            className="flex w-1 justify-center font-bold text-gray-100"
+          >
             {order}
           </Text>
           <button
-            className={`flex  h-6 w-6 items-center justify-center rounded-md font-bold ${"bg-orange-500"} text-black`}
+            className={`flex  h-6 w-6 items-center justify-center rounded-md font-bold ${"bg-[#FD9B62]"} text-black`}
             onClick={() => handleOrder("increase")}
           >
             <Text as="body1">+</Text>

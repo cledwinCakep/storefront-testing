@@ -16,7 +16,7 @@ const Anchor = ({ children, href, isExternal, className }: AnchorProps) => {
   };
 
   const aStyle =
-    "text-white py-4 px-2 inline-block font-medium hover:text-orange-500 active:bg-orange-50";
+    "text-white py-4 px-2 inline-block font-medium hover:text-orange-500";
 
   if (isExternal) {
     return (

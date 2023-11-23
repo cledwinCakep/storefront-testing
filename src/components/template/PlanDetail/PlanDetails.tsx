@@ -243,7 +243,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
               <Text as="subHeading2" className="font-bold text-[#F9F9F9]">
                 {t("planDetail_orderInformation")}
               </Text>
-              <Text as="small" className="font-medium text-[#eee]">
+              <Text as="small" className="font-medium text-[#9CA3AF]">
                 {`${
                   currentSelected.plan.value === "UNLIMITED"
                     ? "Daily Unlimited Plan"
@@ -266,7 +266,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
               <div className="flex items-center gap-4">
                 <button
                   className={`flex items-center rounded-lg px-3 py-1 font-bold ${
-                    order <= 1 ? "bg-[#FED7AA]" : "bg-orange-500"
+                    order <= 1 ? "bg-[#BDBDBD]" : "bg-[#FD9B62]"
                   } select-none text-black`}
                   disabled={order <= 1 ? true : false}
                   onClick={() => handleOrder("decrease")}
@@ -281,7 +281,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
                 </Text>
                 <button
                   className={`flex items-center rounded-lg px-3 py-1 font-bold ${
-                    increaseButton ? "bg-[#FED7AA]" : "bg-orange-500"
+                    increaseButton ? "bg-[#BDBDBD]" : "bg-[#FD9B62]"
                   } select-none text-black`}
                   disabled={increaseButton ? true : false}
                   onClick={() => handleOrder("increase")}

@@ -239,7 +239,7 @@ const Guide = () => {
                 subtitle={t("cta_tutorDescOne")}
                 additional={
                   <div
-                    className="flex h-12 flex-row items-center justify-center gap-3 rounded-lg  bg-orange-500 hover:cursor-pointer"
+                    className="flex h-12 w-fit flex-row items-center justify-center gap-3 rounded-lg bg-orange-500  px-5 hover:cursor-pointer"
                     onClick={openModal}
                   >
                     <Text
