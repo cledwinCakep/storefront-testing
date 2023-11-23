@@ -44,8 +44,8 @@ const Radio = ({
         }`}
       />
       <span
-        className={`absolute left-0 top-0 z-0 h-full w-full rounded-lg border-[1px] peer-checked/radio:border-gray-500 peer-checked/radio:bg-gray-900 peer-hover/radio:border-gray-500 ${
-          isDisabled ? "border-0 bg-gray-900" : "border-gray-500"
+        className={`absolute left-0 top-0 z-0 h-full w-full rounded-lg border-[1px] peer-checked/radio:border-gray-500 peer-checked/radio:bg-[#121417] peer-hover/radio:border-gray-500 ${
+          isDisabled ? "border-0 bg-[#121417]" : "border-gray-500"
         }`}
       />
 

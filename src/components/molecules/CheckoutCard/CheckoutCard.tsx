@@ -10,26 +10,27 @@ type CheckoutCardProps = {
   handlePayment: () => void;
   handleInputEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isEmpty: string;
-  code:string |null,
+  code: string | null;
 };
 
 const CheckoutCard = ({
   isEmpty,
   handlePayment,
   handleInputEmail,
-  code
+  code,
 }: CheckoutCardProps) => {
   const t = useTranslations("Checkout");
   return (
-    <div className="flex w-full max-w-[380px] flex-col bg-gray-900 rounded-lg border border-gray-600 px-4 py-5">
+    <div className="flex w-full max-w-[380px] flex-col rounded-lg border border-gray-600 bg-[#121417] px-4 py-5">
       <input
         placeholder={t("checkout_email")}
         onChange={(e) => handleInputEmail(e)}
         className={`bg-black text-gray-100
-          ${isEmpty
-            ? "mb-4 rounded-lg border border-gray-500 px-3 py-2"
-            : "mb-4 rounded-md border border-gray-400 px-3 py-2"
-        }`}
+          ${
+            isEmpty
+              ? "mb-4 rounded-lg border border-gray-500 px-3 py-2"
+              : "mb-4 rounded-md border border-gray-400 px-3 py-2"
+          }`}
       />
       <Text as="body2" className=" mt-4 px-2 text-gray-300 ">
         Affiliate Code: <span className="font-bold uppercase">{code}</span>
@@ -41,7 +42,7 @@ const CheckoutCard = ({
       <Button
         color="orange"
         size="sm"
-        className="my-8 w-full h-12"
+        className="my-8 h-12 w-full"
         onClick={handlePayment}
       >
         {t("checkout_continueToPayment")}

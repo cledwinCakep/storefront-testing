@@ -66,7 +66,7 @@ const Partners = () => {
   }
   return (
     <Layout id="destination">
-      <div className="flex h-full flex-col items-center justify-center gap-10 py-20">
+      <div className="flex h-full flex-col items-center justify-center gap-10 py-32">
         <div className="flex flex-col gap-8">
           <Text
             as="h3"

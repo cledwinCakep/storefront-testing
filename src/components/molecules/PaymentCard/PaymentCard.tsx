@@ -13,13 +13,16 @@ export const PaymentCardSuccess = () => {
   const t = useTranslations("Payment");
   return (
     <>
-      <div className="max-w-[445px] rounded-md bg-gray-900 px-11 py-14">
+      <div className="max-w-[445px] rounded-md bg-[#121417] px-11 py-14">
         <div className="flex flex-col items-center justify-center gap-14">
-          <div className=" flex w-max items-center justify-center rounded-full bg-gray-900 p-3 border border-gray-500">
+          <div className=" flex w-max items-center justify-center rounded-full border border-gray-500 bg-[#121417] p-3">
             <CheckmarkSucess />
           </div>
           <div className="flex flex-col gap-3">
-            <Text as="subHeading1" className="text-center font-bold text-gray-100">
+            <Text
+              as="subHeading1"
+              className="text-center font-bold text-gray-100"
+            >
               {t("payment_paymentSuccessTitle")}
             </Text>
             <Text as="body1" className="text-center text-gray-300">
@@ -27,7 +30,7 @@ export const PaymentCardSuccess = () => {
             </Text>
           </div>
           <Link href="/" className="w-full">
-            <Button color="orange" size="sm" className="w-full h-12">
+            <Button color="orange" size="sm" className="h-12 w-full">
               {t("payment_backHomeButton")}
             </Button>
           </Link>
@@ -55,13 +58,16 @@ export const PaymentCardFailed = () => {
   const t = useTranslations("Payment");
   return (
     <>
-      <div className="max-w-[445px] rounded-md bg-gray-900 px-11 py-14">
+      <div className="max-w-[445px] rounded-md bg-[#121417] px-11 py-14">
         <div className="flex flex-col items-center justify-center gap-14">
-          <div className=" flex w-max items-center justify-center rounded-full bg-gray-900 p-3 border border-gray-500">
+          <div className=" flex w-max items-center justify-center rounded-full border border-gray-500 bg-[#121417] p-3">
             <CheckmarkFailed />
           </div>
           <div className="flex flex-col gap-3">
-            <Text as="subHeading1" className="text-center font-bold text-gray-100">
+            <Text
+              as="subHeading1"
+              className="text-center font-bold text-gray-100"
+            >
               {t("payment_paymentFailedTitle")}
             </Text>
             <Text as="body1" className="text-center text-gray-300">
@@ -75,7 +81,7 @@ export const PaymentCardFailed = () => {
               }
               className="w-full"
             >
-              <Button color="orange" size="sm" className="w-full h-12">
+              <Button color="orange" size="sm" className="h-12 w-full">
                 {t("payment_contactUs")}
               </Button>
             </Link>
