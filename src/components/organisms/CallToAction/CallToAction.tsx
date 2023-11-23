@@ -13,10 +13,8 @@ import Link from "next/link";
 const CallToAction = () => {
   const t = useTranslations("CTA");
   return (
-    <div
-      className="bg-lightgray w-full  bg-cover bg-[right_-10rem_bottom] bg-no-repeat md:bg-bottom border-gray-600 border-t-[1px]"
-    >
-      <Layout className="flex flex-col items-center justify-between gap-10 py-20 md:flex-row">
+    <div className="bg-lightgray w-full  border-t-[1px] border-gray-600 bg-cover bg-[right_-10rem_bottom] bg-no-repeat md:bg-bottom">
+      <Layout className="flex flex-col items-center justify-between gap-10 py-20 md:flex-col">
         <Text
           as="h3"
           className="max-w-[628px] text-center font-bold text-gray-100 md:text-start"
@@ -28,7 +26,11 @@ const CallToAction = () => {
             "https://api.whatsapp.com/send?phone=6282339909564&text=Hallo%20min%2C%20saya%20mau%20beli%20eSIM%20untuk%20traveling"
           }
         >
-          <Button color="orange" size="sm" iconLeft={<Whatsapp color="white" />}>
+          <Button
+            color="transparent"
+            size="xs"
+            iconLeft={<Whatsapp color="white" />}
+          >
             {t("cta_ctaButton")}
           </Button>
         </Link>

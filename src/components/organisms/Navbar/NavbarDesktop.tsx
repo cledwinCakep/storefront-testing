@@ -110,7 +110,7 @@ const NavbarDesktop = ({ params }: { params: { locale: string } }) => {
             }
           >
             <Button
-              color="orange"
+              color="transparent"
               size="xs"
               iconLeft={<Whatsapp color="white" />}
               className="w-full"

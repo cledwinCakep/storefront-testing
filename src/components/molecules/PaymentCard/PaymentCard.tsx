@@ -25,7 +25,7 @@ export const PaymentCardSuccess = () => {
             >
               {t("payment_paymentSuccessTitle")}
             </Text>
-            <Text as="body1" className="text-center text-gray-300">
+            <Text as="body1" className="text-center text-[#BDBDBD]">
               {t("payment_paymentSuccessDesc")}
             </Text>
           </div>
@@ -35,7 +35,7 @@ export const PaymentCardSuccess = () => {
             </Button>
           </Link>
           <div className="max-w-[300px">
-            <Text as="body1" className="text-center text-gray-300">
+            <Text as="body1" className="text-center text-[#BDBDBD]">
               {t("payment_detailsContactUs")}{" "}
               <Link
                 href={
@@ -70,7 +70,7 @@ export const PaymentCardFailed = () => {
             >
               {t("payment_paymentFailedTitle")}
             </Text>
-            <Text as="body1" className="text-center text-gray-300">
+            <Text as="body1" className="text-center text-[#BDBDBD]">
               {t("payment_paymentFailedDesc")}
             </Text>
           </div>

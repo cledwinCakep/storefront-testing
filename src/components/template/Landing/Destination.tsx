@@ -74,7 +74,7 @@ const Partners = () => {
           >
             {t("hero_destinationTitle")}
           </Text>
-          <Text as="body1" className="text-center text-gray-300">
+          <Text as="body1" className="text-center text-[#BDBDBD]">
             {t("hero_destinationDesc")}
           </Text>
         </div>

@@ -24,7 +24,7 @@ const Partners = () => {
           </Text>
           <Text
             as="body1"
-            className="font-regular text-center leading-[24px] text-gray-300 sm:text-start md:text-xl"
+            className="font-regular text-center leading-[24px] text-[#BDBDBD] sm:text-start md:text-xl"
           >
             {t("hero_heroDesc")}
           </Text>

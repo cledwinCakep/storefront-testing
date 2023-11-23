@@ -33,7 +33,7 @@ const Tabs = ({ data }: TabsProps) => {
             className={`w-full py-6 font-bold ${
               i === currentlySelected
                 ? "border-b-2 border-b-gray-200 text-gray-100"
-                : "text-gray-300"
+                : "text-[#BDBDBD]"
             }`}
             onClick={() => handleCurrentlyActiveTab(i)}
           >
@@ -42,7 +42,7 @@ const Tabs = ({ data }: TabsProps) => {
         ))}
       </div>
 
-      <div className="w-full py-6 [&>ul>li]:mb-1 [&>ul>li]:list-disc [&>ul]:mb-4 [&>ul]:pl-5 text-gray-100">
+      <div className="w-full py-6 text-gray-100 [&>ul>li]:mb-1 [&>ul>li]:list-disc [&>ul]:mb-4 [&>ul]:pl-5">
         <ReactMarkdown remarkPlugins={[remarkGfm]}>
           {
             data
