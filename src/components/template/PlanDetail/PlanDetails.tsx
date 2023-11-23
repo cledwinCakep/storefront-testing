@@ -45,12 +45,14 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
 
   const countryName = i[country_code];
 
+  console.log(countryName);
+
   return (
     <div className="sm:relative">
       {countryName ? (
         <Image
-          src={`/${countryName}_plan.png`}
-          alt={countryName}
+          src={`/${countryName.toLowerCase()}_plan.png`}
+          alt={countryName.toLowerCase()}
           width={600}
           height={280}
           className="max-h-[280px] sm:hidden"
@@ -76,8 +78,8 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
         <div className="relative hidden h-full w-full  border-gray-300 sm:col-span-2 sm:col-start-1 sm:block md:col-span-1 md:col-start-1 md:row-start-1 md:h-[430px] md:w-full">
           {countryName ? (
             <Image
-              src={`/${countryName}_plan.png`}
-              alt={countryName}
+              src={`/${countryName.toLowerCase()}_plan.png`}
+              alt={countryName.toLowerCase()}
               priority
               fill
               style={{
@@ -146,7 +148,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
           <Tabs
             data={
               countryName
-                ? countryName == "china"
+                ? countryName.toLowerCase() == "china"
                   ? [
                       {
                         label: t("planDetail_descriptionTitle"),
