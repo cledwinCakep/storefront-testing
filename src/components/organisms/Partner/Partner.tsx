@@ -14,22 +14,7 @@ const Partnerbanner = ({
   spacing,
   justify,
 }: PartnerBannerData) => {
-  const partnerBank = [
-    "bca",
-    "bni",
-    "bri",
-    "mandiri",
-    "bjb",
-    "permata",
-    "visa",
-    "mastercard",
-    "jcb",
-    "dana",
-    "ovo",
-    "shopeepay",
-    "linkaja",
-    "qris",
-  ];
+  const partnerBank = ["mastercard", "paypal", "visa"];
   return (
     <>
       <div
@@ -42,6 +27,7 @@ const Partnerbanner = ({
             alt={`${dt} icon`}
             width={width}
             height={height}
+            priority
           />
         ))}
       </div>
@@ -53,6 +39,7 @@ const Partnerbanner = ({
           width={398}
           height={192}
           style={{ width: "100%", objectFit: "cover" }}
+          priority
         />
       </div>
     </>

@@ -16,10 +16,10 @@ const CardInfo = ({ image, title, subtitle, additional }: CardInfoProps) => {
     <>
       {image}
       <div className="flex  h-[150px] flex-col">
-        <Text as="subHeading1" className="text-center font-bold">
+        <Text as="subHeading1" className="text-center font-bold text-gray-100">
           {title}
         </Text>
-        <Text as="body1" className="py-6 text-center text-stone-500">
+        <Text as="body1" className="py-6 text-center text-[#BDBDBD]">
           {subtitle}
         </Text>
         {additional}

@@ -26,14 +26,14 @@ const Tabs = ({ data }: TabsProps) => {
 
   return (
     <div className="w-full">
-      <div className="flex w-full border-b-[1px] border-b-zinc-200 text-zinc-400">
+      <div className="flex w-full border-b-[1px] border-b-zinc-500 text-gray-100">
         {data.map((data, i) => (
           <button
             key={i}
             className={`w-full py-6 font-bold ${
               i === currentlySelected
-                ? "border-b-2 border-stone-900 text-stone-900"
-                : "border-b-[1px] border-b-zinc-200 text-zinc-400"
+                ? "border-b-2 border-b-gray-200 text-gray-100"
+                : "text-[#BDBDBD]"
             }`}
             onClick={() => handleCurrentlyActiveTab(i)}
           >
@@ -42,7 +42,7 @@ const Tabs = ({ data }: TabsProps) => {
         ))}
       </div>
 
-      <div className="w-full py-6 [&>ul>li]:mb-1 [&>ul>li]:list-disc [&>ul]:mb-4 [&>ul]:pl-5">
+      <div className="w-full py-6 text-gray-100 [&>ul>li]:mb-1 [&>ul>li]:list-disc [&>ul]:mb-4 [&>ul]:pl-5">
         <ReactMarkdown remarkPlugins={[remarkGfm]}>
           {
             data

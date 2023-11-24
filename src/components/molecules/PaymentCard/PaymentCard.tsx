@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 
 // components
 import Text from "@/components/atoms/Text/Text";
@@ -11,35 +12,46 @@ import { useTranslations } from "next-intl";
 
 export const PaymentCardSuccess = () => {
   const t = useTranslations("Payment");
+  const [code, setCode] = useState<string | null>("");
+
+  useEffect(() => {
+    if (window) {
+      setCode(window.localStorage.getItem("affiliate_code"));
+    }
+  });
+  
   return (
     <>
-      <div className="max-w-[445px] rounded-md bg-white px-11 py-14">
+      <div className="max-w-[445px] rounded-md bg-[#121417] px-11 py-14">
         <div className="flex flex-col items-center justify-center gap-14">
-          <div className=" flex w-max items-center justify-center rounded-md bg-zinc-100 p-3">
+          <div className=" flex w-max items-center justify-center rounded-full border border-gray-500 bg-[#121417] p-3">
             <CheckmarkSucess />
           </div>
           <div className="flex flex-col gap-3">
-            <Text as="subHeading1" className="text-center font-bold">
+            <Text
+              as="subHeading1"
+              className="text-center font-bold text-gray-100"
+            >
               {t("payment_paymentSuccessTitle")}
             </Text>
-            <Text as="body1" className="text-center text-stone-500">
+            <Text as="body1" className="text-center text-[#BDBDBD]">
               {t("payment_paymentSuccessDesc")}
             </Text>
           </div>
-          <Link href="/">
-            <Button color="orange" size="sm" className="w-full">
+          <Link href={`${code ? `/aff/${code}` : `/`}`} className="w-full">
+            <Button color="orange" size="sm" className="h-12 w-full">
               {t("payment_backHomeButton")}
             </Button>
           </Link>
-          <div className="max-w-[300px]">
-            <Text as="body1" className="text-center text-stone-500">
+          <div className="max-w-[300px">
+            <Text as="body1" className="text-center text-[#BDBDBD]">
               {t("payment_detailsContactUs")}{" "}
               <Link
                 href={
                   "https://api.whatsapp.com/send?phone=6282339909564&text=Hallo%20min%2C%20saya%20mau%20beli%20eSIM%20untuk%20traveling"
                 }
               >
-                <span className="font-bold text-blue-800 hover:cursor-pointer">
+                <span className="font-bold text-blue-500 hover:cursor-pointer">
                   {t("payment_contactUs")}
                 </span>
               </Link>
@@ -55,16 +67,19 @@ export const PaymentCardFailed = () => {
   const t = useTranslations("Payment");
   return (
     <>
-      <div className="max-w-[445px] rounded-md bg-white px-11 py-14">
+      <div className="max-w-[445px] rounded-md bg-[#121417] px-11 py-14">
         <div className="flex flex-col items-center justify-center gap-14">
-          <div className=" flex w-max items-center justify-center rounded-md bg-zinc-100 p-3">
+          <div className=" flex w-max items-center justify-center rounded-full border border-gray-500 bg-[#121417] p-3">
             <CheckmarkFailed />
           </div>
           <div className="flex flex-col gap-3">
-            <Text as="subHeading1" className="text-center font-bold">
+            <Text
+              as="subHeading1"
+              className="text-center font-bold text-gray-100"
+            >
               {t("payment_paymentFailedTitle")}
             </Text>
-            <Text as="body1" className="text-center text-stone-500">
+            <Text as="body1" className="text-center text-[#BDBDBD]">
               {t("payment_paymentFailedDesc")}
             </Text>
           </div>
@@ -73,17 +88,18 @@ export const PaymentCardFailed = () => {
               href={
                 " https://api.whatsapp.com/send?phone=6282339909564&text=Hallo%20min%2C%20saya%20mau%20beli%20eSIM%20untuk%20traveling"
               }
+              className="w-full"
             >
-              <Button color="orange" size="sm" className="w-full">
+              <Button color="orange" size="sm" className="h-12 w-full">
                 {t("payment_contactUs")}
               </Button>
             </Link>
             <Link href="/">
               <div className="flex flex-row gap-2">
-                <ArrowLeft color="#3B82F6" />
+                <ArrowLeft color="#F9F9F9" />
                 <Text
                   as="body1"
-                  className="text-center font-bold text-blue-500"
+                  className="text-center font-bold text-gray-100"
                 >
                   {t("payment_backHomeButton")}
                 </Text>

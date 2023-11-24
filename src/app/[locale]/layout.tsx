@@ -8,20 +8,18 @@ import "./globals.css";
 import { redirect } from "next/navigation";
 import { useState } from "react";
 import GoogleAnalytics from "../../../GoogleAnalytics";
-import Smartlook from "smartlook-client";
 import { pageview } from "../../../gtag";
 
 export const dynamic = "force-dynamic";
 
 export async function generateStaticParams() {
-  return ["en", "id"].map((locale) => ({ locale }));
+  return ["en"].map((locale) => ({ locale }));
 }
 
 const dictionaries: {
-  [key: string]: typeof en | typeof id;
+  [key: string]: typeof en;
 } = {
   en,
-  id,
 };
 
 function getMessages(locale: string) {
@@ -45,7 +43,6 @@ export default function RootLayout({
   children?: React.ReactNode;
   params: { locale: string };
 }) {
-  Smartlook.init(process.env.NEXT_PUBLIC_SMARTLOOK!);
 
   const [messages, setMessages] = useState(getMessages(params.locale));
   return (
@@ -75,9 +72,9 @@ export default function RootLayout({
         />
       </head>
 
-      <body>
-        <GoogleAnalytics keys={process.env.NEXT_PUBLIC_GOOGLE_ID} />
-        <NextIntlClientProvider locale={params.locale} messages={messages}>
+      <body className="bg-black">
+        {/* <GoogleAnalytics keys={process.env.NEXT_PUBLIC_GOOGLE_ID} /> */}
+        <NextIntlClientProvider locale={"en"} messages={messages}>
           {children}
         </NextIntlClientProvider>
         <ProgressBar

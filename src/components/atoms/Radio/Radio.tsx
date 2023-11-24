@@ -44,29 +44,19 @@ const Radio = ({
         }`}
       />
       <span
-        className={`absolute left-0 top-0 z-0 h-full w-full rounded-lg border-[1px] peer-checked/radio:border-orange-500 peer-checked/radio:bg-orange-50 peer-hover/radio:border-orange-500 ${
-          isDisabled ? "border-0 bg-zinc-200" : "border-stone-500"
+        className={`absolute left-0 top-0 z-0 h-full w-full rounded-lg border-[1px] peer-checked/radio:border-[#9A3412] peer-checked/radio:bg-[#431407] peer-hover/radio:border-[#9A3412] ${
+          isDisabled ? "border-0 bg-[#121417]" : "border-gray-500"
         }`}
       />
 
       <label
         htmlFor={label}
-        className={`z-10 cursor-pointer whitespace-nowrap font-medium peer-checked/radio:text-orange-500 peer-hover/radio:text-orange-500 ${
-          isDisabled ? "text-zinc-500" : "text-zinc-700"
+        className={`z-10 cursor-pointer whitespace-nowrap font-medium peer-checked/radio:text-[#F97316] peer-hover/radio:text-[#F97316] ${
+          isDisabled ? "text-gray-100" : "text-gray-500"
         }`}
       >
         <Text as="body1">{label}</Text>
       </label>
-
-      <span
-        className={`relative block h-4 w-4 rounded-full border-[1px] p-1 peer-checked/radio:hidden peer-hover/radio:border-orange-500 ${
-          isDisabled ? "border-zinc-500" : "border-stone-700"
-        }`}
-      />
-
-      <span className="relative hidden h-4 w-4 rounded-full border-[1px] border-stone-500 p-1 peer-checked/radio:block peer-checked/radio:border-orange-500 peer-hover/radio:border-orange-500">
-        <span className="absolute left-1/2 top-1/2 h-[10px] w-[10px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-orange-500" />
-      </span>
     </div>
   );
 };

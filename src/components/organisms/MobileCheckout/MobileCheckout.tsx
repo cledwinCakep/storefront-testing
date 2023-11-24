@@ -18,16 +18,16 @@ const MobileCheckout = () => {
   } = usePlanContext();
   const t = useTranslations("PlanDetail");
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-10 bg-white px-4 pb-4 pt-4 shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] sm:hidden">
+    <div className="fixed bottom-0 left-0 right-0 z-10 bg-[#121417] px-4 pb-4 pt-4 shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] sm:hidden">
       <div className="mb-4 flex items-end justify-between">
         <div>
-          <Text as="subHeading2" className="font-black text-stone-900">
+          <Text as="subHeading2" className="font-black text-white">
             {subtotal.toLocaleString("id-ID", {
               style: "currency",
               currency: "IDR",
             })}
           </Text>
-          <Text as="small" className="font-medium text-stone-500">
+          <Text as="small" className="font-medium text-gray-500">
             {`${
               currentSelected.plan.value === "UNLIMITED"
                 ? "Daily Unlimited Plan"
@@ -45,20 +45,20 @@ const MobileCheckout = () => {
         <div className="flex items-center gap-4">
           <button
             className={`flex items-center rounded-lg px-3 py-1 font-bold ${
-              order <= 1 ? "bg-orange-200" : "bg-orange-500"
-            } text-white`}
+              order <= 1 ? "bg-[#BDBDBD]" : "bg-[#FD9B62]"
+            } select-none text-black`}
             disabled={order <= 1 ? true : false}
             onClick={() => handleOrder("decrease")}
           >
             <Text as="body1">-</Text>
           </button>
-          <Text as="subHeading2" className="font-black text-stone-900">
+          <Text as="subHeading2" className="font-black text-white">
             {order}
           </Text>
           <button
             className={`flex items-center rounded-lg px-3 py-1 font-bold ${
-              increaseButton ? "bg-orange-200" : "bg-orange-500"
-            } text-white`}
+              increaseButton ? "bg-[#BDBDBD]" : "bg-[#FD9B62]"
+            } select-none text-black`}
             disabled={increaseButton ? true : false}
             onClick={() => handleOrder("increase")}
           >
@@ -67,7 +67,7 @@ const MobileCheckout = () => {
         </div>
       </div>
 
-      <Button color="orange" className="w-full" onClick={handleBuy}>
+      <Button color="orange" className="h-12 w-full" onClick={handleBuy}>
         {t("planDetail_buyButton")}
       </Button>
     </div>

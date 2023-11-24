@@ -10,19 +10,26 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <div className="flex flex-row bg-zinc-200">
-      <Layout className="flex w-full flex-col-reverse items-center justify-between gap-2 py-6 md:flex-row">
+    <div className="flex flex-row bg-white">
+      <Layout className="flex w-full flex-col-reverse items-center justify-between gap-5 py-6">
         <Text
           as="body1"
-          className="text-wrap text-center font-medium text-stone-400"
+          className="text-wrap text-center font-medium text-gray-500"
         >
-          &copy; {new Date().getFullYear()}. PT. Cakeplabs Global Teknologi
+          &copy; {new Date().getFullYear()}. Gadgetkorea INC. ALL RIGHTS
+          RESERVED
         </Text>
         <div className="flex flex-row gap-8">
-          <Link href={"https://www.tiktok.com/@adminbeliesim"}>
+          <Link
+            href={"https://www.tiktok.com/@adminbeliesim"}
+            className="rounded-full border border-gray-400 p-2"
+          >
             <Tiktok />
           </Link>
-          <Link href={"https://www.instagram.com/beliesim/"}>
+          <Link
+            href={"https://www.instagram.com/beliesim/"}
+            className="rounded-full border border-gray-400 p-2"
+          >
             <Instagram />
           </Link>
         </div>

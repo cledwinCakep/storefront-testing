@@ -13,9 +13,9 @@ import Button from "@/components/atoms/Button/Button";
 import RadioPlan from "@/components/molecules/RadioPlan/RadioPlan";
 
 // utils
-import { capitalizeSentences } from "@/lib/utils/capitalize";
 import { usePlanContext } from "@/lib/context/plan";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/router";
 
 const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
   const {
@@ -31,38 +31,83 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     country,
   } = usePlanContext();
   const t = useTranslations("PlanDetail");
+  const router = location.pathname;
+  const country_code = router.split("/")[2];
+
+  const i: any = {
+    CN: "China",
+    SG: "Singapore",
+    MY: "Malaysia",
+    TH: "Thailand",
+    JP: "Japan",
+    KR: "Korea",
+  };
+
+  const countryName = i[country_code];
+
+  console.log(countryName);
 
   return (
     <div className="sm:relative">
-      <Image
-        src={`/${country?.toLowerCase()}_plan.png`}
-        alt={country?.toLowerCase()}
-        width={600}
-        height={280}
-        className="max-h-[280px] sm:hidden"
-        style={{
-          objectFit: "cover",
-        }}
-      />
-      <Layout className="space-y-8 sm:grid sm:grid-cols-3 sm:gap-5 sm:space-y-0 md:grid-cols-4">
-        <div className="relative hidden h-full w-full  border-stone-300 sm:col-span-2 sm:col-start-1 sm:block md:col-span-1 md:col-start-1 md:row-start-1 md:h-[430px] md:w-full">
-          <Image
-            src={`/${country?.toLowerCase()}_plan.png`}
-            alt={country?.toLowerCase()}
-            fill
-            style={{
-              objectFit: "cover",
-            }}
-            className="rounded-3xl"
-          />
+      {countryName ? (
+        <Image
+          src={`/${countryName.toLowerCase()}_plan.png`}
+          alt={countryName.toLowerCase()}
+          width={600}
+          height={280}
+          className="max-h-[280px] sm:hidden"
+          style={{
+            objectFit: "cover",
+          }}
+          priority
+        />
+      ) : (
+        <Image
+          src={``}
+          alt={"country.png"}
+          width={600}
+          height={280}
+          className="max-h-[280px] sm:hidden"
+          style={{
+            objectFit: "cover",
+          }}
+          priority
+        />
+      )}
+      <Layout className="space-y-8 border-b-[1px] border-gray-500 sm:grid sm:grid-cols-3 sm:gap-5 sm:space-y-0 md:grid-cols-4">
+        <div className="relative hidden h-full w-full  border-gray-300 sm:col-span-2 sm:col-start-1 sm:block md:col-span-1 md:col-start-1 md:row-start-1 md:h-[430px] md:w-full">
+          {countryName ? (
+            <Image
+              src={`/${countryName.toLowerCase()}_plan.png`}
+              alt={countryName.toLowerCase()}
+              priority
+              fill
+              style={{
+                objectFit: "cover",
+              }}
+              className="rounded-3xl"
+            />
+          ) : (
+            <Image
+              src={``}
+              alt={"country.png"}
+              width={600}
+              height={280}
+              className="max-h-[280px] sm:hidden"
+              style={{
+                objectFit: "cover",
+              }}
+              priority
+            />
+          )}
         </div>
 
         <div className="space-y-8 sm:col-span-2 sm:col-start-1 md:col-span-2 md:col-start-2 md:row-start-1">
           <div className="sm:mt-8 md:mt-0">
-            <Text as="subHeading1" className="font-bold text-stone-700">
-              {country} eSim Data Plan
+            <Text as="subHeading1" className="font-bold text-gray-100">
+              {countryName ? countryName : ""} eSim Data Plan
             </Text>
-            <Text as="small" className="font-medium text-stone-500">
+            <Text as="small" className="font-medium text-gray-400">
               {t("planDetail_detailDesc")}
             </Text>
           </div>
@@ -102,35 +147,65 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
           )}
           <Tabs
             data={
-              country?.toLowerCase() == "china"
-                ? [
-                    {
-                      label: t("planDetail_descriptionTitle"),
-                      content: `${t("planDetail_descriptionCNOne")}${t(
-                        "planDetail_descriptionCNTwo"
-                      )}${t("planDetail_descriptionCNThree")}${t(
-                        "planDetail_descriptionCNFour"
-                      )}${t("planDetail_descriptionCNFive")}${t(
-                        "planDetail_descriptionCNSix"
-                      )}${t("planDetail_descriptionCNSeven")}`,
-                    },
-                    {
-                      label: t("planDetail_howtouseTitle"),
-                      content: `${t("planDetail_howtouseOne")}${t(
-                        "planDetail_howtouseTwo"
-                      )}${t("planDetail_howtouseThree")}${t(
-                        "planDetail_howtouseFour"
-                      )}${t("planDetail_howtouseFive")}${t(
-                        "planDetail_howtouseSix"
-                      )}${t("planDetail_howtouseSeven")}`,
-                    },
-                    {
-                      label: t("planDetail_policyTitle"),
-                      content: `${t("planDetail_policyOne")}${t(
-                        "planDetail_policyTwo"
-                      )}`,
-                    },
-                  ]
+              countryName
+                ? countryName.toLowerCase() == "china"
+                  ? [
+                      {
+                        label: t("planDetail_descriptionTitle"),
+                        content: `${t("planDetail_descriptionCNOne")}${t(
+                          "planDetail_descriptionCNTwo"
+                        )}${t("planDetail_descriptionCNThree")}${t(
+                          "planDetail_descriptionCNFour"
+                        )}${t("planDetail_descriptionCNFive")}${t(
+                          "planDetail_descriptionCNSix"
+                        )}${t("planDetail_descriptionCNSeven")}`,
+                      },
+                      {
+                        label: t("planDetail_howtouseTitle"),
+                        content: `${t("planDetail_howtouseOne")}${t(
+                          "planDetail_howtouseTwo"
+                        )}${t("planDetail_howtouseThree")}${t(
+                          "planDetail_howtouseFour"
+                        )}${t("planDetail_howtouseFive")}${t(
+                          "planDetail_howtouseSix"
+                        )}${t("planDetail_howtouseSeven")}`,
+                      },
+                      {
+                        label: t("planDetail_policyTitle"),
+                        content: `${t("planDetail_policyOne")}${t(
+                          "planDetail_policyTwo"
+                        )}`,
+                      },
+                    ]
+                  : [
+                      {
+                        label: t("planDetail_descriptionTitle"),
+                        content: `${t("planDetail_descriptionOne")}${t(
+                          "planDetail_descriptionTwo"
+                        )}${t("planDetail_descriptionThree")}${t(
+                          "planDetail_descriptionFour"
+                        )}${t("planDetail_descriptionFive")}${t(
+                          "planDetail_descriptionSix"
+                        )}`,
+                      },
+
+                      {
+                        label: t("planDetail_howtouseTitle"),
+                        content: `${t("planDetail_howtouseOne")}${t(
+                          "planDetail_howtouseTwo"
+                        )}${t("planDetail_howtouseThree")}${t(
+                          "planDetail_howtouseFour"
+                        )}${t("planDetail_howtouseFive")}${t(
+                          "planDetail_howtouseSix"
+                        )}${t("planDetail_howtouseSeven")}`,
+                      },
+                      {
+                        label: t("planDetail_policyTitle"),
+                        content: `${t("planDetail_policyOne")}${t(
+                          "planDetail_policyTwo"
+                        )}`,
+                      },
+                    ]
                 : [
                     {
                       label: t("planDetail_descriptionTitle"),
@@ -142,7 +217,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
                         "planDetail_descriptionSix"
                       )}`,
                     },
-                  
+
                     {
                       label: t("planDetail_howtouseTitle"),
                       content: `${t("planDetail_howtouseOne")}${t(
@@ -164,13 +239,13 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
           />
         </div>
 
-        <div className="relative sticky top-0 hidden h-full sm:col-start-3 sm:row-start-1 sm:block md:col-start-4   ">
-          <div className="sticky top-2 w-full rounded-lg border-[1px] border-stone-300 bg-white px-4 py-5">
+        <div className="sticky top-0 hidden h-full sm:col-start-3 sm:row-start-1 sm:block md:col-start-4   ">
+          <div className="sticky top-2 w-full rounded-lg border-[1px] border-[#222] bg-[#121417] px-4 py-5">
             <div className="space-y-6">
-              <Text as="subHeading2" className="font-bold text-stone-900">
+              <Text as="subHeading2" className="font-bold text-[#F9F9F9]">
                 {t("planDetail_orderInformation")}
               </Text>
-              <Text as="small" className="font-medium text-stone-500">
+              <Text as="small" className="font-medium text-[#9CA3AF]">
                 {`${
                   currentSelected.plan.value === "UNLIMITED"
                     ? "Daily Unlimited Plan"
@@ -193,20 +268,23 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
               <div className="flex items-center gap-4">
                 <button
                   className={`flex items-center rounded-lg px-3 py-1 font-bold ${
-                    order <= 1 ? "bg-orange-200" : "bg-orange-500"
-                  } text-white`}
+                    order <= 1 ? "bg-[#BDBDBD]" : "bg-[#FD9B62]"
+                  } select-none text-black`}
                   disabled={order <= 1 ? true : false}
                   onClick={() => handleOrder("decrease")}
                 >
                   <Text as="body1">-</Text>
                 </button>
-                <Text as="body1" className="flex w-1 justify-center font-bold">
+                <Text
+                  as="body1"
+                  className="flex w-1 justify-center font-bold text-white"
+                >
                   {order}
                 </Text>
                 <button
                   className={`flex items-center rounded-lg px-3 py-1 font-bold ${
-                    increaseButton ? "bg-orange-200" : "bg-orange-500"
-                  } text-white`}
+                    increaseButton ? "bg-[#BDBDBD]" : "bg-[#FD9B62]"
+                  } select-none text-black`}
                   disabled={increaseButton ? true : false}
                   onClick={() => handleOrder("increase")}
                 >
@@ -215,10 +293,10 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
               </div>
 
               <div className="flex w-full flex-col justify-between lg:flex-row lg:items-center">
-                <Text as="body1" className="font-medium text-stone-500">
+                <Text as="body1" className="font-medium text-gray-500">
                   Subtotal
                 </Text>
-                <Text as="body1" className="text-xl font-black text-stone-900">
+                <Text as="body1" className="text-xl font-black text-[#F9F9F9]">
                   {subtotal.toLocaleString("id-ID", {
                     style: "currency",
                     currency: "IDR",

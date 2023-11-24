@@ -42,11 +42,11 @@ const RadioPlan = ({ title, name, data }: RadioPlanProps) => {
   return (
     <div>
       <div className="mb-5 flex gap-x-3">
-        <Text as="body1" className="font-bold text-stone-700">
+        <Text as="body1" className="font-bold text-gray-100">
           {title}
         </Text>
 
-        <Text as="body1" className="font-medium text-stone-500">
+        <Text as="body1" className="font-medium text-gray-400">
           {currentSelected[name as keyof currentSelectedProps]?.id}
         </Text>
       </div>

@@ -25,7 +25,7 @@ const NavbarDesktop = ({ params }: { params: { locale: string } }) => {
   function handleChangeLanguage() {
     setOpen(!isOpen);
   }
-  const url = new URL(window.location.href);
+  const url = new URL(location.href);
   const test = new URLSearchParams(url.search);
 
   const plan = test.get("plan");
@@ -33,15 +33,16 @@ const NavbarDesktop = ({ params }: { params: { locale: string } }) => {
   const duration = test.get("duration");
 
   return (
-    <div className="hidden w-full items-center justify-center border-b-[1px] border-stone-200 bg-white px-4 py-3 lg:flex ">
+    <div className="hidden w-full items-center justify-center border-b-[1px] border-gray-600 bg-black px-4 py-3 lg:flex ">
       <div className="flex w-full flex-row justify-between md:max-w-[1180px]">
         <div className="flex flex-row gap-14">
-          <Anchor href="/" className="px-[0px] py-[0px]">
+          <Anchor href="/" className="flex px-[0px] py-[0px]">
             <Image
-              src="/logo-beliesim.svg"
-              alt="beliesim"
-              width={142}
-              height={48}
+              src="/logo-superalink.svg"
+              alt="superalink logo"
+              width={151.77}
+              height={21.95}
+              priority
             />
           </Anchor>
           <div className=" flex  flex-row items-center justify-center gap-6">
@@ -58,20 +59,20 @@ const NavbarDesktop = ({ params }: { params: { locale: string } }) => {
         </div>
         <div className="hidden w-1/4 flex-row items-center gap-6 lg:flex">
           <div className="relative w-1/4">
-            <div
+            {/* <div
               className="flex w-full cursor-pointer flex-row justify-between"
               onClick={handleChangeLanguage}
             >
               <Translation />
-              <Text as="body2" className="mx-2 font-bold">
+              <Text as="body2" className="mx-2 font-bold text-white">
                 {params.locale.toUpperCase()}
               </Text>
               {isOpen ? <ChevronDown /> : <ChevronUp />}
-            </div>
+            </div> */}
             <div
               className={`absolute flex-col ${
                 isOpen ? "flex" : "hidden"
-              } left-0 top-[50px] z-50 rounded-[4px] bg-zinc-100 transition-all ease-in-out`}
+              } left-0 top-[40px] z-50 rounded-[4px] bg-gray-100 transition-all ease-in-out`}
             >
               <Link
                 locale="en"
@@ -109,9 +110,10 @@ const NavbarDesktop = ({ params }: { params: { locale: string } }) => {
             }
           >
             <Button
-              color="black"
+              color="transparent"
               size="xs"
               iconLeft={<Whatsapp color="white" />}
+              className="w-full"
             >
               {t("navbar_contactUs")}
             </Button>

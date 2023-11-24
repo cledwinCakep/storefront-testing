@@ -19,6 +19,7 @@ import Box from "@/components/icons/Box";
 import { utilityApi } from "@/lib/api/GetApi";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
+import Divider from "@/components/atoms/Divider/Divider";
 
 export default function Checkout({ params }: { params: { locale: string } }) {
   const router = useRouter();
@@ -33,12 +34,27 @@ export default function Checkout({ params }: { params: { locale: string } }) {
   //   setIsOpen(true);
   // }
 
-  const [retrievedData, setRetrievedData] = useState(null);
+  const [retrievedData, setRetrievedData] = useState({
+    country_code: "",
+    country_name: "",
+    created_at: "",
+    data_amount: 0,
+    data_unit: "",
+    duration_in_days: 0,
+    id: 0,
+    idr_price: 0,
+    option_id: "",
+    plan_option: "",
+    updated_at: "",
+  });
   const [subtotal, setSubtotal] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [order, setOrder] = useState<number>(1);
   const [email, setEmail] = useState<string>("");
   const [emailError, setEmailError] = useState("");
+
+  const code = localStorage.getItem("affiliate_code")
+
   useEffect(() => {
     // Retrieve the JSON string from localStorage
     const storedData = localStorage.getItem("buy");
@@ -75,6 +91,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
         esim_id: id,
         quantity: order,
         email: email,
+        user_code: code,
       };
       utilityApi.postBuyesim(body).then((response) => {
         // Handle the response here
@@ -109,7 +126,19 @@ export default function Checkout({ params }: { params: { locale: string } }) {
   }
 
   function handleDelete() {
-    setRetrievedData(null);
+    setRetrievedData({
+      country_code: "",
+      country_name: "",
+      created_at: "",
+      data_amount: 0,
+      data_unit: "",
+      duration_in_days: 0,
+      id: 0,
+      idr_price: 0,
+      option_id: "",
+      plan_option: "",
+      updated_at: "",
+    });
   }
   return (
     <>
@@ -153,7 +182,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
         </div>
       </Dialog>*/}
       <Navbar params={params} />
-      <Layout className="mb-20 mt-[160px] flex h-full flex-col">
+      <Layout className="mb-20 mt-20 flex h-full flex-col">
         <Breadcrumb>
           <BreadcrumbItem isHome />
 
@@ -161,26 +190,29 @@ export default function Checkout({ params }: { params: { locale: string } }) {
 
           <BreadcrumbItem isCurrentlyActive>Checkout</BreadcrumbItem>
         </Breadcrumb>
-
         <Text
           as="h1"
-          className="mb-10 mt-7 text-center text-[36px] font-bold sm:mb-14 "
+          className="mb-10 mt-7 text-[26px] font-bold text-gray-100 sm:mb-14"
         >
           {t("checkout_checkoutTitle")}
         </Text>
         {!isLoading ? (
           retrievedData ? (
-            <div className="flex w-full flex-col items-center justify-center gap-5 md:flex-row md:items-start">
+            <div className="flex w-full flex-col items-center justify-center gap-16 md:flex-row md:items-start">
               <div className="flex w-full flex-col">
-                <Text as="subHeading2" className="font-bold">
+                <Text as="subHeading2" className="font-bold text-gray-100">
                   {t("checkout_purchasedItems")}
                 </Text>
                 <Purchaseinfo
                   handleDelete={handleDelete}
                   order={order}
                   handleOrder={handleOrder}
-                  image="/purchased-placeholder.png"
-                  destination={`${retrievedData["country_name"]["String"]} eSim data plans`}
+                  image={`${
+                    retrievedData.country_name
+                      ? `/${retrievedData.country_name.toLowerCase()}_plan.png`
+                      : "/purchased-placeholder.png"
+                  }`}
+                  destination={`${retrievedData.country_name} eSim data plans`}
                   packages={`${
                     retrievedData!["plan_option"] == "UNLIMITED"
                       ? "Daily Unlimited"
@@ -198,6 +230,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
                 isEmpty={emailError}
                 handlePayment={handlePayment}
                 handleInputEmail={handleInputEmail}
+                code={code}
               />
             </div>
           ) : (
@@ -206,7 +239,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
               <Text as="body1" className="mb-3 mt-6 font-bold">
                 {t("checkout_orderEmptyTitle")}
               </Text>
-              <Text as="body2" className="mb-8 text-center text-stone-500">
+              <Text as="body2" className="mb-8 text-center text-gray-500">
                 {t("checkout_orderEmptyDesc")}
               </Text>
               <Button

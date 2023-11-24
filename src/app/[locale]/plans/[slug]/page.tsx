@@ -22,14 +22,15 @@ import { PlanContext } from "@/lib/context/plan";
 import usePlanHook from "@/lib/hooks/usePlanHooks";
 import { useTranslations } from "next-intl";
 
-const PlanDetail = ({ params }: { params: any }) => {
+const PlanDetail = ({ params }: { params: any }) => {  
   const planHook = usePlanHook(params);
   const t = useTranslations("PlanDetail");
+
   return (
     <PlanContext.Provider value={planHook}>
-      <div className="relative space-y-6 pb-[152px] sm:pb-0">
+      <div className="relative space-y-6 pb-[139px] sm:pb-0 ">
         <Navbar params={params} />
-        <div className="pt-[80px]">
+        <div className="pt-[54px]">
           <Layout>
             <Breadcrumb>
               <BreadcrumbItem isHome />
