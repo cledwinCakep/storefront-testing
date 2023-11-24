@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
 import React, { useEffect } from "react";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Superalink – Local eSIM for Traveler",
-  description:
-    "Data packs with local rates. Buy the affordable eSIM package in Superalink.",
-  openGraph: {
-    images: "https://i.ibb.co/RY2Gz3H/Base-Thumbnail.jpg",
-  },
-};
+// export const metadata: Metadata = {
+//   title: "Superalink – Local eSIM for Traveler",
+//   description:
+//     "Data packs with local rates. Buy the affordable eSIM package in Superalink.",
+//   openGraph: {
+//     images: "https://i.ibb.co/RY2Gz3H/Base-Thumbnail.jpg",
+//   },
+// };
 
 //Component
 import Navbar from "@/components/organisms/Navbar/Navbar";
