@@ -1,70 +1,3 @@
-export const Rocket = () => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="58"
-      height="58"
-      viewBox="0 0 44 44"
-      fill="none"
-    >
-      <path
-        opacity="0.4"
-        d="M15.9022 35.4957C15.4645 36.1972 15.2499 37.0151 15.2862 37.8412"
-        stroke="white"
-        stroke-width="2.44444"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-      <path
-        opacity="0.4"
-        d="M8.95107 28.5416C8.24977 28.9784 7.43036 29.1887 6.60547 29.1417"
-        stroke="white"
-        stroke-width="2.44444"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-      <path
-        opacity="0.4"
-        d="M19.3414 13.2553L11.8598 13.8371L8.6582 17.0387C10.6719 18.222 12.6056 19.5371 14.4453 20.976C17.8135 23.5995 20.844 26.6307 23.4675 29.999C24.9024 31.8356 26.2173 33.763 27.4048 35.7685L30.5888 32.5836L31.1714 25.0855"
-        stroke="white"
-        stroke-width="2.44444"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-      <path
-        d="M13.9658 21.8997C15.5632 18.4388 17.6438 15.2223 20.1458 12.3467C20.1458 12.3467 28.518 3.42877 37.4202 7.0068C41.0154 15.7037 32.0962 24.2804 32.0962 24.2804C29.2146 26.7874 25.992 28.874 22.5257 30.4781C21.4085 31.0599 20.224 31.5019 18.999 31.7954L12.6309 25.4274C12.9957 24.2229 13.4415 23.0437 13.9658 21.8997Z"
-        stroke="white"
-        stroke-width="2.44444"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-      <path
-        d="M26.3947 20.4792C27.6994 20.4792 28.7571 19.4215 28.7571 18.1166C28.7571 16.8118 27.6994 15.7541 26.3947 15.7541C25.0898 15.7541 24.0322 16.8118 24.0322 18.1166C24.0322 19.4215 25.0898 20.4792 26.3947 20.4792Z"
-        stroke="white"
-        stroke-width="2.44444"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-      <path
-        opacity="0.4"
-        d="M27.2192 7.98185L36.464 17.2265"
-        stroke="white"
-        stroke-width="2.44444"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-      <path
-        opacity="0.4"
-        d="M12.1522 32.309L10.3032 34.1408"
-        stroke="white"
-        stroke-width="2.44444"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-    </svg>
-  );
-};
-
 export const Money = () => {
   return (
     <svg
@@ -195,8 +128,8 @@ export const Phonecompatibility = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="160"
-      height="160"
+      width="112"
+      height="112"
       viewBox="0 0 160 160"
       fill="none"
     >
@@ -239,8 +172,8 @@ export const Shoppingcart = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="160"
-      height="160"
+      width="112"
+      height="112"
       viewBox="0 0 160 160"
       fill="none"
     >
@@ -275,8 +208,8 @@ export const Scan = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="160"
-      height="160"
+      width="112"
+      height="112"
       viewBox="0 0 160 160"
       fill="none"
     >

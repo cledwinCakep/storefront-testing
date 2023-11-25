@@ -25,12 +25,12 @@ const NavbarDesktop = ({ params }: { params: { locale: string } }) => {
   function handleChangeLanguage() {
     setOpen(!isOpen);
   }
-  const url = new URL(location.href);
-  const test = new URLSearchParams(url.search);
+  // const url = new URL(location.href);
+  // const test = new URLSearchParams(url.search);
 
-  const plan = test.get("plan");
-  const data = test.get("data");
-  const duration = test.get("duration");
+  // const plan = test.get("plan");
+  // const data = test.get("data");
+  // const duration = test.get("duration");
 
   return (
     <div className="hidden w-full items-center justify-center border-b-[1px] border-gray-600 bg-black px-4 py-3 lg:flex ">
@@ -45,7 +45,7 @@ const NavbarDesktop = ({ params }: { params: { locale: string } }) => {
               priority
             />
           </Anchor>
-          <div className=" flex  flex-row items-center justify-center gap-6">
+          <div className=" flex  flex-row items-center justify-center gap-6 text-sm">
             <Anchor href={pathname.split("/")[1] != "" ? "/" : "#destination"}>
               {t("navbar_destination")}
             </Anchor>
@@ -74,7 +74,7 @@ const NavbarDesktop = ({ params }: { params: { locale: string } }) => {
                 isOpen ? "flex" : "hidden"
               } left-0 top-[40px] z-50 rounded-[4px] bg-gray-100 transition-all ease-in-out`}
             >
-              <Link
+              {/* <Link
                 locale="en"
                 href={`${
                   pathname.split("/").includes("plans")
@@ -87,8 +87,8 @@ const NavbarDesktop = ({ params }: { params: { locale: string } }) => {
                 <div className="w-full cursor-pointer p-[20px] hover:bg-[#DDDDDE]">
                   English
                 </div>
-              </Link>
-              <Link
+              </Link> */}
+              {/* <Link
                 locale="id"
                 href={`${
                   pathname.split("/").includes("plans")
@@ -101,7 +101,7 @@ const NavbarDesktop = ({ params }: { params: { locale: string } }) => {
                 <div className="w-full cursor-pointer p-[20px] hover:bg-[#DDDDDE]">
                   Indonesia
                 </div>
-              </Link>
+              </Link> */}
             </div>
           </div>
           <Link

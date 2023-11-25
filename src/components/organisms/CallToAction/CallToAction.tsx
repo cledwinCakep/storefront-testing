@@ -14,7 +14,7 @@ const CallToAction = () => {
   const t = useTranslations("CTA");
   return (
     <div className="bg-lightgray w-full  border-t-[1px] border-gray-600 bg-cover bg-[right_-10rem_bottom] bg-no-repeat md:bg-bottom">
-      <Layout className="flex flex-col items-center justify-between gap-10 py-20 md:flex-col">
+      <Layout className="flex flex-col items-center justify-between gap-10 py-10 md:flex-col">
         <Text
           as="h3"
           className="max-w-[628px] text-center font-bold text-gray-100 md:text-start"

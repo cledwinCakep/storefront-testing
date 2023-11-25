@@ -52,10 +52,11 @@ export default function Checkout({ params }: { params: { locale: string } }) {
   const [order, setOrder] = useState<number>(1);
   const [email, setEmail] = useState<string>("");
   const [emailError, setEmailError] = useState("");
-
-  const code = localStorage.getItem("affiliate_code")
+  const [code, setCode] = useState<string>("");
 
   useEffect(() => {
+    const code = localStorage.getItem("affiliate_code") ?? "";
+    setCode(code);
     // Retrieve the JSON string from localStorage
     const storedData = localStorage.getItem("buy");
     let orderData = parseInt(localStorage.getItem("order")!);

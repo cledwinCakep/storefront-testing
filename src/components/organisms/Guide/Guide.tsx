@@ -214,13 +214,13 @@ const Guide = () => {
       </Dialog>
       <div
         id="how-it-works"
-        className="bg-lightgray flex h-full w-full flex-col bg-cover bg-bottom bg-no-repeat px-2"
+        className="bg-lightgray flex h-full w-full flex-col bg-cover bg-bottom bg-no-repeat px-4"
       >
-        <div className="flex flex-col items-center justify-center gap-12 py-[80px]">
+        <div className="flex flex-col items-center justify-center gap-12 py-14">
           <div className="gap-8 space-y-8">
             <Text
               as="h3"
-              className="text-center font-bold text-gray-100 sm:text-[44px]"
+              className="text-center font-semibold text-gray-100 sm:text-[44px]"
             >
               {t("cta_howToUseTitle")}
             </Text>
@@ -232,7 +232,7 @@ const Guide = () => {
             </Text>
           </div>
           <div className="flex h-full flex-col items-center justify-center md:h-[483px] md:flex-row">
-            <div className="flex max-w-[356px] flex-col items-center justify-center gap-8 px-4 py-[72px]">
+            <div className="flex max-w-[324px] flex-col items-center justify-center py-10">
               <CardInfo
                 image={<Phonecompatibility />}
                 title={t("cta_tutorTitleOne")}
@@ -244,7 +244,7 @@ const Guide = () => {
                   >
                     <Text
                       as="body1"
-                      className="flex h-12 items-center justify-center text-center font-bold text-slate-50"
+                      className="flex h-12 items-center justify-center text-center text-slate-50"
                     >
                       {t("cta_checkCompabilityButton")}
                     </Text>
@@ -253,14 +253,14 @@ const Guide = () => {
                 }
               />
             </div>
-            <div className="flex max-w-[356px] flex-col items-center justify-center gap-8 px-4 py-[72px]">
+            <div className="flex max-w-[324px] flex-col items-center justify-center py-10">
               <CardInfo
                 image={<Shoppingcart />}
                 title={t("cta_tutorTitleTwo")}
                 subtitle={t("cta_tutorDescTwo")}
               />
             </div>
-            <div className="flex max-w-[356px] flex-col items-center justify-center gap-8 px-4 py-[72px]">
+            <div className="flex max-w-[324px] flex-col items-center justify-center py-10">
               <CardInfo
                 image={<Scan />}
                 title={t("cta_tutorTitleThree")}

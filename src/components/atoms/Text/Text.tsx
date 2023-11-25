@@ -18,12 +18,12 @@ interface TextProps {
 
 const Text = ({ children, className, as = "body1" }: TextProps) => {
   const TEXT_VARIANTS = {
-    h1: "text-[56px] leading-[122%]",
+    h1: "text-[54px] leading-[122%]",
     h2: "text-[44px] leading-[115%]",
-    h3: "text-[34px] leading-[130%]",
+    h3: "text-[32px] leading-[42px]",
     subHeading1: "text-2xl leading-[130%]",
-    subHeading2: "text-xl leading-[120%]",
-    body1: "text-base leading-[142%]",
+    subHeading2: "text-xl leading-[140%]",
+    body1: "text-base leading-[150%]",
     body2: "text-sm leading-[150%]",
     small: "text-[13px]",
   };

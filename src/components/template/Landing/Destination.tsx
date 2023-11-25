@@ -14,7 +14,7 @@ import { useTranslations } from "next-intl";
 
 const Partners = () => {
   const router = useRouter();
-  const url = window.location.href;
+  // const url = window.location.href;
 
   const [data, setData] = useState<any>();
   const [searched, setSearched] = useState<any>([]);
@@ -66,11 +66,11 @@ const Partners = () => {
   }
   return (
     <Layout id="destination">
-      <div className="flex h-full flex-col items-center justify-center gap-10 py-32">
-        <div className="flex flex-col gap-8">
+      <div className="flex h-full flex-col items-center justify-center py-32">
+        <div className="mb-14 flex flex-col gap-8 px-4">
           <Text
             as="h3"
-            className="text-center font-bold text-gray-100 sm:text-[2.75rem]"
+            className="text-center font-semibold text-gray-100 sm:text-[2.75rem]"
           >
             {t("hero_destinationTitle")}
           </Text>
@@ -78,8 +78,9 @@ const Partners = () => {
             {t("hero_destinationDesc")}
           </Text>
         </div>
+
         {/* search country */}
-        <div className="relative h-auto w-full max-w-[852px] rounded-lg bg-[#374151] px-4 py-2">
+        <div className="relative mb-4 h-auto w-full max-w-[852px] rounded-lg bg-[#374151] px-5 py-2">
           <input
             className="min-w-full bg-transparent pl-8 text-white outline-none"
             placeholder="Search destination..."
@@ -121,8 +122,7 @@ const Partners = () => {
             })}
           </div>
         </div>
-
-        <div className="flex w-full flex-col gap-6">
+        <div className="flex w-full flex-col gap-4">
           <div className="flex w-full flex-col items-center justify-center gap-4 gap-y-4 md:flex-row">
             <PriceInfoCards
               data={[
