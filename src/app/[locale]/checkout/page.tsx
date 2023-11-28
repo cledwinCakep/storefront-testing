@@ -141,6 +141,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
       updated_at: "",
     });
   }
+
   return (
     <>
       {/* <Dialog
@@ -198,7 +199,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
           {t("checkout_checkoutTitle")}
         </Text>
         {!isLoading ? (
-          retrievedData ? (
+          retrievedData.data_amount > 0 ? (
             <div className="flex w-full flex-col items-center justify-center gap-16 md:flex-row md:items-start">
               <div className="flex w-full flex-col">
                 <Text as="subHeading2" className="font-bold text-gray-100">
