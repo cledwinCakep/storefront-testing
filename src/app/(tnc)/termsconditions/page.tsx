@@ -1,11 +1,12 @@
+"use client"
+import { TLists } from "@/app/types";
 import {
   Content,
   Footer,
   Header,
   List,
   Subtitle,
-} from "@/components/molecules/PartialLegal";
-import { TLists } from "@/types";
+} from "@/app/[locale]/components/PartialLegal";
 import { Button, Metric, Text, Title } from "@tremor/react";
 import React from "react";
 

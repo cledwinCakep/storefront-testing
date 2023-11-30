@@ -1,3 +1,4 @@
+"use client"
 import {
   Content,
   Footer,
@@ -5,8 +6,8 @@ import {
   List,
   Paragraph,
   Subtitle,
-} from "@/components/molecules/PartialLegal";
-import { TLists } from "@/types";
+} from "@/app/[locale]/components/PartialLegal";
+import { TLists } from "@/app/types";
 import { Button, Metric, Text, Title } from "@tremor/react";
 import Image from "next/image";
 import Link from "next/link";
