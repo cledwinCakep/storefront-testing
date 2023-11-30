@@ -124,63 +124,87 @@ const Partners = () => {
         </div>
         <div className="flex w-full flex-col gap-4">
           <div className="flex w-full flex-col items-center justify-center gap-4 gap-y-4 md:flex-row">
-            <PriceInfoCards
+            {/* <PriceInfoCards
               data={[
                 {
                   code: data[0].country_code,
                   image: `/${data[0].country_name.trim().toLowerCase()}.png`,
                   title: capitalizeFirstLetter(data[0].country_name.trim()),
-                  price: data[0].idr_price.toLocaleString("id-ID", {
+                  price: data[0].idr_price.toLocaleString("en-US", {
                     style: "currency",
-                    currency: "IDR",
+                    currency: "USD",
                   }),
                 },
                 {
                   code: data[1].country_code,
                   image: `/${data[1].country_name.trim().toLowerCase()}.png`,
                   title: capitalizeFirstLetter(data[1].country_name.trim()),
-                  price: data[1].idr_price.toLocaleString("id-ID", {
+                  price: data[1].idr_price.toLocaleString("en-US", {
                     style: "currency",
-                    currency: "IDR",
+                    currency: "USD",
                   }),
                 },
                 {
                   code: data[2].country_code,
                   image: `/${data[2].country_name.trim().toLowerCase()}.png`,
                   title: capitalizeFirstLetter(data[2].country_name.trim()),
-                  price: data[2].idr_price.toLocaleString("id-ID", {
+                  price: data[2].idr_price.toLocaleString("en-US", {
                     style: "currency",
-                    currency: "IDR",
+                    currency: "USD",
                   }),
                 },
                 {
                   code: data[3].country_code,
                   image: `/${data[3].country_name.trim().toLowerCase()}.png`,
                   title: capitalizeFirstLetter(data[3].country_name.trim()),
-                  price: data[3].idr_price.toLocaleString("id-ID", {
+                  price: data[3].idr_price.toLocaleString("en-US", {
                     style: "currency",
-                    currency: "IDR",
+                    currency: "USD",
                   }),
                 },
                 {
                   code: data[4].country_code,
                   image: `/${data[4].country_name.trim().toLowerCase()}.png`,
                   title: capitalizeFirstLetter(data[4].country_name.trim()),
-                  price: data[4].idr_price.toLocaleString("id-ID", {
+                  price: data[4].idr_price.toLocaleString("en-US", {
                     style: "currency",
-                    currency: "IDR",
+                    currency: "USD",
                   }),
                 },
                 {
                   code: data[5].country_code,
                   image: `/${data[5].country_name.trim().toLowerCase()}.png`,
                   title: capitalizeFirstLetter(data[5].country_name.trim()),
-                  price: data[5].idr_price.toLocaleString("id-ID", {
+                  price: data[5].idr_price.toLocaleString("en-US", {
                     style: "currency",
-                    currency: "IDR",
+                    currency: "USD",
                   }),
                 },
               ]}
+            />  */}
+            <PriceInfoCards
+              data={data.map(
+                (item: {
+                  country_code: any;
+                  country_name: string;
+                  idr_price: {
+                    toLocaleString: (
+                      arg0: string,
+                      arg1: { style: string; currency: string }
+                    ) => any;
+                  };
+                }) => ({
+                  code: item.country_code,
+                  image:
+                    `/${item.country_name.trim().toLowerCase()}.png` ||
+                    "/china.png",
+                  title: capitalizeFirstLetter(item.country_name.trim()),
+                  price: item.idr_price.toLocaleString("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                  }),
+                })
+              )}
             />
           </div>
         </div>

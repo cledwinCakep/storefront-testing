@@ -222,9 +222,9 @@ export default function Checkout({ params }: { params: { locale: string } }) {
                   }, ${
                     retrievedData!["data_amount"] + retrievedData!["data_unit"]
                   } , ${retrievedData!["duration_in_days"]} Day`}
-                  price={subtotal.toLocaleString("id-ID", {
+                  price={subtotal.toLocaleString("en-US", {
                     style: "currency",
-                    currency: "IDR",
+                    currency: "USD",
                   })}
                 />
               </div>

@@ -16,9 +16,20 @@ interface PriceInfoCardsProps {
   data: PriceInfoCardsData[];
 }
 
+const i: any = {
+  CN: "china",
+  SG: "singapore",
+  MY: "malaysia",
+  TH: "thailand",
+  JP: "japan",
+  KR: "korea",
+};
+
 const PriceInfoCards = ({ data }: PriceInfoCardsProps) => {
+  const countryName = data.map((item) => i[item.code]);
+  console.log({ countryName });
   return (
-    <div className="grid w-full gap-y-4 sm:grid-cols-3 sm:gap-x-3 sm:gap-y-2 md:w-auto md:gap-x-[18px] md:gap-y-6 ">
+    <div className="grid w-full gap-y-4 sm:gap-x-3 sm:gap-y-2 md:w-auto md:grid-cols-4 md:gap-x-[18px] md:gap-y-6 ">
       {data.map((data) => (
         <Link
           key={data.code}
@@ -29,7 +40,7 @@ const PriceInfoCards = ({ data }: PriceInfoCardsProps) => {
             className="w-full rounded-lg border border-gray-800 bg-[#121417] p-4 transition-all duration-200 ease-in-out hover:border-orange-500 hover:shadow-2xl hover:shadow-orange-500/30 md:min-w-[272px]"
           >
             <PriceInfo
-              image={data.image}
+              image={countryName ? data.image : `/china.png`}
               title={data.title}
               price={data.price}
             />
