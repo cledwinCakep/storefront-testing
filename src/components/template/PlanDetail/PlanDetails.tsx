@@ -110,7 +110,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
         />
       ) : (
         <Image
-          src={"/china_plan.png"}
+          src={"/default_plan.png"}
           alt={"country.png"}
           width={600}
           height={280}
@@ -136,7 +136,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
             />
           ) : (
             <Image
-              src={"/china_plan.png"}
+              src={"/default_plan.png"}
               alt={"country.png"}
               priority
               fill
