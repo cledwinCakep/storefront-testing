@@ -35,7 +35,7 @@ const Purchaseinfo = ({
           alt="Purchased items plaeholder"
           width={100}
           height={100}
-          style={{ objectFit: "contain", maxHeight: "100px" }}
+          style={{ objectFit: "cover", maxHeight: "100px", borderRadius: 16 }}
           priority
         />
         <div className="flex flex-col">

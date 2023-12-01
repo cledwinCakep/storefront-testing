@@ -21,6 +21,15 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import Divider from "@/components/atoms/Divider/Divider";
 
+const i: any = {
+  CN: "CN",
+  SG: "SG",
+  MY: "MY",
+  TH: "TH",
+  JP: "JP",
+  KR: "KR",
+};
+
 export default function Checkout({ params }: { params: { locale: string } }) {
   const router = useRouter();
   const t = useTranslations("Checkout");
@@ -184,88 +193,101 @@ export default function Checkout({ params }: { params: { locale: string } }) {
         </div>
       </Dialog>*/}
       <Navbar params={params} />
-      <Layout className="mb-20 mt-20 flex h-full flex-col">
-        <Breadcrumb>
-          <BreadcrumbItem isHome />
+      <div className="flex h-screen flex-col">
+        <Layout className="mb-20 mt-20 flex h-full w-full grow flex-col">
+          <Breadcrumb>
+            <BreadcrumbItem isHome />
 
-          <BreadcrumbItem href="/#destination">Destination</BreadcrumbItem>
+            <BreadcrumbItem href="/#destination">Destination</BreadcrumbItem>
 
-          <BreadcrumbItem isCurrentlyActive>Checkout</BreadcrumbItem>
-        </Breadcrumb>
-        <Text
-          as="h1"
-          className="mb-10 mt-7 text-[26px] font-bold text-gray-100 sm:mb-14"
-        >
-          {t("checkout_checkoutTitle")}
-        </Text>
-        {!isLoading ? (
-          retrievedData.data_amount > 0 ? (
-            <div className="flex w-full flex-col items-center justify-center gap-16 md:flex-row md:items-start">
-              <div className="flex w-full flex-col">
-                <Text as="subHeading2" className="font-bold text-gray-100">
-                  {t("checkout_purchasedItems")}
-                </Text>
-                <Purchaseinfo
-                  handleDelete={handleDelete}
-                  order={order}
-                  handleOrder={handleOrder}
-                  image={`${
-                    retrievedData.country_name
-                      ? `/${retrievedData.country_name.toLowerCase()}_plan.png`
-                      : "/purchased-placeholder.png"
-                  }`}
-                  destination={`${retrievedData.country_name} eSim data plans`}
-                  packages={`${
-                    retrievedData!["plan_option"] == "UNLIMITED"
-                      ? "Daily Unlimited"
-                      : "Quota"
-                  }, ${
-                    retrievedData!["data_amount"] + retrievedData!["data_unit"]
-                  } , ${retrievedData!["duration_in_days"]} Day`}
-                  price={subtotal.toLocaleString("id-ID", {
-                    style: "currency",
-                    currency: "IDR",
-                  })}
+            <BreadcrumbItem
+              href={`/plans/${retrievedData.country_code}?plan=${retrievedData.plan_option}&data=${retrievedData.data_amount}${retrievedData.data_unit}&duration=${retrievedData.duration_in_days}`}
+            >
+              {retrievedData.country_code}
+            </BreadcrumbItem>
+
+            <BreadcrumbItem isCurrentlyActive>Checkout</BreadcrumbItem>
+          </Breadcrumb>
+          <Text
+            as="h1"
+            className="mb-10 mt-7 text-[26px] font-bold text-gray-100 sm:mb-14"
+          >
+            {t("checkout_checkoutTitle")}
+          </Text>
+          {!isLoading ? (
+            retrievedData.data_amount > 0 ? (
+              <div className="flex w-full flex-col items-center justify-center gap-16 md:flex-row md:items-start">
+                <div className="flex w-full flex-col">
+                  <Text as="subHeading2" className="font-bold text-gray-100">
+                    {t("checkout_purchasedItems")}
+                  </Text>
+                  <Purchaseinfo
+                    handleDelete={handleDelete}
+                    order={order}
+                    handleOrder={handleOrder}
+                    image={`${
+                      retrievedData.country_name &&
+                      retrievedData.country_code ==
+                        i[retrievedData.country_code]
+                        ? `/${retrievedData.country_name.toLowerCase()}_plan.png`
+                        : "/default_plan.png"
+                    }`}
+                    destination={`${retrievedData.country_name} eSim data plans`}
+                    packages={`${
+                      retrievedData!["plan_option"] == "UNLIMITED"
+                        ? "Daily Unlimited"
+                        : "Quota"
+                    }, ${
+                      retrievedData!["data_amount"] +
+                      retrievedData!["data_unit"]
+                    } , ${retrievedData!["duration_in_days"]} Day`}
+                    price={subtotal.toLocaleString("en-US", {
+                      style: "currency",
+                      currency: "USD",
+                    })}
+                  />
+                </div>
+                <CheckoutCard
+                  isEmpty={emailError}
+                  handlePayment={handlePayment}
+                  handleInputEmail={handleInputEmail}
+                  code={code}
                 />
               </div>
-              <CheckoutCard
-                isEmpty={emailError}
-                handlePayment={handlePayment}
-                handleInputEmail={handleInputEmail}
-                code={code}
-              />
-            </div>
+            ) : (
+              <div className="flex flex-col items-center justify-center">
+                <Box />
+                <Text as="body1" className="mb-3 mt-6 font-bold">
+                  {t("checkout_orderEmptyTitle")}
+                </Text>
+                <Text as="body2" className="mb-8 text-center text-gray-500">
+                  {t("checkout_orderEmptyDesc")}
+                </Text>
+                <Button
+                  color="black"
+                  size="sm"
+                  className="my-8 w-full max-w-[290px]"
+                  onClick={() => {
+                    router.push("/");
+                  }}
+                >
+                  {t("checkout_findPlanButton")}
+                </Button>
+              </div>
+            )
           ) : (
-            <div className="flex flex-col items-center justify-center">
-              <Box />
-              <Text as="body1" className="mb-3 mt-6 font-bold">
-                {t("checkout_orderEmptyTitle")}
-              </Text>
-              <Text as="body2" className="mb-8 text-center text-gray-500">
-                {t("checkout_orderEmptyDesc")}
-              </Text>
-              <Button
-                color="black"
-                size="sm"
-                className="my-8 w-full max-w-[290px]"
-                onClick={() => {
-                  router.push("/");
-                }}
-              >
-                {t("checkout_findPlanButton")}
-              </Button>
-            </div>
-          )
-        ) : (
-          <ProgressBar
-            height="4px"
-            color="#f97316"
-            options={{ showSpinner: true }}
-            shallowRouting
-          />
-        )}
-      </Layout>
-      <CTA />
+            <ProgressBar
+              height="4px"
+              color="#f97316"
+              options={{ showSpinner: true }}
+              shallowRouting
+            />
+          )}
+        </Layout>
+        <div className="bottom-0 flex-none">
+          <CTA />
+        </div>
+      </div>
     </>
   );
 }

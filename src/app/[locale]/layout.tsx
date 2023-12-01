@@ -43,11 +43,19 @@ export default function RootLayout({
   children?: React.ReactNode;
   params: { locale: string };
 }) {
-
   const [messages, setMessages] = useState(getMessages(params.locale));
   return (
     <html lang="en" className="scroll-smooth">
       <head>
+        <title>Superalink – Local eSIM for Traveler</title>
+        <meta
+          name="description"
+          content="Data packs with local rates. Buy the affordable eSIM package in Superalink."
+        />
+        <meta
+          property="og:image"
+          content="https://i.ibb.co/RY2Gz3H/Base-Thumbnail.jpg"
+        />
         <link
           rel="apple-touch-icon"
           sizes="180x180"

@@ -22,9 +22,9 @@ const MobileCheckout = () => {
       <div className="mb-4 flex items-end justify-between">
         <div>
           <Text as="subHeading2" className="font-black text-white">
-            {subtotal.toLocaleString("id-ID", {
+            {subtotal.toLocaleString("en-US", {
               style: "currency",
-              currency: "IDR",
+              currency: "USD",
             })}
           </Text>
           <Text as="small" className="font-medium text-gray-500">

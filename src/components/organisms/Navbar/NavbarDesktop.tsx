@@ -46,10 +46,16 @@ const NavbarDesktop = ({ params }: { params: { locale: string } }) => {
             />
           </Anchor>
           <div className=" flex  flex-row items-center justify-center gap-6 text-sm">
-            <Anchor href={pathname.split("/")[1] != "" ? "/" : "#destination"}>
+            <Anchor
+              href={
+                pathname.split("/")[1] != "" ? "/#destination" : "#destination"
+              }
+            >
               {t("navbar_destination")}
             </Anchor>
-            <Anchor href={pathname.split("/")[1] != "" ? "/" : "#payment"}>
+            <Anchor
+              href={pathname.split("/")[1] != "" ? "/#payment" : "#payment"}
+            >
               {t("navbar_payment")}
             </Anchor>
             <Anchor href={pathname.split("/")[1] != "" ? "/" : "#how-it-works"}>
