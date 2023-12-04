@@ -40,7 +40,7 @@ export const NavbarMobileMenu = ({
   }, []);
 
   return (
-    <div className="relative z-50 flex h-[78px] w-full items-center justify-center border-b-[1px]  border-gray-600 bg-black px-4 py-3 lg:hidden ">
+    <div className="relative z-50 flex min-h-full w-full items-center justify-center overflow-hidden border-b border-gray-600 bg-black px-4 py-3 lg:hidden">
       <div className="flex h-full w-full flex-row items-center justify-between md:max-w-[1180px]">
         <Anchor href="/" className="px-[0px] py-[0px]">
           <Image
@@ -65,8 +65,8 @@ export const NavbarMobileMenu = ({
 
       <div
         className={`${
-          isHamburgerMenuOpen ? "block " : "hidden"
-        } fixed bottom-0 left-0 right-0 top-0 z-10  w-full overflow-auto bg-black `}
+          isHamburgerMenuOpen ? "fixed " : "hidden"
+        }  bottom-0 left-0 right-0 top-0 z-50 min-h-screen w-full overflow-auto bg-black `}
       >
         <div className="flex h-full flex-col">
           <div className="flex h-full flex-col ">
@@ -170,10 +170,10 @@ export const NavbarMobileMenu = ({
               </div>
             </Link>
           </div>
-          <div className="bottom-0 flex-none pb-5 text-center text-[13px] text-[#6B7280]">
-            &copy; {new Date().getFullYear()}. Gadgetkorea INC. ALL RIGHTS
-            RESERVED
-          </div>
+        </div>
+        <div className="bottom-0 h-auto flex-none pb-5 text-center text-[13px] text-[#6B7280]">
+          &copy; {new Date().getFullYear()}. Gadgetkorea INC. ALL RIGHTS
+          RESERVED
         </div>
       </div>
     </div>

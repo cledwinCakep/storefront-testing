@@ -1,3 +1,8 @@
+"use client"
+
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+
 //Component
 import Navbar from "@/components/organisms/Navbar/Navbar";
 import CTA from "@/components/template/Landing/CTA";
@@ -14,6 +19,14 @@ export const metadata: Metadata = {
   },
 };
 export default function Status({ params }: { params: { locale: string } }) {
+  const router = useRouter()
+  useEffect(() => {
+    const handleReplaceHistory = () => {
+      router.replace('/');
+    };
+
+    handleReplaceHistory();
+  }, []);
   return (
     <>
       <Navbar params={params} />
