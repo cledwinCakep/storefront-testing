@@ -11,6 +11,7 @@ import { useTranslations } from "next-intl";
 import { usePathname } from "next-intl/client";
 import { Translation } from "@/components/icons/Translation";
 import Link from "next-intl/link";
+import Email from "@/components/icons/Email";
 
 export const NavbarMobileMenu = ({
   params,
@@ -154,7 +155,7 @@ export const NavbarMobileMenu = ({
             </div>
             <Link
               href={
-                "https://api.whatsapp.com/send?phone=6282339909564&text=Hallo%20min%2C%20saya%20mau%20beli%20eSIM%20untuk%20traveling"
+                "mailto:support@superalink.com?subject=Support%20to%20buy%20eSIM"
               }
               className="w-full"
             >
@@ -162,7 +163,7 @@ export const NavbarMobileMenu = ({
                 <Button
                   color="transparent"
                   size="xs"
-                  iconLeft={<Whatsapp color="white" />}
+                  iconLeft={<Email />}
                   className="w-full"
                 >
                   {t("navbar_contactUs")}

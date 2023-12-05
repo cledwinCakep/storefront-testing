@@ -41,10 +41,10 @@ const Partners = () => {
         </div>
         <Image
           className=""
-          src="/esim_3d_superalink-min.png"
+          src="/3d_esim.jpg"
           alt="Hero Illust"
-          width={480}
-          height={480}
+          width={340}
+          height={340}
           priority
         />
       </div>

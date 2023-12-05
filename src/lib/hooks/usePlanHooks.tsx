@@ -110,7 +110,7 @@ const usePlanHook = (params: { slug: string }) => {
             person["duration_in_days"] == currentSelected["duration"].value
           ) {
             setBuy(person);
-            let temp = order * person["idr_price"];
+            let temp = order * person["price_in_usd"];
             setSubtotal(temp);
           }
         }
@@ -234,7 +234,6 @@ const usePlanHook = (params: { slug: string }) => {
     localStorage.setItem("buy", jsonString);
     localStorage.setItem("order", order.toString());
     window.location.href = "/checkout";
-    
   }
 
   return {

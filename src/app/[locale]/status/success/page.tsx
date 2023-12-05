@@ -1,5 +1,8 @@
 "use client";
 
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+
 //Component
 import Navbar from "@/components/organisms/Navbar/Navbar";
 import CTA from "@/components/template/Landing/CTA";
@@ -7,6 +10,14 @@ import CTA from "@/components/template/Landing/CTA";
 import { PaymentCardSuccess } from "@/components/molecules/PaymentCard/PaymentCard";
 
 export default function Status({ params }: { params: { locale: string } }) {
+  const router = useRouter();
+  // useEffect(() => {
+  //   const handleReplaceHistory = () => {
+  //     router.replace("/");
+  //   };
+
+  //   handleReplaceHistory();
+  // }, []);
   return (
     <>
       <Navbar params={params} />

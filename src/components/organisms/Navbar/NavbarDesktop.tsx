@@ -8,7 +8,6 @@ import Anchor from "@/components/atoms/Anchor/Anchor";
 import Text from "@/components/atoms/Text/Text";
 
 // icons
-import Whatsapp from "@/components/icons/Whatsapp";
 import { Translation } from "@/components/icons/Translation";
 import { ChevronDown, ChevronUp } from "react-feather";
 
@@ -16,6 +15,7 @@ import { ChevronDown, ChevronUp } from "react-feather";
 import { useTranslations } from "next-intl";
 import { usePathname } from "next-intl/client";
 import Link from "next-intl/link";
+import Email from "@/components/icons/Email";
 
 const NavbarDesktop = ({ params }: { params: { locale: string } }) => {
   const t = useTranslations("Navbar");
@@ -112,13 +112,13 @@ const NavbarDesktop = ({ params }: { params: { locale: string } }) => {
           </div>
           <Link
             href={
-              "https://api.whatsapp.com/send?phone=6282339909564&text=Hallo%20min%2C%20saya%20mau%20beli%20eSIM%20untuk%20traveling"
+              "mailto:support@superalink.com?subject=Support%20to%20buy%20eSIM"
             }
           >
             <Button
               color="transparent"
               size="xs"
-              iconLeft={<Whatsapp color="white" />}
+              iconLeft={<Email />}
               className="w-full"
             >
               {t("navbar_contactUs")}
