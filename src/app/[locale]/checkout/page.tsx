@@ -225,13 +225,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
                     handleDelete={handleDelete}
                     order={order}
                     handleOrder={handleOrder}
-                    image={`${
-                      retrievedData.country_name &&
-                      retrievedData.country_code ==
-                        i[retrievedData.country_code]
-                        ? `/${retrievedData.country_name.toLowerCase()}_plan.png`
-                        : "/default_destination.png"
-                    }`}
+                    image={`${`/destination/${retrievedData.country_name.toLowerCase()}.png`}`}
                     destination={`${retrievedData.country_name} eSim data plans`}
                     packages={`${
                       retrievedData!["plan_option"] == "UNLIMITED"

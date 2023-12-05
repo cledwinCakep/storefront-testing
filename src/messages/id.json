@@ -45,9 +45,9 @@
   "PlanDetail": {
     "planDetail_destination": "Destinasi",
     "planDetail_detailDesc": "Setelah melakukan pembelian eSIM, kami akan mengirimkan QR Code ke e-mailmu.",
-    "planDetail_selectPlanTitle": "Pilih Paket",
-    "planDetail_selectDataTitle": "Pilih Kuota",
-    "planDetail_selectDurationTitle": "Pilih masa aktif",
+    "planDetail_selectPlanTitle": "Pilih Paket:",
+    "planDetail_selectDataTitle": "Pilih Kuota:",
+    "planDetail_selectDurationTitle": "Pilih masa aktif:",
     "planDetail_descriptionTitle": "Deskripsi",
     "planDetail_descriptionCNOne": "- Setelah Anda menggunakan semua kuota harian Anda, Anda dapat menggunakannya dengan kecepatan tanpa batas.\n\n",
     "planDetail_descriptionCNTwo": "- Anda dapat menggunakan semua media sosial di seluruh China tanpa VPN.\n\n",
