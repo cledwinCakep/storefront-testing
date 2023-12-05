@@ -27,7 +27,7 @@ const i: any = {
 
 const PriceInfoCards = ({ data }: PriceInfoCardsProps) => {
   return (
-    <div className="grid w-full gap-y-4 sm:gap-x-3 sm:gap-y-2 md:w-auto md:grid-cols-3 md:gap-x-[18px] md:gap-y-6 ">
+    <div className="grid w-full gap-y-3 sm:gap-x-3 sm:gap-y-2 md:w-auto md:grid-cols-3 md:gap-x-3 md:gap-y-3 ">
       {data.map((data) => (
         <Link
           key={data.code}
