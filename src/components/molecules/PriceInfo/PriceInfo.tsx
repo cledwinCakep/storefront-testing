@@ -27,7 +27,7 @@ const PriceInfo = ({ image, title, price }: PriceInfoProps) => {
           className="rounded-md"
         />
         <div>
-          <Text as="subHeading2" className="font-medium text-gray-200">
+          <Text as="body1" className="font-medium text-gray-200">
             {title}
           </Text>
         </div>
