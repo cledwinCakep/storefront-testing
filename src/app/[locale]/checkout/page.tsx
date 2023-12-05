@@ -195,7 +195,30 @@ export default function Checkout({ params }: { params: { locale: string } }) {
       <Navbar params={params} />
       <div className="flex h-screen flex-col">
         <Layout className="mb-20 mt-20 flex h-full w-full grow flex-col">
-          <Breadcrumb>
+          {retrievedData.data_amount > 0 ? (
+            <Breadcrumb>
+              <BreadcrumbItem isHome />
+
+              <BreadcrumbItem href="/#destination">Destination</BreadcrumbItem>
+
+              <BreadcrumbItem
+                href={`/plans/${retrievedData.country_code}?plan=${retrievedData.plan_option}&data=${retrievedData.data_amount}${retrievedData.data_unit}&duration=${retrievedData.duration_in_days}`}
+              >
+                {retrievedData.country_code}
+              </BreadcrumbItem>
+
+              <BreadcrumbItem isCurrentlyActive>Checkout</BreadcrumbItem>
+            </Breadcrumb>
+          ) : (
+            <Breadcrumb>
+              <BreadcrumbItem isHome />
+
+              <BreadcrumbItem href="/#destination">Destination</BreadcrumbItem>
+
+              <BreadcrumbItem isCurrentlyActive>Checkout</BreadcrumbItem>
+            </Breadcrumb>
+          )}
+          {/* <Breadcrumb>
             <BreadcrumbItem isHome />
 
             <BreadcrumbItem href="/#destination">Destination</BreadcrumbItem>
@@ -207,7 +230,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
             </BreadcrumbItem>
 
             <BreadcrumbItem isCurrentlyActive>Checkout</BreadcrumbItem>
-          </Breadcrumb>
+          </Breadcrumb> */}
           <Text
             as="h1"
             className="mb-10 mt-7 text-[26px] font-bold text-gray-100 sm:mb-14"
