@@ -34,6 +34,53 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
   const router = location.pathname;
   const country_code = router.split("/")[2];
 
+  const z: any = {
+    WW: "Global 146 Countries",
+    KH: "Cambodia",
+    US_CA: "United States/Canada",
+    AE: "United Arab Emirates",
+    QA: "Qatar",
+    SA: "Saudi Arabia",
+    IN: "India",
+    MX: "Mexico",
+    AR: "Argentina",
+    BR: "Brazil",
+    NP: "Nepal",
+    ZA: "South Africa",
+    AU: "Australia",
+    GU: "Guam",
+    AP: "13 Asian Countries",
+    CN: "China",
+    PH: "Philippines",
+    US: "United States",
+    MY: "Malaysia",
+    SG: "Singapore",
+    TH: "Thailand",
+    JP: "Japan",
+    TW: "Taiwan",
+    MO: "Macau",
+    GU_MP: "Guam/Saipan",
+    DE: "Germany",
+    FR: "France",
+    ES: "Spain",
+    GB: "United Kingdom",
+    PT: "Portugal",
+    IT: "Italy",
+    IE: "Ireland",
+    SE: "Sweden",
+    DK: "Denmark",
+    AT: "Austria",
+    EU: "33 European Countries",
+    ID: "Indonesia",
+    VN: "Vietnam",
+    HK: "Hong Kong",
+    HK_MO: "Hong Kong/Macau",
+    MN: "Mongolia",
+    KR: "South Korea",
+    CA: "Canada",
+    AU_NZ: "Australia/New Zealand",
+  };
+
   const i: any = {
     CN: "China",
     SG: "Singapore",
@@ -63,7 +110,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
         />
       ) : (
         <Image
-          src={``}
+          src={"/default_plan.png"}
           alt={"country.png"}
           width={600}
           height={280}
@@ -89,15 +136,14 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
             />
           ) : (
             <Image
-              src={``}
+              src={"/default_plan.png"}
               alt={"country.png"}
-              width={600}
-              height={280}
-              className="max-h-[280px] sm:hidden"
+              priority
+              fill
               style={{
                 objectFit: "cover",
               }}
-              priority
+              className="rounded-3xl"
             />
           )}
         </div>
@@ -297,9 +343,9 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
                   Subtotal
                 </Text>
                 <Text as="body1" className="text-xl font-black text-[#F9F9F9]">
-                  {subtotal.toLocaleString("id-ID", {
+                  {subtotal.toLocaleString("en-US", {
                     style: "currency",
-                    currency: "IDR",
+                    currency: "USD",
                   })}
                 </Text>
               </div>

@@ -52,7 +52,7 @@ const Radio = ({
       <label
         htmlFor={label}
         className={`z-10 cursor-pointer whitespace-nowrap font-medium peer-checked/radio:text-[#F97316] peer-hover/radio:text-[#F97316] ${
-          isDisabled ? "text-gray-100" : "text-gray-500"
+          isDisabled ? "text-gray-500" : "text-gray-100"
         }`}
       >
         <Text as="body1">{label}</Text>

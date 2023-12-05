@@ -10,7 +10,6 @@ import Partners from "@/components/template/Landing/Partner";
 import Destination from "@/components/template/Landing/Destination";
 import Advantage from "@/components/template/Landing/Advantage";
 import Hero from "@/components/template/Landing/Hero";
-import Head from "next/head";
 
 export default function Home({ params }: { params: { locale: string } }) {
   useEffect(() => {
@@ -20,17 +19,6 @@ export default function Home({ params }: { params: { locale: string } }) {
   }, []);
   return (
     <>
-      <Head>
-        <title>Superalink – Local eSIM for Traveler</title>
-        <meta
-          name="description"
-          content="Data packs with local rates. Buy the affordable eSIM package in Superalink."
-        />
-        <meta
-          property="og:image"
-          content="https://i.ibb.co/RY2Gz3H/Base-Thumbnail.jpg"
-        />
-      </Head>
       <Navbar params={params} />
       <Hero />
       <Advantage />
