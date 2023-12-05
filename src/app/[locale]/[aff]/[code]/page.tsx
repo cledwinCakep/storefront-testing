@@ -23,12 +23,18 @@ import Destination from "@/components/template/Landing/Destination";
 import Advantage from "@/components/template/Landing/Advantage";
 import Hero from "@/components/template/Landing/Hero";
 
-export default function AffLink({ params }: { params: { locale: string } }) {
-  const code = location.pathname.split("/aff/")[1];
+export default function AffLink({
+  params,
+}: {
+  params: { locale: string; code: string };
+}) {
+  const code = location.pathname.split("/aff/")[1] ?? params.code;
 
   useEffect(() => {
     localStorage.setItem("affiliate_code", code);
   }, [code]);
+  
+  console.log(params);
 
   return (
     <>

@@ -18,7 +18,7 @@ export const PaymentCardSuccess = () => {
     if (window) {
       setCode(window.localStorage.getItem("affiliate_code"));
     }
-  });
+  }, [code]);
   
   return (
     <>
