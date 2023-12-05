@@ -268,7 +268,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
                   size="sm"
                   className="my-8 w-full max-w-[290px]"
                   onClick={() => {
-                    router.push("/");
+                    router.replace("/");
                   }}
                 >
                   {t("checkout_findPlanButton")}
