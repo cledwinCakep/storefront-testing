@@ -51,7 +51,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
     data_unit: "",
     duration_in_days: 0,
     id: 0,
-    idr_price: 0,
+    price_in_usd: 0,
     option_id: "",
     plan_option: "",
     updated_at: "",
@@ -77,7 +77,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
 
       setRetrievedData(parsedData);
       setOrder(orderData);
-      setSubtotal(orderData * parsedData["idr_price"]);
+      setSubtotal(orderData * parsedData["price_in_usd"]);
     }
 
     setIsLoading(false);
@@ -132,7 +132,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
       temp = temp - 1;
       setOrder(temp);
     }
-    setSubtotal(temp * retrievedData!["idr_price"]);
+    setSubtotal(temp * retrievedData!["price_in_usd"]);
   }
 
   function handleDelete() {
@@ -144,7 +144,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
       data_unit: "",
       duration_in_days: 0,
       id: 0,
-      idr_price: 0,
+      price_in_usd: 0,
       option_id: "",
       plan_option: "",
       updated_at: "",
@@ -230,7 +230,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
                       retrievedData.country_code ==
                         i[retrievedData.country_code]
                         ? `/${retrievedData.country_name.toLowerCase()}_plan.png`
-                        : "/default_plan.png"
+                        : "/default_destination.png"
                     }`}
                     destination={`${retrievedData.country_name} eSim data plans`}
                     packages={`${
@@ -268,7 +268,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
                   size="sm"
                   className="my-8 w-full max-w-[290px]"
                   onClick={() => {
-                    router.replace("/");
+                    router.push("/");
                   }}
                 >
                   {t("checkout_findPlanButton")}

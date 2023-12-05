@@ -11,7 +11,7 @@ const Country: any = {
     values: "Cambodia",
     image: "https://i.ibb.co/RY2Gz3H/Base-Thumbnail.jpg",
   },
-  USCA: {
+  US_CA: {
     values: "United States/Canada",
     image: "https://i.ibb.co/RY2Gz3H/Base-Thumbnail.jpg",
   },
@@ -99,7 +99,7 @@ const Country: any = {
     values: "Macau",
     image: "https://i.ibb.co/RY2Gz3H/Base-Thumbnail.jpg",
   },
-  GUMP: {
+  GU_MP: {
     values: "Guam/Saipan",
     image: "https://i.ibb.co/RY2Gz3H/Base-Thumbnail.jpg",
   },
@@ -159,7 +159,7 @@ const Country: any = {
     values: "Hong Kong",
     image: "https://i.ibb.co/RY2Gz3H/Base-Thumbnail.jpg",
   },
-  HKMO: {
+  HK_MO: {
     values: "Hong Kong/Macau",
     image: "https://i.ibb.co/RY2Gz3H/Base-Thumbnail.jpg",
   },
@@ -175,7 +175,7 @@ const Country: any = {
     values: "Canada",
     image: "https://i.ibb.co/RY2Gz3H/Base-Thumbnail.jpg",
   },
-  AUNZ: {
+  AU_NZ: {
     values: "Australia/New Zealand",
     image: "https://i.ibb.co/RY2Gz3H/Base-Thumbnail.jpg",
   },
