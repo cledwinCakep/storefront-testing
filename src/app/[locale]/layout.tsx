@@ -15,6 +15,8 @@ export async function generateStaticParams() {
   return ["en"].map((locale) => ({ locale }));
 }
 
+let cache: { [key: string]: typeof en } = {};
+
 const dictionaries: {
   [key: string]: typeof en;
 } = {
@@ -22,9 +24,14 @@ const dictionaries: {
 };
 
 function getMessages(locale: string) {
+  if (cache[locale]) {
+    return cache[locale];
+  }
+
   try {
     const messages = dictionaries[locale];
     if (messages) {
+      cache[locale] = messages;
       return messages;
     } else {
       redirect("/"); // Return an empty object or handle the missing locale as needed.
