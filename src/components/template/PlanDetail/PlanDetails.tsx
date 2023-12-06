@@ -206,7 +206,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
                 name="data"
                 title={t("planDetail_selectDataTitle")}
                 data={Object.keys(data[parameter.plan]).map((key, index) => ({
-                  label: `${key}/day`,
+                  label: parameter.plan === "QUOTA" ? key : `${key}/day`,
                   value: key, // Generate a value based on the label
                 }))}
               />
