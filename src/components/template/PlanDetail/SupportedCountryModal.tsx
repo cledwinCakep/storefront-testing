@@ -17,19 +17,19 @@ export default function SupportedCountryModal() {
 
   const cancelButtonRef = useRef(null);
 
-//   const data = [
-//     { img: 'https://via.placeholder.com/40x26', country: 'Singapore' },
-//     { img: 'https://via.placeholder.com/40x26', country: 'Japan' },
-//     { img: 'https://via.placeholder.com/40x26', country: 'Indonesia' },
-//   ];
+  const data = [
+    { img: 'https://via.placeholder.com/40x26', country: 'Singapore' },
+    { img: 'https://via.placeholder.com/40x26', country: 'Japan' },
+    { img: 'https://via.placeholder.com/40x26', country: 'Indonesia' },
+  ];
 
-//   const handleInputChange = (e:any) => {
-//     setSearchTerm(e.target.value);
-//   }
+  const handleInputChange = (e:any) => {
+    setSearchTerm(e.target.value);
+  }
 
-//   const filteredCountries = data.filter(destination =>
-//     destination.country.toLowerCase().includes(searchTerm.toLowerCase())
-//   );
+  const filteredCountries = data.filter(destination =>
+    destination.country.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <Transition.Root show={openSupportedCountry} as={Fragment}>
