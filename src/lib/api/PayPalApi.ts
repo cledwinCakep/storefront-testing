@@ -1,3 +1,4 @@
+import { OnApproveActions } from "@paypal/paypal-js";
 import { API } from "./API";
 
 class PayPalApi extends API {
@@ -14,33 +15,51 @@ class PayPalApi extends API {
   }): Promise<string> {
     try {
       const result = this.publicRoute<any>({
-        url: "orders",
+        url: "orders/",
         method: "POST",
         data: {
-          esim_id,
-          quantity,
-          email,
-          user_code,
+          esim_id: 426,
+          quantity: 1,
+          email: "dwiprasetya@cakeplabs.com",
+          user_code: null,
         },
       });
 
-      console.log({ result });
-
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve("foo");
-        }, 300);
-      });
-    } catch (error: any) {
-      throw new Error(error);
+      return Promise.resolve(result.then((response) => response.data.order_id));
+    } catch (error) {
+      return Promise.reject(error);
     }
   }
 
-  onApprove(orderId: string) {
-    return this.publicRoute<any>({
-      url: `orders/${orderId}`,
-      method: "POST",
-    });
+  async onApprove({
+    orderId,
+    actions,
+  }: {
+    orderId: string;
+    actions: OnApproveActions;
+  }): Promise<void> {
+    try {
+      await this.publicRoute({
+        url: `orders/${orderId}`,
+        method: "POST",
+      });
+
+      window.location.replace("/status/success");
+    } catch (error: any) {
+      if (error.response.status === 422) {
+        switch (error.response.data.message) {
+          case "instrument declined":
+            actions.restart();
+            break;
+          case "transaction refused":
+          case "paypal internal error":
+            window.location.replace("/status/fail");
+            break;
+        }
+      }
+
+      throw new Error(error);
+    }
   }
 }
 

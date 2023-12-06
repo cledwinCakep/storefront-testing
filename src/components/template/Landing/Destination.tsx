@@ -41,7 +41,6 @@ const Partners = () => {
       if (res.status >= 200) {
         setLoading(false);
         setSearched(res.data);
-        console.log(res);
       } else {
         setLoading(false);
       }
@@ -68,8 +67,6 @@ const Partners = () => {
 
     return word.charAt(0).toUpperCase() + word.slice(1);
   }
-
-  console.log(data);
 
   if (!data) {
     return;

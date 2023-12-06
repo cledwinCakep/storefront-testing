@@ -145,8 +145,6 @@ export default function Checkout({ params }: { params: { locale: string } }) {
   }
 
   const createOrder = (data: CreateOrderData, actions: CreateOrderActions) => {
-    console.log("createOrder");
-
     return payPalApi.createOrder({
       esim_id: 426,
       quantity: 1,
@@ -155,10 +153,11 @@ export default function Checkout({ params }: { params: { locale: string } }) {
     });
   };
 
-  const onApprove = (data: OnApproveData) => {
-    return fetch(`/orders/${data.orderID}`).then((response) =>
-      console.log({ response })
-    );
+  const onApprove = (data: OnApproveData, actions: OnApproveActions) => {
+    return payPalApi.onApprove({
+      orderId: data.orderID,
+      actions,
+    });
   };
 
   let [isOpen, setIsOpen] = React.useState(false);
@@ -274,8 +273,6 @@ export default function Checkout({ params }: { params: { locale: string } }) {
                   handlePayment={handlePayment}
                   handleInputEmail={handleInputEmail}
                   code={code}
-                  createOrder={createOrder}
-                  onApprove={onApprove}
                 />
               </div>
             ) : (

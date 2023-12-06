@@ -26,8 +26,6 @@ const PlanDetail = ({ params }: { params: any }) => {
   const planHook = usePlanHook(params);
   const t = useTranslations("PlanDetail");
 
-  console.log({ params });
-
   return (
     <PlanContext.Provider value={planHook}>
       <div className="relative space-y-6 pb-[139px] sm:pb-0 ">
