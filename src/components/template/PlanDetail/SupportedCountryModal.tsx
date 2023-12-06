@@ -83,9 +83,9 @@ export default function SupportedCountryModal() {
                     {filteredCountries.map((destination, index) => (
                         <div key={index} className="w-full px-5 py-4 bg-neutral-900 rounded-lg shadow justify-start items-center inline-flex">
                             <div className="grow shrink basis-0 justify-start items-center gap-4 flex">
-                                <img className="w-10 h-[26px] relative rounded border border-zinc-100" src={data[0].img} />
+                                <img className="w-10 h-[26px] relative rounded border border-zinc-100" src={destination.img} />
                                 <div className="grow shrink basis-0 flex-col justify-center items-start gap-4 inline-flex">
-                                    <div className="self-stretch text-stone-50 text-base font-semibold leading-normal">{data[0].country}</div>
+                                    <div className="self-stretch text-stone-50 text-base font-semibold leading-normal">{destination.country}</div>
                                 </div>
                             </div>
                         </div>
