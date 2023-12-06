@@ -80,16 +80,16 @@ export default function SupportedCountryModal() {
                         className="px-4 py-1 bg-gray-700 rounded-lg border-none text-white text-lg font-normal leading-7 gap-2"
                     />
                   <div className="w-full h-full text-start overflow-y-auto flex flex-col gap-2">
-                    {/* {filteredCountries.map((destination) => (
-                        <div className="w-full px-5 py-4 bg-neutral-900 rounded-lg shadow justify-start items-center inline-flex">
+                    {filteredCountries.map((destination, index) => (
+                        <div key={index} className="w-full px-5 py-4 bg-neutral-900 rounded-lg shadow justify-start items-center inline-flex">
                             <div className="grow shrink basis-0 justify-start items-center gap-4 flex">
-                                <img className="w-10 h-[26px] relative rounded border border-zinc-100" src={destination.img} />
+                                <img className="w-10 h-[26px] relative rounded border border-zinc-100" src={data[0].img} />
                                 <div className="grow shrink basis-0 flex-col justify-center items-start gap-4 inline-flex">
-                                    <div className="self-stretch text-stone-50 text-base font-semibold leading-normal">{destination.country}</div>
+                                    <div className="self-stretch text-stone-50 text-base font-semibold leading-normal">{data[0].country}</div>
                                 </div>
                             </div>
                         </div>
-                    ))} */}
+                    ))}
                   </div>
                 </div>
               </Dialog.Panel>
