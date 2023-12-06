@@ -7,8 +7,7 @@ import id from "@/messages/id.json";
 import "./globals.css";
 import { redirect } from "next/navigation";
 import { useState } from "react";
-import GoogleAnalytics from "../../../GoogleAnalytics";
-import { pageview } from "../../../gtag";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 export const dynamic = "force-dynamic";
 
@@ -82,9 +81,18 @@ export default function RootLayout({
 
       <body className="bg-black">
         {/* <GoogleAnalytics keys={process.env.NEXT_PUBLIC_GOOGLE_ID} /> */}
-        <NextIntlClientProvider locale={"en"} messages={messages}>
-          {children}
-        </NextIntlClientProvider>
+        <PayPalScriptProvider
+          options={{
+            // disableFunding: ["credit", "card"],
+            currency: "USD",
+            clientId:
+              "AWxV0e0JdVy-elqSzzmza_PuRd3A6lqKztayVoVORTGfkjsiGvmXFYptYFaJeTLAtYKb-uy8xieyerKs",
+          }}
+        >
+          <NextIntlClientProvider locale={"en"} messages={messages}>
+            {children}
+          </NextIntlClientProvider>
+        </PayPalScriptProvider>
         <ProgressBar
           height="4px"
           color="#f97316"

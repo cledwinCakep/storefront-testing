@@ -18,6 +18,14 @@ export default function Status({ params }: { params: { locale: string } }) {
 
   //   handleReplaceHistory();
   // }, []);
+
+  useEffect(() => {
+    if (window) {
+      localStorage.removeItem("order");
+      localStorage.removeItem("buy");
+    }
+  }, []);
+
   return (
     <>
       <Navbar params={params} />
