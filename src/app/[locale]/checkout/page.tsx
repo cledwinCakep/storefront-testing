@@ -1,5 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { payPalApi } from "@/lib/api/PayPalApi";
+import { Dialog } from "@headlessui/react";
+import { X } from "react-feather";
 
 //Component
 import Navbar from "@/components/organisms/Navbar/Navbar";
@@ -20,6 +23,13 @@ import { utilityApi } from "@/lib/api/GetApi";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import Divider from "@/components/atoms/Divider/Divider";
+import {
+  CreateOrderActions,
+  CreateOrderData,
+  OnApproveActions,
+  OnApproveData,
+} from "@paypal/paypal-js";
+import { PayPalButtons } from "@paypal/react-paypal-js";
 
 const i: any = {
   CN: "CN",
@@ -96,24 +106,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
       return;
     }
 
-    if (email) {
-      let body = {
-        esim_id: id,
-        quantity: order,
-        email: email,
-        user_code: code,
-      };
-      utilityApi.postBuyesim(body).then((response) => {
-        // Handle the response here
-        // Remove "buy" item from localStorage
-        localStorage.removeItem("buy");
-
-        // Remove "order" item from localStorage
-        localStorage.removeItem("order");
-
-        window.location.href = response.data.invoice_url;
-      });
-    }
+    setIsOpen(true);
   };
 
   function handleInputEmail(e: React.ChangeEvent<HTMLInputElement>) {
@@ -151,51 +144,86 @@ export default function Checkout({ params }: { params: { locale: string } }) {
     });
   }
 
+  const createOrder = (data: CreateOrderData, actions: CreateOrderActions) => {
+    console.log("createOrder");
+
+    return payPalApi.createOrder({
+      esim_id: 426,
+      quantity: 1,
+      email: "dwiprasetya@cakeplabs.com",
+      user_code: null,
+    });
+  };
+
+  const onApprove = (data: OnApproveData) => {
+    return fetch(`/orders/${data.orderID}`).then((response) =>
+      console.log({ response })
+    );
+  };
+
+  let [isOpen, setIsOpen] = React.useState(false);
+
   return (
     <>
-      {/* <Dialog
+      <Dialog
         open={isOpen}
         onClose={() => setIsOpen(false)}
         className="relative z-50 "
       >
         <div className="fixed inset-0 flex w-screen items-center justify-center bg-black/30 p-4">
-          <Dialog.Panel className="w-full max-w-[530px] rounded bg-white p-8">
-            <div className="flex flex-col gap-8">
-              <div className="flex h-full w-full flex-row gap-4">
-                <div className="h-[90px] w-[90px]">
-                  <Itemcarrier />
-                </div>
-                <div className="flex max-w-[360px] flex-col gap-6">
-                  <Text as="subHeading2" className="font-bold">
-                    Oops! Out of stocks
-                  </Text>
-
-                  <Text as="body2">
-                    {`We're sorry, but it appears that the plan eSIM you are looking for
-                is currently out of stock.`}
-                  </Text>
+          <Dialog.Panel className="max-h-[600px] w-full max-w-[480px] rounded-md bg-white p-6">
+            <div>
+              <div className="mb-8 flex flex-row justify-between">
+                <Text as="subHeading1" className="font-bold">
+                  {/* {t("Checkout")} */}
+                  Select Payment Method
+                </Text>
+                <div
+                  className=" h-8 w-8  hover:cursor-pointer"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <X />
                 </div>
               </div>
-              <div className="flex flex-row items-center justify-end gap-8">
-                <Text as="body2" className="md:text- text-blue-500">
-                  Back to home
-                </Text>
-                <Button
-                  color="black"
-                  size="sm"
-                  className="h-full w-[240px] md:max-h-[42px]"
-                >
-                  Find other plan
-                </Button>
+
+              <div className="max-h-[400px] overflow-y-auto">
+                <PayPalButtons
+                  createOrder={createOrder}
+                  onApprove={onApprove}
+                />
               </div>
             </div>
-          </Dialog.Panel> 
+          </Dialog.Panel>
         </div>
-      </Dialog>*/}
+      </Dialog>
+
       <Navbar params={params} />
       <div className="flex h-screen flex-col">
         <Layout className="mb-20 mt-20 flex h-full w-full grow flex-col">
-          <Breadcrumb>
+          {retrievedData.data_amount > 0 ? (
+            <Breadcrumb>
+              <BreadcrumbItem isHome />
+
+              <BreadcrumbItem href="/#destination">Destination</BreadcrumbItem>
+
+              <BreadcrumbItem
+                href={`/plans/${retrievedData.country_code}?plan=${retrievedData.plan_option}&data=${retrievedData.data_amount}${retrievedData.data_unit}&duration=${retrievedData.duration_in_days}`}
+              >
+                {retrievedData.country_code}
+              </BreadcrumbItem>
+
+              <BreadcrumbItem isCurrentlyActive>Checkout</BreadcrumbItem>
+            </Breadcrumb>
+          ) : (
+            <Breadcrumb>
+              <BreadcrumbItem isHome />
+
+              <BreadcrumbItem href="/#destination">Destination</BreadcrumbItem>
+
+              <BreadcrumbItem isCurrentlyActive>Checkout</BreadcrumbItem>
+            </Breadcrumb>
+          )}
+          {/* <Breadcrumb>
             <BreadcrumbItem isHome />
 
             <BreadcrumbItem href="/#destination">Destination</BreadcrumbItem>
@@ -207,7 +235,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
             </BreadcrumbItem>
 
             <BreadcrumbItem isCurrentlyActive>Checkout</BreadcrumbItem>
-          </Breadcrumb>
+          </Breadcrumb> */}
           <Text
             as="h1"
             className="mb-10 mt-7 text-[26px] font-bold text-gray-100 sm:mb-14"
@@ -225,13 +253,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
                     handleDelete={handleDelete}
                     order={order}
                     handleOrder={handleOrder}
-                    image={`${
-                      retrievedData.country_name &&
-                      retrievedData.country_code ==
-                        i[retrievedData.country_code]
-                        ? `/${retrievedData.country_name.toLowerCase()}_plan.png`
-                        : "/default_destination.png"
-                    }`}
+                    image={`${`/destination/${retrievedData.country_name.toLowerCase()}.png`}`}
                     destination={`${retrievedData.country_name} eSim data plans`}
                     packages={`${
                       retrievedData!["plan_option"] == "UNLIMITED"
@@ -252,6 +274,8 @@ export default function Checkout({ params }: { params: { locale: string } }) {
                   handlePayment={handlePayment}
                   handleInputEmail={handleInputEmail}
                   code={code}
+                  createOrder={createOrder}
+                  onApprove={onApprove}
                 />
               </div>
             ) : (
