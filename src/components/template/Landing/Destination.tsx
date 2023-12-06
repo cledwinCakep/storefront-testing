@@ -11,16 +11,24 @@ import PriceInfoCards from "@/components/organisms/PriceInfoCards/PriceInfoCards
 //API
 import { utilityApi } from "@/lib/api/GetApi";
 import { useTranslations } from "next-intl";
+import Tabs2 from "@/components/atoms/Tabs2/Tabs2";
 
 const Partners = () => {
   const router = useRouter();
   // const url = window.location.href;
 
-  const [data, setData] = useState<any>();
+  const [data, setData] = useState<any>([]);
   const [searched, setSearched] = useState<any>([]);
   const [loading, setLoading] = useState(false);
 
   const t = useTranslations("Homepage");
+
+  const scrollToLayout = () => {
+    const layoutElement = document.getElementById("destination");
+    if (layoutElement) {
+      layoutElement.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   const handleSearch = async (e: any) => {
     const body = {
@@ -61,6 +69,8 @@ const Partners = () => {
     return word.charAt(0).toUpperCase() + word.slice(1);
   }
 
+  console.log(data);
+
   if (!data) {
     return;
   }
@@ -80,9 +90,9 @@ const Partners = () => {
         </div>
 
         {/* search country */}
-        <div className="relative mb-4 h-auto w-full max-w-[852px] rounded-lg bg-[#374151] px-5 py-2">
+        <div className="relative mb-8 h-auto w-full rounded-lg bg-[#374151] px-5 py-2">
           <input
-            className="min-w-full bg-transparent pl-8 text-white outline-none"
+            className="min-w-full bg-transparent pl-8 text-white outline-none "
             placeholder="Search destination..."
             onChange={handleSearch}
           />
@@ -123,71 +133,40 @@ const Partners = () => {
           </div>
         </div>
         <div className="flex w-full flex-col gap-4">
-          <div className="flex w-full flex-col items-center justify-center gap-4 gap-y-4 md:flex-row">
-            {/* <PriceInfoCards
-              data={[
-                {
-                  code: data[0].country_code,
-                  image: `/${data[0].country_name.trim().toLowerCase()}.png`,
-                  title: capitalizeFirstLetter(data[0].country_name.trim()),
-                  price: data[0].idr_price.toLocaleString("en-US", {
-                    style: "currency",
-                    currency: "USD",
-                  }),
-                },
-                {
-                  code: data[1].country_code,
-                  image: `/${data[1].country_name.trim().toLowerCase()}.png`,
-                  title: capitalizeFirstLetter(data[1].country_name.trim()),
-                  price: data[1].idr_price.toLocaleString("en-US", {
-                    style: "currency",
-                    currency: "USD",
-                  }),
-                },
-                {
-                  code: data[2].country_code,
-                  image: `/${data[2].country_name.trim().toLowerCase()}.png`,
-                  title: capitalizeFirstLetter(data[2].country_name.trim()),
-                  price: data[2].idr_price.toLocaleString("en-US", {
-                    style: "currency",
-                    currency: "USD",
-                  }),
-                },
-                {
-                  code: data[3].country_code,
-                  image: `/${data[3].country_name.trim().toLowerCase()}.png`,
-                  title: capitalizeFirstLetter(data[3].country_name.trim()),
-                  price: data[3].idr_price.toLocaleString("en-US", {
-                    style: "currency",
-                    currency: "USD",
-                  }),
-                },
-                {
-                  code: data[4].country_code,
-                  image: `/${data[4].country_name.trim().toLowerCase()}.png`,
-                  title: capitalizeFirstLetter(data[4].country_name.trim()),
-                  price: data[4].idr_price.toLocaleString("en-US", {
-                    style: "currency",
-                    currency: "USD",
-                  }),
-                },
-                {
-                  code: data[5].country_code,
-                  image: `/${data[5].country_name.trim().toLowerCase()}.png`,
-                  title: capitalizeFirstLetter(data[5].country_name.trim()),
-                  price: data[5].idr_price.toLocaleString("en-US", {
-                    style: "currency",
-                    currency: "USD",
-                  }),
-                },
-              ]}
-            />  */}
+          {/* put in here */}
+          <Tabs2
+            data={data.map(
+              (item: {
+                country_code: any;
+                country_name: string;
+                price_in_usd: {
+                  toLocaleString: (
+                    arg0: string,
+                    arg1: { style: string; currency: string }
+                  ) => any;
+                };
+              }) => ({
+                code: item.country_code,
+                image:
+                  `/flag/${item.country_code.trim().toUpperCase()}.png` ||
+                  "/default.png",
+                title: capitalizeFirstLetter(item.country_name.trim()),
+                price: item.price_in_usd.toLocaleString("en-US", {
+                  style: "currency",
+                  currency: "USD",
+                }),
+              })
+            )}
+            onShowLessClicked={scrollToLayout}
+          />
+
+          {/* <div className="flex w-full flex-col items-center justify-center gap-4 gap-y-4 md:flex-row">
             <PriceInfoCards
               data={data.map(
                 (item: {
                   country_code: any;
                   country_name: string;
-                  idr_price: {
+                  price_in_usd: {
                     toLocaleString: (
                       arg0: string,
                       arg1: { style: string; currency: string }
@@ -196,17 +175,17 @@ const Partners = () => {
                 }) => ({
                   code: item.country_code,
                   image:
-                    `/${item.country_name.trim().toLowerCase()}.png` ||
-                    "/china.png",
+                    `/flag/${item.country_code.trim().toUpperCase()}.png` ||
+                    "/default.png",
                   title: capitalizeFirstLetter(item.country_name.trim()),
-                  price: item.idr_price.toLocaleString("en-US", {
+                  price: item.price_in_usd.toLocaleString("en-US", {
                     style: "currency",
                     currency: "USD",
                   }),
                 })
               )}
             />
-          </div>
+          </div> */}
         </div>
       </div>
     </Layout>
