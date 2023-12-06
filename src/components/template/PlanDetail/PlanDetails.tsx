@@ -1,6 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import { useState, useEffect, useRef, Fragment } from "react";
+import { ChevronRight } from "react-feather";
+import { useModalStore } from "@/lib/stores/useModalStore";
 
 // atoms
 import Text from "@/components/atoms/Text/Text";
@@ -16,8 +19,10 @@ import RadioPlan from "@/components/molecules/RadioPlan/RadioPlan";
 import { usePlanContext } from "@/lib/context/plan";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
+import GlobeIcon from "@/components/atoms/SVG/GlobeIcon";
 
 const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
+  const { openSupportedCountry, setOpenSupportedCountry } = useModalStore();
   const {
     data,
     isLoading,
@@ -30,6 +35,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     handleBuy,
     country,
   } = usePlanContext();
+
   const t = useTranslations("PlanDetail");
   const router = location.pathname;
   const country_code = router.split("/")[2];
@@ -37,7 +43,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
   const z: any = {
     WW: "Global 146 Countries",
     KH: "Cambodia",
-    US_CA: "United States Canada",
+    US_CA: "United States/Canada",
     AE: "United Arab Emirates",
     QA: "Qatar",
     SA: "Saudi Arabia",
@@ -59,7 +65,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     JP: "Japan",
     TW: "Taiwan",
     MO: "Macau",
-    GU_MP: "Guam Saipan",
+    GU_MP: "Guam/Saipan",
     DE: "Germany",
     FR: "France",
     ES: "Spain",
@@ -73,74 +79,83 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     EU: "33 European Countries",
     ID: "Indonesia",
     VN: "Vietnam",
-    HK: "Hongkong",
-    HK_MO: "Hongkong Macau",
+    HK: "Hong Kong",
+    HK_MO: "Hong Kong/Macau",
     MN: "Mongolia",
-    KR: "South Korea",
+    KR: "Korea",
     CA: "Canada",
-    AU_NZ: "Australia New Zealand",
+    AU_NZ: "Australia/New Zealand",
+  };
+
+  const globalCodes = ["WW", "AP", "EU", "US_CA", "GU_MP", "HK_MO", "AU_NZ"];
+
+  const i: any = {
+    CN: "China",
+    SG: "Singapore",
+    MY: "Malaysia",
+    TH: "Thailand",
+    JP: "Japan",
+    KR: "Korea",
   };
 
   const countryName = z[country_code];
+  const countryNameZ = z[country_code];
 
-  console.log({ data });
+  console.log(countryName);
+  console.log(params.slug);
 
   return (
     <div className="sm:relative">
-      {countryName
-        ? (
-          <Image
-            src={`/destination/${countryName.toLowerCase()}.png`}
-            alt={countryName.toLowerCase()}
-            width={600}
-            height={280}
-            className="max-h-[280px] sm:hidden"
-            style={{
-              objectFit: "cover",
-            }}
-            priority
-          />
-        )
-        : (
-          <Image
-            src={"/default_destination.png"}
-            alt={"country.png"}
-            width={600}
-            height={280}
-            className="max-h-[280px] sm:hidden"
-            style={{
-              objectFit: "cover",
-            }}
-            priority
-          />
-        )}
+      {countryName ? (
+        <Image
+          src={`/${countryName.toLowerCase()}_plan.png`}
+          alt={countryName.toLowerCase()}
+          width={600}
+          height={280}
+          className="max-h-[280px] sm:hidden"
+          style={{
+            objectFit: "cover",
+          }}
+          priority
+        />
+      ) : (
+        <Image
+          src={"/default_destination.png"}
+          alt={"country.png"}
+          width={600}
+          height={280}
+          className="max-h-[280px] sm:hidden"
+          style={{
+            objectFit: "cover",
+          }}
+          priority
+        />
+      )}
       <Layout className="space-y-8 border-b-[1px] border-gray-500 sm:grid sm:grid-cols-3 sm:gap-5 sm:space-y-0 md:grid-cols-4">
         <div className="relative hidden h-full w-full  border-gray-300 sm:col-span-2 sm:col-start-1 sm:block md:col-span-1 md:col-start-1 md:row-start-1 md:h-[430px] md:w-full">
-          {countryName
-            ? (
-              <Image
-                src={`/destination/${countryName.toLowerCase()}.png`}
-                alt={countryName.toLowerCase()}
-                priority
-                fill
-                style={{
-                  objectFit: "cover",
-                }}
-                className="rounded-3xl"
-              />
-            )
-            : (
-              <Image
-                src={"/default_destination.png"}
-                alt={"country.png"}
-                priority
-                fill
-                style={{
-                  objectFit: "cover",
-                }}
-                className="rounded-3xl"
-              />
-            )}
+          {countryName ? (
+            <Image
+              src={`/${countryName.toLowerCase()}_plan.png`}
+              alt={countryName.toLowerCase()}
+              priority
+              fill
+              style={{
+                objectFit: "cover",
+              }}
+              className="rounded-3xl"
+            />
+          ) : (
+            <Image
+              src={"/default_destination.png"}
+              alt={"country.png"}
+              priority
+              fill
+              style={{
+                objectFit: "cover",
+              }}
+              className="rounded-3xl"
+            />
+          )}
         </div>
 
         <div className="space-y-8 sm:col-span-2 sm:col-start-1 md:col-span-2 md:col-start-2 md:row-start-1">
@@ -151,6 +166,28 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
             <Text as="small" className="font-medium text-gray-400">
               {t("planDetail_detailDesc")}
             </Text>
+            {globalCodes.includes(params.slug) && (
+              <button
+                type="button"
+                onClick={() => {
+                  setOpenSupportedCountry(!openSupportedCountry);
+                }}
+                className="mt-5 inline-flex w-full items-center justify-start gap-2 rounded-lg bg-neutral-900 px-2 py-2 shadow sm:mt-6 sm:w-fit"
+              >
+                <div className="flex w-full items-center justify-between gap-2">
+                  <div className="flex items-center justify-start gap-2">
+                    <GlobeIcon className="h-6 w-6" />
+                    <div className="inline-flex flex-col items-start justify-center gap-4">
+                      <div className="self-stretch text-base font-normal leading-7 text-stone-50">
+                        Supported country
+                      </div>
+                    </div>
+                  </div>
+
+                  <ChevronRight className="text-stone-50" />
+                </div>
+              </button>
+            )}
           </div>
 
           {!isLoading && (
@@ -159,9 +196,8 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
                 name="plan"
                 title={t("planDetail_selectPlanTitle")}
                 data={Object.keys(data).map((key) => ({
-                  label: key == "UNLIMITED"
-                    ? "Daily Unlimited Plan"
-                    : "Quota Plan",
+                  label:
+                    key == "UNLIMITED" ? "Daily Unlimited Plan" : "Quota Plan",
                   value: key, // Generate a value based on the label
                 }))}
               />
@@ -179,145 +215,105 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
                 data={Object.values(
                   data[parameter.plan][parameter.data]
                     ? data[parameter.plan][parameter.data]
-                    : data[parameter.plan]["15GB"],
+                    : data[parameter.plan]["15GB"]
                 ).map((key: any) => ({
                   label: `${key["duration_in_days"]} Day(s)`,
-                  value: `${key["duration_in_days"]}`,
+                  value: `${key["duration_in_days"]}`, // Generate a value based on the label
                 }))}
               />
             </>
           )}
           <Tabs
-            data={countryName
-              ? countryName.toLowerCase() == "china"
-                ? [
-                  {
-                    label: t("planDetail_descriptionTitle"),
-                    content: `${t("planDetail_descriptionCNOne")}${
-                      t(
-                        "planDetail_descriptionCNTwo",
-                      )
-                    }${t("planDetail_descriptionCNThree")}${
-                      t(
-                        "planDetail_descriptionCNFour",
-                      )
-                    }${t("planDetail_descriptionCNFive")}${
-                      t(
-                        "planDetail_descriptionCNSix",
-                      )
-                    }${t("planDetail_descriptionCNSeven")}`,
-                  },
-                  {
-                    label: t("planDetail_howtouseTitle"),
-                    content: `${t("planDetail_howtouseOne")}${
-                      t(
-                        "planDetail_howtouseTwo",
-                      )
-                    }${t("planDetail_howtouseThree")}${
-                      t(
-                        "planDetail_howtouseFour",
-                      )
-                    }${t("planDetail_howtouseFive")}${
-                      t(
-                        "planDetail_howtouseSix",
-                      )
-                    }${t("planDetail_howtouseSeven")}`,
-                  },
-                  {
-                    label: t("planDetail_policyTitle"),
-                    content: `${t("planDetail_policyOne")}${
-                      t(
-                        "planDetail_policyTwo",
-                      )
-                    }`,
-                  },
-                ]
+            data={
+              countryName
+                ? countryName.toLowerCase() == "china"
+                  ? [
+                      {
+                        label: t("planDetail_descriptionTitle"),
+                        content: `${t("planDetail_descriptionCNOne")}${t(
+                          "planDetail_descriptionCNTwo"
+                        )}${t("planDetail_descriptionCNThree")}${t(
+                          "planDetail_descriptionCNFour"
+                        )}${t("planDetail_descriptionCNFive")}${t(
+                          "planDetail_descriptionCNSix"
+                        )}${t("planDetail_descriptionCNSeven")}`,
+                      },
+                      {
+                        label: t("planDetail_howtouseTitle"),
+                        content: `${t("planDetail_howtouseOne")}${t(
+                          "planDetail_howtouseTwo"
+                        )}${t("planDetail_howtouseThree")}${t(
+                          "planDetail_howtouseFour"
+                        )}${t("planDetail_howtouseFive")}${t(
+                          "planDetail_howtouseSix"
+                        )}${t("planDetail_howtouseSeven")}`,
+                      },
+                      {
+                        label: t("planDetail_policyTitle"),
+                        content: `${t("planDetail_policyOne")}${t(
+                          "planDetail_policyTwo"
+                        )}`,
+                      },
+                    ]
+                  : [
+                      {
+                        label: t("planDetail_descriptionTitle"),
+                        content: `${t("planDetail_descriptionOne")}${t(
+                          "planDetail_descriptionTwo"
+                        )}${t("planDetail_descriptionThree")}${t(
+                          "planDetail_descriptionFour"
+                        )}${t("planDetail_descriptionFive")}${t(
+                          "planDetail_descriptionSix"
+                        )}`,
+                      },
+
+                      {
+                        label: t("planDetail_howtouseTitle"),
+                        content: `${t("planDetail_howtouseOne")}${t(
+                          "planDetail_howtouseTwo"
+                        )}${t("planDetail_howtouseThree")}${t(
+                          "planDetail_howtouseFour"
+                        )}${t("planDetail_howtouseFive")}${t(
+                          "planDetail_howtouseSix"
+                        )}${t("planDetail_howtouseSeven")}`,
+                      },
+                      {
+                        label: t("planDetail_policyTitle"),
+                        content: `${t("planDetail_policyOne")}${t(
+                          "planDetail_policyTwo"
+                        )}`,
+                      },
+                    ]
                 : [
-                  {
-                    label: t("planDetail_descriptionTitle"),
-                    content: `${t("planDetail_descriptionOne")}${
-                      t(
-                        "planDetail_descriptionTwo",
-                      )
-                    }${t("planDetail_descriptionThree")}${
-                      t(
-                        "planDetail_descriptionFour",
-                      )
-                    }${t("planDetail_descriptionFive")}${
-                      t(
-                        "planDetail_descriptionSix",
-                      )
-                    }`,
-                  },
+                    {
+                      label: t("planDetail_descriptionTitle"),
+                      content: `${t("planDetail_descriptionOne")}${t(
+                        "planDetail_descriptionTwo"
+                      )}${t("planDetail_descriptionThree")}${t(
+                        "planDetail_descriptionFour"
+                      )}${t("planDetail_descriptionFive")}${t(
+                        "planDetail_descriptionSix"
+                      )}`,
+                    },
 
-                  {
-                    label: t("planDetail_howtouseTitle"),
-                    content: `${t("planDetail_howtouseOne")}${
-                      t(
-                        "planDetail_howtouseTwo",
-                      )
-                    }${t("planDetail_howtouseThree")}${
-                      t(
-                        "planDetail_howtouseFour",
-                      )
-                    }${t("planDetail_howtouseFive")}${
-                      t(
-                        "planDetail_howtouseSix",
-                      )
-                    }${t("planDetail_howtouseSeven")}`,
-                  },
-                  {
-                    label: t("planDetail_policyTitle"),
-                    content: `${t("planDetail_policyOne")}${
-                      t(
-                        "planDetail_policyTwo",
-                      )
-                    }`,
-                  },
-                ]
-              : [
-                {
-                  label: t("planDetail_descriptionTitle"),
-                  content: `${t("planDetail_descriptionOne")}${
-                    t(
-                      "planDetail_descriptionTwo",
-                    )
-                  }${t("planDetail_descriptionThree")}${
-                    t(
-                      "planDetail_descriptionFour",
-                    )
-                  }${t("planDetail_descriptionFive")}${
-                    t(
-                      "planDetail_descriptionSix",
-                    )
-                  }`,
-                },
-
-                {
-                  label: t("planDetail_howtouseTitle"),
-                  content: `${t("planDetail_howtouseOne")}${
-                    t(
-                      "planDetail_howtouseTwo",
-                    )
-                  }${t("planDetail_howtouseThree")}${
-                    t(
-                      "planDetail_howtouseFour",
-                    )
-                  }${t("planDetail_howtouseFive")}${
-                    t(
-                      "planDetail_howtouseSix",
-                    )
-                  }${t("planDetail_howtouseSeven")}`,
-                },
-                {
-                  label: t("planDetail_policyTitle"),
-                  content: `${t("planDetail_policyOne")}${
-                    t(
-                      "planDetail_policyTwo",
-                    )
-                  }`,
-                },
-              ]}
+                    {
+                      label: t("planDetail_howtouseTitle"),
+                      content: `${t("planDetail_howtouseOne")}${t(
+                        "planDetail_howtouseTwo"
+                      )}${t("planDetail_howtouseThree")}${t(
+                        "planDetail_howtouseFour"
+                      )}${t("planDetail_howtouseFive")}${t(
+                        "planDetail_howtouseSix"
+                      )}${t("planDetail_howtouseSeven")}`,
+                    },
+                    {
+                      label: t("planDetail_policyTitle"),
+                      content: `${t("planDetail_policyOne")}${t(
+                        "planDetail_policyTwo"
+                      )}`,
+                    },
+                  ]
+            }
           />
         </div>
 
