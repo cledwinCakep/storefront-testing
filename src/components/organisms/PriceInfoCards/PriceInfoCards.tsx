@@ -31,7 +31,7 @@ const PriceInfoCards = ({ data }: PriceInfoCardsProps) => {
       {data.map((data) => (
         <Link
           key={data.code}
-          href={`/plans/${data.code}?plan=UNLIMITED&data=500MB&duration=1`}
+          href={`/plans/${data.code}?plan=UNLIMITED&dataType=Roaming&data=500MB&duration=1%20Day(s)`}
         >
           <div
             key={data.title}

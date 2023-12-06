@@ -25,11 +25,16 @@ const usePlanHook = (params: { slug: string }) => {
     plan: "UNLIMITED",
     data: "500MB",
     duration: "1 Day(s)",
+    dataType: "Roaming",
   });
 
   const [isLoading, setLoading] = useState<boolean>(true);
   const dataPlan: DataPlan = {};
   const [currentSelected, setCurrentSelect] = useState<currentSelectedProps>({
+    dataType: {
+      id: "-",
+      value: "",
+    },
     plan: {
       id: "-",
       value: "",
@@ -50,9 +55,14 @@ const usePlanHook = (params: { slug: string }) => {
     const plan = urlSearchParams.get("plan") || "";
     const data = urlSearchParams.get("data") || "";
     const duration = urlSearchParams.get("duration") || "";
+    const dataType = urlSearchParams.get("dataType") || "";
 
     // Update the currentSelected state with the parsed parameters
     setCurrentSelect({
+      dataType: {
+        id: dataType == "" ? "Roaming" : dataType,
+        value: dataType == "" ? "Roaming" : dataType,
+      },
       plan: {
         id:
           plan == ""
@@ -67,7 +77,7 @@ const usePlanHook = (params: { slug: string }) => {
         value: data,
       },
       duration: {
-        id: duration == "" ? "-" : duration + " Day(s)", // Se // Set the id to "duration" or any other identifier you prefer
+        id: duration == "" ? "-" : duration + " Day(s)", // Set the id to "duration" or any other identifier you prefer
         value: duration,
       },
     });
@@ -177,6 +187,7 @@ const usePlanHook = (params: { slug: string }) => {
         plan: "UNLIMITED",
         data: "500MB",
         duration: "1 Day(s)",
+        dataType: "Roaming",
       };
       setSubtotal(0);
       setOrder(1);
@@ -187,6 +198,10 @@ const usePlanHook = (params: { slug: string }) => {
           value: "",
         },
         duration: {
+          id: "-",
+          value: "",
+        },
+        dataType: {
           id: "-",
           value: "",
         },
@@ -196,6 +211,7 @@ const usePlanHook = (params: { slug: string }) => {
         plan: "QUOTA",
         data: "15GB",
         duration: "30 Day(s)",
+        dataType: "Roaming",
       };
       setSubtotal(0);
       setOrder(1);
@@ -206,6 +222,10 @@ const usePlanHook = (params: { slug: string }) => {
           value: "",
         },
         duration: {
+          id: "-",
+          value: "",
+        },
+        dataType: {
           id: "-",
           value: "",
         },

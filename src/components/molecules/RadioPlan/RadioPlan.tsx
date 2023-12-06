@@ -36,8 +36,10 @@ const RadioPlan = ({ title, name, data }: RadioPlanProps) => {
     };
 
     setCurrentSelect(temp);
-    selectDataPlan(label, e.target.value);
+    selectDataPlan(e.target.name, e.target.value);
   };
+
+  console.log({ data });
 
   return (
     <div>
