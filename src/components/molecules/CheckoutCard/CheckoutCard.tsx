@@ -19,11 +19,6 @@ type CheckoutCardProps = {
   handleInputEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isEmpty: string;
   code: string | null;
-  createOrder: (
-    data: CreateOrderData,
-    actions: CreateOrderActions
-  ) => Promise<string>;
-  onApprove: (data: OnApproveData, actions: OnApproveActions) => Promise<void>;
 };
 
 const CheckoutCard = ({
@@ -31,8 +26,6 @@ const CheckoutCard = ({
   handlePayment,
   handleInputEmail,
   code,
-  createOrder,
-  onApprove,
 }: CheckoutCardProps) => {
   const t = useTranslations("Checkout");
   return (
