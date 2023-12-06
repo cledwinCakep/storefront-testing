@@ -76,11 +76,11 @@ export default function SupportedCountryModal() {
                         icon={Search}
                         placeholder="Search destination"
                         // value={searchTerm}
-                        // onChange={handleInputChange}
+                        onChange={handleInputChange}
                         className="px-4 py-1 bg-gray-700 rounded-lg border-none text-white text-lg font-normal leading-7 gap-2"
                     />
-                  {/* <div className="w-full h-full text-start overflow-y-auto flex flex-col gap-2">
-                    {filteredCountries.map((destination) => (
+                  <div className="w-full h-full text-start overflow-y-auto flex flex-col gap-2">
+                    {/* {filteredCountries.map((destination) => (
                         <div className="w-full px-5 py-4 bg-neutral-900 rounded-lg shadow justify-start items-center inline-flex">
                             <div className="grow shrink basis-0 justify-start items-center gap-4 flex">
                                 <img className="w-10 h-[26px] relative rounded border border-zinc-100" src={destination.img} />
@@ -89,8 +89,8 @@ export default function SupportedCountryModal() {
                                 </div>
                             </div>
                         </div>
-                    ))}
-                  </div> */}
+                    ))} */}
+                  </div>
                 </div>
               </Dialog.Panel>
             </Transition.Child>
