@@ -25,7 +25,6 @@ import Hero from "@/components/template/Landing/Hero";
 
 export default function AffLink({ params }: { params: { locale: string } }) {
   const code = location.pathname.split("/aff/")[1];
-  console.log(params);
 
   useEffect(() => {
     localStorage.setItem("affiliate_code", code);
