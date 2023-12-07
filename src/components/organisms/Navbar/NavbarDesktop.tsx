@@ -16,11 +16,14 @@ import { useTranslations } from "next-intl";
 import { usePathname } from "next-intl/client";
 import Link from "next-intl/link";
 import Email from "@/components/icons/Email";
+import { JsxEmit } from "typescript";
 
 const NavbarDesktop = ({ params }: { params: { locale: string } }) => {
   const t = useTranslations("Navbar");
   const [isOpen, setOpen] = useState(false);
   const pathname = usePathname();
+
+  console.log({ pathname: pathname.split("/")[1] });
 
   function handleChangeLanguage() {
     setOpen(!isOpen);
@@ -48,17 +51,35 @@ const NavbarDesktop = ({ params }: { params: { locale: string } }) => {
           <div className=" flex  flex-row items-center justify-center gap-6 text-sm">
             <Anchor
               href={
-                pathname.split("/")[1] != "" ? "/#destination" : "#destination"
+                pathname.split("/").includes("aff")
+                  ? "#destination"
+                  : pathname !== "/"
+                  ? "/#destination"
+                  : "#destination"
               }
             >
               {t("navbar_destination")}
             </Anchor>
             <Anchor
-              href={pathname.split("/")[1] != "" ? "/#payment" : "#payment"}
+              href={
+                pathname.split("/").includes("aff")
+                  ? "#payment"
+                  : pathname !== "/"
+                  ? "/#payment"
+                  : "#payment"
+              }
             >
               {t("navbar_payment")}
             </Anchor>
-            <Anchor href={pathname.split("/")[1] != "" ? "/" : "#how-it-works"}>
+            <Anchor
+              href={
+                pathname.split("/").includes("aff")
+                  ? "#how-it-works"
+                  : pathname !== "/"
+                  ? "/#how-it-works"
+                  : "#how-it-works"
+              }
+            >
               {t("navbar_howItWorks")}
             </Anchor>
           </div>

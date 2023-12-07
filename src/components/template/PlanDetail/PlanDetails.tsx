@@ -114,13 +114,11 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
       )
       .map((planDuration: any) => ({
         label: planDuration.duration_in_days + " Day(s)",
-        value: planDuration.duration_in_days + " Day(s)",
+        value: planDuration.duration_in_days,
       }));
 
     return result ?? [];
   }, [data, parameter]);
-
-  console.log({ parameter });
 
   return (
     <div className="sm:relative">
@@ -201,6 +199,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
                 name="dataType"
                 title={t("planDetail_selectDataTitle")}
                 data={getPlanDataType()}
+                // data={[{ label: "Roaming", value: "Roaming" }]}
               />
               <RadioPlan
                 name="data"
