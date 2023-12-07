@@ -84,7 +84,7 @@ export default function SupportedCountryModal() {
                     >
                         <X className="text-white"/>
                     </button>
-                    <div className="w-full text-white text-2xl font-semibold sm:font-medium leading-loose sm:leading-[30px]">Supported country {globalCode}{temp["US"]}</div>
+                    <div className="w-full text-white text-2xl font-semibold sm:font-medium leading-loose sm:leading-[30px]">Supported country</div>
                     <TextInput
                         icon={Search}
                         placeholder="Search destination"
