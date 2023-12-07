@@ -22,7 +22,7 @@ import { useRouter } from "next/router";
 import GlobeIcon from "@/components/atoms/SVG/GlobeIcon";
 
 const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
-  const { openSupportedCountry, setOpenSupportedCountry } = useModalStore();
+  const { openSupportedCountry, globalCode, setOpenSupportedCountry, setGlobalCode } = useModalStore();
   const {
     data,
     isLoading,
@@ -89,7 +89,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     AU_NZ: "Australia/New Zealand",
   };
 
-  const globalCodes = ["WW", "AP", "EU", "US_CA", "GU_MP", "HK_MO", "AU_NZ"];
+  const globalCodes = ["WW_146", "WW_54", "AP", "EU_42", "EU_33", "US_CA", "GU_MP", "HK_MO", "AU_NZ"];
 
   const i: any = {
     CN: "China",
@@ -101,7 +101,13 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
   };
 
   const countryName = z[country_code];
-  console.log(data);
+  
+  
+  useEffect(()=>{
+    if(globalCodes.includes(country_code)){
+      setGlobalCode(country_code)
+    }
+  }, [globalCode, country_code])
 
   return (
     <div className="sm:relative">
@@ -165,7 +171,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
             <Text as="small" className="font-medium text-gray-400">
               {t("planDetail_detailDesc")}
             </Text>
-            {globalCodes.includes(params.slug) && (
+            {globalCodes.includes(country_code) && (
               <button
                 type="button"
                 onClick={() => {

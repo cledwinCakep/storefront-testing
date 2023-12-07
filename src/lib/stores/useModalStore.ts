@@ -10,7 +10,7 @@ interface ModalStoreProps {
 
 export const useModalStore = create<ModalStoreProps>((set) => ({
   openSupportedCountry: false,
-  globalCode: "WW",
+  globalCode: "WW_146",
   setOpenSupportedCountry: (openSupportedCountry) => set({ openSupportedCountry }),
   setGlobalCode: (globalCode) => set({ globalCode }),
 }));

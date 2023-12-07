@@ -5,30 +5,44 @@ import { useModalStore } from "@/lib/stores/useModalStore";
 import { Search } from "react-feather";
 import { TextInput } from "@tremor/react";
 import Image from "next/image"
+import { globalData } from "@/lib/utils/globalData";
 
 export default function SupportedCountryModal() {
-  const { openSupportedCountry, setOpenSupportedCountry } = useModalStore();
+  const { openSupportedCountry, globalCode, setOpenSupportedCountry } = useModalStore();
   const [selectedOption, setSelectedOption] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [country, setCountry] = useState()
+
+  interface CountryData {
+    [key: string]: string;
+  }
 
   const handleSelectChange = (selectedOption:any) => {
     setSelectedOption(selectedOption);
   };
 
-  const cancelButtonRef = useRef(null);
+  let temp:CountryData;
+  if(globalCode=="WW_146") temp = globalData["WW_146"]
+  else if(globalCode=="WW_54") temp = globalData["WW_54"]
+  else if(globalCode=="AP") temp = globalData["AP"]
+  else if(globalCode=="EU_42") temp = globalData["EU_42"]
+  else if(globalCode=="EU_33") temp = globalData["EU_33"]
+  else if(globalCode=="AU_NZ") temp = globalData["AU_NZ"]
+  else if(globalCode=="US_CA") temp = globalData["US_CA"]
+  else if(globalCode=="HK_MO") temp = globalData["HK_MO"]
+  else if(globalCode=="GU_MP") temp = globalData["GU_MP"]
+  else temp = globalData["WW_146"]
 
-  const data = [
-    { img: 'https://via.placeholder.com/40x26', country: 'Singapore' },
-    { img: 'https://via.placeholder.com/40x26', country: 'Japan' },
-    { img: 'https://via.placeholder.com/40x26', country: 'Indonesia' },
-  ];
+  const dataArray = Object.entries(temp).map(([key, name]) => {
+    return { key, name };
+  });
 
   const handleInputChange = (e:any) => {
     setSearchTerm(e.target.value);
   }
 
-  const filteredCountries = data.filter(destination =>
-    destination.country.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredCountries = dataArray.filter(destination =>
+    destination.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -36,7 +50,6 @@ export default function SupportedCountryModal() {
       <Dialog
         as="div"
         className="absolute z-50"
-        initialFocus={cancelButtonRef}
         onClose={setOpenSupportedCountry}
       >
         <Transition.Child
@@ -71,7 +84,7 @@ export default function SupportedCountryModal() {
                     >
                         <X className="text-white"/>
                     </button>
-                    <div className="w-full text-white text-2xl font-semibold sm:font-medium leading-loose sm:leading-[30px]">Supported country</div>
+                    <div className="w-full text-white text-2xl font-semibold sm:font-medium leading-loose sm:leading-[30px]">Supported country {globalCode}{temp["US"]}</div>
                     <TextInput
                         icon={Search}
                         placeholder="Search destination"
@@ -83,9 +96,16 @@ export default function SupportedCountryModal() {
                     {filteredCountries.map((destination, index) => (
                         <div key={index} className="w-full px-5 py-4 bg-neutral-900 rounded-lg shadow justify-start items-center inline-flex">
                             <div className="grow shrink basis-0 justify-start items-center gap-4 flex">
-                                <img className="w-10 h-[26px] relative rounded border border-zinc-100" src={destination.img} />
+                                {/* <img className="w-10 h-[26px] relative rounded border border-zinc-100" src={destination.img} /> */}
+                                <Image
+                                  src={`/flag/${destination.key}.png`}
+                                  width={40}
+                                  height={26}
+                                  alt={destination.name}
+                                  className="rounded border border-zinc-100"
+                                />
                                 <div className="grow shrink basis-0 flex-col justify-center items-start gap-4 inline-flex">
-                                    <div className="self-stretch text-stone-50 text-base font-semibold leading-normal">{destination.country}</div>
+                                    <div className="self-stretch text-stone-50 text-base font-semibold leading-normal">{destination.name}</div>
                                 </div>
                             </div>
                         </div>
