@@ -23,8 +23,6 @@ const NavbarDesktop = ({ params }: { params: { locale: string } }) => {
   const [isOpen, setOpen] = useState(false);
   const pathname = usePathname();
 
-  console.log({ pathname: pathname.split("/")[1] });
-
   function handleChangeLanguage() {
     setOpen(!isOpen);
   }

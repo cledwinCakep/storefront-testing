@@ -39,10 +39,6 @@ const RadioPlan = ({ title, name, data }: RadioPlanProps) => {
     selectDataPlan(e.target.name, e.target.value);
   };
 
-  console.log({
-    curr: currentSelected[name as keyof currentSelectedProps].value,
-  });
-
   return (
     <div>
       <div className="mb-5 flex gap-x-3">
