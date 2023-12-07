@@ -40,6 +40,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     currentSelected,
     handleBuy,
     country,
+    isError,
   } = usePlanContext();
 
   const t = useTranslations("PlanDetail");
@@ -160,6 +161,8 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     return result ?? [];
   }, [data, parameter]);
 
+  console.log({ parameter });
+
   return (
     <div className="sm:relative">
       {countryName ? (
@@ -260,7 +263,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
 
               <RadioPlan
                 name="dataType"
-                title={t("planDetail_selectDataTitle")}
+                title="Select Type:"
                 data={getPlanDataType()}
                 // data={[{ label: "Roaming", value: "Roaming" }]}
               />
@@ -460,6 +463,15 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
             >
               {t("planDetail_buyButton")}
             </Button>
+            {isError ? (
+              !parameter.data || !parameter.duration || !parameter.dataType ? (
+                <Text className="mt-2 text-red-500">
+                  Please select {!parameter.dataType ? "type," : ""}{" "}
+                  {!parameter.data ? "data," : ""} and{" "}
+                  {!parameter.duration ? "duration" : ""}.
+                </Text>
+              ) : null
+            ) : null}
           </div>
         </div>
       </Layout>

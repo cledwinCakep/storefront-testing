@@ -37,6 +37,7 @@ export interface currentSelectedProps {
 export interface PlanHooks {
   data: DataPlan;
   isLoading: boolean;
+  isError: boolean;
   selectDataPlan: (options: string, value: string) => void;
   parameter: any;
   currentSelected: currentSelectedProps;

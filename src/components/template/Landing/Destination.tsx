@@ -48,9 +48,7 @@ const Partners = () => {
   };
 
   const handleClickCountry = (name: string) => () => {
-    router.push(
-      `/plans/${name}?plan=UNLIMITED&dataType=Roaming&data=500MB&duration=1`
-    );
+    router.push(`/plans/${name}?plan=UNLIMITED&dataType=&data=&duration=`);
   };
 
   useEffect(() => {
