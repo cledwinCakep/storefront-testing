@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 //Component
 import Navbar from "@/components/organisms/Navbar/Navbar";
@@ -12,11 +13,12 @@ import Advantage from "@/components/template/Landing/Advantage";
 import Hero from "@/components/template/Landing/Hero";
 
 export default function Home({ params }: { params: { locale: string } }) {
-  useEffect(() => {
-    if (localStorage.getItem("affiliate_code")) {
-      localStorage.removeItem("affiliate_code");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (localStorage.getItem("affiliate_code")) {
+  //     localStorage.removeItem("affiliate_code");
+  //   }
+  // }, []);
+
   return (
     <>
       <Navbar params={params} />

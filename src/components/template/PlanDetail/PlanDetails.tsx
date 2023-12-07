@@ -16,6 +16,7 @@ import RadioPlan from "@/components/molecules/RadioPlan/RadioPlan";
 import { usePlanContext } from "@/lib/context/plan";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
+import { useCallback } from "react";
 
 const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
   const {
@@ -85,6 +86,42 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
 
   const countryName = z[country_code];
   console.log(data);
+
+  const getPlanDataType = useCallback(() => {
+    const planArr: any[][] = Object.values(data[parameter.plan] ?? []);
+
+    const dataTypeArr = planArr.flatMap((type) =>
+      type.map((type) => type.plan_type)
+    );
+
+    const capitalizeSetValue = (text: string) => {
+      return (
+        String(text).charAt(0).toUpperCase() +
+        String(text).toLocaleLowerCase().substring(1)
+      );
+    };
+
+    return Array.from(new Set(dataTypeArr), (value) => ({
+      label: capitalizeSetValue(value),
+      value: capitalizeSetValue(value),
+    }));
+  }, [data, parameter]);
+
+  const getPlanDuration = useCallback(() => {
+    const planArr: any = data[parameter.plan] ?? [];
+
+    const result = planArr[parameter.data]
+      ?.filter(
+        (planDuration: any) =>
+          planDuration.plan_type === parameter.dataType.toLocaleUpperCase()
+      )
+      .map((planDuration: any) => ({
+        label: planDuration.duration_in_days + " Day(s)",
+        value: planDuration.duration_in_days,
+      }));
+
+    return result ?? [];
+  }, [data, parameter]);
 
   return (
     <div className="sm:relative">
@@ -163,24 +200,31 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
               />
 
               <RadioPlan
+                name="dataType"
+                title={t("planDetail_selectDataTitle")}
+                data={getPlanDataType()}
+                // data={[{ label: "Roaming", value: "Roaming" }]}
+              />
+              <RadioPlan
                 name="data"
                 title={t("planDetail_selectDataTitle")}
                 data={Object.keys(data[parameter.plan]).map((key, index) => ({
-                  label: `${key}/day`,
+                  label: parameter.plan === "QUOTA" ? key : `${key}/day`,
                   value: key, // Generate a value based on the label
                 }))}
               />
               <RadioPlan
                 name="duration"
                 title={t("planDetail_selectDurationTitle")}
-                data={Object.values(
-                  data[parameter.plan][parameter.data]
-                    ? data[parameter.plan][parameter.data]
-                    : data[parameter.plan]["15GB"]
-                ).map((key: any) => ({
-                  label: `${key["duration_in_days"]} Day(s)`,
-                  value: `${key["duration_in_days"]}`,
-                }))}
+                // data={Object.values(
+                //   data[parameter.plan][parameter.data]
+                //     ? data[parameter.plan][parameter.data]
+                //     : data[parameter.plan]["15GB"]
+                // ).map((key: any) => ({
+                //   label: `${key["duration_in_days"]} Day(s)`,
+                //   value: `${key["duration_in_days"]}`,
+                // }))}
+                data={getPlanDuration()}
               />
             </>
           )}

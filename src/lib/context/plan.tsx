@@ -28,6 +28,7 @@ type DurationType = {
 };
 
 export interface currentSelectedProps {
+  dataType: { id: string; value: string };
   plan: PlanType;
   data: DataType;
   duration: DurationType;

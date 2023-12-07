@@ -94,7 +94,6 @@ export default function Checkout({ params }: { params: { locale: string } }) {
   }, []);
 
   const handlePayment = () => {
-    const id = retrievedData!["id"];
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     // if( emailRegex.test(email!)) return
 
@@ -107,6 +106,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
     }
 
     setIsOpen(true);
+    window.history.pushState({}, "Home", "/");
   };
 
   function handleInputEmail(e: React.ChangeEvent<HTMLInputElement>) {
@@ -115,6 +115,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
 
     setEmailError(""); // Clear the error message if the input is not empty
   }
+
   function handleOrder(method: string) {
     let temp = order;
 
@@ -145,11 +146,13 @@ export default function Checkout({ params }: { params: { locale: string } }) {
   }
 
   const createOrder = (data: CreateOrderData, actions: CreateOrderActions) => {
+    const id = retrievedData!["id"];
+
     return payPalApi.createOrder({
-      esim_id: 426,
-      quantity: 1,
-      email: "dwiprasetya@cakeplabs.com",
-      user_code: null,
+      esim_id: id,
+      quantity: order,
+      email: email,
+      user_code: code,
     });
   };
 

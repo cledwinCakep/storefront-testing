@@ -20,7 +20,7 @@ export default function Status({ params }: { params: { locale: string } }) {
   // }, []);
 
   useEffect(() => {
-    if (window) {
+    if (typeof window !== undefined) {
       localStorage.removeItem("order");
       localStorage.removeItem("buy");
     }

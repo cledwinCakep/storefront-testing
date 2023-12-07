@@ -36,8 +36,12 @@ const RadioPlan = ({ title, name, data }: RadioPlanProps) => {
     };
 
     setCurrentSelect(temp);
-    selectDataPlan(label, e.target.value);
+    selectDataPlan(e.target.name, e.target.value);
   };
+
+  console.log({
+    curr: currentSelected[name as keyof currentSelectedProps].value,
+  });
 
   return (
     <div>
@@ -54,11 +58,12 @@ const RadioPlan = ({ title, name, data }: RadioPlanProps) => {
       <div className="no-scrollbar flex gap-x-4 overflow-scroll sm:max-w-[559px] sm:flex-wrap sm:gap-y-4">
         {data.map((data) => (
           <Radio
+            isDisabled={data.label === "Local"}
             current={currentSelected[name as keyof currentSelectedProps].value}
             key={data.label}
             name={name}
             label={data.label}
-            value={data.value}
+            value={String(data.value)}
             onChange={(e) => handleSelectRadio(data.label, name, e)}
           />
         ))}
