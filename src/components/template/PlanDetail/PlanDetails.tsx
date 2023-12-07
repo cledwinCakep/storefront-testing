@@ -1,6 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import { useState, useEffect, useRef, Fragment } from "react";
+import { ChevronRight } from "react-feather";
+import { useModalStore } from "@/lib/stores/useModalStore";
 
 // atoms
 import Text from "@/components/atoms/Text/Text";
@@ -17,8 +20,15 @@ import { usePlanContext } from "@/lib/context/plan";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import { useCallback } from "react";
+import GlobeIcon from "@/components/atoms/SVG/GlobeIcon";
 
 const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
+  const {
+    openSupportedCountry,
+    globalCode,
+    setOpenSupportedCountry,
+    setGlobalCode,
+  } = useModalStore();
   const {
     data,
     isLoading,
@@ -31,6 +41,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     handleBuy,
     country,
   } = usePlanContext();
+
   const t = useTranslations("PlanDetail");
   const router = location.pathname;
   const country_code = router.split("/")[2];
@@ -39,7 +50,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     WW_146: "Global 146 Countries",
     WW_54: "Global 54 Countries",
     KH: "Cambodia",
-    US_CA: "United States Canada",
+    US_CA: "United States/Canada",
     AE: "United Arab Emirates",
     QA: "Qatar",
     SA: "Saudi Arabia",
@@ -61,7 +72,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     JP: "Japan",
     TW: "Taiwan",
     MO: "Macau",
-    GU_MP: "Guam Saipan",
+    GU_MP: "Guam/Saipan",
     DE: "Germany",
     FR: "France",
     ES: "Spain",
@@ -76,16 +87,42 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     EU_33: "33 European Countries",
     ID: "Indonesia",
     VN: "Vietnam",
-    HK: "Hongkong",
-    HK_MO: "Hongkong Macau",
+    HK: "Hong Kong",
+    HK_MO: "Hong Kong/Macau",
     MN: "Mongolia",
-    KR: "South Korea",
+    KR: "Korea",
     CA: "Canada",
-    AU_NZ: "Australia New Zealand",
+    AU_NZ: "Australia/New Zealand",
+  };
+
+  const globalCodes = [
+    "WW_146",
+    "WW_54",
+    "AP",
+    "EU_42",
+    "EU_33",
+    "US_CA",
+    "GU_MP",
+    "HK_MO",
+    "AU_NZ",
+  ];
+
+  const i: any = {
+    CN: "China",
+    SG: "Singapore",
+    MY: "Malaysia",
+    TH: "Thailand",
+    JP: "Japan",
+    KR: "Korea",
   };
 
   const countryName = z[country_code];
-  console.log(data);
+
+  useEffect(() => {
+    if (globalCodes.includes(country_code)) {
+      setGlobalCode(country_code);
+    }
+  }, [globalCode, country_code]);
 
   const getPlanDataType = useCallback(() => {
     const planArr: any[][] = Object.values(data[parameter.plan] ?? []);
@@ -185,6 +222,28 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
             <Text as="small" className="font-medium text-gray-400">
               {t("planDetail_detailDesc")}
             </Text>
+            {globalCodes.includes(country_code) && (
+              <button
+                type="button"
+                onClick={() => {
+                  setOpenSupportedCountry(!openSupportedCountry);
+                }}
+                className="mt-5 inline-flex w-full items-center justify-start gap-2 rounded-lg bg-neutral-900 px-2 py-2 shadow sm:mt-6 sm:w-fit"
+              >
+                <div className="flex w-full items-center justify-between gap-2">
+                  <div className="flex items-center justify-start gap-2">
+                    <GlobeIcon className="h-6 w-6" />
+                    <div className="inline-flex flex-col items-start justify-center gap-4">
+                      <div className="self-stretch text-base font-normal leading-7 text-stone-50">
+                        Supported country
+                      </div>
+                    </div>
+                  </div>
+
+                  <ChevronRight className="text-stone-50" />
+                </div>
+              </button>
+            )}
           </div>
 
           {!isLoading && (
