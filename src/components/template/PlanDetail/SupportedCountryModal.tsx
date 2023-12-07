@@ -73,11 +73,9 @@ export default function SupportedCountryModal() {
 
   useEffect(() => {
     return () => {
-      setSearchTerm('');
-      setCountry('');
-      setVisible(false);
+      setOpenSupportedCountry(false)
     };
-  }, [openSupportedCountry]);
+  }, []);
 
   return (
     <Transition.Root show={openSupportedCountry} as={Fragment}>
