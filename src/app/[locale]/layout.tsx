@@ -15,6 +15,8 @@ export async function generateStaticParams() {
   return ["en"].map((locale) => ({ locale }));
 }
 
+let cache: { [key: string]: typeof en } = {};
+
 const dictionaries: {
   [key: string]: typeof en;
 } = {
@@ -22,12 +24,16 @@ const dictionaries: {
 };
 
 function getMessages(locale: string) {
+  if (cache[locale]) {
+    return cache[locale];
+  }
+
   try {
     const messages = dictionaries[locale];
     if (messages) {
+      cache[locale] = messages;
       return messages;
     } else {
-      console.log(`Locale '${locale}' not found in dictionaries.`);
       redirect("/"); // Return an empty object or handle the missing locale as needed.
     }
   } catch (error) {
@@ -85,8 +91,7 @@ export default function RootLayout({
           options={{
             // disableFunding: ["credit", "card"],
             currency: "USD",
-            clientId:
-              "AWxV0e0JdVy-elqSzzmza_PuRd3A6lqKztayVoVORTGfkjsiGvmXFYptYFaJeTLAtYKb-uy8xieyerKs",
+            clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID!,
           }}
         >
           <NextIntlClientProvider locale={"en"} messages={messages}>
