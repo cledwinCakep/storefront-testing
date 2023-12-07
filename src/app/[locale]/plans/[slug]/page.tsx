@@ -26,6 +26,57 @@ const PlanDetail = ({ params }: { params: any }) => {
   const planHook = usePlanHook(params);
   const t = useTranslations("PlanDetail");
 
+  const z: any = {
+    WW_146: "Global 146 Countries",
+    WW_54: "Global 54 Countries",
+    KH: "Cambodia",
+    US_CA: "United States/Canada",
+    AE: "United Arab Emirates",
+    QA: "Qatar",
+    SA: "Saudi Arabia",
+    IN: "India",
+    MX: "Mexico",
+    AR: "Argentina",
+    BR: "Brazil",
+    NP: "Nepal",
+    ZA: "South Africa",
+    AU: "Australia",
+    GU: "Guam",
+    AP: "13 Asian Countries",
+    CN: "China",
+    PH: "Philippines",
+    US: "United States",
+    MY: "Malaysia",
+    SG: "Singapore",
+    TH: "Thailand",
+    JP: "Japan",
+    TW: "Taiwan",
+    MO: "Macau",
+    GU_MP: "Guam/Saipan",
+    DE: "Germany",
+    FR: "France",
+    ES: "Spain",
+    GB: "United Kingdom",
+    PT: "Portugal",
+    IT: "Italy",
+    IE: "Ireland",
+    SE: "Sweden",
+    DK: "Denmark",
+    AT: "Austria",
+    EU_42: "42 European Countries",
+    EU_33: "33 European Countries",
+    ID: "Indonesia",
+    VN: "Vietnam",
+    HK: "Hong Kong",
+    HK_MO: "Hong Kong/Macau",
+    MN: "Mongolia",
+    KR: "Korea",
+    CA: "Canada",
+    AU_NZ: "Australia/New Zealand",
+  };
+
+  const countryName = z[params.slug];
+
   return (
     <PlanContext.Provider value={planHook}>
       <div className="relative space-y-6 pb-[139px] sm:pb-0 ">
@@ -40,7 +91,7 @@ const PlanDetail = ({ params }: { params: any }) => {
               </BreadcrumbItem>
 
               <BreadcrumbItem isCurrentlyActive>
-                {capitalizeSentences(params.slug)}
+                {capitalizeSentences(countryName)}
               </BreadcrumbItem>
             </Breadcrumb>
           </Layout>
