@@ -1,6 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import { useState, useEffect, useRef, Fragment } from "react";
+import { ChevronRight } from "react-feather";
+import { useModalStore } from "@/lib/stores/useModalStore";
 
 // atoms
 import Text from "@/components/atoms/Text/Text";
@@ -16,8 +19,16 @@ import RadioPlan from "@/components/molecules/RadioPlan/RadioPlan";
 import { usePlanContext } from "@/lib/context/plan";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
+import { useCallback } from "react";
+import GlobeIcon from "@/components/atoms/SVG/GlobeIcon";
 
 const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
+  const {
+    openSupportedCountry,
+    globalCode,
+    setOpenSupportedCountry,
+    setGlobalCode,
+  } = useModalStore();
   const {
     data,
     isLoading,
@@ -29,10 +40,73 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     currentSelected,
     handleBuy,
     country,
+    isError,
   } = usePlanContext();
+
   const t = useTranslations("PlanDetail");
   const router = location.pathname;
   const country_code = router.split("/")[2];
+
+  const z: any = {
+    WW_146: "Global 146 Countries",
+    WW_54: "Global 54 Countries",
+    KH: "Cambodia",
+    US_CA: "United States/Canada",
+    AE: "United Arab Emirates",
+    QA: "Qatar",
+    SA: "Saudi Arabia",
+    IN: "India",
+    MX: "Mexico",
+    AR: "Argentina",
+    BR: "Brazil",
+    NP: "Nepal",
+    ZA: "South Africa",
+    AU: "Australia",
+    GU: "Guam",
+    AP: "13 Asian Countries",
+    CN: "China",
+    PH: "Philippines",
+    US: "United States",
+    MY: "Malaysia",
+    SG: "Singapore",
+    TH: "Thailand",
+    JP: "Japan",
+    TW: "Taiwan",
+    MO: "Macau",
+    GU_MP: "Guam/Saipan",
+    DE: "Germany",
+    FR: "France",
+    ES: "Spain",
+    GB: "United Kingdom",
+    PT: "Portugal",
+    IT: "Italy",
+    IE: "Ireland",
+    SE: "Sweden",
+    DK: "Denmark",
+    AT: "Austria",
+    EU_42: "42 European Countries",
+    EU_33: "33 European Countries",
+    ID: "Indonesia",
+    VN: "Vietnam",
+    HK: "Hong Kong",
+    HK_MO: "Hong Kong/Macau",
+    MN: "Mongolia",
+    KR: "Korea",
+    CA: "Canada",
+    AU_NZ: "Australia/New Zealand",
+  };
+
+  const globalCodes = [
+    "WW_146",
+    "WW_54",
+    "AP",
+    "EU_42",
+    "EU_33",
+    "US_CA",
+    "GU_MP",
+    "HK_MO",
+    "AU_NZ",
+  ];
 
   const i: any = {
     CN: "China",
@@ -43,15 +117,59 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     KR: "Korea",
   };
 
-  const countryName = i[country_code];
+  const countryName = z[country_code];
 
-  console.log(countryName);
+  useEffect(() => {
+    if (globalCodes.includes(country_code)) {
+      setGlobalCode(country_code);
+    }
+  }, [globalCode, country_code]);
+
+  const getPlanDataType = useCallback(() => {
+    const planArr: any[][] = Object.values(data[parameter.plan] ?? []);
+
+    const dataTypeArr = planArr.flatMap((type) =>
+      type.map((type) => type.plan_type)
+    );
+
+    const capitalizeSetValue = (text: string) => {
+      return (
+        String(text).charAt(0).toUpperCase() +
+        String(text).toLocaleLowerCase().substring(1)
+      );
+    };
+
+    return Array.from(new Set(dataTypeArr), (value) => ({
+      label: capitalizeSetValue(value),
+      value: capitalizeSetValue(value),
+    }));
+  }, [data, parameter]);
+
+  const getPlanDuration = useCallback(() => {
+    const planArr: any = data[parameter.plan] ?? [];
+
+    const result = planArr[parameter.data]
+      ?.filter(
+        (planDuration: any) =>
+          planDuration.plan_type === parameter.dataType.toLocaleUpperCase()
+      )
+      .map((planDuration: any) => ({
+        label: planDuration.duration_in_days + " Day(s)",
+        value: planDuration.duration_in_days,
+      }));
+
+    return result ?? [];
+  }, [data, parameter]);
+
+  console.log({ parameter });
 
   return (
     <div className="sm:relative">
       {countryName ? (
         <Image
-          src={`/${countryName.toLowerCase()}_plan.png`}
+          src={`/destination/${countryName
+            .toLowerCase()
+            .replace(/\//g, " ")}.png`}
           alt={countryName.toLowerCase()}
           width={600}
           height={280}
@@ -63,7 +181,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
         />
       ) : (
         <Image
-          src={``}
+          src={"/default_destination.png"}
           alt={"country.png"}
           width={600}
           height={280}
@@ -78,7 +196,9 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
         <div className="relative hidden h-full w-full  border-gray-300 sm:col-span-2 sm:col-start-1 sm:block md:col-span-1 md:col-start-1 md:row-start-1 md:h-[430px] md:w-full">
           {countryName ? (
             <Image
-              src={`/${countryName.toLowerCase()}_plan.png`}
+              src={`/destination/${countryName
+                .toLowerCase()
+                .replace(/\//g, " ")}.png`}
               alt={countryName.toLowerCase()}
               priority
               fill
@@ -89,15 +209,14 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
             />
           ) : (
             <Image
-              src={``}
+              src={"/default_destination.png"}
               alt={"country.png"}
-              width={600}
-              height={280}
-              className="max-h-[280px] sm:hidden"
+              priority
+              fill
               style={{
                 objectFit: "cover",
               }}
-              priority
+              className="rounded-3xl"
             />
           )}
         </div>
@@ -110,6 +229,28 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
             <Text as="small" className="font-medium text-gray-400">
               {t("planDetail_detailDesc")}
             </Text>
+            {globalCodes.includes(country_code) && (
+              <button
+                type="button"
+                onClick={() => {
+                  setOpenSupportedCountry(!openSupportedCountry);
+                }}
+                className="mt-5 inline-flex w-full items-center justify-start gap-2 rounded-lg bg-neutral-900 px-2 py-2 shadow sm:mt-6 sm:w-fit"
+              >
+                <div className="flex w-full items-center justify-between gap-2">
+                  <div className="flex items-center justify-start gap-2">
+                    <GlobeIcon className="h-6 w-6" />
+                    <div className="inline-flex flex-col items-start justify-center gap-4">
+                      <div className="self-stretch text-base font-normal leading-7 text-stone-50">
+                        Supported country
+                      </div>
+                    </div>
+                  </div>
+
+                  <ChevronRight className="text-stone-50" />
+                </div>
+              </button>
+            )}
           </div>
 
           {!isLoading && (
@@ -123,25 +264,33 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
                   value: key, // Generate a value based on the label
                 }))}
               />
+
+              <RadioPlan
+                name="dataType"
+                title="Select Type:"
+                data={getPlanDataType()}
+                // data={[{ label: "Roaming", value: "Roaming" }]}
+              />
               <RadioPlan
                 name="data"
                 title={t("planDetail_selectDataTitle")}
                 data={Object.keys(data[parameter.plan]).map((key, index) => ({
-                  label: `${key}/day`,
+                  label: parameter.plan === "QUOTA" ? key : `${key}/day`,
                   value: key, // Generate a value based on the label
                 }))}
               />
               <RadioPlan
                 name="duration"
                 title={t("planDetail_selectDurationTitle")}
-                data={Object.values(
-                  data[parameter.plan][parameter.data]
-                    ? data[parameter.plan][parameter.data]
-                    : data[parameter.plan]["15GB"]
-                ).map((key: any) => ({
-                  label: `${key["duration_in_days"]} Day(s)`,
-                  value: `${key["duration_in_days"]}`, // Generate a value based on the label
-                }))}
+                // data={Object.values(
+                //   data[parameter.plan][parameter.data]
+                //     ? data[parameter.plan][parameter.data]
+                //     : data[parameter.plan]["15GB"]
+                // ).map((key: any) => ({
+                //   label: `${key["duration_in_days"]} Day(s)`,
+                //   value: `${key["duration_in_days"]}`,
+                // }))}
+                data={getPlanDuration()}
               />
             </>
           )}
@@ -297,9 +446,9 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
                   Subtotal
                 </Text>
                 <Text as="body1" className="text-xl font-black text-[#F9F9F9]">
-                  {subtotal.toLocaleString("id-ID", {
+                  {subtotal.toLocaleString("en-US", {
                     style: "currency",
-                    currency: "IDR",
+                    currency: "USD",
                   })}
                 </Text>
               </div>
@@ -318,6 +467,15 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
             >
               {t("planDetail_buyButton")}
             </Button>
+            {isError ? (
+              !parameter.data || !parameter.duration || !parameter.dataType ? (
+                <Text className="mt-2 text-red-500">
+                  Please select {!parameter.dataType ? "type," : ""}{" "}
+                  {!parameter.data ? "data," : ""} and{" "}
+                  {!parameter.duration ? "duration" : ""}.
+                </Text>
+              ) : null
+            ) : null}
           </div>
         </div>
       </Layout>

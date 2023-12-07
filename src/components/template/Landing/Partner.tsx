@@ -9,17 +9,24 @@ import { useTranslations } from "next-intl";
 const Partners = () => {
   const t = useTranslations("Homepage");
   return (
-    <div className="h-full bg-[#121417]" id="payment">
-      <Layout className="flex flex-col items-center justify-center gap-12 py-14">
-        <Text
-          as="subHeading1"
-          className="text-center font-medium leading-[32px] text-gray-100 "
-        >
-          {t("hero_paymentMethodTitle")}
-        </Text>
+    <div className="bg-black pt-[86px]" id="payment">
+      <div className="h-full bg-[#121417]">
+        <Layout className="flex flex-col items-center justify-center gap-10 py-14">
+          <Text
+            as="subHeading1"
+            className="text-center font-medium leading-[32px] text-gray-100 "
+          >
+            {t("hero_paymentMethodTitle")}
+          </Text>
 
-        <Partnerbanner width={100} height={48} spacing={10} justify="center" />
-      </Layout>
+          <Partnerbanner
+            width={100}
+            height={48}
+            spacing={10}
+            justify="center"
+          />
+        </Layout>
+      </div>
     </div>
   );
 };

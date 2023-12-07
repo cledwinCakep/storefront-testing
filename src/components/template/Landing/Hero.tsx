@@ -14,17 +14,17 @@ const Partners = () => {
   const t = useTranslations("Homepage");
   return (
     <Layout>
-      <div className="mt-[80px] flex h-full w-full flex-col items-center justify-between gap-14 py-10 sm:py-0 lg:mt-0 lg:h-screen lg:flex-row ">
-        <div className="flex max-w-[600px] flex-col items-center justify-center gap-[40px] md:items-start ">
+      <div className="mb-10 mt-[118px] flex h-full w-full flex-col items-center justify-between gap-14 sm:py-0 lg:mt-0 lg:h-screen lg:flex-row ">
+        <div className="flex max-w-[600px] flex-col items-center justify-center lg:items-start ">
           <Text
             as="h1"
-            className="text-center text-[2.75rem] font-bold leading-[72px] text-gray-100 sm:text-start md:text-[56px]"
+            className="mb-4 text-center text-[49px] font-bold leading-[53px] text-gray-100 md:text-[54px] md:leading-[72px] lg:text-start"
           >
             {t("hero_heroTitle")}
           </Text>
           <Text
             as="body1"
-            className="font-regular text-center leading-[24px] text-[#BDBDBD] sm:text-start md:text-xl"
+            className="font-regular mb-12 text-center leading-[24px] text-[#BDBDBD] sm:text-start md:text-lg"
           >
             {t("hero_heroDesc")}
           </Text>
@@ -41,10 +41,10 @@ const Partners = () => {
         </div>
         <Image
           className=""
-          src="/esim_3d_superalink-min.png"
+          src="/3d_esim.jpg"
           alt="Hero Illust"
-          width={480}
-          height={480}
+          width={340}
+          height={340}
           priority
         />
       </div>

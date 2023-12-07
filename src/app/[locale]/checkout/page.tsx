@@ -1,5 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { payPalApi } from "@/lib/api/PayPalApi";
+import { Dialog } from "@headlessui/react";
+import { X } from "react-feather";
 
 //Component
 import Navbar from "@/components/organisms/Navbar/Navbar";
@@ -13,13 +16,29 @@ import CheckoutCard from "@/components/molecules/CheckoutCard/CheckoutCard";
 import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
 
 // utils
-import Itemcarrier from "@/components/icons/Itemcarrier";
+// import Itemcarrier from "@/components/icons/Itemcarrier";
 import Button from "@/components/atoms/Button/Button";
 import Box from "@/components/icons/Box";
-import { utilityApi } from "@/lib/api/GetApi";
+// import { utilityApi } from "@/lib/api/GetApi";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
-import Divider from "@/components/atoms/Divider/Divider";
+// import Divider from "@/components/atoms/Divider/Divider";
+import {
+  CreateOrderActions,
+  CreateOrderData,
+  OnApproveActions,
+  OnApproveData,
+} from "@paypal/paypal-js";
+import { PayPalButtons } from "@paypal/react-paypal-js";
+
+const i: any = {
+  CN: "CN",
+  SG: "SG",
+  MY: "MY",
+  TH: "TH",
+  JP: "JP",
+  KR: "KR",
+};
 
 export default function Checkout({ params }: { params: { locale: string } }) {
   const router = useRouter();
@@ -42,7 +61,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
     data_unit: "",
     duration_in_days: 0,
     id: 0,
-    idr_price: 0,
+    price_in_usd: 0,
     option_id: "",
     plan_option: "",
     updated_at: "",
@@ -52,10 +71,11 @@ export default function Checkout({ params }: { params: { locale: string } }) {
   const [order, setOrder] = useState<number>(1);
   const [email, setEmail] = useState<string>("");
   const [emailError, setEmailError] = useState("");
-
-  const code = localStorage.getItem("affiliate_code")
+  const [code, setCode] = useState<string>("");
 
   useEffect(() => {
+    const code = localStorage.getItem("affiliate_code") ?? "";
+    setCode(code);
     // Retrieve the JSON string from localStorage
     const storedData = localStorage.getItem("buy");
     let orderData = parseInt(localStorage.getItem("order")!);
@@ -67,14 +87,13 @@ export default function Checkout({ params }: { params: { locale: string } }) {
 
       setRetrievedData(parsedData);
       setOrder(orderData);
-      setSubtotal(orderData * parsedData["idr_price"]);
+      setSubtotal(orderData * parsedData["price_in_usd"]);
     }
 
     setIsLoading(false);
   }, []);
 
   const handlePayment = () => {
-    const id = retrievedData!["id"];
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     // if( emailRegex.test(email!)) return
 
@@ -86,24 +105,8 @@ export default function Checkout({ params }: { params: { locale: string } }) {
       return;
     }
 
-    if (email) {
-      let body = {
-        esim_id: id,
-        quantity: order,
-        email: email,
-        user_code: code,
-      };
-      utilityApi.postBuyesim(body).then((response) => {
-        // Handle the response here
-        // Remove "buy" item from localStorage
-        localStorage.removeItem("buy");
-
-        // Remove "order" item from localStorage
-        localStorage.removeItem("order");
-
-        window.location.href = response.data.invoice_url;
-      });
-    }
+    setIsOpen(true);
+    window.history.pushState({}, "Home", "/");
   };
 
   function handleInputEmail(e: React.ChangeEvent<HTMLInputElement>) {
@@ -112,6 +115,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
 
     setEmailError(""); // Clear the error message if the input is not empty
   }
+
   function handleOrder(method: string) {
     let temp = order;
 
@@ -122,7 +126,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
       temp = temp - 1;
       setOrder(temp);
     }
-    setSubtotal(temp * retrievedData!["idr_price"]);
+    setSubtotal(temp * retrievedData!["price_in_usd"]);
   }
 
   function handleDelete() {
@@ -134,136 +138,169 @@ export default function Checkout({ params }: { params: { locale: string } }) {
       data_unit: "",
       duration_in_days: 0,
       id: 0,
-      idr_price: 0,
+      price_in_usd: 0,
       option_id: "",
       plan_option: "",
       updated_at: "",
     });
   }
+
+  const createOrder = (data: CreateOrderData, actions: CreateOrderActions) => {
+    const id = retrievedData!["id"];
+
+    return payPalApi.createOrder({
+      esim_id: id,
+      quantity: order,
+      email: email,
+      user_code: code,
+    });
+  };
+
+  const onApprove = (data: OnApproveData, actions: OnApproveActions) => {
+    return payPalApi.onApprove({
+      orderId: data.orderID,
+      actions,
+    });
+  };
+
+  let [isOpen, setIsOpen] = React.useState(false);
+
   return (
     <>
-      {/* <Dialog
+      <Dialog
         open={isOpen}
         onClose={() => setIsOpen(false)}
         className="relative z-50 "
       >
         <div className="fixed inset-0 flex w-screen items-center justify-center bg-black/30 p-4">
-          <Dialog.Panel className="w-full max-w-[530px] rounded bg-white p-8">
-            <div className="flex flex-col gap-8">
-              <div className="flex h-full w-full flex-row gap-4">
-                <div className="h-[90px] w-[90px]">
-                  <Itemcarrier />
-                </div>
-                <div className="flex max-w-[360px] flex-col gap-6">
-                  <Text as="subHeading2" className="font-bold">
-                    Oops! Out of stocks
-                  </Text>
-
-                  <Text as="body2">
-                    {`We're sorry, but it appears that the plan eSIM you are looking for
-                is currently out of stock.`}
-                  </Text>
+          <Dialog.Panel className="max-h-[600px] w-full max-w-[480px] rounded-md bg-white p-6">
+            <div>
+              <div className="mb-8 flex flex-row justify-between">
+                <Text as="subHeading1" className="font-bold">
+                  {/* {t("Checkout")} */}
+                  Select Payment Method
+                </Text>
+                <div
+                  className=" h-8 w-8  hover:cursor-pointer"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <X />
                 </div>
               </div>
-              <div className="flex flex-row items-center justify-end gap-8">
-                <Text as="body2" className="md:text- text-blue-500">
-                  Back to home
+
+              <div className="max-h-[400px] overflow-y-auto">
+                <PayPalButtons
+                  createOrder={createOrder}
+                  onApprove={onApprove}
+                />
+              </div>
+            </div>
+          </Dialog.Panel>
+        </div>
+      </Dialog>
+
+      <Navbar params={params} />
+      <div className="flex h-screen flex-col">
+        <Layout className="mb-20 mt-20 flex h-fit w-full grow flex-col py-4 md:h-full">
+          {retrievedData.data_amount > 0 ? (
+            <Breadcrumb>
+              <BreadcrumbItem isHome />
+
+              <BreadcrumbItem href="/#destination">Destination</BreadcrumbItem>
+
+              <BreadcrumbItem
+                href={`/plans/${retrievedData.country_code}?plan=${retrievedData.plan_option}&data=${retrievedData.data_amount}${retrievedData.data_unit}&duration=${retrievedData.duration_in_days}`}
+              >
+                {retrievedData.country_name}
+              </BreadcrumbItem>
+
+              <BreadcrumbItem isCurrentlyActive>Checkout</BreadcrumbItem>
+            </Breadcrumb>
+          ) : (
+            <Breadcrumb>
+              <BreadcrumbItem isHome />
+
+              <BreadcrumbItem href="/#destination">Destination</BreadcrumbItem>
+
+              <BreadcrumbItem isCurrentlyActive>Checkout</BreadcrumbItem>
+            </Breadcrumb>
+          )}
+          <Text
+            as="h1"
+            className="mb-7 text-[26px] font-bold text-gray-100 sm:mb-14"
+          >
+            {t("checkout_checkoutTitle")}
+          </Text>
+          {!isLoading ? (
+            retrievedData.data_amount > 0 ? (
+              <div className="flex w-full flex-col items-center justify-center gap-10 md:flex-row md:items-start">
+                <div className="flex w-full flex-col">
+                  <Text as="subHeading2" className="font-bold text-gray-100">
+                    {t("checkout_purchasedItems")}
+                  </Text>
+                  <Purchaseinfo
+                    handleDelete={handleDelete}
+                    order={order}
+                    handleOrder={handleOrder}
+                    image={`/destination/${retrievedData.country_name
+                      .toLowerCase()
+                      .replace(/\//g, " ")}.png`}
+                    destination={`${retrievedData.country_name} eSim data plans`}
+                    packages={`${
+                      retrievedData!["plan_option"] == "UNLIMITED"
+                        ? "Daily Unlimited"
+                        : "Quota"
+                    }, ${
+                      retrievedData!["data_amount"] +
+                      retrievedData!["data_unit"]
+                    } , ${retrievedData!["duration_in_days"]} Day`}
+                    price={subtotal.toLocaleString("en-US", {
+                      style: "currency",
+                      currency: "USD",
+                    })}
+                  />
+                </div>
+                <CheckoutCard
+                  isEmpty={emailError}
+                  handlePayment={handlePayment}
+                  handleInputEmail={handleInputEmail}
+                  code={code}
+                />
+              </div>
+            ) : (
+              <div className="flex flex-col items-center justify-center">
+                <Box />
+                <Text as="body1" className="mb-3 mt-6 font-bold">
+                  {t("checkout_orderEmptyTitle")}
+                </Text>
+                <Text as="body2" className="mb-8 text-center text-gray-500">
+                  {t("checkout_orderEmptyDesc")}
                 </Text>
                 <Button
                   color="black"
                   size="sm"
-                  className="h-full w-[240px] md:max-h-[42px]"
+                  className="my-8 w-full max-w-[290px]"
+                  onClick={() => {
+                    router.push("/");
+                  }}
                 >
-                  Find other plan
+                  {t("checkout_findPlanButton")}
                 </Button>
               </div>
-            </div>
-          </Dialog.Panel> 
-        </div>
-      </Dialog>*/}
-      <Navbar params={params} />
-      <Layout className="mb-20 mt-20 flex h-full flex-col">
-        <Breadcrumb>
-          <BreadcrumbItem isHome />
-
-          <BreadcrumbItem href="/#destination">Destination</BreadcrumbItem>
-
-          <BreadcrumbItem isCurrentlyActive>Checkout</BreadcrumbItem>
-        </Breadcrumb>
-        <Text
-          as="h1"
-          className="mb-10 mt-7 text-[26px] font-bold text-gray-100 sm:mb-14"
-        >
-          {t("checkout_checkoutTitle")}
-        </Text>
-        {!isLoading ? (
-          retrievedData ? (
-            <div className="flex w-full flex-col items-center justify-center gap-16 md:flex-row md:items-start">
-              <div className="flex w-full flex-col">
-                <Text as="subHeading2" className="font-bold text-gray-100">
-                  {t("checkout_purchasedItems")}
-                </Text>
-                <Purchaseinfo
-                  handleDelete={handleDelete}
-                  order={order}
-                  handleOrder={handleOrder}
-                  image={`${
-                    retrievedData.country_name
-                      ? `/${retrievedData.country_name.toLowerCase()}_plan.png`
-                      : "/purchased-placeholder.png"
-                  }`}
-                  destination={`${retrievedData.country_name} eSim data plans`}
-                  packages={`${
-                    retrievedData!["plan_option"] == "UNLIMITED"
-                      ? "Daily Unlimited"
-                      : "Quota"
-                  }, ${
-                    retrievedData!["data_amount"] + retrievedData!["data_unit"]
-                  } , ${retrievedData!["duration_in_days"]} Day`}
-                  price={subtotal.toLocaleString("id-ID", {
-                    style: "currency",
-                    currency: "IDR",
-                  })}
-                />
-              </div>
-              <CheckoutCard
-                isEmpty={emailError}
-                handlePayment={handlePayment}
-                handleInputEmail={handleInputEmail}
-                code={code}
-              />
-            </div>
+            )
           ) : (
-            <div className="flex flex-col items-center justify-center">
-              <Box />
-              <Text as="body1" className="mb-3 mt-6 font-bold">
-                {t("checkout_orderEmptyTitle")}
-              </Text>
-              <Text as="body2" className="mb-8 text-center text-gray-500">
-                {t("checkout_orderEmptyDesc")}
-              </Text>
-              <Button
-                color="black"
-                size="sm"
-                className="my-8 w-full max-w-[290px]"
-                onClick={() => {
-                  router.push("/");
-                }}
-              >
-                {t("checkout_findPlanButton")}
-              </Button>
-            </div>
-          )
-        ) : (
-          <ProgressBar
-            height="4px"
-            color="#f97316"
-            options={{ showSpinner: true }}
-            shallowRouting
-          />
-        )}
-      </Layout>
-      <CTA />
+            <ProgressBar
+              height="4px"
+              color="#f97316"
+              options={{ showSpinner: true }}
+              shallowRouting
+            />
+          )}
+        </Layout>
+        <div className="bottom-0 flex-none">
+          <CTA />
+        </div>
+      </div>
     </>
   );
 }

@@ -1,4 +1,12 @@
 import React, { ChangeEventHandler } from "react";
+import { PayPalButtons } from "@paypal/react-paypal-js";
+import {
+  OnApproveData,
+  OnApproveActions,
+  CreateOrderActions,
+  CreateOrderData,
+} from "@paypal/paypal-js";
+import { AxiosResponse } from "axios";
 
 // components
 import Text from "@/components/atoms/Text/Text";
@@ -21,24 +29,24 @@ const CheckoutCard = ({
 }: CheckoutCardProps) => {
   const t = useTranslations("Checkout");
   return (
-    <div className="flex w-full max-w-[380px] flex-col rounded-lg border border-gray-600 bg-[#121417] px-4 py-5">
+    <div className="flex w-full max-w-[380px] flex-col rounded-lg border border-[#222222] bg-[#121417] px-4 py-5">
       <input
         placeholder={t("checkout_email")}
         onChange={(e) => handleInputEmail(e)}
         className={`bg-black text-gray-100
           ${
             isEmpty
-              ? "mb-4 rounded-lg border border-gray-500 px-3 py-2"
-              : "mb-4 rounded-md border border-gray-400 px-3 py-2"
+              ? "mb-4 rounded-lg border border-[#424242] px-3 py-2"
+              : "mb-4 rounded-md border border-[#424242] px-3 py-2"
           }`}
       />
+      {isEmpty && <div className="px-2 text-red-500">{isEmpty}</div>}
       {code && (
         <Text as="body2" className="mt-4 px-2 text-[#BDBDBD]">
           Affiliate Code: <span className="font-bold uppercase">{code}</span>
         </Text>
       )}
-      {isEmpty && <div className="px-2 text-red-500">{isEmpty}</div>}
-      <Text as="body2" className=" mt-4 px-2 text-[#BDBDBD]">
+      <Text as="body2" className="mt-4 px-2 text-[#BDBDBD]">
         {t("checkout_emailDesc")}
       </Text>
       <Button

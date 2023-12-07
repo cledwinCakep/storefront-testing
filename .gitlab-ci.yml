@@ -50,8 +50,8 @@ build-production:
   only:
     - main
   script:
-    - docker build 
-      --build-arg NEXT_PUBLIC_HOST_API=$PROD_HOST_API
+    - docker build
+      --build-arg NEXT_PUBLIC_HOST_API=$NEXT_PUBLIC_PROD_HOST_API
       --build-arg NEXT_PUBLIC_GOOGLE_ID=$NEXT_PUBLIC_GOOGLE_ID
       --build-arg NEXT_PUBLIC_SMARTLOOK=$NEXT_PUBLIC_SMARTLOOK
       -t $DOCKER_IMAGE:latest .

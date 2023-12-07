@@ -14,12 +14,17 @@ interface CardInfoProps {
 const CardInfo = ({ image, title, subtitle, additional }: CardInfoProps) => {
   return (
     <>
-      {image}
-      <div className="flex  h-[150px] flex-col">
-        <Text as="subHeading1" className="text-center font-bold text-gray-100">
+      <div className="mb-8 flex content-center items-center justify-center rounded-full border border-gray-800 bg-[#121417] p-5">
+        {image}
+      </div>
+      <div className="flex flex-col items-center lg:h-[150px]">
+        <Text
+          as="subHeading1"
+          className="text-center font-semibold text-gray-100"
+        >
           {title}
         </Text>
-        <Text as="body1" className="py-6 text-center text-[#BDBDBD]">
+        <Text as="body1" className="mb-4 py-6 text-center text-[#BDBDBD]">
           {subtitle}
         </Text>
         {additional}

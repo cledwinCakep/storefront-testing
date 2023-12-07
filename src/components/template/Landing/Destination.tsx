@@ -5,22 +5,30 @@ import { useRouter } from "next/navigation";
 import Text from "@/components/atoms/Text/Text";
 import Layout from "@/components/atoms/Layout/Layout";
 
-// oganisms
+// organisms
 import PriceInfoCards from "@/components/organisms/PriceInfoCards/PriceInfoCards";
 
 //API
 import { utilityApi } from "@/lib/api/GetApi";
 import { useTranslations } from "next-intl";
+import Tabs2 from "@/components/atoms/Tabs2/Tabs2";
 
 const Partners = () => {
   const router = useRouter();
-  const url = window.location.href;
+  // const url = window.location.href;
 
-  const [data, setData] = useState<any>();
+  const [data, setData] = useState<any>([]);
   const [searched, setSearched] = useState<any>([]);
   const [loading, setLoading] = useState(false);
 
   const t = useTranslations("Homepage");
+
+  const scrollToLayout = () => {
+    const layoutElement = document.getElementById("destination");
+    if (layoutElement) {
+      layoutElement.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   const handleSearch = async (e: any) => {
     const body = {
@@ -33,7 +41,6 @@ const Partners = () => {
       if (res.status >= 200) {
         setLoading(false);
         setSearched(res.data);
-        console.log(res);
       } else {
         setLoading(false);
       }
@@ -41,7 +48,7 @@ const Partners = () => {
   };
 
   const handleClickCountry = (name: string) => () => {
-    router.push(`/plans/${name}?plan=UNLIMITED&data=500MB&duration=1`);
+    router.push(`/plans/${name}?plan=UNLIMITED&dataType=&data=&duration=`);
   };
 
   useEffect(() => {
@@ -65,12 +72,12 @@ const Partners = () => {
     return;
   }
   return (
-    <Layout id="destination">
-      <div className="flex h-full flex-col items-center justify-center gap-10 py-32">
-        <div className="flex flex-col gap-8">
+    <Layout id="destination" className="pt-[98px]">
+      <div className="flex h-full flex-col items-center justify-center">
+        <div className="mb-14 flex flex-col gap-8 px-4">
           <Text
             as="h3"
-            className="text-center font-bold text-gray-100 sm:text-[2.75rem]"
+            className="text-center font-semibold text-gray-100 sm:text-[2.75rem]"
           >
             {t("hero_destinationTitle")}
           </Text>
@@ -78,10 +85,11 @@ const Partners = () => {
             {t("hero_destinationDesc")}
           </Text>
         </div>
+
         {/* search country */}
-        <div className="relative h-auto w-full max-w-[852px] rounded-lg bg-[#374151] px-4 py-2">
+        <div className="relative mb-8 h-auto w-full rounded-lg bg-[#374151] px-5 py-2">
           <input
-            className="min-w-full bg-transparent pl-8 text-white outline-none"
+            className="min-w-full bg-transparent pl-8 text-white outline-none "
             placeholder="Search destination..."
             onChange={handleSearch}
           />
@@ -121,68 +129,33 @@ const Partners = () => {
             })}
           </div>
         </div>
-
-        <div className="flex w-full flex-col gap-6">
-          <div className="flex w-full flex-col items-center justify-center gap-4 gap-y-4 md:flex-row">
-            <PriceInfoCards
-              data={[
-                {
-                  code: data[0].country_code,
-                  image: `/${data[0].country_name.trim().toLowerCase()}.png`,
-                  title: capitalizeFirstLetter(data[0].country_name.trim()),
-                  price: data[0].idr_price.toLocaleString("id-ID", {
-                    style: "currency",
-                    currency: "IDR",
-                  }),
-                },
-                {
-                  code: data[1].country_code,
-                  image: `/${data[1].country_name.trim().toLowerCase()}.png`,
-                  title: capitalizeFirstLetter(data[1].country_name.trim()),
-                  price: data[1].idr_price.toLocaleString("id-ID", {
-                    style: "currency",
-                    currency: "IDR",
-                  }),
-                },
-                {
-                  code: data[2].country_code,
-                  image: `/${data[2].country_name.trim().toLowerCase()}.png`,
-                  title: capitalizeFirstLetter(data[2].country_name.trim()),
-                  price: data[2].idr_price.toLocaleString("id-ID", {
-                    style: "currency",
-                    currency: "IDR",
-                  }),
-                },
-                {
-                  code: data[3].country_code,
-                  image: `/${data[3].country_name.trim().toLowerCase()}.png`,
-                  title: capitalizeFirstLetter(data[3].country_name.trim()),
-                  price: data[3].idr_price.toLocaleString("id-ID", {
-                    style: "currency",
-                    currency: "IDR",
-                  }),
-                },
-                {
-                  code: data[4].country_code,
-                  image: `/${data[4].country_name.trim().toLowerCase()}.png`,
-                  title: capitalizeFirstLetter(data[4].country_name.trim()),
-                  price: data[4].idr_price.toLocaleString("id-ID", {
-                    style: "currency",
-                    currency: "IDR",
-                  }),
-                },
-                {
-                  code: data[5].country_code,
-                  image: `/${data[5].country_name.trim().toLowerCase()}.png`,
-                  title: capitalizeFirstLetter(data[5].country_name.trim()),
-                  price: data[5].idr_price.toLocaleString("id-ID", {
-                    style: "currency",
-                    currency: "IDR",
-                  }),
-                },
-              ]}
-            />
-          </div>
+        <div className="flex w-full flex-col gap-4">
+          {/* put in here */}
+          <Tabs2
+            data={data.map(
+              (item: {
+                country_code: any;
+                country_name: string;
+                price_in_usd: {
+                  toLocaleString: (
+                    arg0: string,
+                    arg1: { style: string; currency: string }
+                  ) => any;
+                };
+              }) => ({
+                code: item.country_code,
+                image:
+                  `/flag/${item.country_code.trim().toUpperCase()}.png` ||
+                  "/default.png",
+                title: capitalizeFirstLetter(item.country_name.trim()),
+                price: item.price_in_usd.toLocaleString("en-US", {
+                  style: "currency",
+                  currency: "USD",
+                }),
+              })
+            )}
+            onShowLessClicked={scrollToLayout}
+          />
         </div>
       </div>
     </Layout>

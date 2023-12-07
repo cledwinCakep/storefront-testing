@@ -9,12 +9,13 @@ import Button from "@/components/atoms/Button/Button";
 import Whatsapp from "@/components/icons/Whatsapp";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import Email from "@/components/icons/Email";
 
 const CallToAction = () => {
   const t = useTranslations("CTA");
   return (
-    <div className="bg-lightgray w-full  border-t-[1px] border-gray-600 bg-cover bg-[right_-10rem_bottom] bg-no-repeat md:bg-bottom">
-      <Layout className="flex flex-col items-center justify-between gap-10 py-20 md:flex-col">
+    <div className="bg-lightgray w-full  border-t-[1px] border-[#222222] bg-cover bg-[right_-10rem_bottom] bg-no-repeat md:bg-bottom">
+      <Layout className="flex flex-col items-center justify-between gap-10 py-10 md:flex-col">
         <Text
           as="h3"
           className="max-w-[628px] text-center font-bold text-gray-100 md:text-start"
@@ -23,14 +24,10 @@ const CallToAction = () => {
         </Text>
         <Link
           href={
-            "https://api.whatsapp.com/send?phone=6282339909564&text=Hallo%20min%2C%20saya%20mau%20beli%20eSIM%20untuk%20traveling"
+            "mailto:support@superalink.com?subject=Support%20to%20buy%20eSIM"
           }
         >
-          <Button
-            color="transparent"
-            size="xs"
-            iconLeft={<Whatsapp color="white" />}
-          >
+          <Button color="transparent" size="xs" iconLeft={<Email />}>
             {t("cta_ctaButton")}
           </Button>
         </Link>

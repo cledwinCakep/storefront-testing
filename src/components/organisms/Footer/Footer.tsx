@@ -14,12 +14,12 @@ const Footer = () => {
       <Layout className="flex w-full flex-col-reverse items-center justify-between gap-5 py-6">
         <Text
           as="body1"
-          className="text-wrap text-center font-medium text-gray-500"
+          className="text-wrap text-center text-[13px] text-gray-500"
         >
           &copy; {new Date().getFullYear()}. Gadgetkorea INC. ALL RIGHTS
           RESERVED
         </Text>
-        <div className="flex flex-row gap-8">
+        <div className="flex flex-row gap-4">
           <Link
             href={"https://www.tiktok.com/@adminbeliesim"}
             className="rounded-full border border-gray-400 p-2"

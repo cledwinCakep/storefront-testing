@@ -28,14 +28,14 @@ const Purchaseinfo = ({
   handleDelete,
 }: PurchaseInfoProps) => {
   return (
-    <div className="mt-8 flex flex-col border-b-[1px] border-gray-600 px-1 pb-6">
+    <div className="mt-6 flex flex-col border-b-[1px] border-[#222222] px-1 pb-6">
       <div className="mb-4 flex flex-row gap-3">
         <Image
           src={image}
-          alt="Purchased items plaeholder"
+          alt="Purchased items placeholder"
           width={100}
           height={100}
-          style={{ objectFit: "contain", maxHeight: "100px" }}
+          style={{ objectFit: "cover", maxHeight: "100px", borderRadius: 16 }}
           priority
         />
         <div className="flex flex-col">
@@ -44,7 +44,7 @@ const Purchaseinfo = ({
           </Text>
           <Text
             as="body1"
-            className="mb-6 mt-3 font-medium text-gray-100 sm:text-xl sm:leading-none"
+            className="mb-4 mt-1 font-medium text-gray-100 sm:text-xl sm:leading-none"
           >
             {packages}
           </Text>
@@ -58,7 +58,7 @@ const Purchaseinfo = ({
           <Trash />
         </div>
 
-        <span className="mx-4 border-[1px] border-gray-600" />
+        <span className="mx-4 border-[1px] border-[#222222]" />
         <div className="flex items-center gap-4">
           <button
             className={`flex h-6 w-6 items-center justify-center rounded-md font-bold ${
