@@ -68,14 +68,14 @@ export default function SupportedCountryModal() {
     const term = e.target.value;
     setSearchTerm(term);
     setVisible(!!term);
-    if(!term) setCountry('')
+    if (!term) setCountry("");
   };
 
   useEffect(() => {
     return () => {
-      setOpenSupportedCountry(false)
+      setOpenSupportedCountry(false);
     };
-  }, []);
+  }, [setOpenSupportedCountry]);
 
   return (
     <Transition.Root show={openSupportedCountry} as={Fragment}>
@@ -144,7 +144,7 @@ export default function SupportedCountryModal() {
 
                     {visible && (
                       <div
-                        className={`absolute left-0 top-full mt-1 w-full rounded-md bg-[#374151] shadow-lg overflow-y-auto`}
+                        className={`absolute left-0 top-full mt-1 w-full overflow-y-auto rounded-md bg-[#374151] shadow-lg`}
                       >
                         {filteredCountries.map((dt: any, index: number) => {
                           return (
@@ -171,7 +171,7 @@ export default function SupportedCountryModal() {
                     {filteredAfterClick.map((destination, index) => (
                       <div
                         key={index}
-                        className="inline-flex w-full items-center justify-start rounded-lg bg-neutral-900 px-5 py-4 shadow"
+                        className="inline-flex w-full items-center justify-start rounded-lg bg-neutral-900 px-5 py-4 shadow  last:mb-16"
                       >
                         <div className="flex shrink grow basis-0 items-center justify-start gap-4">
                           <Image

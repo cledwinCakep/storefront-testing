@@ -81,7 +81,7 @@ const PlanDetail = ({ params }: { params: any }) => {
     <PlanContext.Provider value={planHook}>
       <div className="relative space-y-6 pb-[139px] sm:pb-0 ">
         <Navbar params={params} />
-        <div className="pt-[54px]">
+        <div className="pt-3 sm:pt-[54px]">
           <Layout>
             <Breadcrumb>
               <BreadcrumbItem isHome />

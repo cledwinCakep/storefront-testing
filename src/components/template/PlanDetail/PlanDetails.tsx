@@ -167,7 +167,9 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     <div className="sm:relative">
       {countryName ? (
         <Image
-          src={`/destination/${countryName.toLowerCase()}.png`}
+          src={`/destination/${countryName
+            .toLowerCase()
+            .replace(/\//g, " ")}.png`}
           alt={countryName.toLowerCase()}
           width={600}
           height={280}
