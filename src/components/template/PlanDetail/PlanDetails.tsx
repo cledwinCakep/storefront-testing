@@ -191,7 +191,9 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
         <div className="relative hidden h-full w-full  border-gray-300 sm:col-span-2 sm:col-start-1 sm:block md:col-span-1 md:col-start-1 md:row-start-1 md:h-[430px] md:w-full">
           {countryName ? (
             <Image
-              src={`/destination/${countryName.toLowerCase()}.png`}
+              src={`/destination/${countryName
+                .toLowerCase()
+                .replace(/\//g, " ")}.png`}
               alt={countryName.toLowerCase()}
               priority
               fill
