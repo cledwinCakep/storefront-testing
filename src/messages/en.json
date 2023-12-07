@@ -45,9 +45,9 @@
   "PlanDetail": {
     "planDetail_destination": "Destination",
     "planDetail_detailDesc": "  Your eSIM QR code will be sent to your email address!",
-    "planDetail_selectPlanTitle": "Select Plan",
-    "planDetail_selectDataTitle": "Select Data",
-    "planDetail_selectDurationTitle": "Select Duration",
+    "planDetail_selectPlanTitle": "Select Plan:",
+    "planDetail_selectDataTitle": "Select Data:",
+    "planDetail_selectDurationTitle": "Select Duration:",
     "planDetail_descriptionTitle": "Description",
     "planDetail_descriptionCNOne": "- After you use up all of your daily allowance, you can use it at unlimited speeds.\n\n",
     "planDetail_descriptionCNTwo": "- **You can use all social media throughout China without a VPN**.\n\n",

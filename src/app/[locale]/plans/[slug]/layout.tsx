@@ -3,8 +3,12 @@ import { capitalizeSentences } from "@/lib/utils/capitalize";
 import Head from "next/head";
 
 const Country: any = {
-  WW: {
+  WW_146: {
     values: "Global 146 Countries",
+    image: "https://i.ibb.co/RY2Gz3H/Base-Thumbnail.jpg",
+  },
+  WW_54: {
+    values: "Global 54 Countries",
     image: "https://i.ibb.co/RY2Gz3H/Base-Thumbnail.jpg",
   },
   KH: {
@@ -143,7 +147,11 @@ const Country: any = {
     values: "Austria",
     image: "https://i.ibb.co/RY2Gz3H/Base-Thumbnail.jpg",
   },
-  EU: {
+  EU_42: {
+    values: "42 European Countries",
+    image: "https://i.ibb.co/RY2Gz3H/Base-Thumbnail.jpg",
+  },
+  EU_33: {
     values: "33 European Countries",
     image: "https://i.ibb.co/RY2Gz3H/Base-Thumbnail.jpg",
   },

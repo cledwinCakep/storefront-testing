@@ -7,14 +7,15 @@ import id from "@/messages/id.json";
 import "./globals.css";
 import { redirect } from "next/navigation";
 import { useState } from "react";
-import GoogleAnalytics from "../../../GoogleAnalytics";
-import { pageview } from "../../../gtag";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 export const dynamic = "force-dynamic";
 
 export async function generateStaticParams() {
   return ["en"].map((locale) => ({ locale }));
 }
+
+let cache: { [key: string]: typeof en } = {};
 
 const dictionaries: {
   [key: string]: typeof en;
@@ -23,12 +24,16 @@ const dictionaries: {
 };
 
 function getMessages(locale: string) {
+  if (cache[locale]) {
+    return cache[locale];
+  }
+
   try {
     const messages = dictionaries[locale];
     if (messages) {
+      cache[locale] = messages;
       return messages;
     } else {
-      console.log(`Locale '${locale}' not found in dictionaries.`);
       redirect("/"); // Return an empty object or handle the missing locale as needed.
     }
   } catch (error) {
@@ -82,9 +87,17 @@ export default function RootLayout({
 
       <body className="bg-black">
         {/* <GoogleAnalytics keys={process.env.NEXT_PUBLIC_GOOGLE_ID} /> */}
-        <NextIntlClientProvider locale={"en"} messages={messages}>
-          {children}
-        </NextIntlClientProvider>
+        <PayPalScriptProvider
+          options={{
+            // disableFunding: ["credit", "card"],
+            currency: "USD",
+            clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID!,
+          }}
+        >
+          <NextIntlClientProvider locale={"en"} messages={messages}>
+            {children}
+          </NextIntlClientProvider>
+        </PayPalScriptProvider>
         <ProgressBar
           height="4px"
           color="#f97316"

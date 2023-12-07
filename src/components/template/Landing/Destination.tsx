@@ -41,7 +41,6 @@ const Partners = () => {
       if (res.status >= 200) {
         setLoading(false);
         setSearched(res.data);
-        console.log(res);
       } else {
         setLoading(false);
       }
@@ -68,8 +67,6 @@ const Partners = () => {
 
     return word.charAt(0).toUpperCase() + word.slice(1);
   }
-
-  console.log(data);
 
   if (!data) {
     return;
@@ -159,33 +156,6 @@ const Partners = () => {
             )}
             onShowLessClicked={scrollToLayout}
           />
-
-          {/* <div className="flex w-full flex-col items-center justify-center gap-4 gap-y-4 md:flex-row">
-            <PriceInfoCards
-              data={data.map(
-                (item: {
-                  country_code: any;
-                  country_name: string;
-                  price_in_usd: {
-                    toLocaleString: (
-                      arg0: string,
-                      arg1: { style: string; currency: string }
-                    ) => any;
-                  };
-                }) => ({
-                  code: item.country_code,
-                  image:
-                    `/flag/${item.country_code.trim().toUpperCase()}.png` ||
-                    "/default.png",
-                  title: capitalizeFirstLetter(item.country_name.trim()),
-                  price: item.price_in_usd.toLocaleString("en-US", {
-                    style: "currency",
-                    currency: "USD",
-                  }),
-                })
-              )}
-            />
-          </div> */}
         </div>
       </div>
     </Layout>

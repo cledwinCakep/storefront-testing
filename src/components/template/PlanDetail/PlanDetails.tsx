@@ -35,9 +35,10 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
   const country_code = router.split("/")[2];
 
   const z: any = {
-    WW: "Global 146 Countries",
+    WW_146: "Global 146 Countries",
+    WW_54: "Global 54 Countries",
     KH: "Cambodia",
-    US_CA: "United States/Canada",
+    US_CA: "United States Canada",
     AE: "United Arab Emirates",
     QA: "Qatar",
     SA: "Saudi Arabia",
@@ -59,7 +60,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     JP: "Japan",
     TW: "Taiwan",
     MO: "Macau",
-    GU_MP: "Guam/Saipan",
+    GU_MP: "Guam Saipan",
     DE: "Germany",
     FR: "France",
     ES: "Spain",
@@ -70,35 +71,26 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     SE: "Sweden",
     DK: "Denmark",
     AT: "Austria",
-    EU: "33 European Countries",
+    EU_42: "42 European Countries",
+    EU_33: "33 European Countries",
     ID: "Indonesia",
     VN: "Vietnam",
-    HK: "Hong Kong",
-    HK_MO: "Hong Kong/Macau",
+    HK: "Hongkong",
+    HK_MO: "Hongkong Macau",
     MN: "Mongolia",
     KR: "South Korea",
     CA: "Canada",
-    AU_NZ: "Australia/New Zealand",
+    AU_NZ: "Australia New Zealand",
   };
 
-  const i: any = {
-    CN: "China",
-    SG: "Singapore",
-    MY: "Malaysia",
-    TH: "Thailand",
-    JP: "Japan",
-    KR: "Korea",
-  };
-
-  const countryName = i[country_code];
-
-  console.log(countryName);
+  const countryName = z[country_code];
+  console.log(data);
 
   return (
     <div className="sm:relative">
       {countryName ? (
         <Image
-          src={`/${countryName.toLowerCase()}_plan.png`}
+          src={`/destination/${countryName.toLowerCase()}.png`}
           alt={countryName.toLowerCase()}
           width={600}
           height={280}
@@ -125,7 +117,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
         <div className="relative hidden h-full w-full  border-gray-300 sm:col-span-2 sm:col-start-1 sm:block md:col-span-1 md:col-start-1 md:row-start-1 md:h-[430px] md:w-full">
           {countryName ? (
             <Image
-              src={`/${countryName.toLowerCase()}_plan.png`}
+              src={`/destination/${countryName.toLowerCase()}.png`}
               alt={countryName.toLowerCase()}
               priority
               fill
@@ -169,6 +161,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
                   value: key, // Generate a value based on the label
                 }))}
               />
+
               <RadioPlan
                 name="data"
                 title={t("planDetail_selectDataTitle")}
@@ -186,7 +179,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
                     : data[parameter.plan]["15GB"]
                 ).map((key: any) => ({
                   label: `${key["duration_in_days"]} Day(s)`,
-                  value: `${key["duration_in_days"]}`, // Generate a value based on the label
+                  value: `${key["duration_in_days"]}`,
                 }))}
               />
             </>

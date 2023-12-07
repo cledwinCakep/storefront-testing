@@ -46,9 +46,9 @@ const RadioPlan = ({ title, name, data }: RadioPlanProps) => {
           {title}
         </Text>
 
-        <Text as="body1" className="font-medium text-gray-400">
+        {/* <Text as="body1" className="font-medium text-gray-400">
           {currentSelected[name as keyof currentSelectedProps]?.id}
-        </Text>
+        </Text> */}
       </div>
 
       <div className="no-scrollbar flex gap-x-4 overflow-scroll sm:max-w-[559px] sm:flex-wrap sm:gap-y-4">

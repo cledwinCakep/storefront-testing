@@ -23,7 +23,17 @@ const Tabs2: React.FC<Tabs2Props> = ({ data, onShowLessClicked }) => {
   const [filteredData, setFilteredData] = useState<PriceInfo[]>([]);
 
   useEffect(() => {
-    const globalCodes = ["WW", "EU", "GU_MP", "HK_MO", "AU_NZ", "US_CA", "AP"];
+    const globalCodes = [
+      "WW_146",
+      "WW_54",
+      "EU_42",
+      "EU_33",
+      "GU_MP",
+      "HK_MO",
+      "AU_NZ",
+      "US_CA",
+      "AP",
+    ];
     const popularLocalCodes = [
       "JP",
       "TW",
