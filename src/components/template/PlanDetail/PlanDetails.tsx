@@ -36,7 +36,8 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
   const country_code = router.split("/")[2];
 
   const z: any = {
-    WW: "Global 146 Countries",
+    WW_146: "Global 146 Countries",
+    WW_54: "Global 54 Countries",
     KH: "Cambodia",
     US_CA: "United States Canada",
     AE: "United Arab Emirates",
@@ -71,7 +72,8 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     SE: "Sweden",
     DK: "Denmark",
     AT: "Austria",
-    EU: "33 European Countries",
+    EU_42: "42 European Countries",
+    EU_33: "33 European Countries",
     ID: "Indonesia",
     VN: "Vietnam",
     HK: "Hongkong",
@@ -83,6 +85,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
   };
 
   const countryName = z[country_code];
+  console.log(data);
 
   const getPlanDataType = useCallback(() => {
     const planArr: any[][] = Object.values(data[parameter.plan] ?? []);
@@ -195,6 +198,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
                   value: key, // Generate a value based on the label
                 }))}
               />
+
               <RadioPlan
                 name="dataType"
                 title={t("planDetail_selectDataTitle")}

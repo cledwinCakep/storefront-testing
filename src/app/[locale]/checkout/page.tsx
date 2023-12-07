@@ -211,7 +211,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
               <BreadcrumbItem
                 href={`/plans/${retrievedData.country_code}?plan=${retrievedData.plan_option}&data=${retrievedData.data_amount}${retrievedData.data_unit}&duration=${retrievedData.duration_in_days}`}
               >
-                {retrievedData.country_code}
+                {retrievedData.country_name}
               </BreadcrumbItem>
 
               <BreadcrumbItem isCurrentlyActive>Checkout</BreadcrumbItem>
