@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Text from "@/components/atoms/Text/Text";
 import Layout from "@/components/atoms/Layout/Layout";
 
-// oganisms
+// organisms
 import PriceInfoCards from "@/components/organisms/PriceInfoCards/PriceInfoCards";
 
 //API
