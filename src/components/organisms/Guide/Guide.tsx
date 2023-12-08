@@ -220,7 +220,7 @@ const Guide = () => {
           <div className="gap-8 space-y-8">
             <Text
               as="h3"
-              className="text-center font-semibold text-gray-100 sm:text-[44px]"
+              className="text-center font-bold text-gray-100 text-[44px]"
             >
               {t("cta_howToUseTitle")}
             </Text>

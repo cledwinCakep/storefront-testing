@@ -161,8 +161,6 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     return result ?? [];
   }, [data, parameter]);
 
-  console.log({ parameter });
-
   return (
     <div className="sm:relative">
       {countryName ? (
@@ -221,14 +219,16 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
           )}
         </div>
 
-        <div className="space-y-8 sm:col-span-2 sm:col-start-1 md:col-span-2 md:col-start-2 md:row-start-1">
+        <div className="space-y-8 px-6 sm:col-span-2 sm:col-start-1 md:col-span-2 md:col-start-2 md:row-start-1">
           <div className="sm:mt-8 md:mt-0">
-            <Text as="subHeading1" className="font-bold text-gray-100">
-              {countryName ? countryName : ""} eSim Data Plan
-            </Text>
-            <Text as="small" className="font-medium text-gray-400">
-              {t("planDetail_detailDesc")}
-            </Text>
+            <div className="flex w-full flex-col gap-2">
+              <Text as="subHeading1" className="font-bold text-gray-100">
+                {countryName ? countryName : ""} eSim Data Plan
+              </Text>
+              <Text as="small" className="font-medium text-gray-400">
+                {t("planDetail_detailDesc")}
+              </Text>
+            </div>
             {globalCodes.includes(country_code) && (
               <button
                 type="button"
@@ -414,30 +414,40 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
             <Divider />
 
             <div className="space-y-8">
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-6">
                 <button
-                  className={`flex items-center rounded-lg px-3 py-1 font-bold ${
+                  className={`flex h-7 w-7 items-center rounded-lg font-bold ${
                     order <= 1 ? "bg-[#BDBDBD]" : "bg-[#FD9B62]"
                   } select-none text-black`}
                   disabled={order <= 1 ? true : false}
                   onClick={() => handleOrder("decrease")}
                 >
-                  <Text as="body1">-</Text>
+                  <Text
+                    as="body1"
+                    className="flex h-full w-full flex-col justify-center"
+                  >
+                    -
+                  </Text>
                 </button>
                 <Text
                   as="body1"
-                  className="flex w-1 justify-center font-bold text-white"
+                  className="min-w-1 flex justify-center font-bold text-white"
                 >
                   {order}
                 </Text>
                 <button
-                  className={`flex items-center rounded-lg px-3 py-1 font-bold ${
+                  className={`flex h-7 w-7 items-center rounded-lg font-bold ${
                     increaseButton ? "bg-[#BDBDBD]" : "bg-[#FD9B62]"
                   } select-none text-black`}
                   disabled={increaseButton ? true : false}
                   onClick={() => handleOrder("increase")}
                 >
-                  <Text as="body1">+</Text>
+                  <Text
+                    as="body1"
+                    className="flex h-full w-full flex-col justify-center"
+                  >
+                    +
+                  </Text>
                 </button>
               </div>
 
