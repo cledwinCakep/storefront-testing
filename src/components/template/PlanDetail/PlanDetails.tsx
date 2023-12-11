@@ -18,7 +18,7 @@ import RadioPlan from "@/components/molecules/RadioPlan/RadioPlan";
 // utils
 import { usePlanContext } from "@/lib/context/plan";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/router";
+import { useRouter, usePathname } from "next/navigation";
 import { useCallback } from "react";
 import GlobeIcon from "@/components/atoms/SVG/GlobeIcon";
 
@@ -44,7 +44,8 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
   } = usePlanContext();
 
   const t = useTranslations("PlanDetail");
-  const router = location.pathname;
+  const router = usePathname()
+  
   const country_code = router.split("/")[2];
 
   const z: any = {

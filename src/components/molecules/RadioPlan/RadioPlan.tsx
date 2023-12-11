@@ -54,7 +54,7 @@ const RadioPlan = ({ title, name, data }: RadioPlanProps) => {
       <div className="no-scrollbar flex gap-x-4 overflow-scroll sm:max-w-[559px] sm:flex-wrap sm:gap-y-4">
         {data.map((data) => (
           <Radio
-            isDisabled={data.label === "Local"}
+            // isDisabled={data.label === "Local"}
             current={currentSelected[name as keyof currentSelectedProps].value}
             key={data.label}
             name={name}

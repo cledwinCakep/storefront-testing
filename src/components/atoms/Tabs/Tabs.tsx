@@ -26,7 +26,7 @@ const Tabs = ({ data }: TabsProps) => {
 
   return (
     <div className="w-full">
-      <div className="flex w-full border-b-[1px] border-b-zinc-500 text-gray-100">
+      <div className="flex w-full border-b-[1px] border-b-zinc-500 text-gray-100 overflow-x-auto">
         {data.map((data, i) => (
           <button
             key={i}
