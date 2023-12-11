@@ -23,13 +23,19 @@ const usePlanHook = (params: { slug: string }) => {
   const pageOrigins = useRef<Array<string>>([]);
   const [parameter, setParameter] = useState({
     plan: "UNLIMITED",
-    data: "500MB",
-    duration: "1 Day(s)",
+    data: "",
+    duration: "",
+    dataType: "",
   });
+  const [isError, setIsError] = useState(false);
 
   const [isLoading, setLoading] = useState<boolean>(true);
   const dataPlan: DataPlan = {};
   const [currentSelected, setCurrentSelect] = useState<currentSelectedProps>({
+    dataType: {
+      id: "-",
+      value: "",
+    },
     plan: {
       id: "-",
       value: "",
@@ -50,9 +56,16 @@ const usePlanHook = (params: { slug: string }) => {
     const plan = urlSearchParams.get("plan") || "";
     const data = urlSearchParams.get("data") || "";
     const duration = urlSearchParams.get("duration") || "";
+    const dataType = urlSearchParams.get("dataType") || "";
+
+    setParameter({ plan, data, duration, dataType });
 
     // Update the currentSelected state with the parsed parameters
     setCurrentSelect({
+      dataType: {
+        id: dataType == "" ? "" : dataType,
+        value: dataType == "" ? "" : dataType,
+      },
       plan: {
         id:
           plan == ""
@@ -67,7 +80,7 @@ const usePlanHook = (params: { slug: string }) => {
         value: data,
       },
       duration: {
-        id: duration == "" ? "-" : duration + " Day(s)", // Se // Set the id to "duration" or any other identifier you prefer
+        id: duration == "" ? "-" : duration + " Day(s)", // Set the id to "duration" or any other identifier you prefer
         value: duration,
       },
     });
@@ -175,8 +188,9 @@ const usePlanHook = (params: { slug: string }) => {
     if (value == "UNLIMITED") {
       temp = {
         plan: "UNLIMITED",
-        data: "500MB",
-        duration: "1 Day(s)",
+        data: "",
+        duration: "",
+        dataType: "",
       };
       setSubtotal(0);
       setOrder(1);
@@ -187,6 +201,10 @@ const usePlanHook = (params: { slug: string }) => {
           value: "",
         },
         duration: {
+          id: "-",
+          value: "",
+        },
+        dataType: {
           id: "-",
           value: "",
         },
@@ -194,8 +212,9 @@ const usePlanHook = (params: { slug: string }) => {
     } else if (value == "QUOTA") {
       temp = {
         plan: "QUOTA",
-        data: "15GB",
-        duration: "30 Day(s)",
+        data: "",
+        duration: "",
+        dataType: "",
       };
       setSubtotal(0);
       setOrder(1);
@@ -206,6 +225,10 @@ const usePlanHook = (params: { slug: string }) => {
           value: "",
         },
         duration: {
+          id: "-",
+          value: "",
+        },
+        dataType: {
           id: "-",
           value: "",
         },
@@ -228,8 +251,22 @@ const usePlanHook = (params: { slug: string }) => {
   }
 
   function handleBuy() {
-    if (order <= 0) return;
+    console.log({ order });
+    console.log({ buy });
+    console.log({ parameter });
+
+    if (order <= 0) {
+      setIsError(true);
+      return;
+    }
+
+    if (!parameter.data || !parameter.dataType || !parameter.duration) {
+      setIsError(true);
+      return;
+    }
+
     const jsonString = JSON.stringify(buy);
+
     // Save the JSON string to localStorage
     localStorage.setItem("buy", jsonString);
     localStorage.setItem("order", order.toString());
@@ -249,6 +286,7 @@ const usePlanHook = (params: { slug: string }) => {
     increaseButton,
     handleBuy,
     country,
+    isError,
   };
 };
 

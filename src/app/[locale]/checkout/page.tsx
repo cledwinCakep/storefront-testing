@@ -16,13 +16,13 @@ import CheckoutCard from "@/components/molecules/CheckoutCard/CheckoutCard";
 import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
 
 // utils
-import Itemcarrier from "@/components/icons/Itemcarrier";
+// import Itemcarrier from "@/components/icons/Itemcarrier";
 import Button from "@/components/atoms/Button/Button";
 import Box from "@/components/icons/Box";
-import { utilityApi } from "@/lib/api/GetApi";
+// import { utilityApi } from "@/lib/api/GetApi";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
-import Divider from "@/components/atoms/Divider/Divider";
+// import Divider from "@/components/atoms/Divider/Divider";
 import {
   CreateOrderActions,
   CreateOrderData,
@@ -94,7 +94,6 @@ export default function Checkout({ params }: { params: { locale: string } }) {
   }, []);
 
   const handlePayment = () => {
-    const id = retrievedData!["id"];
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     // if( emailRegex.test(email!)) return
 
@@ -107,6 +106,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
     }
 
     setIsOpen(true);
+    window.history.pushState({}, "Home", "/");
   };
 
   function handleInputEmail(e: React.ChangeEvent<HTMLInputElement>) {
@@ -115,6 +115,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
 
     setEmailError(""); // Clear the error message if the input is not empty
   }
+
   function handleOrder(method: string) {
     let temp = order;
 
@@ -145,11 +146,13 @@ export default function Checkout({ params }: { params: { locale: string } }) {
   }
 
   const createOrder = (data: CreateOrderData, actions: CreateOrderActions) => {
+    const id = retrievedData!["id"];
+
     return payPalApi.createOrder({
-      esim_id: 426,
-      quantity: 1,
-      email: "dwiprasetya@cakeplabs.com",
-      user_code: null,
+      esim_id: id,
+      quantity: order,
+      email: email,
+      user_code: code,
     });
   };
 
@@ -198,7 +201,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
 
       <Navbar params={params} />
       <div className="flex h-screen flex-col">
-        <Layout className="mb-20 mt-20 flex h-full w-full grow flex-col">
+        <Layout className="mb-20 mt-20 flex h-fit w-full grow flex-col py-4 md:h-full">
           {retrievedData.data_amount > 0 ? (
             <Breadcrumb>
               <BreadcrumbItem isHome />
@@ -208,7 +211,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
               <BreadcrumbItem
                 href={`/plans/${retrievedData.country_code}?plan=${retrievedData.plan_option}&data=${retrievedData.data_amount}${retrievedData.data_unit}&duration=${retrievedData.duration_in_days}`}
               >
-                {retrievedData.country_code}
+                {retrievedData.country_name}
               </BreadcrumbItem>
 
               <BreadcrumbItem isCurrentlyActive>Checkout</BreadcrumbItem>
@@ -222,28 +225,15 @@ export default function Checkout({ params }: { params: { locale: string } }) {
               <BreadcrumbItem isCurrentlyActive>Checkout</BreadcrumbItem>
             </Breadcrumb>
           )}
-          {/* <Breadcrumb>
-            <BreadcrumbItem isHome />
-
-            <BreadcrumbItem href="/#destination">Destination</BreadcrumbItem>
-
-            <BreadcrumbItem
-              href={`/plans/${retrievedData.country_code}?plan=${retrievedData.plan_option}&data=${retrievedData.data_amount}${retrievedData.data_unit}&duration=${retrievedData.duration_in_days}`}
-            >
-              {retrievedData.country_code}
-            </BreadcrumbItem>
-
-            <BreadcrumbItem isCurrentlyActive>Checkout</BreadcrumbItem>
-          </Breadcrumb> */}
           <Text
             as="h1"
-            className="mb-10 mt-7 text-[26px] font-bold text-gray-100 sm:mb-14"
+            className="mb-7 text-[26px] font-bold text-gray-100 sm:mb-14"
           >
             {t("checkout_checkoutTitle")}
           </Text>
           {!isLoading ? (
             retrievedData.data_amount > 0 ? (
-              <div className="flex w-full flex-col items-center justify-center gap-16 md:flex-row md:items-start">
+              <div className="flex w-full flex-col items-center justify-center gap-10 md:flex-row md:items-start">
                 <div className="flex w-full flex-col">
                   <Text as="subHeading2" className="font-bold text-gray-100">
                     {t("checkout_purchasedItems")}
@@ -252,7 +242,9 @@ export default function Checkout({ params }: { params: { locale: string } }) {
                     handleDelete={handleDelete}
                     order={order}
                     handleOrder={handleOrder}
-                    image={`${`/destination/${retrievedData.country_name.toLowerCase()}.png`}`}
+                    image={`/destination/${retrievedData.country_name
+                      .toLowerCase()
+                      .replace(/\//g, " ")}.png`}
                     destination={`${retrievedData.country_name} eSim data plans`}
                     packages={`${
                       retrievedData!["plan_option"] == "UNLIMITED"

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Text from "@/components/atoms/Text/Text";
 import Layout from "@/components/atoms/Layout/Layout";
 
-// oganisms
+// organisms
 import PriceInfoCards from "@/components/organisms/PriceInfoCards/PriceInfoCards";
 
 //API
@@ -48,7 +48,7 @@ const Partners = () => {
   };
 
   const handleClickCountry = (name: string) => () => {
-    router.push(`/plans/${name}?plan=UNLIMITED&data=500MB&duration=1`);
+    router.push(`/plans/${name}?plan=UNLIMITED&dataType=&data=&duration=`);
   };
 
   useEffect(() => {
@@ -72,8 +72,8 @@ const Partners = () => {
     return;
   }
   return (
-    <Layout id="destination">
-      <div className="flex h-full flex-col items-center justify-center py-32">
+    <Layout id="destination" className="pt-[98px]">
+      <div className="flex h-full flex-col items-center justify-center">
         <div className="mb-14 flex flex-col gap-8 px-4">
           <Text
             as="h3"

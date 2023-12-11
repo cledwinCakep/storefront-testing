@@ -29,15 +29,15 @@ const CheckoutCard = ({
 }: CheckoutCardProps) => {
   const t = useTranslations("Checkout");
   return (
-    <div className="flex w-full max-w-[380px] flex-col rounded-lg border border-gray-600 bg-[#121417] px-4 py-5">
+    <div className="flex w-full max-w-[380px] flex-col rounded-lg border border-[#222222] bg-[#121417] px-4 py-5">
       <input
         placeholder={t("checkout_email")}
         onChange={(e) => handleInputEmail(e)}
         className={`bg-black text-gray-100
           ${
             isEmpty
-              ? "mb-4 rounded-lg border border-gray-500 px-3 py-2"
-              : "mb-4 rounded-md border border-gray-400 px-3 py-2"
+              ? "mb-4 rounded-lg border border-[#424242] px-3 py-2"
+              : "mb-4 rounded-md border border-[#424242] px-3 py-2"
           }`}
       />
       {isEmpty && <div className="px-2 text-red-500">{isEmpty}</div>}

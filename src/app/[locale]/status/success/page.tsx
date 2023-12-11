@@ -20,7 +20,7 @@ export default function Status({ params }: { params: { locale: string } }) {
   // }, []);
 
   useEffect(() => {
-    if (window) {
+    if (typeof window !== undefined) {
       localStorage.removeItem("order");
       localStorage.removeItem("buy");
     }
@@ -29,10 +29,14 @@ export default function Status({ params }: { params: { locale: string } }) {
   return (
     <>
       <Navbar params={params} />
-      <div className="flex h-full items-center justify-center bg-black px-4 pb-[135px] pt-[149px]">
-        <PaymentCardSuccess />
+      <div className="flex h-screen flex-col">
+        <div className="flex h-fit w-full grow flex-col items-center justify-center bg-black px-4 pb-[135px] pt-[149px] md:h-full">
+          <PaymentCardSuccess />
+        </div>
+        <div className="bottom-0 flex-none">
+          <CTA CtaSection={false} />
+        </div>
       </div>
-      <CTA CtaSection={false} />
     </>
   );
 }

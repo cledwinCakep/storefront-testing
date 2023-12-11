@@ -62,39 +62,62 @@ export const Network = () => {
       xmlns="http://www.w3.org/2000/svg"
       width="58"
       height="58"
-      viewBox="0 0 44 44"
+      viewBox="0 0 58 58"
       fill="none"
     >
       <path
-        d="M32.2798 7.12047L7.12066 32.2796C5.06915 34.3312 6.52131 37.84 9.4239 37.84H34.5831C36.3829 37.84 37.8402 36.3827 37.8402 34.5829V9.42372C37.8402 6.52112 34.3314 5.06897 32.2798 7.12047Z"
+        opacity="0.4"
+        d="M20.9618 46.7898C20.3848 47.7145 20.1019 48.7927 20.1497 49.8817"
         stroke="white"
-        strokeWidth="2.44444"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        stroke-width="2.44444"
+        stroke-linecap="round"
+        stroke-linejoin="round"
       />
       <path
         opacity="0.4"
-        d="M14.8916 24.5609V37.8392"
+        d="M11.799 37.623C10.8746 38.1989 9.79445 38.4761 8.70709 38.4142"
         stroke="white"
-        strokeWidth="2.44444"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        stroke-width="2.44444"
+        stroke-linecap="round"
+        stroke-linejoin="round"
       />
       <path
         opacity="0.4"
-        d="M22.6733 16.8127V37.8397"
+        d="M25.4954 17.4729L15.6334 18.2398L11.4131 22.4601C14.0675 24.0199 16.6165 25.7534 19.0416 27.6502C23.4814 31.1084 27.4762 35.1041 30.9344 39.5442C32.8259 41.9651 34.5592 44.5057 36.1245 47.1493L40.3216 42.9511L41.0895 33.0672"
         stroke="white"
-        strokeWidth="2.44444"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        stroke-width="2.44444"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M18.4093 28.8678C20.5149 24.3058 23.2575 20.0658 26.5557 16.2752C26.5557 16.2752 37.5917 4.51978 49.3265 9.23627C54.0655 20.7003 42.3085 32.006 42.3085 32.006C38.5099 35.3106 34.262 38.0612 29.6928 40.1757C28.22 40.9427 26.6587 41.5252 25.0439 41.9122L16.6495 33.518C17.1305 31.9302 17.7181 30.3758 18.4093 28.8678Z"
+        stroke="white"
+        stroke-width="2.44444"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M34.7928 26.9953C36.5127 26.9953 37.907 25.601 37.907 23.881C37.907 22.161 36.5127 20.7667 34.7928 20.7667C33.0728 20.7667 31.6787 22.161 31.6787 23.881C31.6787 25.601 33.0728 26.9953 34.7928 26.9953Z"
+        stroke="white"
+        stroke-width="2.44444"
+        stroke-linecap="round"
+        stroke-linejoin="round"
       />
       <path
         opacity="0.4"
-        d="M30.4492 8.95119V37.8401"
+        d="M35.8797 10.5215L48.066 22.7077"
         stroke="white"
-        strokeWidth="2.44444"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        stroke-width="2.44444"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        opacity="0.4"
+        d="M16.0193 42.5891L13.582 45.0038"
+        stroke="white"
+        stroke-width="2.44444"
+        stroke-linecap="round"
+        stroke-linejoin="round"
       />
     </svg>
   );

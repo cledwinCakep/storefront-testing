@@ -19,7 +19,7 @@ export const PaymentCardSuccess = () => {
       setCode(window.localStorage.getItem("affiliate_code"));
     }
   });
-  
+
   return (
     <>
       <div className="max-w-[445px] rounded-md bg-[#121417] px-11 py-14">
@@ -38,7 +38,7 @@ export const PaymentCardSuccess = () => {
               {t("payment_paymentSuccessDesc")}
             </Text>
           </div>
-          <Link href={`${code ? `/aff/${code}` : `/`}`} className="w-full">
+          <Link href="/" className="w-full">
             <Button color="orange" size="sm" className="h-12 w-full">
               {t("payment_backHomeButton")}
             </Button>

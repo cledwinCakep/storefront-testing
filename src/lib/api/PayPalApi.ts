@@ -18,10 +18,10 @@ class PayPalApi extends API {
         url: "orders/",
         method: "POST",
         data: {
-          esim_id: 426,
-          quantity: 1,
-          email: "dwiprasetya@cakeplabs.com",
-          user_code: null,
+          esim_id,
+          quantity,
+          email,
+          user_code,
         },
       });
 
@@ -46,6 +46,10 @@ class PayPalApi extends API {
 
       window.location.replace("/status/success");
     } catch (error: any) {
+      if (error.response.status === 500) {
+        window.location.replace("/status/fail");
+      }
+
       if (error.response.status === 422) {
         switch (error.response.data.message) {
           case "instrument declined":
