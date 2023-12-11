@@ -220,7 +220,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
           )}
         </div>
 
-        <div className="space-y-8 px-6 sm:col-span-2 sm:col-start-1 md:col-span-2 md:col-start-2 md:row-start-1">
+        <div className="space-y-8 md:px-6 sm:col-span-2 sm:col-start-1 md:col-span-2 md:col-start-2 md:row-start-1">
           <div className="sm:mt-8 md:mt-0">
             <div className="flex w-full flex-col gap-2">
               <Text as="subHeading1" className="font-bold text-gray-100">
