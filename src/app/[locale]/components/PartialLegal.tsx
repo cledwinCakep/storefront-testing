@@ -70,7 +70,6 @@ export const Header = () => {
   return (
     <div className="flex px-7 py-5 flex-col justify-end items-start gap-3 sm:flex-row sm:justify-around">
       <Logo />
-      <Login />
     </div>
   );
 };
@@ -113,7 +112,7 @@ export const Paragraph = ({
   return (
     <div
       {...rest}
-      className="items-stretch text-tremor-content-strong text-base not-italic font-normal leading-6 tracking-tighter"
+      className="items-stretch text-white text-base not-italic font-normal leading-6 tracking-tighter"
     >
       {children}
     </div>
@@ -128,7 +127,7 @@ export const Content = ({
   children: React.ReactNode;
 }) => {
   return (
-    <div className="flex flex-col items-start gap-2" {...rest}>
+    <div className="flex flex-col items-start gap-2 text-white" {...rest}>
       <Titletext title={title} />
       <Paragraph>{children}</Paragraph>
     </div>

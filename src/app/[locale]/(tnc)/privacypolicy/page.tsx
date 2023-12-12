@@ -38,7 +38,7 @@ const Container = () => {
     <div className="flex px-5 justify-center items-start ">
       <div className="flex max-w-[1180px] py-5 flex-col items-center gap-14 flex-1">
         <Metric className="text-2xl not-italic font-bold leading-9 tracking-tighter">
-          <span className="items-stretch  text-tremor-content-strong ">
+          <span className="items-stretch  text-tremor-content-strong text-white">
             Privacy and Policy
           </span>
         </Metric>
@@ -70,22 +70,22 @@ const Container = () => {
               personal information.
             </p>
             <br />
-            <p>A few key principles regarding GDPR;</p>
+            <p>A few key principles regarding GDPR:</p>
             <div className="text-tremor-content-strong">
               <div className="list-disc pl-2">
-                <li>
-                  <span className="font-bold">A clear purpose: </span>the
+                <li className="text-gray-400">
+                  <span className="font-bold text-white">A clear purpose: </span>the
                   controller must specifically inform the customer of the use he
                   will make of his personal data by collecting them.
                 </li>
-                <li>
-                  <span className="font-bold">Relevant data:</span>
+                <li className="text-gray-400">
+                  <span className="font-bold text-white">Relevant data: </span>
                   the controller must only collect data that is strictly
                   necessary for his treatment; this is the principle of
                   minimizing collection.
                 </li>
-                <li>
-                  <span className="font-bold">The retention period: </span>the
+                <li className="text-gray-400">
+                  <span className="font-bold text-white">The retention period: </span>the
                   personal data must be kept enough time to the controller to
                   achieve its purpose; beyond that time, the data must be
                   deleted.
@@ -506,7 +506,7 @@ const Container = () => {
 
 const PrivacyPolicy = () => {
   return (
-    <div className="bg-white flex w-full h-full p-0 flex-col gap-0">
+    <div className="bg-black flex w-full h-full p-0 flex-col gap-0">
       <Header />
       <Container />
       <Footer />
