@@ -41,7 +41,7 @@ export const NavbarMobileMenu = ({
   }, []);
 
   return (
-    <div className="relative z-50 flex min-h-full w-full items-center justify-center overflow-hidden border-b border-gray-600 bg-black px-4 py-3 lg:hidden">
+    <div className="relative z-50 flex min-h-[78px] w-full items-center justify-center overflow-hidden border-b border-[#222222] bg-black px-4 py-3 lg:hidden">
       <div className="flex h-full w-full flex-row items-center justify-between md:max-w-[1180px]">
         <Anchor href="/" className="px-[0px] py-[0px]">
           <Image

@@ -216,11 +216,11 @@ const Guide = () => {
         id="how-it-works"
         className="bg-lightgray flex h-full w-full flex-col bg-cover bg-bottom bg-no-repeat px-4"
       >
-        <div className="flex flex-col items-center justify-center gap-12 py-14">
+        <div className="flex flex-col items-center justify-center gap-12 pb-14 pt-[98px]">
           <div className="gap-8 space-y-8">
             <Text
               as="h3"
-              className="text-center font-semibold text-gray-100 sm:text-[44px]"
+              className="text-center font-bold text-gray-100 text-[44px]"
             >
               {t("cta_howToUseTitle")}
             </Text>

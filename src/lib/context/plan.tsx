@@ -28,6 +28,7 @@ type DurationType = {
 };
 
 export interface currentSelectedProps {
+  dataType: { id: string; value: string };
   plan: PlanType;
   data: DataType;
   duration: DurationType;
@@ -36,6 +37,7 @@ export interface currentSelectedProps {
 export interface PlanHooks {
   data: DataPlan;
   isLoading: boolean;
+  isError: boolean;
   selectDataPlan: (options: string, value: string) => void;
   parameter: any;
   currentSelected: currentSelectedProps;

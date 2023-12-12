@@ -6,6 +6,7 @@ import { usePlanContext } from "@/lib/context/plan";
 
 const MobileCheckout = () => {
   const {
+    isError,
     data,
     isLoading,
     parameter,
@@ -70,6 +71,15 @@ const MobileCheckout = () => {
       <Button color="orange" className="h-12 w-full" onClick={handleBuy}>
         {t("planDetail_buyButton")}
       </Button>
+      {isError ? (
+        !parameter.data || !parameter.duration || !parameter.dataType ? (
+          <Text className="mt-2 text-red-500">
+            Please select {!parameter.dataType ? "type," : ""}{" "}
+            {!parameter.data ? "data," : ""} and{" "}
+            {!parameter.duration ? "duration" : ""}.
+          </Text>
+        ) : null
+      ) : null}
     </div>
   );
 };

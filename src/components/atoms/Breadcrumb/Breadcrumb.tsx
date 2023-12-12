@@ -7,7 +7,7 @@ interface BreadcrumbProps {
 
 const Breadcrumb = ({ children }: BreadcrumbProps) => {
   return (
-    <div className="flex items-center gap-x-3 px-3 py-4">
+    <div className=" hidden items-center gap-x-3 px-3 py-4 sm:flex">
       {children}
     </div>
   );
