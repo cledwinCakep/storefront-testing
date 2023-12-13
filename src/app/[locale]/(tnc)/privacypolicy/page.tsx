@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import {
   Content,
   Footer,
@@ -10,7 +10,7 @@ import {
 import { TLists } from "@/app/types";
 import { Button, Metric, Text, Title } from "@tremor/react";
 import Image from "next/image";
-import Link from "next/link";
+import Link, { LinkProps } from "next/link";
 
 const LISTS_2: TLists = {
   lists: [
@@ -33,12 +33,20 @@ const LISTS_3: TLists = {
   ],
 };
 
+const P = ({ children }: { children: React.ReactNode }) => {
+  return <div className="text-gray-400">{children}</div>;
+};
+const link = ({ children, href }: { children: React.ReactNode, href:string }) => {
+  return <Link href={href} className="text-gray-400">{children}</Link>;
+};
+
+
 const Container = () => {
   return (
-    <div className="flex px-5 justify-center items-start ">
-      <div className="flex max-w-[1180px] py-5 flex-col items-center gap-14 flex-1">
-        <Metric className="text-2xl not-italic font-bold leading-9 tracking-tighter">
-          <span className="items-stretch  text-tremor-content-strong text-white">
+    <div className="flex items-start justify-center px-5 ">
+      <div className="flex max-w-[1180px] flex-1 flex-col items-center gap-14 py-5">
+        <Metric className="text-2xl font-bold not-italic leading-9 tracking-tighter">
+          <span className="text-tremor-content-strong  items-stretch text-white">
             Privacy and Policy
           </span>
         </Metric>
@@ -74,9 +82,11 @@ const Container = () => {
             <div className="text-tremor-content-strong">
               <div className="list-disc pl-2">
                 <li className="text-gray-400">
-                  <span className="font-bold text-white">A clear purpose: </span>the
-                  controller must specifically inform the customer of the use he
-                  will make of his personal data by collecting them.
+                  <span className="font-bold text-white">
+                    A clear purpose:{" "}
+                  </span>
+                  the controller must specifically inform the customer of the
+                  use he will make of his personal data by collecting them.
                 </li>
                 <li className="text-gray-400">
                   <span className="font-bold text-white">Relevant data: </span>
@@ -85,9 +95,11 @@ const Container = () => {
                   minimizing collection.
                 </li>
                 <li className="text-gray-400">
-                  <span className="font-bold text-white">The retention period: </span>the
-                  personal data must be kept enough time to the controller to
-                  achieve its purpose; beyond that time, the data must be
+                  <span className="font-bold text-white">
+                    The retention period:{" "}
+                  </span>
+                  the personal data must be kept enough time to the controller
+                  to achieve its purpose; beyond that time, the data must be
                   deleted.
                 </li>
               </div>
@@ -104,8 +116,8 @@ const Container = () => {
             <div className="flex flex-col gap-3">
               <div>
                 <Subtitle title="Personally-Identifiable Information" />
-                <Paragraph>
-                  <p>
+                <>
+                  <P>
                     We may collect personally identifiable information when you
                     specifically and knowingly provide it to us, for example
                     when you sign up for our newsletter or chat, create an
@@ -115,9 +127,9 @@ const Container = () => {
                     or other information. Where applicable, personally
                     identifiable information includes personal data as defined
                     in applicable law.
-                  </p>
+                  </P>
                   <br />
-                  <p>
+                  <P>
                     This Privacy Policy does not apply to the privacy practices
                     of third parties that we do not own or control, including
                     but not limited to any third party websites, services,
@@ -125,14 +137,38 @@ const Container = () => {
                     or otherwise reference (collectively Third Party Services or
                     TPS) that you may access through the Services. For example,
                     the Services utilize the Facebook API Services as a TPS, and
-                    you are agreeing to be bound by the Facebook Terms of
-                    Service,  Privacy Policy and API Services Terms of Service
+                    you are agreeing to be bound by the Facebook {" "}
+                    <Link
+                      href="https://www.facebook.com/terms.php"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#F47325]"
+                    >
+                      Terms of Service, 
+                    </Link>
+                    <Link
+                      href="https://www.facebook.com/privacy/policy/?entry_point=data_policy_redirect&entry=0"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#F47325]"
+                    >
+                      Privacy Policy
+                    </Link> {" "}
+                    and {' '}
+                    <Link
+                      href="https://developers.facebook.com/terms/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#F47325]"
+                    >
+                      API Services Terms of Service
+                    </Link>{" "}
                     when engaging Facebook content and services through the
                     Service. We take no responsibility for the content or
                     privacy practices of any TPS. We encourage you to carefully
                     review the privacy policies of any TPS you access.
-                  </p>
-                  <p>
+                  </P>
+                  <P>
                     SUPERA LINK does not consider personally identifiable
                     information to include information that has been anonymized
                     so that it does not allow a third party to identify a
@@ -142,9 +178,9 @@ const Container = () => {
                     perform research and analysis aimed at improving our
                     products, service and technology, and display content that
                     is customized to your interests and preferences.
-                  </p>
+                  </P>
                   <br />
-                  <p>
+                  <P>
                     You may always choose not to provide personally identifiable
                     information, but if you choose so, certain parts of the
                     Service may not be available to you. If you have registered
@@ -155,13 +191,13 @@ const Container = () => {
                     maintain the right to withdraw such consent at any time. If
                     you do not agree to our use of your personal data in line
                     with this policy, please do not use our Services.
-                  </p>
-                </Paragraph>
+                  </P>
+                </>
               </div>
               <div>
                 <Subtitle title="Sensitive Personal Data" />
-                <Paragraph>
-                  <p>
+                <>
+                  <P>
                     Subject to the following paragraph, we ask that you do not
                     send us, and you do not disclose, any sensitive personal
                     data (e.g., social security numbers, information related to
@@ -177,13 +213,13 @@ const Container = () => {
                     not submit such content to us. Please note that even if
                     these information are provided, we will not store them
                     anywhere on our side.
-                  </p>
-                </Paragraph>
+                  </P>
+                </>
               </div>
               <div>
                 <Subtitle title="Non-Personally-Identifiable Information" />
-                <Paragraph>
-                  <p>
+                <>
+                  <P>
                     We may collect and aggregate non-personally identifiable
                     information which is information which does not permit you
                     to be identified or identifiable either by itself or in
@@ -197,13 +233,13 @@ const Container = () => {
                     taken in connection with the service. We use this
                     information to analyze usage patterns as part of making
                     improvements to the Service.
-                  </p>
-                </Paragraph>
+                  </P>
+                </>
               </div>
               <div>
                 <Subtitle title="Cookies, Pixels and Local Storage" />
-                <Paragraph>
-                  <p>
+                <>
+                  <P>
                     We may collect information using cookies, which are small
                     data files stored on the hard drive of your computer or
                     mobile device by a website. We may use both session cookies
@@ -220,8 +256,8 @@ const Container = () => {
                     applications and can be used by such service providers to
                     recognize your computer or mobile device when it visits
                     other websites.
-                  </p>
-                </Paragraph>
+                  </P>
+                </>
               </div>
             </div>
           </Content>
@@ -238,8 +274,8 @@ const Container = () => {
               </div>
               <div>
                 <Subtitle title="Strictly Necessary Cookies" />
-                <Paragraph>
-                  <p>
+                <>
+                  <P>
                     These cookies are essential to provide you with services
                     available through the Services and to enable you to use some
                     of its features. For example, they allow you to log in to
@@ -248,13 +284,13 @@ const Container = () => {
                     these cookies, the services that you have asked for cannot
                     be provided, and we only use these cookies to provide you
                     with those services.
-                  </p>
-                </Paragraph>
+                  </P>
+                </>
               </div>
               <div>
                 <Subtitle title="Functionality Cookies" />
-                <Paragraph>
-                  <p>
+                <>
+                  <P>
                     These cookies allow the Services to remember choices you
                     make when you use a site or application, such as remembering
                     your language preferences, remembering your login details
@@ -263,13 +299,13 @@ const Container = () => {
                     provide you with a more personal experience and to avoid you
                     having to re-enter your preferences every time you use the
                     Services.
-                  </p>
-                </Paragraph>
+                  </P>
+                </>
               </div>
               <div>
                 <Subtitle title="Performance Cookies" />
-                <Paragraph>
-                  <p>
+                <>
+                  <P>
                     These cookies allow the Services to remember choices you
                     make when you use a site or application, such as remembering
                     your language preferences, remembering your login details
@@ -278,34 +314,50 @@ const Container = () => {
                     provide you with a more personal experience and to avoid you
                     having to re-enter your preferences every time you use the
                     Services.
-                  </p>
+                  </P>
                   <br />
-                  <p>
+                  <P>
                     We use Google Analytics for this purpose. Google Analytics
                     uses its own cookies. It is only used to improve how the
                     services work. You can find out more information about
-                    Google Analytics cookies here:
-                    https://developers.google.com/analytics/resources
-                    /concepts/gaConceptsCookies
-                  </p>
+                    Google Analytics cookies here:{" "}
+                    <Link
+                      href="https://developers.google.com/analytics/resources
+                      /concepts/gaConceptsCookies"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#F47325]"
+                    >
+                      https://developers.google.com/analytics/resources
+                      /concepts/gaConceptsCookies
+                    </Link>
+                  </P>
                   <br />
-                  <p>
+                  <P>
                     You can find out more about how Google protects your data
-                    here: www.google.com/analytics/learn/privacy.html
-                  </p>
+                    here:{" "}
+                    <Link
+                      href="https://www.google.com/analytics/learn/privacy.html"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#F47325]"
+                    >
+                      www.google.com/analytics/learn/privacy.html
+                    </Link>
+                  </P>
                   <br />
-                  <p>
+                  <P>
                     You can prevent the use of Google Analytics relating to your
                     use of the services by downloading and installing the
                     browser plugin available via this link:
                     http://tools.google.com/dlpage/gaoptout?hl=en-GB
-                  </p>
-                </Paragraph>
+                  </P>
+                </>
               </div>
               <div>
                 <Subtitle title="Targeting Cookies / Advertising Cookies" />
-                <Paragraph>
-                  <p>
+                <>
+                  <P>
                     These cookies are used to deliver adverts more relevant to
                     you and your interests They are also used to limit the
                     number of times you see an advertisement as well as help
@@ -316,27 +368,64 @@ const Container = () => {
                     organizations such as advertisers. Quite often targeting or
                     advertising cookies will be linked to site functionality
                     provided by the other organization.
-                  </p>
-                </Paragraph>
+                  </P>
+                </>
               </div>
               <div>
                 <Subtitle title="Disabling Cookies" />
-                <Paragraph>
-                  <p>
+                <>
+                  <P>
                     Google AdWords Conversion Tool : Privacy information of the
-                    provider(https://goo.gl/CUUMgi), Link to
-                    Opt-Out(https://goo.gl/ghZWnt). On www.youronlinechoices.com
-                    you can read more about cookies and the individual
-                    providers. There you can also opt out of usage-based online
-                    advertising through one or more tools. To go directly to the
-                    preference manager, please click here.
-                  </p>
-                </Paragraph>
+                    provider{" "}
+                    <Link
+                      href="https://goo.gl/CUUMgi"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#F47325]"
+                    >
+                      (https://goo.gl/CUUMgi)
+                    </Link>
+                    , Link to Opt-Out{" "}
+                    <Link
+                      href="https://goo.gl/ghZWnt"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#F47325]"
+                    >
+                      (https://goo.gl/ghZWnt)
+                    </Link>
+                    .
+                    <p>
+                      On{"  "}
+                      <Link
+                        href="https://www.youronlinechoices.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#F47325]"
+                      >
+                        www.youronlinechoices.com{" "}
+                      </Link>
+                      you can read more about cookies and the individual
+                      providers. There you can also opt out of usage-based
+                      online advertising through one or more tools. To go
+                      directly to the preference manager, please click{" "}
+                      <Link
+                        href="https://www.youronlinechoices.com/uk/your-ad-choices"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#F47325]"
+                      >
+                        here
+                      </Link>
+                      .
+                    </p>
+                  </P>
+                </>
               </div>
               <div>
                 <Subtitle title="Facebook Custom Audiences" />
-                <Paragraph>
-                  <p>
+                <>
+                  <P>
                     In the context of usage-based online advertising, we also
                     use communication tools of Facebook, in particular custom-
                     and website custom audiences. Basically, a non-reversible
@@ -347,16 +436,37 @@ const Container = () => {
                     information on the purpose and scope of the data collection
                     and further processing and use of the data by Facebook and
                     your options to protect your privacy, please refer to the
-                    privacy policy of Facebook, which you can see here. If you
-                    want to object to the use of Facebook website custom
-                    audiences, you can do so here.
-                  </p>
-                </Paragraph>
+                    privacy policy of Facebook, which you can see
+                    <Link
+                      href={
+                        "https://www.facebook.com/privacy/policy/?entry_point=data_policy_redirect&entry=0"
+                      }
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#F47325]"
+                    >
+                      {" "}
+                      here
+                    </Link>
+                    . If you want to object to the use of Facebook website
+                    custom audiences, you can do so
+                    <Link
+                      href="https://www.facebook.com/adpreferences/?entry_product=ad_settings_screen"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#F47325]"
+                    >
+                      {" "}
+                      here
+                    </Link>
+                    .
+                  </P>
+                </>
               </div>
               <div>
                 <Subtitle title="Pixel Tags" />
-                <Paragraph>
-                  <p>
+                <>
+                  <P>
                     We may also use pixel tags (which are also known as web
                     beacons and clear GIFs) on the Services to track the actions
                     of users on our sites and applications.  Unlike cookies,
@@ -367,35 +477,126 @@ const Container = () => {
                     the services, so that we can manage our content more
                     effectively. The information we collect using pixel tags is
                     not linked to our users personal data.
-                  </p>
-                </Paragraph>
+                  </P>
+                </>
               </div>
               <div>
                 <Subtitle title="Do Not Track Signals" />
-                <Paragraph>
-                  <p>
+                <>
+                  <P>
                     Some Internet browsers may be configured to send “Do Not
                     Track” signals to the online services that you visit. We
                     currently do not respond to do not track signals. To find
                     out more about “Do Not Track,” please visit
-                    http://www.allaboutdnt.com.
-                  </p>
-                </Paragraph>
+                    <Link
+                      href={"http://www.allaboutdnt.com."}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#F47325]"
+                    >
+                      {" "}
+                      http://www.allaboutdnt.com.
+                    </Link>
+                  </P>
+                </>
               </div>
             </div>
           </Content>
           <Content title="3. What Do We Do With The Information That We Collect?">
+            <p className="mb-2 text-lg font-semibold leading-7 tracking-tighter text-white">
+              Information That We Collect
+            </p>
             <div className="flex flex-col gap-3">
               <Paragraph>
-                <p>
+                <P>
                   Except as disclosed in this privacy policy, SUPERA LINK does
                   not share your personal information with any outside parties.
                   SUPERA LINK will use the personally identifiable information
                   directly provided by you solely for the purpose for which you
                   have provided it, which may include:
-                </p>
+                </P>
               </Paragraph>
-              <List lists={LISTS_2.lists} />
+              <P>
+                <List lists={LISTS_2.lists} />
+              </P>
+              <P>
+                <p>
+                  We may share this information with service providers who
+                  perform services on our behalf, such as those services listed
+                  above, or other services like processing information requests,
+                  displaying stored data you access, to assist us in marketing,
+                  to conduct audits, etc. Those companies will be permitted to
+                  obtain only the personal information they need to provide the
+                  service they provide, will be required to maintain the
+                  confidentiality of the information, and will be prohibited
+                  from using it for any other purpose.
+                </p>
+                <br />
+                <p>
+                  We may also use information you provide to better serve you,
+                  and, if you have given your consent for us to do so, to send
+                  you email or text messages concerning offers from our partners
+                  and other third parties that we think may be of interest to
+                  you. If you do not wish to receive marketing emails, you may
+                  adjust your Personal Information Preferences as described
+                  below or follow the unsubscribe or stop instructions included
+                  within each communication. We use MailChimp as our marketing
+                  automation platform. By submitting the information you provide
+                  us, you acknowledge that the information will be transferred
+                  to MailChimp for processing in accordance with their{" "}
+                  <Link
+                    href={"https://www.intuit.com/privacy/statement/"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#F47325]"
+                  >
+                    {" "}
+                    Privacy Policy{" "}
+                  </Link>
+                  and
+                  <Link
+                    href={"https://mailchimp.com/legal/terms/"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#F47325]"
+                  >
+                    {" "}
+                    Terms.
+                  </Link>
+                </p>
+                <br />
+                <p>
+                  We will only retain your personally identifiable information
+                  as long as reasonably required to provide you with the
+                  Services unless a longer retention period is required or
+                  permitted by law (for example, for regulatory purposes).
+                  SUPERA LINK will provide you with information about SUPERA
+                  LINK’ data and how it will be used upon request. Should your
+                  data stored by SUPERA LINK be incorrect, SUPERA LINK will
+                  correct it. In this regard, you can write to SUPERA LINK at
+                  the address listed in section ‘7. How Does A User Change Or
+                  Update Information’ or contact them in any other way. In
+                  addition, customers can view the data in their account that
+                  SUPERA LINK has stored about them and correct it if necessary.
+                </p>
+                <br />
+                <p>
+                  You may contact us anytime to opt-out of: (i) direct marketing
+                  communications; (ii) our collection of sensitive personal
+                  data; (iii) any new processing of your personal data that we
+                  may carry out beyond the original purpose. Please note that
+                  your use of some of the Services may be ineffective upon
+                  opt-out.  You may also: (A) access the data we hold about you
+                  at any time via your account or by contacting us directly; (B)
+                  update or correct any inaccuracies in your personal data by
+                  contacting us; (C) in certain situations, for example when the
+                  data we hold about you is no longer relevant or is incorrect,
+                  you can request that we erase your data. You may contact us at
+                  support@superalink.com anytime for any other questions you may
+                  have about your personally identifiable information and our
+                  use of it
+                </p>
+              </P>
             </div>
           </Content>
           <Content title="4. Disclosure">
@@ -407,12 +608,14 @@ const Container = () => {
                   following circumstances:
                 </p>
               </Paragraph>
-              <List lists={LISTS_3.lists} />
+              <P>
+                <List lists={LISTS_3.lists} />
+              </P>
             </div>
           </Content>
           <Content title="5. Children’s Policy">
             <Paragraph>
-              <p>
+              <P>
                 The Terms of service clearly provide that Users must be (i) 18
                 or older, or (ii) 13 and older if either (a) an emancipated
                 minor, or (b) he/she possess legal parental or guardian consent.
@@ -421,12 +624,12 @@ const Container = () => {
                 that we have collected any personal information from a user
                 under the age of 13, we will attempt to identify and delete that
                 information from our database.
-              </p>
+              </P>
             </Paragraph>
           </Content>
           <Content title="6. International Usage">
             <Paragraph>
-              <p>
+              <P>
                 The Service is owned by SUPERA LINK and may be accessed in
                 Europe and abroad. For data protection purposes, SUPERA LINK is
                 the controller and, unless otherwise noted, is also the
@@ -441,22 +644,22 @@ const Container = () => {
                 engaged under a binding confidentiality agreement and have a
                 limited access to SUPERA LINK database for the purposes of
                 providing support.
-              </p>
+              </P>
             </Paragraph>
           </Content>
           <Content title="7. How Does A User Change Or Update Information?">
             <Paragraph>
-              <p>
+              <P>
                 If you have any questions or concerns about this privacy policy
                 or would like the personally identifiable information that you
                 have provided to be removed from our files, please contact
                 SUPERA LINK via email at support@superalink.com.
-              </p>
+              </P>
             </Paragraph>
           </Content>
           <Content title="8. Security and Encryption">
             <Paragraph>
-              <p>
+              <P>
                 We follow generally accepted industry standards to help protect
                 your personal information. No method of transmission over the
                 internet, mobile technology, or method of electronic storage, is
@@ -476,12 +679,12 @@ const Container = () => {
                 you feel that the security of any account you might have with us
                 has been compromised), please immediately notify us of the
                 problem by contacting us at support@superalink.com.
-              </p>
+              </P>
             </Paragraph>
           </Content>
           <Content title="9. Changes to This Policy">
             <Paragraph>
-              <p>
+              <P>
                 We reserve the right to change the terms of this privacy policy
                 at any time. When we make changes, we will revise the last
                 updated date at the top of the policy. If there are material
@@ -490,7 +693,7 @@ const Container = () => {
                 of such changes here or on our home page, or by sending you an
                 email. We encourage you to review this policy whenever you visit
                 one of our websites or applications.
-              </p>
+              </P>
             </Paragraph>
           </Content>
           <div className="mt-10">
@@ -506,7 +709,7 @@ const Container = () => {
 
 const PrivacyPolicy = () => {
   return (
-    <div className="bg-black flex w-full h-full p-0 flex-col gap-0">
+    <div className="flex h-full w-full flex-col gap-0 bg-black p-0">
       <Header />
       <Container />
       <Footer />

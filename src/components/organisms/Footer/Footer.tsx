@@ -204,101 +204,96 @@ const Footer = () => {
         </div>
       </Dialog>
       <Layout className="flex w-full flex-col items-center  gap-14 bg-[#121417] pt-20">
-        <div className="flex w-full flex-wrap content-start items-start  gap-y-14 md:flex-nowrap md:gap-x-32">
-          <div className="flex w-full flex-1 flex-col items-start gap-5">
-            <div className="flex flex-col items-start md:items-start lg:w-[325px]">
+        <div className="flex w-full flex-col items-center gap-14">
+          <div className="flex w-full flex-col flex-wrap content-start items-start gap-x-7 gap-y-14 sm:flex-nowrap md:flex-row md:gap-x-48">
+            <div className="flex w-full flex-col items-start gap-5 md:max-w-[380px]">
               <Link href={"/"}>
                 <Icons.superalink width={228} height={33} />
               </Link>
-              <div className="dark:text-dark-tremor-content-strong mt-6 text-base font-normal leading-6 tracking-tighter text-gray-300 opacity-80 md:text-start md:text-lg md:leading-7">
-                <Text
-                  as="body1"
-                  // className="text-center font-medium leading-[32px] text-gray-100 "
-                >
-                  Supera link provide electronic SIM (eSIM) for customers who
-                  want to travel around the world with super hassle-free &
-                  affordable connectivity
-                  {/* {t("hero_paymentMethodTitle")} */}
+              <div className="dark:text-dark-tremor-content-strong mt-6 text-base font-normal leading-6 tracking-tighter text-gray-300 opacity-80 sm:text-start sm:text-lg sm:leading-7">
+                Supera link provide electronic SIM (eSIM) for customers who want
+                to travel around the world with super hassle-free & affordable
+                connectivity
+              </div>
+            </div>
+            <div className="grid w-full grid-cols-2 content-start items-start gap-x-5 gap-y-10 sm:grid-cols-3">
+              <div className="col-span-1">
+                <Text className=" text-base font-bold leading-6 tracking-tighter text-gray-400">
+                  ABOUT
                 </Text>
+                <div className="mt-4 flex flex-col gap-2">
+                  <FooterTextLink text="Destination" href="#destination" hash />
+                  <FooterTextLink
+                    text="How it works"
+                    href="#how-it-works"
+                    hash
+                  />
+                  <span
+                    className="text-base font-normal leading-6 tracking-tighter text-gray-100 opacity-80  hover:opacity-100 sm:text-lg"
+                    onClick={openModal}
+                    role="button"
+                  >
+                    Device compatibility
+                  </span>
+                  <Link
+                    href="https://affiliate.superalink.com/register?step=personal"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-base font-normal leading-6 tracking-tighter text-gray-100 opacity-80  hover:opacity-100 sm:text-lg"
+                  >
+                    Become affiliate{" "}
+                  </Link>
+                </div>
               </div>
-            </div>
-          </div>
-          <div className="flex w-full flex-wrap content-start items-start gap-x-5 gap-y-10 sm:justify-between md:gap-x-10">
-            <div className="col-span-1">
-              <div className=" text-base font-bold leading-6 tracking-tighter text-gray-400 md:text-[26px]">
-                ABOUT
+              <div className="col-span-1">
+                <div className=" text-base font-bold leading-6 tracking-tighter text-gray-400">
+                  RESOURCES
+                </div>
+                <div className="mt-4 flex flex-col gap-2">
+                  <FooterTextLink
+                    text="Support"
+                    href="mailto:support@superalink.com"
+                  />
+                  <FooterTextLink text="Privacy policy" href="/privacypolicy" />
+                  <FooterTextLink
+                    text="Term & Conditions"
+                    href="/termsconditions"
+                  />
+                </div>
               </div>
-              <div className="mt-4 flex flex-col gap-2">
-                <FooterTextLink text="Destination" href="#destination" />
-                <FooterTextLink text="How it works" href="#how-it-works" />
-                <span
-                  onClick={openModal}
-                  role="button"
-                  className="text-base font-normal leading-6 tracking-tighter text-gray-100 opacity-80  hover:opacity-100 md:text-lg"
-                >
-                  Device compatibility
-                </span>
-                <Link
-                  href="https://affiliate.superalink.com/register?step=personal"
-                  target="_blank" rel="noopener noreferrer"
-                  className="text-base font-normal leading-6 tracking-tighter text-gray-100 opacity-80  hover:opacity-100 md:text-lg"
-                >
-                  Become affiliate
-                </Link>
-              </div>
-            </div>
-            <div className="col-span-1">
-              <div className=" text-base font-bold leading-6 tracking-tighter text-gray-400 md:text-[26px]">
-                RESOURCES
-              </div>
-              <div className="mt-4 flex flex-col gap-2">
-                <FooterTextLink
-                  text="Support"
-                  href="mailto:support@superalink.com"
-                />
-                <FooterTextLink text="Privacy policy" href="privacypolicy" />
-                <FooterTextLink
-                  text="Terms & Conditions"
-                  href="termsconditions"
-                />
-              </div>
-            </div>
-            <div className="col-span-1">
-              <div className=" text-base font-bold leading-6 tracking-tighter text-gray-400 md:text-[26px]">
-                SOCIAL MEDIA
-              </div>
-              <div className="mt-4 flex flex-col gap-2">
-                {/* <FooterTextLink
+              <div className="col-span-1">
+                <div className=" text-base font-bold leading-6 tracking-tighter text-gray-400">
+                  SOCIAL MEDIA
+                </div>
+                <div className="mt-4 flex flex-col gap-2">
+                  {/* <FooterTextLink
                     text="Tiktok"
                     href="www.tiktok.com"
                     
                   />
                   <FooterTextLink text="Instagram" href="www.instagram.com/beliesim" /> */}
-                <Link
-                  href="https://www.tiktok.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-base font-normal leading-6 tracking-tighter text-gray-100 opacity-80  hover:opacity-100 md:text-lg"
-                >
-                  Tiktok
-                </Link>
-                <Link
-                  href="https://www.instagram.com"
-                  target="_blank"
-                  className="text-base font-normal leading-6 tracking-tighter text-gray-100 opacity-80  hover:opacity-100 md:text-lg"
-                >
-                  Instagram
-                </Link>
+                  <Link
+                    href="https://www.tiktok.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-base font-normal leading-6 tracking-tighter text-gray-100 opacity-80  hover:opacity-100 sm:text-lg"
+                  >
+                    Tiktok
+                  </Link>
+                  <Link
+                    href="https://www.instagram.com"
+                    target="_blank"
+                    className="text-base font-normal leading-6 tracking-tighter text-gray-100 opacity-80  hover:opacity-100 sm:text-lg"
+                  >
+                    Instagram
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className="flex w-full items-center justify-center border-t-[1px] border-gray-500 py-7">
-          <Text
-            as="body1"
-            className="text-wrap text-center text-[13px] text-gray-400"
-          >
-            &copy; {new Date().getFullYear()}. All Rights Reserved Supera link
+          <Text className="flex w-full items-center justify-center border-t-[1px] border-gray-400 pb-7 pt-7 text-gray-400">
+            &copy; Copyright {new Date().getFullYear()}. All Rights Reserved
+            Supera link
           </Text>
         </div>
       </Layout>

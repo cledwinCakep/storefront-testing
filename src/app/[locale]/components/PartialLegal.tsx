@@ -68,7 +68,7 @@ export const Logo = () => {
 
 export const Header = () => {
   return (
-    <div className="flex px-7 py-5 flex-col justify-end items-start gap-3 sm:flex-row sm:justify-around">
+    <div className="flex px-5 pt-7 lg:px-32 py-5 flex-col justify-end items-start">
       <Logo />
     </div>
   );
