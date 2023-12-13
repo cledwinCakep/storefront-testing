@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 
 // atoms
@@ -204,7 +204,7 @@ const Footer = () => {
         </div>
       </Dialog>
       <Layout className="flex w-full flex-col items-center  gap-14 bg-[#121417] pt-20">
-        <div className="flex w-full flex-wrap content-start items-start  gap-y-14 md:gap-x-32 md:flex-nowrap">
+        <div className="flex w-full flex-wrap content-start items-start  gap-y-14 md:flex-nowrap md:gap-x-32">
           <div className="flex w-full flex-1 flex-col items-start gap-5">
             <div className="flex flex-col items-start md:items-start lg:w-[325px]">
               <Link href={"/"}>
@@ -223,7 +223,7 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div className="flex w-full flex-wrap content-start items-start gap-x-5 gap-y-10 md:gap-x-10 sm:justify-between">
+          <div className="flex w-full flex-wrap content-start items-start gap-x-5 gap-y-10 sm:justify-between md:gap-x-10">
             <div className="col-span-1">
               <div className=" text-base font-bold leading-6 tracking-tighter text-gray-400 md:text-[26px]">
                 ABOUT
@@ -238,6 +238,13 @@ const Footer = () => {
                 >
                   Device compatibility
                 </span>
+                <Link
+                  href="https://affiliate.superalink.com/register?step=personal"
+                  target="_blank" rel="noopener noreferrer"
+                  className="text-base font-normal leading-6 tracking-tighter text-gray-100 opacity-80  hover:opacity-100 md:text-lg"
+                >
+                  Become affiliate
+                </Link>
               </div>
             </div>
             <div className="col-span-1">
@@ -250,8 +257,10 @@ const Footer = () => {
                   href="mailto:support@superalink.com"
                 />
                 <FooterTextLink text="Privacy policy" href="privacypolicy" />
-                <FooterTextLink text="Terms & Conditions" href="termsconditions" />
-               
+                <FooterTextLink
+                  text="Terms & Conditions"
+                  href="termsconditions"
+                />
               </div>
             </div>
             <div className="col-span-1">
