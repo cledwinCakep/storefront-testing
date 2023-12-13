@@ -29,8 +29,6 @@ export default function AffLink({ params }: { params: { locale: string } }) {
   useEffect(() => {
     localStorage.setItem("affiliate_code", code);
   }, [code]);
-  
-  console.log(params);
 
   return (
     <>
