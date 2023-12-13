@@ -272,7 +272,7 @@ const Container = () => {
                             due to charges from alternate phones, alternate SIM
                             cards, alternate providers, hotel phones, or other
                             charges that are not directly linked to the
-                            Customer's Supera Link eSIM purchase (
+                           {`Customer's`} Supera Link eSIM purchase (
                             <span className="text-white">
                               {" "}
                               See section 7. LIABILITY AND WARRANTY{" "}
