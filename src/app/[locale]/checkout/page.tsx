@@ -253,7 +253,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
                     }, ${
                       retrievedData!["data_amount"] +
                       retrievedData!["data_unit"]
-                    } , ${retrievedData!["duration_in_days"]} Day`}
+                    }, ${retrievedData!["duration_in_days"]} Day`}
                     price={subtotal.toLocaleString("en-US", {
                       style: "currency",
                       currency: "USD",
