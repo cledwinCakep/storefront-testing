@@ -98,12 +98,12 @@ export default function RootLayout({
             {children}
           </NextIntlClientProvider>
         </PayPalScriptProvider>
-        <ProgressBar
+        {/* <ProgressBar
           height="4px"
           color="#f97316"
           options={{ showSpinner: false }}
           shallowRouting
-        />
+        /> */}
       </body>
     </html>
   );
