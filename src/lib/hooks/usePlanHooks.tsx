@@ -122,7 +122,21 @@ const usePlanHook = (params: { slug: string }) => {
               currentSelected["data"].value.replace(/[^0-9]/g, "") &&
             person["duration_in_days"] == currentSelected["duration"].value
           ) {
-            setBuy(person);
+            const newBod = {
+              country_code: person["country_code"],
+              country_name: person["country_name"],
+              created_at: person["created_at"],
+              data_amount: person["data_amount"],
+              data_unit: person["data_unit"],
+              duration_in_days: person["duration_in_days"],
+              id: person["id"],
+              option_id: person["option_id"],
+              plan_option: person["plan_option"],
+              plan_type: currentSelected.dataType.value,
+              price_in_usd: person["price_in_usd"],
+              updated_at: person["updated_at"],
+            };
+            setBuy(newBod);
             let temp = order * person["price_in_usd"];
             setSubtotal(temp);
           }

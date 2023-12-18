@@ -470,10 +470,11 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
             <Button
               color="orange"
               className={`w-full ${
-                order <= 0
+                subtotal<1
                   ? "bg-orange-200 hover:border-0 hover:bg-orange-200 hover:text-slate-50"
                   : "bg-orange-500"
               }`}
+              disabled={subtotal<1}
               onClick={handleBuy}
             >
               {t("planDetail_buyButton")}
