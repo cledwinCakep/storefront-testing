@@ -65,6 +65,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
     option_id: "",
     plan_option: "",
     updated_at: "",
+    plan_type: "",
   });
   const [subtotal, setSubtotal] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -142,6 +143,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
       option_id: "",
       plan_option: "",
       updated_at: "",
+      plan_type: "",
     });
   }
 
@@ -164,6 +166,10 @@ export default function Checkout({ params }: { params: { locale: string } }) {
   };
 
   let [isOpen, setIsOpen] = React.useState(false);
+
+  function capitalizeFirstLetter(inputString: string): string {
+    return inputString.charAt(0).toUpperCase() + inputString.slice(1).toLowerCase();
+  }
 
   return (
     <>
@@ -253,7 +259,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
                     }, ${
                       retrievedData!["data_amount"] +
                       retrievedData!["data_unit"]
-                    }, ${retrievedData!["duration_in_days"]} Day`}
+                    }, ${retrievedData!["duration_in_days"]} Day (${capitalizeFirstLetter(retrievedData!["plan_type"])})`}
                     price={subtotal.toLocaleString("en-US", {
                       style: "currency",
                       currency: "USD",
