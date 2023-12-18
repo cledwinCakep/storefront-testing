@@ -22,7 +22,7 @@ const CallToAction = () => {
         >
           {t("cta_ctaTitle")}
         </Text>
-        <Link
+        <a
           href={
             "mailto:support@superalink.com?subject=Support%20to%20buy%20eSIM"
           }
@@ -30,7 +30,7 @@ const CallToAction = () => {
           <Button color="transparent" size="xs" iconLeft={<Email />}>
             {t("cta_ctaButton")}
           </Button>
-        </Link>
+        </a>
       </Layout>
     </div>
   );
