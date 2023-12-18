@@ -129,7 +129,7 @@ const NavbarDesktop = ({ params }: { params: { locale: string } }) => {
               </Link> */}
             </div>
           </div>
-          <Link
+          <a
             href={
               "mailto:support@superalink.com?subject=Support%20to%20buy%20eSIM"
             }
@@ -142,7 +142,7 @@ const NavbarDesktop = ({ params }: { params: { locale: string } }) => {
             >
               {t("navbar_contactUs")}
             </Button>
-          </Link>
+          </a>
         </div>
       </div>
     </div>
