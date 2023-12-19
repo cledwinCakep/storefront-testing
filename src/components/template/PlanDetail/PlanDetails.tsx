@@ -470,7 +470,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
             <Button
               color="orange"
               className={`w-full ${
-                subtotal<1
+                subtotal<=0
                   ? "bg-orange-200 hover:border-0 hover:bg-orange-200 hover:text-slate-50"
                   : "bg-orange-500"
               }`}
