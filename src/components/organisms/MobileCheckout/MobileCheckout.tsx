@@ -68,7 +68,16 @@ const MobileCheckout = () => {
         </div>
       </div>
 
-      <Button color="orange" className="h-12 w-full" onClick={handleBuy}>
+      <Button
+        color="orange"
+        className={`h-12 w-full ${
+          subtotal<=0
+            ? "bg-orange-200 hover:border-0 hover:bg-orange-200 hover:text-slate-50"
+            : "bg-orange-500"
+        }`}
+        disabled={subtotal<=0}
+        onClick={handleBuy}
+      >
         {t("planDetail_buyButton")}
       </Button>
       {isError ? (

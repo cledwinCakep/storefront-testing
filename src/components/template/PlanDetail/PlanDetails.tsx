@@ -474,7 +474,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
                   ? "bg-orange-200 hover:border-0 hover:bg-orange-200 hover:text-slate-50"
                   : "bg-orange-500"
               }`}
-              disabled={subtotal<1}
+              disabled={subtotal<=0}
               onClick={handleBuy}
             >
               {t("planDetail_buyButton")}
