@@ -71,9 +71,9 @@ const MobileCheckout = () => {
       <Button
         color="orange"
         className={`h-12 w-full ${
-          subtotal<=0
-            ? "bg-orange-200 hover:border-0 hover:bg-orange-200 hover:text-slate-50"
-            : "bg-orange-500"
+          subtotal <= 0
+                  ? "bg-neutral-500 font-medium text-neutral-800 hover:border-0 hover:bg-neutral-500"
+                  : "bg-orange-500 hover:bg-orange-800"
         }`}
         disabled={subtotal<=0}
         onClick={handleBuy}
