@@ -140,26 +140,12 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
       );
     };
 
-    return Array.from(new Set(dataTypeArr), (value) => ({
+    const planDataType = Array.from(new Set(dataTypeArr), (value) => ({
       label: capitalizeSetValue(value),
       value: capitalizeSetValue(value),
     }));
-  }, [data, parameter]);
 
-  const getPlanDuration = useCallback(() => {
-    const planArr: any = data[parameter.plan] ?? [];
-
-    const result = planArr[parameter.data]
-      ?.filter(
-        (planDuration: any) =>
-          planDuration.plan_type === parameter.dataType.toLocaleUpperCase()
-      )
-      .map((planDuration: any) => ({
-        label: planDuration.duration_in_days + " Day(s)",
-        value: planDuration.duration_in_days,
-      }));
-
-    return result ?? [];
+    return planDataType;
   }, [data, parameter]);
 
   const getQuotaPerDay = () => {
@@ -188,6 +174,22 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
       return check;
     }
   };
+
+  const getPlanDuration = useCallback(() => {
+    const planArr: any = data[parameter.plan] ?? [];
+
+    const result = planArr[parameter.data]
+      ?.filter(
+        (planDuration: any) =>
+          planDuration.plan_type === parameter.dataType.toLocaleUpperCase()
+      )
+      .map((planDuration: any) => ({
+        label: planDuration.duration_in_days + " Day(s)",
+        value: planDuration.duration_in_days,
+      }));
+
+    return result ?? [];
+  }, [data, parameter]);
 
   return (
     <div className="sm:relative">
@@ -494,11 +496,14 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
             <Button
               color="orange"
               className={`w-full ${
-                subtotal <= 0
+                subtotal <= 0 &&
+                currentSelected.data.id == "-" ||
+                currentSelected.duration.id == "-"
                   ? "bg-neutral-500 font-medium text-neutral-800 hover:border-0 hover:bg-neutral-500"
                   : "bg-orange-500 hover:bg-orange-800"
               }`}
               onClick={handleBuy}
+              disabled={subtotal <= 0 &&  currentSelected.data.id == "-" || currentSelected.duration.id == "-"}
             >
               {t("planDetail_buyButton")}
             </Button>

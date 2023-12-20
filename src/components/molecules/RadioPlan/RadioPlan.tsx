@@ -31,14 +31,18 @@ const RadioPlan = ({ title, name, data }: RadioPlanProps) => {
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     let temp = {
-      ...currentSelected,
+      ...currentSelected,      
       [name]: { id: e.target.id, value: e.target.value },
     };
 
+    if (name === 'dataType' && currentSelected.dataType.value !== e.target.value) {
+      temp = { ...temp, duration: { id: '-', value: '' } };
+    }
+    
     setCurrentSelect(temp);
     selectDataPlan(e.target.name, e.target.value);
   };
-
+  
   return (
     <div>
       <div className="mb-5 flex gap-x-3">
