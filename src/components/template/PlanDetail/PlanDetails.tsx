@@ -501,14 +501,14 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
               color="orange"
               className={`w-full ${
                 (subtotal <= 0 && currentSelected.data.id == "-") ||
-                currentSelected.duration.id == "-"
+                currentSelected.duration.id == "-" || currentSelected.dataType.id==""
                   ? "bg-neutral-500 font-medium text-neutral-800 hover:border-0 hover:bg-neutral-500"
                   : "bg-orange-500 hover:bg-orange-800"
               }`}
               onClick={handleBuy}
               disabled={
                 (subtotal <= 0 && currentSelected.data.id == "-") ||
-                currentSelected.duration.id == "-"
+                currentSelected.duration.id == "-" || currentSelected.dataType.id==""
               }
             >
               {t("planDetail_buyButton")}

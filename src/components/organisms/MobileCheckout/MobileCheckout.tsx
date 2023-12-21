@@ -31,11 +31,17 @@ const MobileCheckout = () => {
           <Text as="small" className="font-medium text-gray-500">
             {`${
               currentSelected.plan.value === "UNLIMITED"
-                ? "Daily Unlimited Plan"
-                : "Quota Plan"
-            } ${
-              currentSelected.data.id !== "-" ? currentSelected.data.value : ""
-            } ${
+                ? "Daily Unlimited Plan, "
+                : "Quota Plan, "
+            }${
+              currentSelected.dataType.id !== "-"
+                ? currentSelected.dataType.value + ", "
+                : ""
+            }${
+              currentSelected.data.id !== "-"
+                ? currentSelected.data.value + ", "
+                : ""
+            }${
               currentSelected.duration.id !== "-"
                 ? currentSelected.duration.value + " " + "Days"
                 : ""
@@ -71,11 +77,17 @@ const MobileCheckout = () => {
       <Button
         color="orange"
         className={`h-12 w-full ${
-          subtotal <= 0
-                  ? "bg-neutral-500 font-medium text-neutral-800 hover:border-0 hover:bg-neutral-500"
-                  : "bg-orange-500 hover:bg-orange-800"
+          (subtotal <= 0 && currentSelected.data.id == "-") ||
+          currentSelected.duration.id == "-" ||
+          currentSelected.dataType.id == ""
+            ? "bg-neutral-500 font-medium text-neutral-800 hover:border-0 hover:bg-neutral-500"
+            : "bg-orange-500 hover:bg-orange-800"
         }`}
-        disabled={subtotal<=0}
+        disabled={
+          (subtotal <= 0 && currentSelected.data.id == "-") ||
+          currentSelected.duration.id == "-" ||
+          currentSelected.dataType.id == ""
+        }
         onClick={handleBuy}
       >
         {t("planDetail_buyButton")}
