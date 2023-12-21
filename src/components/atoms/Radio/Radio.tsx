@@ -45,7 +45,7 @@ const Radio = ({
       />
       <span
         className={`absolute left-0 top-0 z-0 h-full w-full rounded-lg border-[1px] peer-checked/radio:border-[#9A3412] peer-checked/radio:bg-[#431407] peer-hover/radio:border-[#9A3412] ${
-          isDisabled ? "border-0 bg-[#121417]" : "border-gray-500"
+          isDisabled ? "border-0 bg-[#121417]" : "border-[#424242] bg-[#121417]"
         }`}
       />
 

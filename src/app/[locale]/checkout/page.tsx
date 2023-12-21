@@ -256,10 +256,13 @@ export default function Checkout({ params }: { params: { locale: string } }) {
                       retrievedData!["plan_option"] == "UNLIMITED"
                         ? "Daily Unlimited"
                         : "Quota"
-                    }, ${
+                    },
+                     ${capitalizeFirstLetter(retrievedData!["plan_type"])}
+                    ,
+                    ${
                       retrievedData!["data_amount"] +
                       retrievedData!["data_unit"]
-                    }, ${retrievedData!["duration_in_days"]} Day (${capitalizeFirstLetter(retrievedData!["plan_type"])})`}
+                    }, ${retrievedData!["duration_in_days"]} Day`}
                     price={subtotal.toLocaleString("en-US", {
                       style: "currency",
                       currency: "USD",
