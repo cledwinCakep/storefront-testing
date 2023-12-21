@@ -153,7 +153,7 @@ export const NavbarMobileMenu = ({
                 {t("navbar_howItWorks")}
               </Anchor>
             </div>
-            <Link
+            <a
               href={
                 "mailto:support@superalink.com?subject=Support%20to%20buy%20eSIM"
               }
@@ -169,7 +169,7 @@ export const NavbarMobileMenu = ({
                   {t("navbar_contactUs")}
                 </Button>
               </div>
-            </Link>
+            </a>
           </div>
         </div>
         <div className="bottom-0 h-auto flex-none pb-5 text-center text-[13px] text-[#6B7280]">

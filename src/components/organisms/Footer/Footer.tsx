@@ -43,7 +43,6 @@ const Apple = [
 ];
 
 const Samsung = [
-  "Samsung",
   "Galaxy S 20",
   "Galaxy S 20+",
   "Galaxy S 20 Ultra",
@@ -67,10 +66,9 @@ const Samsung = [
   "Galaxy Z Fold 4 5G",
 ];
 
-const Oppo = ["Oppo", "Oppo Find X5", "Oppo Find X5 Pro"];
+const Oppo = ["Oppo Find X5", "Oppo Find X5 Pro"];
 
 const Huawei = [
-  "Huawei",
   "Huawei P40",
   "Huawei P40 Pro",
   "Huawei Mate P40 Pro",
@@ -237,7 +235,7 @@ const Footer = () => {
                     Device compatibility
                   </span>
                   <Link
-                    href="https://affiliate.superalink.com/register?step=personal"
+                    href="https://affiliate.superalink.com"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-base font-normal leading-6 tracking-tighter text-gray-100 opacity-80  hover:opacity-100 sm:text-lg"

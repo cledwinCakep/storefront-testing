@@ -44,8 +44,8 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
   } = usePlanContext();
 
   const t = useTranslations("PlanDetail");
-  const router = usePathname()
-  
+  const router = usePathname();
+
   const country_code = router.split("/")[2];
 
   const z: any = {
@@ -140,11 +140,40 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
       );
     };
 
-    return Array.from(new Set(dataTypeArr), (value) => ({
+    const planDataType = Array.from(new Set(dataTypeArr), (value) => ({
       label: capitalizeSetValue(value),
       value: capitalizeSetValue(value),
     }));
+
+    return planDataType;
   }, [data, parameter]);
+
+  const getQuotaPerDay = () => {
+    const check = Object.keys(data[parameter.plan]).map((key, index) => ({
+      label: parameter.plan === "QUOTA" ? key : `${key}/day`,
+      value: key, // Generate a value based on the label
+    }));
+
+    const filteredParams = check.filter((item) => {
+      const key = item.value;
+      const matchingPlans = data[parameter.plan][key];
+
+      if (matchingPlans) {
+        const localPlan = matchingPlans.find(
+          (plan: any) =>
+            plan.plan_type === parameter.dataType.toLocaleUpperCase()
+        );
+        return localPlan !== undefined;
+      }
+      return false;
+    });
+
+    if (filteredParams.length > 0) {
+      return filteredParams;
+    } else {
+      return check;
+    }
+  };
 
   const getPlanDuration = useCallback(() => {
     const planArr: any = data[parameter.plan] ?? [];
@@ -204,7 +233,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
               style={{
                 objectFit: "cover",
               }}
-              className="rounded-3xl"
+              className="rounded-lg"
             />
           ) : (
             <Image
@@ -220,7 +249,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
           )}
         </div>
 
-        <div className="space-y-8 md:px-6 sm:col-span-2 sm:col-start-1 md:col-span-2 md:col-start-2 md:row-start-1">
+        <div className="space-y-8 sm:col-span-2 sm:col-start-1 md:col-span-2 md:col-start-2 md:row-start-1 md:px-6">
           <div className="sm:mt-8 md:mt-0">
             <div className="flex w-full flex-col gap-2">
               <Text as="subHeading1" className="font-bold text-gray-100">
@@ -275,10 +304,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
               <RadioPlan
                 name="data"
                 title={t("planDetail_selectDataTitle")}
-                data={Object.keys(data[parameter.plan]).map((key, index) => ({
-                  label: parameter.plan === "QUOTA" ? key : `${key}/day`,
-                  value: key, // Generate a value based on the label
-                }))}
+                data={getQuotaPerDay()}
               />
               <RadioPlan
                 name="duration"
@@ -395,16 +421,20 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
               <Text as="subHeading2" className="font-bold text-[#F9F9F9]">
                 {t("planDetail_orderInformation")}
               </Text>
-              <Text as="small" className="font-medium text-[#9CA3AF]">
+              <Text as="body1" className="font-medium text-[#9CA3AF]">
                 {`${
                   currentSelected.plan.value === "UNLIMITED"
-                    ? "Daily Unlimited Plan"
-                    : "Quota Plan"
-                } ${
-                  currentSelected.data.id !== "-"
-                    ? currentSelected.data.value
+                    ? "Daily Unlimited Plan, "
+                    : "Quota Plan, "
+                }${
+                  currentSelected.dataType.id !== "-"
+                    ? currentSelected.dataType.value + ", "
                     : ""
-                } ${
+                }${
+                  currentSelected.data.id !== "-"
+                    ? currentSelected.data.value + ", "
+                    : ""
+                }${
                   currentSelected.duration.id !== "-"
                     ? currentSelected.duration.value + " " + "Days"
                     : ""
@@ -470,11 +500,16 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
             <Button
               color="orange"
               className={`w-full ${
-                order <= 0
-                  ? "bg-orange-200 hover:border-0 hover:bg-orange-200 hover:text-slate-50"
-                  : "bg-orange-500"
+                (subtotal <= 0 && currentSelected.data.id == "-") ||
+                currentSelected.duration.id == "-" || currentSelected.dataType.id==""
+                  ? "bg-neutral-500 font-medium text-neutral-800 hover:border-0 hover:bg-neutral-500"
+                  : "bg-orange-500 hover:bg-orange-800"
               }`}
               onClick={handleBuy}
+              disabled={
+                (subtotal <= 0 && currentSelected.data.id == "-") ||
+                currentSelected.duration.id == "-" || currentSelected.dataType.id==""
+              }
             >
               {t("planDetail_buyButton")}
             </Button>

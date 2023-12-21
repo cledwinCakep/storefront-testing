@@ -319,14 +319,12 @@ const Container = () => {
                     services work. You can find out more information about
                     Google Analytics cookies here:{" "}
                     <Link
-                      href="https://developers.google.com/analytics/resources
-                      /concepts/gaConceptsCookies"
+                      href="https://developers.google.com/analytics/resources/concepts/gaConceptsCookies"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-[#F47325]"
                     >
-                      https://developers.google.com/analytics/resources
-                      /concepts/gaConceptsCookies
+                      https://developers.google.com/analytics/resources/concepts/gaConceptsCookies
                     </Link>
                   </P>
                   <br />
