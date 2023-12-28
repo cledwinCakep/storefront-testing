@@ -42,10 +42,10 @@ const RadioPlan = ({ title, name, data }: RadioPlanProps) => {
     setCurrentSelect(temp);
     selectDataPlan(e.target.name, e.target.value);
   };
-  
+
   return (
     <div>
-      <div className="mb-5 flex gap-x-3">
+      <div className="mb-4 flex gap-x-3">
         <Text as="body1" className="font-bold text-gray-100">
           {title}
         </Text>

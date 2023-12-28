@@ -81,8 +81,8 @@
   "Checkout": {
     "checkout_checkoutTitle": "Checkout",
     "checkout_purchasedItems": "Purchased Items",
-    "checkout_email": "Email",
-    "checkout_emailDesc": " Please provide your email address. We will send your orders and instructions for use to you.",
+    "checkout_email": "Email address",
+    "checkout_emailDesc": " We will send the orders and instructions for usage through your email address",
     "checkout_continueToPayment": "Continue to Payment",
     "checkout_checkoutSecurely": "Checkout securely with",
     "checkout_outStockTitle": "Sorry! Out of Stock",

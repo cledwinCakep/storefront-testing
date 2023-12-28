@@ -233,7 +233,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
               style={{
                 objectFit: "cover",
               }}
-              className="rounded-3xl"
+              className="rounded-lg"
             />
           ) : (
             <Image
@@ -421,16 +421,20 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
               <Text as="subHeading2" className="font-bold text-[#F9F9F9]">
                 {t("planDetail_orderInformation")}
               </Text>
-              <Text as="small" className="font-medium text-[#9CA3AF]">
+              <Text as="body1" className="font-medium text-[#9CA3AF]">
                 {`${
                   currentSelected.plan.value === "UNLIMITED"
-                    ? "Daily Unlimited Plan"
-                    : "Quota Plan"
-                } ${
-                  currentSelected.data.id !== "-"
-                    ? currentSelected.data.value
+                    ? "Daily Unlimited Plan, "
+                    : "Quota Plan, "
+                }${
+                  currentSelected.dataType.id !== "-"
+                    ? currentSelected.dataType.value + ", "
                     : ""
-                } ${
+                }${
+                  currentSelected.data.id !== "-"
+                    ? currentSelected.data.value + ", "
+                    : ""
+                }${
                   currentSelected.duration.id !== "-"
                     ? currentSelected.duration.value + " " + "Days"
                     : ""
@@ -496,14 +500,16 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
             <Button
               color="orange"
               className={`w-full ${
-                subtotal <= 0 &&
-                currentSelected.data.id == "-" ||
-                currentSelected.duration.id == "-"
+                (subtotal <= 0 && currentSelected.data.id == "-") ||
+                currentSelected.duration.id == "-" || currentSelected.dataType.id==""
                   ? "bg-neutral-500 font-medium text-neutral-800 hover:border-0 hover:bg-neutral-500"
                   : "bg-orange-500 hover:bg-orange-800"
               }`}
               onClick={handleBuy}
-              disabled={subtotal <= 0 &&  currentSelected.data.id == "-" || currentSelected.duration.id == "-"}
+              disabled={
+                (subtotal <= 0 && currentSelected.data.id == "-") ||
+                currentSelected.duration.id == "-" || currentSelected.dataType.id==""
+              }
             >
               {t("planDetail_buyButton")}
             </Button>
