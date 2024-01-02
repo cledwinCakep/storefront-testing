@@ -34,19 +34,27 @@ const LISTS_3: TLists = {
 const P = ({ children }: { children: React.ReactNode }) => {
   return <div className="text-gray-400">{children}</div>;
 };
-const link = (
-  { children, href }: { children: React.ReactNode; href: string },
-) => {
-  return <Link href={href} className="text-gray-400">{children}</Link>;
+const link = ({
+  children,
+  href,
+}: {
+  children: React.ReactNode;
+  href: string;
+}) => {
+  return (
+    <Link href={href} className="text-gray-400">
+      {children}
+    </Link>
+  );
 };
 
 const Container = () => {
   return (
     <div className="flex items-start justify-center px-5 ">
       <div className="flex max-w-[1180px] flex-1 flex-col items-center gap-14 py-5">
-        <span className="text-3xl font-semibold leading-10 text-white">
+        <h1 className="text-3xl font-semibold leading-10 text-white">
           Privacy Policy
-        </span>
+        </h1>
         <div className="flex  flex-col items-start gap-5">
           <Paragraph>
             <p>
@@ -150,7 +158,8 @@ const Container = () => {
                       className="text-[#F47325]"
                     >
                       Privacy Policy
-                    </Link>{"  "}
+                    </Link>
+                    {"  "}
                     and{"  "}
                     <Link
                       href="https://developers.facebook.com/terms/"
@@ -331,21 +340,28 @@ const Container = () => {
                   <P>
                     You can find out more about how Google protects your data
                     here:{" "}
-                    <Link
+                    <a
                       href="https://www.google.com/analytics/learn/privacy.html"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-[#F47325]"
                     >
                       www.google.com/analytics/learn/privacy.html
-                    </Link>
+                    </a>
                   </P>
                   <br />
                   <P>
                     You can prevent the use of Google Analytics relating to your
                     use of the services by downloading and installing the
-                    browser plugin available via this link:
-                    http://tools.google.com/dlpage/gaoptout?hl=en-GB
+                    browser plugin available via this link:{" "}
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#F47325]"
+                      href="https://tools.google.com/dlpage/gaoptout?hl=en-GB"
+                    >
+                      https://tools.google.com/dlpage/gaoptout?hl=en-GB
+                    </a>
                   </P>
                 </>
               </div>
@@ -433,7 +449,9 @@ const Container = () => {
                     your options to protect your privacy, please refer to the
                     privacy policy of Facebook, which you can see
                     <Link
-                      href={"https://www.facebook.com/privacy/policy/?entry_point=data_policy_redirect&entry=0"}
+                      href={
+                        "https://www.facebook.com/privacy/policy/?entry_point=data_policy_redirect&entry=0"
+                      }
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-[#F47325]"
@@ -482,13 +500,13 @@ const Container = () => {
                     currently do not respond to do not track signals. To find
                     out more about “Do Not Track,” please visit
                     <Link
-                      href={"http://www.allaboutdnt.com."}
+                      href="https://allaboutdnt.com/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-[#F47325]"
                     >
                       {" "}
-                      http://www.allaboutdnt.com.
+                      https://allaboutdnt.com/
                     </Link>
                   </P>
                 </>
