@@ -7,19 +7,11 @@ import dynamic from "next/dynamic";
 import Navbar from "@/components/organisms/Navbar/Navbar";
 import Hero from "@/components/template/Landing/Hero";
 
-const Advantage = dynamic(
-  () => import("@/components/template/Landing/Advantage")
-);
-const Partners = dynamic(() => import("@/components/template/Landing/Partner"));
-const Destination = dynamic(
-  () => import("@/components/template/Landing/Destination")
-);
-const Guide = dynamic(() => import("@/components/organisms/Guide/Guide"), {
-  ssr: false,
-});
-const CTA = dynamic(() => import("@/components/template/Landing/CTA"), {
-  ssr: false,
-});
+import Advantage from "@/components/template/Landing/Advantage";
+import Partners from "@/components/template/Landing/Partner";
+import Destination from "@/components/template/Landing/Destination";
+import Guide from "@/components/organisms/Guide/Guide";
+import CTA from "@/components/template/Landing/CTA";
 
 export default function Home({ params }: { params: { locale: string } }) {
   return (
