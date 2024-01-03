@@ -13,11 +13,7 @@ const config: Config = {
       lg: "1200px",
       xl: "1800px",
     },
-    extend: {
-      fontFamily: {
-        sans: ["Satoshi", "sans-serif"],
-      },
-    },
+    extend: {},
   },
   plugins: [],
 };

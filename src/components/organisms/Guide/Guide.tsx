@@ -70,11 +70,7 @@ const Samsung = [
 
 const Oppo = ["Oppo Find X5", "Oppo Find X5 Pro"];
 
-const Huawei = [
-  "Huawei P40",
-  "Huawei P40 Pro",
-  "Huawei Mate P40 Pro",
-];
+const Huawei = ["Huawei P40", "Huawei P40 Pro", "Huawei Mate P40 Pro"];
 
 // You can now use the `huaweiModels` array in your code.
 
@@ -217,8 +213,8 @@ const Guide = () => {
         <div className="flex flex-col items-center justify-center gap-12 pb-14 pt-[98px]">
           <div className="gap-8 space-y-8">
             <Text
-              as="h3"
-              className="text-center font-bold text-gray-100 text-[44px]"
+              as="h2"
+              className="text-center text-[44px] font-bold text-gray-100"
             >
               {t("cta_howToUseTitle")}
             </Text>

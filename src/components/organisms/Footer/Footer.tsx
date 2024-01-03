@@ -202,7 +202,7 @@ const Footer = () => {
         <div className="flex w-full flex-col items-center gap-14">
           <div className="flex w-full flex-col flex-wrap content-start items-start gap-x-7 gap-y-14 sm:flex-nowrap md:flex-row md:gap-x-48">
             <div className="flex w-full flex-col items-start gap-5 md:max-w-[380px]">
-              <Link href={"/"}>
+              <Link href={"/"} aria-label="superalink logo to the home page">
                 <Icons.superalink width={228} height={33} />
               </Link>
               <div className="dark:text-dark-tremor-content-strong mt-6 text-base font-normal leading-6 tracking-tighter text-gray-300 opacity-80 sm:text-start sm:text-lg sm:leading-7">

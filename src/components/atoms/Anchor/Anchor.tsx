@@ -1,8 +1,8 @@
-import React from "react";
+import React, { HTMLAttributes } from "react";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 
-interface AnchorProps {
+interface AnchorProps extends HTMLAttributes<HTMLAnchorElement> {
   children: React.ReactNode;
   href: string;
   isExternal?: boolean;

@@ -37,7 +37,11 @@ const NavbarDesktop = ({ params }: { params: { locale: string } }) => {
     <div className="hidden w-full items-center justify-center border-b-[1px] border-[#222222] bg-black px-4 py-3 lg:flex ">
       <div className="flex w-full flex-row justify-between md:max-w-[1180px]">
         <div className="flex flex-row gap-14">
-          <Anchor href="/" className="flex px-[0px] py-[0px]">
+          <Anchor
+            href="/"
+            className="flex px-[0px] py-[0px]"
+            aria-label="logo link that goes to home page"
+          >
             <Image
               src="/logo-superalink.svg"
               alt="superalink logo"

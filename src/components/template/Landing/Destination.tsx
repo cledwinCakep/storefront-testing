@@ -5,9 +5,6 @@ import { useRouter } from "next/navigation";
 import Text from "@/components/atoms/Text/Text";
 import Layout from "@/components/atoms/Layout/Layout";
 
-// organisms
-import PriceInfoCards from "@/components/organisms/PriceInfoCards/PriceInfoCards";
-
 //API
 import { utilityApi } from "@/lib/api/GetApi";
 import { useTranslations } from "next-intl";
@@ -76,7 +73,7 @@ const Partners = () => {
       <div className="flex h-full flex-col items-center justify-center">
         <div className="mb-14 flex flex-col gap-8 px-4">
           <Text
-            as="h3"
+            as="h2"
             className="text-center font-semibold text-gray-100 sm:text-[2.75rem]"
           >
             {t("hero_destinationTitle")}
