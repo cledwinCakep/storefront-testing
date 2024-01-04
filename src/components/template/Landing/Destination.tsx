@@ -1,17 +1,17 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-// atoms
-import Text from "@/components/atoms/Text/Text";
-import Layout from "@/components/atoms/Layout/Layout";
+import dynamic from "next/dynamic";
 
-// organisms
-import PriceInfoCards from "@/components/organisms/PriceInfoCards/PriceInfoCards";
+// atoms
+const Text = dynamic(() => import("@/components/atoms/Text/Text"));
+const Layout = dynamic(() => import("@/components/atoms/Layout/Layout"));
+const Tabs2 = dynamic(() => import("@/components/atoms/Tabs2/Tabs2"));
 
 //API
 import { utilityApi } from "@/lib/api/GetApi";
 import { useTranslations } from "next-intl";
-import Tabs2 from "@/components/atoms/Tabs2/Tabs2";
 
 const Partners = () => {
   const router = useRouter();
@@ -54,6 +54,7 @@ const Partners = () => {
   useEffect(() => {
     const getData = async () => {
       const res = await utilityApi.getCountryList();
+
       setData(res.data);
     };
 
@@ -76,7 +77,7 @@ const Partners = () => {
       <div className="flex h-full flex-col items-center justify-center">
         <div className="mb-14 flex flex-col gap-8 px-4">
           <Text
-            as="h3"
+            as="h2"
             className="text-center font-semibold text-gray-100 sm:text-[2.75rem]"
           >
             {t("hero_destinationTitle")}

@@ -43,7 +43,11 @@ export const NavbarMobileMenu = ({
   return (
     <div className="relative z-50 flex min-h-[78px] w-full items-center justify-center overflow-hidden border-b border-[#222222] bg-black px-4 py-3 lg:hidden">
       <div className="flex h-full w-full flex-row items-center justify-between md:max-w-[1180px]">
-        <Anchor href="/" className="px-[0px] py-[0px]">
+        <Anchor
+          href="/"
+          className="px-[0px] py-[0px]"
+          aria-label="logo link that goes to home page"
+        >
           <Image
             src="/logo-superalink.svg"
             alt="superalink logo"

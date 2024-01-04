@@ -68,11 +68,7 @@ const Samsung = [
 
 const Oppo = ["Oppo Find X5", "Oppo Find X5 Pro"];
 
-const Huawei = [
-  "Huawei P40",
-  "Huawei P40 Pro",
-  "Huawei Mate P40 Pro",
-];
+const Huawei = ["Huawei P40", "Huawei P40 Pro", "Huawei Mate P40 Pro"];
 
 const Footer = () => {
   let [isOpen, setIsOpen] = React.useState(false);
@@ -206,7 +202,7 @@ const Footer = () => {
         <div className="flex w-full flex-col items-center gap-14">
           <div className="flex w-full flex-col flex-wrap content-start items-start gap-x-7 gap-y-14 sm:flex-nowrap md:flex-row md:gap-x-48">
             <div className="flex w-full flex-col items-start gap-5 md:max-w-[380px]">
-              <Link href={"/"}>
+              <Link href={"/"} aria-label="superalink logo to the home page">
                 <Icons.superalink width={228} height={33} />
               </Link>
               <div className="dark:text-dark-tremor-content-strong mt-6 text-base font-normal leading-6 tracking-tighter text-gray-300 opacity-80 sm:text-start sm:text-lg sm:leading-7">
@@ -249,10 +245,14 @@ const Footer = () => {
                   RESOURCES
                 </div>
                 <div className="mt-4 flex flex-col gap-2">
-                  <FooterTextLink
-                    text="Support"
+                  <a
                     href="mailto:support@superalink.com"
-                  />
+                    className="text-base font-normal leading-6 tracking-tighter text-gray-100 opacity-80  hover:opacity-100 sm:text-lg"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    Support
+                  </a>
                   <FooterTextLink
                     text="Privacy policy"
                     href="/privacy-policy"
@@ -268,14 +268,12 @@ const Footer = () => {
                   SOCIAL MEDIA
                 </div>
                 <div className="mt-4 flex flex-col gap-2">
-                  {
-                    /* <FooterTextLink
+                  {/* <FooterTextLink
                     text="Tiktok"
                     href="www.tiktok.com"
 
                   />
-                  <FooterTextLink text="Instagram" href="www.instagram.com/beliesim" /> */
-                  }
+                  <FooterTextLink text="Instagram" href="www.instagram.com/beliesim" /> */}
                   <Link
                     href="https://www.tiktok.com"
                     target="_blank"
@@ -296,8 +294,8 @@ const Footer = () => {
             </div>
           </div>
           <Text className="flex w-full items-center justify-center border-t-[1px] border-gray-400 pb-7 pt-7 text-gray-400">
-            &copy; Copyright{" "}
-            {new Date().getFullYear()}. All Rights Reserved Supera link
+            &copy; Copyright {new Date().getFullYear()}. All Rights Reserved
+            Supera link
           </Text>
         </div>
       </Layout>

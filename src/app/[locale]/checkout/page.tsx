@@ -107,7 +107,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
     }
 
     setIsOpen(true);
-    window.history.pushState({}, "Home", "/");
+    // window.history.pushState({}, "Home", "/");
   };
 
   function handleInputEmail(e: React.ChangeEvent<HTMLInputElement>) {
@@ -168,14 +168,18 @@ export default function Checkout({ params }: { params: { locale: string } }) {
   let [isOpen, setIsOpen] = React.useState(false);
 
   function capitalizeFirstLetter(inputString: string): string {
-    return inputString.charAt(0).toUpperCase() + inputString.slice(1).toLowerCase();
+    return (
+      inputString.charAt(0).toUpperCase() + inputString.slice(1).toLowerCase()
+    );
   }
 
   return (
     <>
       <Dialog
         open={isOpen}
-        onClose={() => setIsOpen(false)}
+        onClose={() => {
+          setIsOpen(false);
+        }}
         className="relative z-50 "
       >
         <div className="fixed inset-0 flex w-screen items-center justify-center bg-black/30 p-4">

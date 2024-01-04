@@ -29,7 +29,7 @@ const PriceInfoCards = ({ data }: PriceInfoCardsProps) => {
   return (
     <div className="grid w-full gap-y-3 sm:gap-x-3 sm:gap-y-2 md:w-auto md:grid-cols-3 md:gap-x-3 md:gap-y-3 ">
       {data.map((data) => (
-        <Link
+        <a
           key={data.code}
           href={`/plans/${data.code}?plan=UNLIMITED&dataType=&data=&duration=`}
         >
@@ -43,7 +43,7 @@ const PriceInfoCards = ({ data }: PriceInfoCardsProps) => {
               price={data.price}
             />
           </div>
-        </Link>
+        </a>
       ))}
     </div>
   );

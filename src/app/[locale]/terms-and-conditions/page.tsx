@@ -53,19 +53,19 @@ const TextWithLink = ({ text }: { text: string }) => {
   return (
     <P>
       {parts.map((part, index) =>
-        urlRegex.test(part)
-          ? (
-            <a
-              href={part}
-              key={index}
-              className="text-[#F47325]"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {part}
-            </a>
-          )
-          : part
+        urlRegex.test(part) ? (
+          <a
+            href={part}
+            key={index}
+            className="text-[#F47325]"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {part}
+          </a>
+        ) : (
+          part
+        )
       )}
     </P>
   );
@@ -74,9 +74,9 @@ const Container = () => {
   return (
     <div className="flex items-start justify-center px-5 ">
       <div className="flex max-w-[1180px] flex-1 flex-col items-center gap-14 py-5">
-        <span className="text-3xl font-semibold leading-10 text-white">
+        <h1 className="text-3xl font-semibold leading-10 text-white">
           Terms and Conditions
-        </span>
+        </h1>
         <div className="flex  flex-col items-start gap-5">
           <span className=" text-xl font-semibold not-italic leading-7 tracking-tighter text-white">
             General Terms and Conditions
@@ -143,10 +143,10 @@ const Container = () => {
                   <br />
                   <P>
                     When the Customer breaches its obligations under Sec. 2.4,
-                    Supera Link may suspend the {`Customer's`}{" "}
-                    use of the Service. During any period of suspension, the
-                    Customer shall continue to pay all Charges due under this
-                    Agreement in respect of the suspended Services.
+                    Supera Link may suspend the {`Customer's`} use of the
+                    Service. During any period of suspension, the Customer shall
+                    continue to pay all Charges due under this Agreement in
+                    respect of the suspended Services.
                   </P>
                 </div>
                 <div className="flex flex-col items-start gap-2">
@@ -157,10 +157,9 @@ const Container = () => {
                     compatibility may depend on the carrier and country of
                     origin, the Customer must check the list of eSIM-compatible
                     devices provided at the checkout. By checking the box that
-                    confirms that the {`Customer's`}{" "}
-                    device is eSIM compatible, the Customer is then held
-                    responsible for the accuracy of the information they
-                    provide.
+                    confirms that the {`Customer's`} device is eSIM compatible,
+                    the Customer is then held responsible for the accuracy of
+                    the information they provide.
                   </P>
                   <br />
                   <P>
@@ -199,9 +198,11 @@ const Container = () => {
                   <br />
                   <P>The currency of payment is in US Dollars($).</P>
                   <br />
-                  <TextWithLink text="The credit card transaction will be processed and secured by
+                  <TextWithLink
+                    text="The credit card transaction will be processed and secured by
                     Supera Link providers PayPal (https://paypal.com) and
-                    Paymentwall (https://paymentwall.com/)." />
+                    Paymentwall (https://paymentwall.com/)."
+                  />
                 </div>
                 <div className="flex flex-col items-start gap-2">
                   <Subtitle title="Charges for Use" />
@@ -213,9 +214,8 @@ const Container = () => {
                   <P>
                     The Customer shall not be entitled to offset any of its
                     claims against claims of Supera Link, except where the
-                    {`Customer's`}{" "}
-                    claims are undisputed or have been confirmed by final court
-                    judgment.
+                    {`Customer's`} claims are undisputed or have been confirmed
+                    by final court judgment.
                   </P>
                 </div>
               </div>
@@ -262,9 +262,8 @@ const Container = () => {
                             the validity period expires.
                           </li>
                           <li>
-                            <span className="text-white">Compensation:</span>
-                            {" "}
-                            No refund or remuneration of any kind will be issued
+                            <span className="text-white">Compensation:</span> No
+                            refund or remuneration of any kind will be issued
                             due to charges from alternate phones, alternate SIM
                             cards, alternate providers, hotel phones, or other
                             charges that are not directly linked to the
@@ -315,8 +314,7 @@ const Container = () => {
                             FOR USE under Terms and Conditions)
                           </li>
                           <li>
-                            <span className="text-white">Other Reasons:</span>
-                            {" "}
+                            <span className="text-white">Other Reasons:</span>{" "}
                             If the refund request is not within the above, we
                             will investigate the request on a case-by-case
                             basis. If the refund is approved, a processing fee

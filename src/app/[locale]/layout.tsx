@@ -55,7 +55,7 @@ export default function RootLayout({
         <title>Superalink – Local eSIM for Traveler</title>
         <meta
           name="description"
-          content="Data packs with local rates. Buy the affordable eSIM package in Superalink."
+          content="Data packs with local rates. Buy affordable eSIM packages in Superalink."
         />
         <meta
           property="og:image"
@@ -77,11 +77,6 @@ export default function RootLayout({
           type="image/png"
           sizes="16x16"
           href="/favicon-16x16.png"
-        />
-        <link rel="manifest" href="/site.webmanifest" />
-        <link
-          href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&display=swap"
-          rel="stylesheet"
         />
       </head>
 

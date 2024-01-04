@@ -1,10 +1,14 @@
 import React from "react";
+import { useTranslations } from "next-intl";
+import dynamic from "next/dynamic";
 
 // atoms
 import Layout from "@/components/atoms/Layout/Layout";
 
 // molecules
-import AdvantageCard from "@/components/molecules/AdvantageCard/AdvantageCard";
+const AdvantageCard = dynamic(
+  () => import("@/components/molecules/AdvantageCard/AdvantageCard")
+);
 
 // icons
 import {
@@ -13,7 +17,6 @@ import {
   Network,
   Simcard,
 } from "@/components/icons/landingpage";
-import { useTranslations } from "next-intl";
 
 const Partners = () => {
   const t = useTranslations("Homepage");
