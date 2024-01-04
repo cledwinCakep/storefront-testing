@@ -54,6 +54,7 @@ const Partners = () => {
   useEffect(() => {
     const getData = async () => {
       const res = await utilityApi.getCountryList();
+
       setData(res.data);
     };
 
