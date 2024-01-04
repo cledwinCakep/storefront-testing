@@ -1,14 +1,17 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
+
 // atoms
-import Text from "@/components/atoms/Text/Text";
-import Layout from "@/components/atoms/Layout/Layout";
+const Text = dynamic(() => import("@/components/atoms/Text/Text"));
+const Layout = dynamic(() => import("@/components/atoms/Layout/Layout"));
+const Tabs2 = dynamic(() => import("@/components/atoms/Tabs2/Tabs2"));
 
 //API
 import { utilityApi } from "@/lib/api/GetApi";
 import { useTranslations } from "next-intl";
-import Tabs2 from "@/components/atoms/Tabs2/Tabs2";
 
 const Partners = () => {
   const router = useRouter();
