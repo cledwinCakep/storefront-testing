@@ -265,10 +265,6 @@ const usePlanHook = (params: { slug: string }) => {
   }
 
   function handleBuy() {
-    console.log({ order });
-    console.log({ buy });
-    console.log({ parameter });
-
     if (order <= 0) {
       setIsError(true);
       return;

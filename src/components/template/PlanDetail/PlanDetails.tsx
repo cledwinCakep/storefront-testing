@@ -149,14 +149,16 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
   }, [data, parameter]);
 
   const getQuotaPerDay = () => {
-    const check = Object.keys(data[parameter.plan]).map((key, index) => ({
-      label: parameter.plan === "QUOTA" ? key : `${key}/day`,
-      value: key, // Generate a value based on the label
-    }));
+    const check = Object.keys(data[parameter.plan || "UNLIMITED"]).map(
+      (key, index) => ({
+        label: parameter.plan === "QUOTA" ? key : `${key}/day`,
+        value: key, // Generate a value based on the label
+      })
+    );
 
     const filteredParams = check.filter((item) => {
       const key = item.value;
-      const matchingPlans = data[parameter.plan][key];
+      const matchingPlans = data[parameter.plan || "UNLIMITED"][key];
 
       if (matchingPlans) {
         const localPlan = matchingPlans.find(
@@ -176,7 +178,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
   };
 
   const getPlanDuration = useCallback(() => {
-    const planArr: any = data[parameter.plan] ?? [];
+    const planArr: any = data[parameter.plan || "UNLIMITED"] ?? [];
 
     const result = planArr[parameter.data]
       ?.filter(
@@ -501,14 +503,16 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
               color="orange"
               className={`w-full ${
                 (subtotal <= 0 && currentSelected.data.id == "-") ||
-                currentSelected.duration.id == "-" || currentSelected.dataType.id==""
+                currentSelected.duration.id == "-" ||
+                currentSelected.dataType.id == ""
                   ? "bg-neutral-500 font-medium text-neutral-800 hover:border-0 hover:bg-neutral-500"
                   : "bg-orange-500 hover:bg-orange-800"
               }`}
               onClick={handleBuy}
               disabled={
                 (subtotal <= 0 && currentSelected.data.id == "-") ||
-                currentSelected.duration.id == "-" || currentSelected.dataType.id==""
+                currentSelected.duration.id == "-" ||
+                currentSelected.dataType.id == ""
               }
             >
               {t("planDetail_buyButton")}
