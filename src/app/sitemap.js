@@ -6,7 +6,7 @@ export default async function sitemap() {
     const countryList = await utilityApi.getCountryList();
 
     const countryPlan = countryList.data.map((countryList) => ({
-      url: `http://superalink.com/${countryList.country_code}`,
+      url: `http://superalink.com/plans/${countryList.country_code}`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.9,
