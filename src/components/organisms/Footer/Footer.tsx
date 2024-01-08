@@ -268,14 +268,16 @@ const Footer = () => {
                   SOCIAL MEDIA
                 </div>
                 <div className="mt-4 flex flex-col gap-2">
-                  {/* <FooterTextLink
+                  {
+                    /* <FooterTextLink
                     text="Tiktok"
                     href="www.tiktok.com"
 
                   />
-                  <FooterTextLink text="Instagram" href="www.instagram.com/beliesim" /> */}
+                  <FooterTextLink text="Instagram" href="www.instagram.com/beliesim" /> */
+                  }
                   <Link
-                    href="https://www.tiktok.com"
+                    href="https://www.tiktok.com/@superalink.official"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-base font-normal leading-6 tracking-tighter text-gray-100 opacity-80  hover:opacity-100 sm:text-lg"
@@ -283,19 +285,28 @@ const Footer = () => {
                     Tiktok
                   </Link>
                   <Link
-                    href="https://www.instagram.com"
+                    href="https://www.instagram.com/superalink.official/"
+                    rel="noopener noreferrer"
                     target="_blank"
                     className="text-base font-normal leading-6 tracking-tighter text-gray-100 opacity-80  hover:opacity-100 sm:text-lg"
                   >
                     Instagram
+                  </Link>
+                  <Link
+                    href="https://www.facebook.com/Superalink.official/"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    className="text-base font-normal leading-6 tracking-tighter text-gray-100 opacity-80  hover:opacity-100 sm:text-lg"
+                  >
+                    Facebook
                   </Link>
                 </div>
               </div>
             </div>
           </div>
           <Text className="flex w-full items-center justify-center border-t-[1px] border-gray-400 pb-7 pt-7 text-gray-400">
-            &copy; Copyright {new Date().getFullYear()}. All Rights Reserved
-            Supera link
+            &copy; Copyright{" "}
+            {new Date().getFullYear()}. All Rights Reserved Supera link
           </Text>
         </div>
       </Layout>
