@@ -45,9 +45,9 @@ const BreadcrumbItem = ({
       as="body1"
       className="font-medium text-orange-600 before:mr-3 before:inline-block before:content-[url('/chevron-right.svg')]"
     >
-      <Link href={href} className="inline">
+      <a href={href} className="inline">
         {children}
-      </Link>
+      </a>
     </Text>
   );
 };
