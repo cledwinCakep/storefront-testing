@@ -9,6 +9,7 @@ import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import Smartlook from "smartlook-client";
+import ReactGA from "react-ga";
 
 export const dynamic = "force-dynamic";
 
@@ -49,10 +50,9 @@ export default function RootLayout({
   children?: React.ReactNode;
   params: { locale: string };
 }) {
-
-
   useEffect(() => {
     Smartlook.init(process.env.NEXT_PUBLIC_SMARTLOOK!);
+    ReactGA.initialize(process.env.NEXT_PUBLIC_GA!);
   }, []);
 
   const [messages, setMessages] = useState(getMessages(params.locale));
