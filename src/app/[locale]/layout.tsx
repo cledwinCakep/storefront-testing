@@ -6,8 +6,9 @@ import en from "@/messages/en.json";
 import id from "@/messages/id.json";
 import "./globals.css";
 import { redirect } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import Smartlook from "smartlook-client";
 
 export const dynamic = "force-dynamic";
 
@@ -48,6 +49,12 @@ export default function RootLayout({
   children?: React.ReactNode;
   params: { locale: string };
 }) {
+
+
+  useEffect(() => {
+    Smartlook.init(process.env.NEXT_PUBLIC_SMARTLOOK!);
+  }, []);
+
   const [messages, setMessages] = useState(getMessages(params.locale));
   return (
     <html lang="en" className="scroll-smooth">
