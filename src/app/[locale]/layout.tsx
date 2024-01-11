@@ -50,9 +50,12 @@ export default function RootLayout({
   children?: React.ReactNode;
   params: { locale: string };
 }) {
+  
   useEffect(() => {
-    Smartlook.init(process.env.NEXT_PUBLIC_SMARTLOOK!);
-    ReactGA.initialize(process.env.NEXT_PUBLIC_GA!);
+    if (process.env.NODE_ENV === 'production') {
+      Smartlook.init(process.env.NEXT_PUBLIC_SMARTLOOK!);
+      ReactGA.initialize(process.env.NEXT_PUBLIC_GA!);
+    }
   }, []);
 
   const [messages, setMessages] = useState(getMessages(params.locale));
