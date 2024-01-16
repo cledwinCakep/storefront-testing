@@ -238,6 +238,14 @@ const Footer = () => {
                   >
                     Become affiliate{" "}
                   </Link>
+                  <Link
+                    href="/blog"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-base font-normal leading-6 tracking-tighter text-gray-100 opacity-80  hover:opacity-100 sm:text-lg"
+                  >
+                    Blog
+                  </Link>
                 </div>
               </div>
               <div className="col-span-1">
