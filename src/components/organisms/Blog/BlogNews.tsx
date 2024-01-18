@@ -14,12 +14,12 @@ function BlogNews() {
     },
     {
       id: 2,
-      link: "/blog/China&#39;s Xiaomi unveils its first EV as it looks to compete with Porsche, Tesla",
+      link: "/blog/China's Xiaomi unveils its first EV as it looks to compete with Porsche, Tesla",
       topic: "Technology",
       date: "22 November 2023",
       title:
-        "China&#39;s Xiaomi unveils its first EV as it looks to compete with Porsche, Tesla",
-      desc: "Chinese consumer electronics company Xiaomi on Thursday detailed plans to enter China&#39;s oversaturated electric vehicle market and compete with automaker giants Tesla and Porsche with a car model it says it spent more than 10 billion yuan ($1.4 billion) to develop.",
+        "China's Xiaomi unveils its first EV as it looks to compete with Porsche, Tesla",
+      desc: "Chinese consumer electronics company Xiaomi on Thursday detailed plans to enter China's oversaturated electric vehicle market and compete with automaker giants Tesla and Porsche with a car model it says it spent more than 10 billion yuan ($1.4 billion) to develop.",
     },
     {
       id: 3,
@@ -81,20 +81,21 @@ function BlogNews() {
                   </div>
                   <div className="mt-4 flex w-full flex-col gap-4">
                     <p className="line-clamp-3 text-[32px] font-semibold leading-[42px] text-gray-700">
-                      South Korea&#39;s LG U+ Launches Innovative eSIM Promotion
+                      South Korea&apos;s LG U+ Launches Innovative eSIM
+                      Promotion
                     </p>
                     <p className="line-clamp-3 text-ellipsis break-words text-base font-normal text-[#424242] sm:line-clamp-2 md:sm:line-clamp-3">
                       {`
                     LG U+, a leading telecommunications enterprise in South Korea, is launching a marketing campaign featuring a complimentary T-Money card for all travelers in South Korea who obtain a prepaid eSIM via its official web portal.
                     The eSIM is a downloadable service that enables dual numbering without the hassle of replacing the current SIM card.
-                    LG U+&#39;s eSIM, a data product of unparalleled convenience, can be swiftly utilized in Korea by scanning the QR code delivered via email upon purchase, eliminating the need to visit physical retail outlets such as airport counters.
+                    LG U+&apos;s eSIM, a data product of unparalleled convenience, can be swiftly utilized in Korea by scanning the QR code delivered via email upon purchase, eliminating the need to visit physical retail outlets such as airport counters.
                    `}
                     </p>
                   </div>
                 </div>
                 <a
                   className="max-w-[120px] border-b border-[#374151] bg-transparent text-start text-[15px] font-normal text-[#374151]"
-                  href="/blog/South Korea&#39;s LG U+ Launches Innovative eSIM Promotion"
+                  href="/blog/South Korea's LG U+ Launches Innovative eSIM Promotion"
                 >
                   Continue Reading
                 </a>
