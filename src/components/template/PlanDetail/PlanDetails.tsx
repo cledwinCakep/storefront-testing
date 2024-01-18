@@ -124,7 +124,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     if (globalCodes.includes(country_code)) {
       setGlobalCode(country_code);
     }
-  }, [globalCode, country_code]);
+  }, [globalCode, country_code, globalCode, setGlobalCode]);
 
   const getPlanDataType = useCallback(() => {
     const planArr: any[][] = Object.values(data[parameter.plan] ?? []);

@@ -6,29 +6,27 @@ function BlogNews() {
   const news = [
     {
       id: 1,
-      link: "/blog/Five dead as planes collide at Tokyo airport; all passengers evacuate Japan Airlines flight",
+      link: "/blog/South Korea introduces 2 numbers in 1 phone service with eSIM",
       topic: "Trending",
-      date: "02 January 2024",
-      title:
-        "Five dead as planes collide at Tokyo airport; all passengers evacuate Japan Airlines flight",
-      desc: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many websites still in their infancy.",
+      date: "31 August 2022",
+      title: "South Korea introduces 2 numbers in 1 phone service with eSIM",
+      desc: "South Korea will begin embedded subscriber identity module, known as eSIM, services from Thursday, allowing Koreans to have two different numbers in one mobile device, the Ministry of Science and ICT said Wednesday.",
     },
     {
       id: 2,
-      link: "/blog/China's Xiaomi unveils its first EV as it looks to compete with Porsche, Tesla",
+      link: "/blog/China&#39;s Xiaomi unveils its first EV as it looks to compete with Porsche, Tesla",
       topic: "Technology",
       date: "22 November 2023",
       title:
-        "China's Xiaomi unveils its first EV as it looks to compete with Porsche, Tesla",
-      desc: "Chinese consumer electronics company Xiaomi on Thursday detailed plans to enter China's oversaturated electric vehicle market and compete with automaker giants Tesla and Porsche with a car model it says it spent more than 10 billion yuan ($1.4 billion) to develop.",
+        "China&#39;s Xiaomi unveils its first EV as it looks to compete with Porsche, Tesla",
+      desc: "Chinese consumer electronics company Xiaomi on Thursday detailed plans to enter China&#39;s oversaturated electric vehicle market and compete with automaker giants Tesla and Porsche with a car model it says it spent more than 10 billion yuan ($1.4 billion) to develop.",
     },
     {
       id: 3,
-      link: "/blog/Cramer makes market predictions for 2023, says investors may be rotating out of tech",
+      link: "/blog/Ooredoo Launches eSIM Service in Myanmar",
       topic: "Market",
-      date: "19 October 2023",
-      title:
-        "Cramer makes market predictions for 2023, says investors may be rotating out of tech",
+      date: "17 January 2024",
+      title: "Ooredoo Launches eSIM Service in Myanmar",
       desc: "He suggested that Wall Street may now be seeing a “sector rotation″ as some investors doubt that the Magnificent Seven tech stocks will continue their runs, instead buying up stocks that have seen steep declines such as food or pharmaceutical names.",
     },
   ];
@@ -43,7 +41,9 @@ function BlogNews() {
             transition={{ ease: "easeOut", duration: 2.6 }}
             className="-mt-2 h-auto w-full"
           >
-            <p className="pb-6 text-[26px] font-bold text-[#121417]">Blog Post</p>
+            <p className="pb-6 text-[26px] font-bold text-[#121417]">
+              Blog Post
+            </p>
           </motion.div>
 
           <div className="flex w-full flex-col justify-between gap-20 md:flex-row md:gap-10">
@@ -55,15 +55,15 @@ function BlogNews() {
                 }}
               >
                 <motion.img
-                  src={"/assets/blog-image2.png"}
+                  src={"/assets/korean-esim-news.jpeg"}
                   width={580}
                   height={255}
-                  // objectFit="cover"
                   initial={{ opacity: 0, y: "-100%" }}
                   animate={{ opacity: 1, y: "0%" }}
                   transition={{ duration: 1 }}
                   alt="logo superalink"
                   className="block h-[300px] w-full rounded-lg object-cover sm:h-[499px] md:w-auto md:object-fill lg:max-h-[455px] lg:max-w-[550px]"
+                  style={{ objectFit: "cover" }}
                 />
               </motion.div>
 
@@ -73,58 +73,28 @@ function BlogNews() {
                 transition={{ ease: "easeOut", duration: 1.2 }}
                 className="mt-20 h-auto w-full"
               >
-                <div className="h-auto w-full mb-2">
+                <div className="mb-2 h-auto w-full">
                   <div className="flex w-full items-center gap-4">
                     <p className="text-base font-medium text-gray-400">
-                      19 January 2024
+                      30 May 2023
                     </p>
                   </div>
                   <div className="mt-4 flex w-full flex-col gap-4">
                     <p className="line-clamp-3 text-[32px] font-semibold leading-[42px] text-gray-700">
-                      Japan quake: At least 55 dead, rescuers rush to reach
-                      survivors trapped in freezing cold
+                      South Korea&#39;s LG U+ Launches Innovative eSIM Promotion
                     </p>
                     <p className="line-clamp-3 text-ellipsis break-words text-base font-normal text-[#424242] sm:line-clamp-2 md:sm:line-clamp-3">
                       {`
-                    Prime Minister Fumio Kishida said the extent of damage from
-                    the quake was becoming “increasingly clear” more than 24
-                    hours after it struck on the Noto peninsula in Ishikawa
-                    prefecture. “The government has deployed emergency rescue
-                    teams from the Self-Defence Forces, police and fire
-                    departments to the area and is doing its utmost to save
-                    lives and rescue victims and survivors, but we have received
-                    reports that there are still many people waiting to be
-                    rescued under collapsed buildings.” Kishida said some 3,000
-                    rescuers were finding it difficult to reach the northern tip
-                    of the peninsula where helicopter surveys had discovered
-                    many fires and widespread damage to buildings and
-                    infrastructure. Japan sits on the “Ring of Fire” arc of
-                    volcanoes and oceanic trenches that partly encircles the
-                    Pacific Basin. It accounts for about 20% of the world's
-                    earthquakes of magnitude 6 or greater, and each year
-                    experiences up to 2,000 quakes that can be felt. Many rail
-                    services and flights into the quake area have been
-                    suspended. More than 500 people were stranded at Noto's
-                    airport which closed due to cracks in its runway and access
-                    road and damage to its terminal building. Authorities have
-                    confirmed 55 deaths, all in Ishikawa prefecture, making it
-                    Japan's deadliest earthquake since 2016. Many of those
-                    killed are in Suzu and Wajima, another city on the remote
-                    northern tip of the Noto peninsula. Scores more have been
-                    injured and authorities were battling blazes in several
-                    cities on Tuesday and hauling people from collapsed
-                    buildings. “I've never experienced a quake that powerful,”
-                    said Wajima resident Shoichi Kobayashi, 71, who was at home
-                    having a celebratory New Year's meal with his wife and son
-                    when the quake struck, sending furniture flying across the
-                    dining room.
+                    LG U+, a leading telecommunications enterprise in South Korea, is launching a marketing campaign featuring a complimentary T-Money card for all travelers in South Korea who obtain a prepaid eSIM via its official web portal.
+                    The eSIM is a downloadable service that enables dual numbering without the hassle of replacing the current SIM card.
+                    LG U+&#39;s eSIM, a data product of unparalleled convenience, can be swiftly utilized in Korea by scanning the QR code delivered via email upon purchase, eliminating the need to visit physical retail outlets such as airport counters.
                    `}
                     </p>
                   </div>
                 </div>
                 <a
-                  className="border-[#374151] text-[#374151] max-w-[120px] border-b bg-transparent text-start text-[15px] font-normal"
-                  href="/"
+                  className="max-w-[120px] border-b border-[#374151] bg-transparent text-start text-[15px] font-normal text-[#374151]"
+                  href="/blog/South Korea&#39;s LG U+ Launches Innovative eSIM Promotion"
                 >
                   Continue Reading
                 </a>
