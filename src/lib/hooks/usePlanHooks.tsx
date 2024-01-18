@@ -110,7 +110,7 @@ const usePlanHook = (params: { slug: string }) => {
     };
 
     getData();
-  }, []);
+  }, [dataPlan, params.slug]);
 
   useEffect(() => {
     function findSubtotal() {
