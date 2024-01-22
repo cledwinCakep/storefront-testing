@@ -250,7 +250,7 @@ const Footer = () => {
               </div>
               <div className="col-span-1">
                 <div className=" text-base font-bold leading-6 tracking-tighter text-gray-400">
-                  RESOURCES
+                  HELP & SUPPORT
                 </div>
                 <div className="mt-4 flex flex-col gap-2">
                   <a
@@ -259,7 +259,7 @@ const Footer = () => {
                     rel="noopener noreferrer"
                     target="_blank"
                   >
-                    Support
+                    Contact us
                   </a>
                   <FooterTextLink
                     text="Privacy policy"

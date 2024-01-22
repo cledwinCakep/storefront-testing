@@ -202,7 +202,7 @@ export const BlogFooter = () => {
       </Dialog>
       <Layout className="flex w-full flex-col items-center  gap-14 bg-[#121417] pt-20">
         <div className="flex w-full flex-col items-center gap-14">
-          <div className="flex w-full flex-col flex-wrap content-start items-start gap-x-7 gap-y-14 sm:flex-nowrap md:flex-row md:gap-x-48">
+          <div className="flex w-full flex-col flex-wrap content-start items-start gap-x-7 gap-y-14 sm:flex-nowrap md:flex-row md:gap-x-10">
             <div className="flex w-full flex-col items-start gap-5 md:max-w-[380px]">
               <Link href={"/"} aria-label="superalink logo to the home page">
                 <Icons.superalink width={228} height={33} />
@@ -214,7 +214,7 @@ export const BlogFooter = () => {
               </div>
             </div>
             <div className="grid w-full grid-cols-2 content-start items-start gap-x-5 gap-y-10 sm:grid-cols-3">
-              <div className="col-span-1">
+              <div className="col-span-2 sm:col-span-1 md:col-span-1">
                 <Text className=" text-base font-bold leading-6 tracking-tighter text-gray-400">
                   ABOUT
                 </Text>
@@ -251,9 +251,9 @@ export const BlogFooter = () => {
                   </Link>
                 </div>
               </div>
-              <div className="col-span-1">
+              <div className="col-span-2 sm:col-span-1 md:col-span-1">
                 <div className=" text-base font-bold leading-6 tracking-tighter text-gray-400">
-                  RESOURCES
+                  HELP & SUPPORT
                 </div>
                 <div className="mt-4 flex flex-col gap-2">
                   <a
@@ -262,7 +262,7 @@ export const BlogFooter = () => {
                     rel="noopener noreferrer"
                     target="_blank"
                   >
-                    Support
+                    Contact us
                   </a>
                   <FooterTextLink
                     text="Privacy policy"
@@ -276,7 +276,7 @@ export const BlogFooter = () => {
                   />
                 </div>
               </div>
-              <div className="col-span-1">
+              <div className="col-span-2 sm:col-span-1 md:col-span-1">
                 <div className=" text-base font-bold leading-6 tracking-tighter text-gray-400">
                   SOCIAL MEDIA
                 </div>

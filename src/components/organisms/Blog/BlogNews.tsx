@@ -106,7 +106,7 @@ function BlogNews() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ ease: "easeOut", duration: 1.8 }}
-              className="h-auto w-full"
+              className="h-auto w-full -mt-20 md:mt-0"
             >
               <div className="w-full">
                 {news.map((dt, index) => {
