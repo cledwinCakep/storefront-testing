@@ -259,7 +259,7 @@ const Footer = () => {
                     rel="noopener noreferrer"
                     target="_blank"
                   >
-                    Support
+                    Contact us
                   </a>
                   <FooterTextLink
                     text="Privacy policy"

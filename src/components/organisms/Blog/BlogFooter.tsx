@@ -202,7 +202,7 @@ export const BlogFooter = () => {
       </Dialog>
       <Layout className="flex w-full flex-col items-center  gap-14 bg-[#121417] pt-20">
         <div className="flex w-full flex-col items-center gap-14">
-          <div className="flex w-full flex-col flex-wrap content-start items-start gap-x-7 gap-y-14 sm:flex-nowrap md:flex-row md:gap-x-48">
+          <div className="flex w-full flex-col flex-wrap content-start items-start gap-x-7 gap-y-14 sm:flex-nowrap md:flex-row md:gap-x-10">
             <div className="flex w-full flex-col items-start gap-5 md:max-w-[380px]">
               <Link href={"/"} aria-label="superalink logo to the home page">
                 <Icons.superalink width={228} height={33} />
