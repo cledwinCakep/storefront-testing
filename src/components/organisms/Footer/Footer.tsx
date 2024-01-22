@@ -217,10 +217,14 @@ const Footer = () => {
                   ABOUT
                 </Text>
                 <div className="mt-4 flex flex-col gap-2">
-                  <FooterTextLink text="Destination" href="#destination" hash />
+                  <FooterTextLink
+                    text="Destination"
+                    href="/#destination"
+                    hash
+                  />
                   <FooterTextLink
                     text="How it works"
-                    href="#how-it-works"
+                    href="/#how-it-works"
                     hash
                   />
                   <span
@@ -276,14 +280,12 @@ const Footer = () => {
                   SOCIAL MEDIA
                 </div>
                 <div className="mt-4 flex flex-col gap-2">
-                  {
-                    /* <FooterTextLink
+                  {/* <FooterTextLink
                     text="Tiktok"
                     href="www.tiktok.com"
 
                   />
-                  <FooterTextLink text="Instagram" href="www.instagram.com/beliesim" /> */
-                  }
+                  <FooterTextLink text="Instagram" href="www.instagram.com/beliesim" /> */}
                   <Link
                     href="https://www.tiktok.com/@superalink.official"
                     target="_blank"
@@ -313,8 +315,8 @@ const Footer = () => {
             </div>
           </div>
           <Text className="flex w-full items-center justify-center border-t-[1px] border-gray-400 pb-7 pt-7 text-gray-400">
-            &copy; Copyright{" "}
-            {new Date().getFullYear()}. All Rights Reserved Supera link
+            &copy; Copyright {new Date().getFullYear()}. All Rights Reserved
+            Supera link
           </Text>
         </div>
       </Layout>
