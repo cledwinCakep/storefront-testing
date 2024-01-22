@@ -34,8 +34,8 @@ const FooterTextLink = ({
     >
       <div
         className={`opacity-80 hover:opacity-100 ${
-          !isBlog ? "text-gray-700 " : "text-gray-100 font-normal"
-        } text-base sm:text-lg font-normal leading-6 tracking-tighter`}
+          !isBlog ? "text-gray-700 " : "text-stone-50 font-normal"
+        } text-base font-normal leading- tracking-tighter`}
       >
         {text}
       </div>
