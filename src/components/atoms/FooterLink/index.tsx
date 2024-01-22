@@ -17,7 +17,7 @@ const FooterTextLink = ({
         history.pushState(
           "",
           document.title,
-          window.location.pathname + window.location.search,
+          window.location.pathname + window.location.search
         );
       }
       router.push(url);
