@@ -207,7 +207,7 @@ export const BlogFooter = () => {
               <Link href={"/"} aria-label="superalink logo to the home page">
                 <Icons.superalink width={228} height={33} />
               </Link>
-              <div className="dark:text-dark-tremor-content-strong mt-6 text-base font-normal leading-6 tracking-tighter text-gray-300 opacity-80 sm:text-start sm:text-lg sm:leading-7">
+              <div className="dark:text-dark-tremor-content-strong mt-6 text-base font-normal leading-normal tracking-tighter text-gray-300 opacity-80 sm:text-start sm:text-lg sm:leading-7">
                 Supera link provide electronic SIM (eSIM) for customers who want
                 to travel around the world with super hassle-free & affordable
                 connectivity
@@ -215,7 +215,7 @@ export const BlogFooter = () => {
             </div>
             <div className="grid w-full grid-cols-2 content-start items-start gap-x-5 gap-y-10 sm:grid-cols-3">
               <div className="col-span-1">
-                <Text className=" text-base font-bold leading-6 tracking-tighter text-gray-400">
+                <Text className=" text-base font-bold leading-normal tracking-tighter text-gray-400">
                   ABOUT
                 </Text>
                 <div className="mt-4 flex flex-col gap-2">
@@ -227,7 +227,7 @@ export const BlogFooter = () => {
                     isBlog
                   />
                   <span
-                    className="text-base font-normal leading-6 tracking-tighter text-gray-100 opacity-80  hover:opacity-100 sm:text-lg"
+                    className="text-base font-normal leading-normal tracking-tighter text-stone-50 opacity-80  hover:opacity-100"
                     onClick={openModal}
                     role="button"
                   >
@@ -237,7 +237,7 @@ export const BlogFooter = () => {
                     href="https://affiliate.superalink.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-base font-normal leading-6 tracking-tighter text-gray-100 opacity-80  hover:opacity-100 sm:text-lg"
+                    className="text-base font-normal leading-normal tracking-tighter text-stone-50 opacity-80  hover:opacity-100"
                   >
                     Become affiliate{" "}
                   </Link>
@@ -245,24 +245,24 @@ export const BlogFooter = () => {
                     href="/blog"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-base font-normal leading-6 tracking-tighter text-gray-100 opacity-80  hover:opacity-100 sm:text-lg"
+                    className="text-base font-normal leading-normal tracking-tighter text-stone-50 opacity-80  hover:opacity-100"
                   >
                     Blog
                   </Link>
                 </div>
               </div>
               <div className="col-span-1">
-                <div className=" text-base font-bold leading-6 tracking-tighter text-gray-400">
-                  RESOURCES
+                <div className=" text-base font-bold leading-normal tracking-tighter text-gray-400">
+                  HELP & SUPPORT
                 </div>
                 <div className="mt-4 flex flex-col gap-2">
                   <a
                     href="mailto:support@superalink.com"
-                    className="text-base font-normal leading-6 tracking-tighter text-gray-100 opacity-80  hover:opacity-100 sm:text-lg"
+                    className="text-base font-normal leading-normal tracking-tighter text-stone-50 opacity-80  hover:opacity-100"
                     rel="noopener noreferrer"
                     target="_blank"
                   >
-                    Support
+                    Contact us
                   </a>
                   <FooterTextLink
                     text="Privacy policy"
@@ -270,14 +270,14 @@ export const BlogFooter = () => {
                     isBlog
                   />
                   <FooterTextLink
-                    text="Term & Conditions"
+                    text="Terms & Conditions"
                     href="/terms-and-conditions"
                     isBlog
                   />
                 </div>
               </div>
               <div className="col-span-1">
-                <div className=" text-base font-bold leading-6 tracking-tighter text-gray-400">
+                <div className="text-base font-bold leading-normal tracking-tighter text-gray-400">
                   SOCIAL MEDIA
                 </div>
                 <div className="mt-4 flex flex-col gap-2">
@@ -291,7 +291,7 @@ export const BlogFooter = () => {
                     href="https://www.tiktok.com/@superalink.official"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-base font-normal leading-6 tracking-tighter text-gray-100 opacity-80  hover:opacity-100 sm:text-lg"
+                    className="text-base font-normal leading-normal tracking-tighter text-stone-50 opacity-80  hover:opacity-100"
                   >
                     Tiktok
                   </Link>
@@ -299,7 +299,7 @@ export const BlogFooter = () => {
                     href="https://www.instagram.com/superalink.official/"
                     rel="noopener noreferrer"
                     target="_blank"
-                    className="text-base font-normal leading-6 tracking-tighter text-gray-100 opacity-80  hover:opacity-100 sm:text-lg"
+                    className="text-base font-normal leading-normal tracking-tighter text-stone-50 opacity-80  hover:opacity-100"
                   >
                     Instagram
                   </Link>
@@ -307,7 +307,7 @@ export const BlogFooter = () => {
                     href="https://www.facebook.com/Superalink.official/"
                     rel="noopener noreferrer"
                     target="_blank"
-                    className="text-base font-normal leading-6 tracking-tighter text-gray-100 opacity-80  hover:opacity-100 sm:text-lg"
+                    className="text-base font-normal leading-normal tracking-tighter text-stone-50 opacity-80  hover:opacity-100"
                   >
                     Facebook
                   </Link>
@@ -315,7 +315,7 @@ export const BlogFooter = () => {
               </div>
             </div>
           </div>
-          <Text className="flex w-full items-center justify-center border-t-[1px] border-gray-400 pb-7 pt-7 text-gray-400">
+          <Text className="flex w-full items-center justify-center border-t-[1px] border-gray-400 pb-7 pt-7 opacity-80 text-center text-neutral-500 text-sm font-normal leading-[18px]">
             &copy; Copyright {new Date().getFullYear()}. All Rights Reserved
             Supera link
           </Text>
