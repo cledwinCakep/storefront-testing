@@ -30,7 +30,7 @@ const FooterTextLink = ({
         handleClick(href);
       }}
     >
-      <div className="text-base font-normal leading-6 tracking-tighter text-gray-100 opacity-80  hover:opacity-100 sm:text-lg">
+      <div className="opacity-80 hover:opacity-100 text-stone-50 text-base font-normal leading-normal tracking-tighter">
         {text}
       </div>
     </Link>

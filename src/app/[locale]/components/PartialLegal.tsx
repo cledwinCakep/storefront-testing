@@ -21,10 +21,10 @@ export const Footer = () => {
     <div className="flex px-5 w-full flex-col justify-center items-center gap-7">
       <div className="flex py-7 justify-between items-center">
         <Link href={"/privacy-policy"}>
-          <ButtonFooter title="Privacy policy" />
+          <ButtonFooter title="Privacy Policy" />
         </Link>
         <Link href={"/terms-and-conditions"}>
-          <ButtonFooter title="Terms of Use" />
+          <ButtonFooter title="Terms and Conditions" />
         </Link>
       </div>
     </div>

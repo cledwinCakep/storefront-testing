@@ -213,7 +213,7 @@ const Footer = () => {
             </div>
             <div className="grid w-full grid-cols-2 content-start items-start gap-x-5 gap-y-10 sm:grid-cols-3">
               <div className="col-span-1">
-                <Text className=" text-base font-bold leading-6 tracking-tighter text-gray-400">
+                <Text className=" text-base font-bold leading-normal tracking-tighter text-neutral-500">
                   ABOUT
                 </Text>
                 <div className="mt-4 flex flex-col gap-2">
@@ -228,7 +228,7 @@ const Footer = () => {
                     hash
                   />
                   <span
-                    className="text-base font-normal leading-6 tracking-tighter text-gray-100 opacity-80  hover:opacity-100 sm:text-lg"
+                    className="text-base font-normal leading-normal tracking-tighter text-stone-50 opacity-80  hover:opacity-100"
                     onClick={openModal}
                     role="button"
                   >
@@ -238,7 +238,7 @@ const Footer = () => {
                     href="https://affiliate.superalink.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-base font-normal leading-6 tracking-tighter text-gray-100 opacity-80  hover:opacity-100 sm:text-lg"
+                    className="text-base font-normal leading-normal tracking-tighter text-stone-50 opacity-80  hover:opacity-100"
                   >
                     Become affiliate{" "}
                   </Link>
@@ -246,37 +246,37 @@ const Footer = () => {
                     href="/blog"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-base font-normal leading-6 tracking-tighter text-gray-100 opacity-80  hover:opacity-100 sm:text-lg"
+                    className="text-base font-normal leading-normal tracking-tighter text-stone-50 opacity-80  hover:opacity-100"
                   >
                     Blog
                   </Link>
                 </div>
               </div>
               <div className="col-span-1">
-                <div className=" text-base font-bold leading-6 tracking-tighter text-gray-400">
+                <div className=" text-base font-bold leading-normal tracking-tighter text-neutral-500">
                   RESOURCES
                 </div>
                 <div className="mt-4 flex flex-col gap-2">
                   <a
                     href="mailto:support@superalink.com"
-                    className="text-base font-normal leading-6 tracking-tighter text-gray-100 opacity-80  hover:opacity-100 sm:text-lg"
+                    className="text-base font-normal leading-normal tracking-tighter text-stone-50 opacity-80  hover:opacity-100"
                     rel="noopener noreferrer"
                     target="_blank"
                   >
-                    Support
+                    Contact us
                   </a>
                   <FooterTextLink
                     text="Privacy policy"
                     href="/privacy-policy"
                   />
                   <FooterTextLink
-                    text="Term & Conditions"
+                    text="Terms & Conditions"
                     href="/terms-and-conditions"
                   />
                 </div>
               </div>
               <div className="col-span-1">
-                <div className=" text-base font-bold leading-6 tracking-tighter text-gray-400">
+                <div className=" text-base font-bold leading-normal tracking-tighter text-neutral-500">
                   SOCIAL MEDIA
                 </div>
                 <div className="mt-4 flex flex-col gap-2">
@@ -290,7 +290,7 @@ const Footer = () => {
                     href="https://www.tiktok.com/@superalink.official"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-base font-normal leading-6 tracking-tighter text-gray-100 opacity-80  hover:opacity-100 sm:text-lg"
+                    className="text-base font-normal leading-normal tracking-tighter text-stone-50 opacity-80  hover:opacity-100"
                   >
                     Tiktok
                   </Link>
@@ -298,7 +298,7 @@ const Footer = () => {
                     href="https://www.instagram.com/superalink.official/"
                     rel="noopener noreferrer"
                     target="_blank"
-                    className="text-base font-normal leading-6 tracking-tighter text-gray-100 opacity-80  hover:opacity-100 sm:text-lg"
+                    className="text-base font-normal leading-normal tracking-tighter text-stone-50 opacity-80  hover:opacity-100"
                   >
                     Instagram
                   </Link>
@@ -306,7 +306,7 @@ const Footer = () => {
                     href="https://www.facebook.com/Superalink.official/"
                     rel="noopener noreferrer"
                     target="_blank"
-                    className="text-base font-normal leading-6 tracking-tighter text-gray-100 opacity-80  hover:opacity-100 sm:text-lg"
+                    className="text-base font-normal leading-normal tracking-tighter text-stone-50 opacity-80  hover:opacity-100"
                   >
                     Facebook
                   </Link>
@@ -314,9 +314,9 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <Text className="flex w-full items-center justify-center border-t-[1px] border-gray-400 pb-7 pt-7 text-gray-400">
-            &copy; Copyright {new Date().getFullYear()}. All Rights Reserved
-            Supera link
+          <Text className="flex w-full items-center justify-center border-t-[1px] border-gray-400 pb-7 pt-7 opacity-80 text-center text-neutral-500 text-sm font-normal leading-[18px]">
+            &copy; Copyright{" "}
+            {new Date().getFullYear()}. All Rights Reserved Supera link
           </Text>
         </div>
       </Layout>
