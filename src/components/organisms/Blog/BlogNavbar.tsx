@@ -3,14 +3,12 @@ import Image from "next/image";
 import React from "react";
 import Link from "next/link";
 import Button from "@/components/atoms/Button/Button";
-import { useMediaQuery } from "@react-hook/media-query";
 
 interface BlogNavbarProps {
   params?: any;
 }
 
-const BlogNavbar = ({ params }: BlogNavbarProps) => {
-  const isMobile = useMediaQuery("only screen and (min-width: 361px)");
+const BlogNavbar = ({ params }: BlogNavbarProps) =>{
 
   return (
     <div
@@ -25,7 +23,7 @@ const BlogNavbar = ({ params }: BlogNavbarProps) => {
             width={175}
             height={26}
             alt="logo superalink"
-            className={`${!isMobile ? 'hidden' :'block'} min-w-[135px]`}
+            className={`hidden xs:block sm:block min-w-[135px]`}
           />
         </Link>
         <div className="h-auto w-full">
@@ -35,7 +33,7 @@ const BlogNavbar = ({ params }: BlogNavbarProps) => {
               width={148}
               height={22}
               alt="logo superalink"
-              className={`${isMobile ? 'hidden' :'block'}`}
+              className={`block xs:hidden sm:hidden`}
             />
           </Link>
         </div>

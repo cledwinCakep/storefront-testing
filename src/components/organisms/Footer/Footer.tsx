@@ -254,7 +254,7 @@ const Footer = () => {
               </div>
               <div className="col-span-1">
                 <div className=" text-base font-bold leading-normal tracking-tighter text-neutral-500">
-                  RESOURCES
+                  HELP & SUPPORT
                 </div>
                 <div className="mt-4 flex flex-col gap-2">
                   <a

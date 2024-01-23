@@ -241,14 +241,14 @@ export const BlogFooter = () => {
                   >
                     Become affiliate{" "}
                   </Link>
-                  <Link
+                  {/* <Link
                     href="/blog"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-base font-normal leading-normal tracking-tighter text-stone-50 opacity-80  hover:opacity-100"
                   >
                     Blog
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
               <div className="col-span-2 sm:col-span-1">
