@@ -227,6 +227,7 @@ const CardPlan = (plan: {}) => {
     <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
       {PLAN[0].UNLIMITED["0UNLIMITED"].map((arr) => (
         <button
+          key={arr.id}
           className={`rounded-md border px-5 py-4 text-left ${
             currentPlan === arr.id
               ? "border-[#9A3412] bg-[#431407]"
