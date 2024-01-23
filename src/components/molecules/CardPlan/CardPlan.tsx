@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 
 import Text from "@/components/atoms/Text/Text";
 import { usePlanContext } from "@/lib/context/plan";
+import usePlanHook from "@/lib/hooks/usePlanHooks";
+
+import { addParametersToUrl } from "@/lib/utils/addParamsToUrl";
 
 const PLAN = [
   {
@@ -210,51 +213,68 @@ const PLAN = [
   },
 ];
 
-const CardPlan = (plan: {}) => {
-  const [currentPlan, setCurrentPlan] = useState(627);
+const CardPlan = (data: any) => {
+  const [currentPlan, setCurrentPlan] = useState(0);
   const { selectDataPlan, currentSelected, setCurrentSelect } =
     usePlanContext();
 
-  useEffect(() => {}, [currentSelected]);
+  useEffect(() => {
+    setCurrentPlan(data.data[0].id);
+  }, []);
 
-  const handleActivePlan = (id: number, day: number, price: number) => {
+  const handleActivePlan = (id: number, duration: number, price: number) => {
     setCurrentPlan(id);
 
-    console.log({ day, price });
+    const temp = {
+      ...currentSelected,
+      unlimitedPlanDuration: {
+        id: String(id),
+        value: String(duration),
+        price,
+      },
+    };
+
+    setCurrentSelect(temp);
   };
 
   return (
     <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-      {PLAN[0].UNLIMITED["0UNLIMITED"].map((arr) => (
-        <button
-          key={arr.id}
-          className={`rounded-md border px-5 py-4 text-left ${
-            currentPlan === arr.id
-              ? "border-[#9A3412] bg-[#431407]"
-              : "border-gray-500 bg-[#121417]"
-          }`}
-          onClick={() =>
-            handleActivePlan(arr.id, arr.duration_in_days, arr.price_in_usd)
-          }
-        >
-          <Text
-            as="body1"
-            className={`font-bold ${
-              currentPlan === arr.id ? "text-orange-500" : "text-[#F9F9F9]"
+      {data.data.map(
+        (arr: {
+          id: number;
+          duration_in_days: number;
+          price_in_usd: number;
+        }) => (
+          <button
+            key={arr.id}
+            className={`cursor-pointer rounded-md border px-5 py-4 text-left ${
+              currentPlan === arr.id
+                ? "border-[#9A3412] bg-[#431407]"
+                : "border-gray-500 bg-[#121417]"
             }`}
+            onClick={() =>
+              handleActivePlan(arr.id, arr.duration_in_days, arr.price_in_usd)
+            }
           >
-            {arr.duration_in_days} Day
-          </Text>
-          <Text
-            as="body2"
-            className={`${
-              currentPlan === arr.id ? "text-orange-600" : "text-[#BDBDBD]"
-            }`}
-          >
-            Unlimited Data
-          </Text>
-        </button>
-      ))}
+            <Text
+              as="body1"
+              className={`font-bold ${
+                currentPlan === arr.id ? "text-orange-500" : "text-[#F9F9F9]"
+              }`}
+            >
+              {arr.duration_in_days} Day
+            </Text>
+            <Text
+              as="body2"
+              className={`${
+                currentPlan === arr.id ? "text-orange-600" : "text-[#BDBDBD]"
+              }`}
+            >
+              Unlimited Data
+            </Text>
+          </button>
+        )
+      )}
     </div>
   );
 };

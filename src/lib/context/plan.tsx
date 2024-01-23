@@ -27,11 +27,18 @@ type DurationType = {
   value: string;
 };
 
+type UnlimitedPlanDurationType = {
+  id: string;
+  value: string;
+  price: number;
+};
+
 export interface currentSelectedProps {
-  dataType: { id: string; value: string };
-  plan: PlanType;
-  data: DataType;
-  duration: DurationType;
+  type?: { id: string; value: string };
+  plan?: PlanType;
+  data?: DataType;
+  duration?: DurationType;
+  unlimitedPlanDuration?: UnlimitedPlanDurationType;
 }
 
 export interface PlanHooks {
@@ -44,7 +51,7 @@ export interface PlanHooks {
   setCurrentSelect: Dispatch<SetStateAction<currentSelectedProps>>;
   handleOrder: (method: string) => void;
   order: number;
-  subtotal: number;
+  subtotal: number | undefined;
   increaseButton: boolean;
   handleBuy: () => void;
   country: string;

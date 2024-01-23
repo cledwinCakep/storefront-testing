@@ -258,7 +258,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
                     destination={`${retrievedData.country_name} eSim data plans`}
                     packages={`${
                       retrievedData!["plan_option"] == "UNLIMITED"
-                        ? "Daily Unlimited"
+                        ? "Unlimited"
                         : "Quota"
                     },
                      ${capitalizeFirstLetter(retrievedData!["plan_type"])}
