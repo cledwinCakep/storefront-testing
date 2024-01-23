@@ -36,8 +36,8 @@ const BlogNavbar = ({ params }: BlogNavbarProps) => {
             />
           </Link>
         </div>
-        <Link href={"/"} className="min-w-[156px]">
-          <Button color="transparent" size="xs" className="w-full">
+        <Link href={"/"} className="min-w-[160px]">
+          <Button color="transparent" size="xs" className="w-full min-w-[160px]">
             Visit Storefront
           </Button>
           {/* <Button className="border-tremor-brand min-w-full border bg-transparent text-[15px]">
