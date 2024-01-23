@@ -50,12 +50,13 @@ const link = ({
 
 const Container = () => {
   return (
-    <div className="flex items-start justify-center px-5 ">
-      <div className="flex max-w-[1180px] flex-1 flex-col items-center gap-14 py-5">
+    <div className="flex items-start justify-center px-5 min-h-full">
+      <div className="flex w-auto max-w-[1180px] flex-1 flex-col items-center gap-14 py-5">
         <h1 className="text-3xl font-semibold leading-10 text-white">
           Privacy Policy
         </h1>
-        <div className="flex  flex-col items-start gap-5">
+      
+        <div className="flex flex-col items-start gap-5">
           <Paragraph>
             <p>
               GADGETKOREA INC., doing business as SUPERA LINK
@@ -333,7 +334,13 @@ const Container = () => {
                       rel="noopener noreferrer"
                       className="text-[#F47325]"
                     >
-                      https://developers.google.com/analytics/resources/concepts/gaConceptsCookies
+                      <span className="">
+                      https://developers.google.com/analytics/
+                      </span>
+                      <br className="blok sm:hidden"/>
+                      <span className="">
+                      resources/concepts/gaConceptsCookies
+                      </span>
                     </Link>
                   </P>
                   <br />
@@ -720,7 +727,7 @@ const Container = () => {
 
 const PrivacyPolicy = () => {
   return (
-    <div className="flex h-full w-full flex-col gap-0 bg-black p-0">
+    <div className="flex min-h-screen w-full flex-col gap-0 bg-black p-0">
       <Header />
       <Container />
       <Footer />
