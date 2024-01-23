@@ -107,17 +107,17 @@ const BlogDetails = ({ params }: { params: { details: string } }) => {
                       {news.filter((news) => news.title === title)[0].author ||
                         "-"}
                     </p>
-                    <div className="flex w-full flex-col gap-0 sm:flex-row sm:gap-2">
-                      <div className="flex w-auto flex-col gap-0 sm:flex-row sm:gap-2">
-                        <Text className="font-normal text-[#767676]">
+                    <div className="xs:flex-row flex w-full flex-col justify-start gap-2">
+                      <div className="flex gap-2">
+                        <Text className="text-sm font-normal text-[#767676]">
                           Publised in
                         </Text>
-                        <Text className="font-normal text-[#121417]">
+                        <Text className="text-sm font-normal text-[#121417]">
                           {news.filter((news) => news.title === title)[0].date}
                         </Text>
                       </div>
-                      <div className="ml-2 flex w-auto gap-2">
-                        <div className="flex min-h-full w-2 flex-col justify-center">
+                      <div className="flex gap-2">
+                        <div className="flex items-center">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="4"
@@ -128,7 +128,7 @@ const BlogDetails = ({ params }: { params: { details: string } }) => {
                             <circle cx="2" cy="2" r="2" fill="#BDBDBD" />
                           </svg>
                         </div>
-                        <Text className="font-normal text-[#121417]">
+                        <Text className="text-sm font-normal text-[#121417]">
                           Hot Topics
                         </Text>
                       </div>
