@@ -214,7 +214,7 @@ export const BlogFooter = () => {
               </div>
             </div>
             <div className="grid w-full grid-cols-2 content-start items-start gap-x-5 gap-y-10 sm:grid-cols-3">
-              <div className="col-span-1">
+              <div className="col-span-2 sm:col-span-1">
                 <Text className=" text-base font-bold leading-normal tracking-tighter text-gray-400">
                   ABOUT
                 </Text>
@@ -251,7 +251,7 @@ export const BlogFooter = () => {
                   </Link>
                 </div>
               </div>
-              <div className="col-span-1">
+              <div className="col-span-2 sm:col-span-1">
                 <div className=" text-base font-bold leading-normal tracking-tighter text-gray-400">
                   HELP & SUPPORT
                 </div>
@@ -276,7 +276,7 @@ export const BlogFooter = () => {
                   />
                 </div>
               </div>
-              <div className="col-span-1">
+              <div className="col-span-2 sm:col-span-1">
                 <div className="text-base font-bold leading-normal tracking-tighter text-gray-400">
                   SOCIAL MEDIA
                 </div>
