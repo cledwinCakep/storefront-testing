@@ -21,8 +21,12 @@ import { useTranslations } from "next-intl";
 import { useRouter, usePathname } from "next/navigation";
 import { useCallback } from "react";
 import GlobeIcon from "@/components/atoms/SVG/GlobeIcon";
+import CardPlan from "@/components/molecules/CardPlan/CardPlan";
 
 const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
+  console.log({ params });
+
+  const [isUnlimitedPlan, setIsUnlimitedPlan] = useState(false);
   const {
     openSupportedCountry,
     globalCode,
@@ -124,7 +128,9 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     if (globalCodes.includes(country_code)) {
       setGlobalCode(country_code);
     }
-  }, [globalCode, country_code, globalCode, setGlobalCode]);
+  }, [globalCodes, country_code, globalCode, setGlobalCode]);
+
+  console.log({ data });
 
   const getPlanDataType = useCallback(() => {
     const planArr: any[][] = Object.values(data[parameter.plan] ?? []);
@@ -158,6 +164,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
 
     const filteredParams = check.filter((item) => {
       const key = item.value;
+
       const matchingPlans = data[parameter.plan || "UNLIMITED"][key];
 
       if (matchingPlans) {
@@ -285,44 +292,48 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
             )}
           </div>
 
-          {!isLoading && (
-            <>
-              <RadioPlan
-                name="plan"
-                title={t("planDetail_selectPlanTitle")}
-                data={Object.keys(data).map((key) => ({
-                  label:
-                    key == "UNLIMITED" ? "Daily Unlimited Plan" : "Quota Plan",
-                  value: key, // Generate a value based on the label
-                }))}
-              />
+          {!isLoading ? (
+            data["UNLIMITED"]["0UNLIMITED"] ? (
+              <>
+                <Text as="small" className="mb-6 font-medium text-white">
+                  How many days are you traveling for?
+                </Text>
 
-              <RadioPlan
-                name="dataType"
-                title="Select Type:"
-                data={getPlanDataType()}
-                // data={[{ label: "Roaming", value: "Roaming" }]}
-              />
-              <RadioPlan
-                name="data"
-                title={t("planDetail_selectDataTitle")}
-                data={getQuotaPerDay()}
-              />
-              <RadioPlan
-                name="duration"
-                title={t("planDetail_selectDurationTitle")}
-                // data={Object.values(
-                //   data[parameter.plan][parameter.data]
-                //     ? data[parameter.plan][parameter.data]
-                //     : data[parameter.plan]["15GB"]
-                // ).map((key: any) => ({
-                //   label: `${key["duration_in_days"]} Day(s)`,
-                //   value: `${key["duration_in_days"]}`,
-                // }))}
-                data={getPlanDuration()}
-              />
-            </>
-          )}
+                <CardPlan />
+              </>
+            ) : (
+              <>
+                <RadioPlan
+                  name="plan"
+                  title={t("planDetail_selectPlanTitle")}
+                  data={Object.keys(data).map((key) => ({
+                    label:
+                      key == "UNLIMITED"
+                        ? "Daily Unlimited Plan"
+                        : "Quota Plan",
+                    value: key, // Generate a value based on the label
+                  }))}
+                />
+
+                <RadioPlan
+                  name="dataType"
+                  title="Select Type:"
+                  data={getPlanDataType()}
+                />
+                <RadioPlan
+                  name="data"
+                  title={t("planDetail_selectDataTitle")}
+                  data={getQuotaPerDay()}
+                />
+                <RadioPlan
+                  name="duration"
+                  title={t("planDetail_selectDurationTitle")}
+                  data={getPlanDuration()}
+                />
+              </>
+            )
+          ) : null}
+
           <Tabs
             data={
               countryName

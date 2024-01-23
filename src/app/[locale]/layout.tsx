@@ -13,9 +13,9 @@ import ReactGA from "react-ga";
 
 export const dynamic = "force-dynamic";
 
-export async function generateStaticParams() {
-  return ["en"].map((locale) => ({ locale }));
-}
+// export async function generateStaticParams() {
+//   return ["en"].map((locale) => ({ locale }));
+// }
 
 let cache: { [key: string]: typeof en } = {};
 
@@ -50,9 +50,8 @@ export default function RootLayout({
   children?: React.ReactNode;
   params: { locale: string };
 }) {
-  
   useEffect(() => {
-    if (process.env.NODE_ENV === 'production') {
+    if (process.env.NODE_ENV === "production") {
       Smartlook.init(process.env.NEXT_PUBLIC_SMARTLOOK!);
       ReactGA.initialize(process.env.NEXT_PUBLIC_GA!);
     }

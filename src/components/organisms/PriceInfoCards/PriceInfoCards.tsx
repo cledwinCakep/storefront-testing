@@ -26,12 +26,15 @@ const i: any = {
 };
 
 const PriceInfoCards = ({ data }: PriceInfoCardsProps) => {
+  console.log({ data });
+
   return (
     <div className="grid w-full gap-y-3 sm:gap-x-3 sm:gap-y-2 md:w-auto md:grid-cols-3 md:gap-x-3 md:gap-y-3 ">
       {data.map((data) => (
         <a
           key={data.code}
-          href={`/plans/${data.code}?plan=UNLIMITED&dataType=&data=&duration=`}
+          // href={`/plans/${data.code}?plan=UNLIMITED&dataType=&data=&duration=`}
+          href={`/plans/${data.code}`}
         >
           <div
             key={data.title}

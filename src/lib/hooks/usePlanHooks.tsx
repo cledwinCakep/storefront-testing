@@ -12,6 +12,8 @@ interface DataPlan {
 }
 
 const usePlanHook = (params: { slug: string }) => {
+  console.log({ hook: params });
+
   const [data, setData] = useState<any>([]);
   const [buy, setBuy] = useState<any>();
   const [increaseButton, setIncreaseButton] = useState<boolean>(true);
@@ -52,43 +54,41 @@ const usePlanHook = (params: { slug: string }) => {
 
   useEffect(() => {
     // Parse the query parameters from the URL
-    const urlSearchParams = new URLSearchParams(window.location.search);
-    const plan = urlSearchParams.get("plan") || "";
-    const data = urlSearchParams.get("data") || "";
-    const duration = urlSearchParams.get("duration") || "";
-    const dataType = urlSearchParams.get("dataType") || "";
-
-    setParameter({ plan, data, duration, dataType });
-
-    // Update the currentSelected state with the parsed parameters
-    setCurrentSelect({
-      dataType: {
-        id: dataType == "" ? "" : dataType,
-        value: dataType == "" ? "" : dataType,
-      },
-      plan: {
-        id:
-          plan == ""
-            ? "-"
-            : plan == "UNLIMITED"
-            ? "Daily Unlimited Plan"
-            : "Quota Plan", // Set the id to "plan" or any other identifier you prefer
-        value: plan,
-      },
-      data: {
-        id: data == "" ? "-" : data, // Set the id to "data" or any other identifier you prefer
-        value: data,
-      },
-      duration: {
-        id: duration == "" ? "-" : duration + " Day(s)", // Set the id to "duration" or any other identifier you prefer
-        value: duration,
-      },
-    });
+    // const urlSearchParams = new URLSearchParams(window.location.search);
+    // const plan = urlSearchParams.get("plan") || "";
+    // const data = urlSearchParams.get("data") || "";
+    // const duration = urlSearchParams.get("duration") || "";
+    // const dataType = urlSearchParams.get("dataType") || "";
+    // setParameter({ plan, data, duration, dataType });
+    // // Update the currentSelected state with the parsed parameters
+    // setCurrentSelect({
+    //   dataType: {
+    //     id: dataType == "" ? "" : dataType,
+    //     value: dataType == "" ? "" : dataType,
+    //   },
+    //   plan: {
+    //     id:
+    //       plan == ""
+    //         ? "-"
+    //         : plan == "UNLIMITED"
+    //         ? "Daily Unlimited Plan"
+    //         : "Quota Plan", // Set the id to "plan" or any other identifier you prefer
+    //     value: plan,
+    //   },
+    //   data: {
+    //     id: data == "" ? "-" : data, // Set the id to "data" or any other identifier you prefer
+    //     value: data,
+    //   },
+    //   duration: {
+    //     id: duration == "" ? "-" : duration + " Day(s)", // Set the id to "duration" or any other identifier you prefer
+    //     value: duration,
+    //   },
+    // });
   }, []);
 
   useEffect(() => {
     const getData = async () => {
-      const res = await utilityApi.getProductListByCountry(params.slug);
+      const res = await utilityApi.getProductListByCountry(params.slug[0]);
       setRawData(res.data);
       setCountry(res.data[0].country_name.String);
       res.data.forEach((dt: any) => {
@@ -155,31 +155,31 @@ const usePlanHook = (params: { slug: string }) => {
       }
     }
 
-    function addParametersToUrl() {
-      // Get the current URL
-      const baseUrl = window.location.origin + window.location.pathname;
+    // function addParametersToUrl() {
+    //   // Get the current URL
+    //   const baseUrl = window.location.origin + window.location.pathname;
 
-      // Construct the query string from the parameters object
-      const queryString = Object.keys(currentSelected)
-        .map(
-          (key: any) =>
-            `${encodeURIComponent(key)}=${encodeURIComponent(
-              currentSelected[key as keyof currentSelectedProps].value
-            )}`
-        )
-        .join("&");
+    //   // Construct the query string from the parameters object
+    //   const queryString = Object.keys(currentSelected)
+    //     .map(
+    //       (key: any) =>
+    //         `${encodeURIComponent(key)}=${encodeURIComponent(
+    //           currentSelected[key as keyof currentSelectedProps].value
+    //         )}`
+    //     )
+    //     .join("&");
 
-      // Check if the URL already has query parameters
-      // Combine the host URL and query string
-      const newUrl = queryString ? `${baseUrl}?${queryString}` : baseUrl;
+    //   // Check if the URL already has query parameters
+    //   // Combine the host URL and query string
+    //   const newUrl = queryString ? `${baseUrl}?${queryString}` : baseUrl;
 
-      // Update the URL without triggering a page reload
-      window.history.replaceState({ path: newUrl }, "", newUrl);
-    }
+    //   // Update the URL without triggering a page reload
+    //   window.history.replaceState({ path: newUrl }, "", newUrl);
+    // }
 
     findSubtotal();
     handleButtonState();
-    addParametersToUrl();
+    // addParametersToUrl();
   }, [order, currentSelected, parameter, rawData]);
 
   // const handleButtonClick = (locale: string) => {
