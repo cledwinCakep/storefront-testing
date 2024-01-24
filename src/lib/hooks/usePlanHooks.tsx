@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 
 interface DataPlan {
   [planOption: string]: {
-    [dataAmount: string]: number[];
+    [dataAmount: string]: any[];
   };
 }
 
@@ -94,28 +94,38 @@ const usePlanHook = (params: { slug: string }) => {
   useEffect(() => {
     const getData = async () => {
       const res = await utilityApi.getProductListByCountry(params.slug[0]);
+
       setRawData(res.data);
       setCountry(res.data[0].country_name.String);
-      res.data.forEach((dt: any) => {
-        const dataKey = dt.data_amount + dt.data_unit;
 
-        if (!dataPlan[dt.plan_option]) {
-          dataPlan[dt.plan_option] = {};
+      for (let i = 0; i < res.data.length; i++) {
+        const dataKey = res.data[i].data_amount + res.data[i].data_unit;
+
+        if (!dataPlan[res.data[i].plan_option]) {
+          dataPlan[res.data[i].plan_option] = {};
         }
 
-        if (!dataPlan[dt.plan_option][dataKey]) {
-          dataPlan[dt.plan_option][dataKey] = [];
+        if (!dataPlan[res.data[i].plan_option][dataKey]) {
+          dataPlan[res.data[i].plan_option][dataKey] = [];
         }
 
-        dataPlan[dt.plan_option][dataKey].push(dt);
-      });
+        const filterDataPlan = dataPlan[res.data[i].plan_option][
+          dataKey
+        ].filter((dataPlan) => dataPlan.id === res.data[i].id);
 
-      setData(dataPlan);
-      setLoading(false);
+        if (filterDataPlan.length) {
+          return;
+        }
+
+        dataPlan[res.data[i].plan_option][dataKey].push(res.data[i]);
+      }
     };
 
+    setData(dataPlan);
+    setLoading(false);
+
     getData();
-  }, [dataPlan, params.slug]); // removing data plan resolves the infinite request issue, but the data is not updated on change
+  }, [params.slug]); // removing data plan resolves the infinite request issue, but the data is not updated on change
 
   useEffect(() => {
     function findSubtotal() {
