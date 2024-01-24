@@ -25,7 +25,11 @@ import CardPlan from "@/components/molecules/CardPlan/CardPlan";
 import { addParametersToUrl } from "@/lib/utils/addParamsToUrl";
 
 const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
-  const [isUnlimitedPlan, setIsUnlimitedPlan] = useState(false);
+  const [plan, setPlan] = useState("unlimited");
+  const [type, setType] = useState("roaming");
+  const [planData, setPlanData] = useState("limited");
+  const [quota, setQuota] = useState("1GB");
+
   const {
     openSupportedCountry,
     globalCode,
@@ -181,68 +185,53 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     );
   };
 
-  const getPlanDataType = useCallback(() => {
-    const planArr: any[][] = Object.values(data[parameter.plan] ?? []);
+  const getPlan = useCallback(() => {
+    const plan: any = Object.keys(data);
 
-    const dataTypeArr = planArr.flatMap((type) =>
-      type.map((type) => type.plan_type)
-    );
-
-    const planDataType = Array.from(new Set(dataTypeArr), (value) => ({
-      title: "type",
-      label: capitalizeSetValue(value),
-      value: lowerCaseSetValue(value),
+    return plan.map((plan: any) => ({
+      title: "plan",
+      label: capitalizeSetValue(plan),
+      value: lowerCaseSetValue(plan),
     }));
+  }, [data, parameter, plan]);
 
-    return planDataType;
-  }, [data, parameter]);
+  const getType = useCallback(() => {
+    const type = data[plan];
 
-  const getQuotaPerDay = () => {
-    const check = Object.keys(data[parameter.plan || "UNLIMITED"]).map(
-      (key, index) => ({
-        title: "data",
-        label: parameter.plan === "QUOTA" ? key : `${key}/day`,
-        value: key,
-      })
-    );
-
-    const filteredParams = check.filter((item) => {
-      const key = item.value;
-
-      const matchingPlans = data[parameter.plan || "UNLIMITED"][key];
-
-      if (matchingPlans) {
-        const localPlan = matchingPlans.find(
-          (plan: any) => plan.plan_type === parameter.type.toLocaleUpperCase()
-        );
-        return localPlan !== undefined;
-      }
-      return false;
-    });
-
-    if (filteredParams.length > 0) {
-      return filteredParams;
-    } else {
-      return check;
+    if (type) {
+      return Object.keys(type).map((type) => ({
+        title: "type",
+        label: capitalizeSetValue(type),
+        value: lowerCaseSetValue(type),
+      }));
     }
-  };
+  }, [data, parameter, plan, type]);
+
+  const getQuota = useCallback(() => {
+    const quota = data[plan]?.[type];
+
+    if (Object.keys(quota?.[planData] || []).length) {
+      return Object.keys(quota?.[planData]).map((quota: any) => ({
+        title: "quota",
+        label: quota.toString().toUpperCase(),
+        value: quota.toString().toUpperCase(),
+      }));
+    }
+  }, [data, plan, type, quota]);
+
+  console.log({ quota: getQuota() });
 
   const getPlanDuration = useCallback(() => {
-    const planArr: any = data[parameter.plan || "UNLIMITED"] ?? [];
+    const duration = data[plan]?.[type]?.[planData]?.[quota];
 
-    const result = planArr[parameter.data]
-      ?.filter(
-        (planDuration: any) =>
-          planDuration.plan_type === parameter.type.toLocaleUpperCase()
-      )
-      .map((planDuration: any) => ({
-        title: "duration",
-        label: planDuration.duration_in_days + " Day(s)",
-        value: planDuration.duration_in_days,
-      }));
+    return duration?.map((duration: any) => ({
+      title: "duration",
+      label: `${duration.duration_in_days} Day(s)`,
+      value: duration.duration_in_days,
+    }));
+  }, [data, parameter, plan, type, planData, quota]);
 
-    return result ?? [];
-  }, [data, parameter]);
+  console.log({ currentSelected });
 
   return (
     <div className="sm:relative">
@@ -341,42 +330,59 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
               <RadioPlan
                 name="plan"
                 title={t("planDetail_selectPlanTitle")}
-                data={Object.keys(data).map((key) => ({
-                  title: "plan",
-                  label:
-                    key == "UNLIMITED" ? "Daily Unlimited Plan" : "Quota Plan",
-                  value: key,
-                }))}
+                data={getPlan()}
+                setPlan={setPlan}
+                setType={setType}
+                setPlanData={setPlanData}
+                setQuota={setQuota}
               />
 
               <RadioPlan
                 name="type"
                 title="Select type:"
-                data={getPlanDataType()}
+                data={getType()}
+                setPlan={setPlan}
+                setType={setType}
+                setPlanData={setPlanData}
+                setQuota={setQuota}
               />
 
-              {parameter.type === "roaming" && (
-                <div>
-                  <Text as="body1" className="mb-4 font-bold text-gray-100">
-                    How many days are you travelling for?
-                  </Text>
+              {planData === "unlimited" && (
+                <>
+                  <div>
+                    <Text as="body1" className="mb-4 font-bold text-gray-100">
+                      How many days are you travelling for?
+                    </Text>
 
-                  <CardPlan data={data["UNLIMITED"]["0UNLIMITED"] ?? []} />
-                </div>
+                    <CardPlan
+                      data={
+                        data?.unlimited?.roaming?.unlimited["0UNLIMITED"] ?? []
+                      }
+                    />
+                  </div>
+                </>
               )}
 
-              {parameter.type === "local" && (
+              {planData === "limited" && (
                 <>
                   <RadioPlan
-                    name="data"
+                    name="quota"
                     title={t("planDetail_selectDataTitle")}
-                    data={getQuotaPerDay()}
+                    data={getQuota()}
+                    setPlan={setPlan}
+                    setType={setType}
+                    setPlanData={setPlanData}
+                    setQuota={setQuota}
                   />
 
                   <RadioPlan
                     name="duration"
                     title={t("planDetail_selectDurationTitle")}
                     data={getPlanDuration()}
+                    setPlan={setPlan}
+                    setType={setType}
+                    setPlanData={setPlanData}
+                    setQuota={setQuota}
                   />
                 </>
               )}
@@ -495,14 +501,14 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
                         ? capitalizeSetValue(currentSelected.type?.value) + ", "
                         : ""
                     }
-                    ${
-                      currentSelected.unlimitedPlanDuration?.id !== "-"
-                        ? currentSelected.unlimitedPlanDuration?.value +
-                          " " +
-                          "Day(s)"
-                        : ""
-                    }
-                    `}
+                  ${
+                    currentSelected.unlimitedPlanDuration?.id !== "-"
+                      ? currentSelected.unlimitedPlanDuration?.value +
+                        " " +
+                        "Day(s)"
+                      : ""
+                  }
+                  `}
                   </>
                 ) : (
                   <>

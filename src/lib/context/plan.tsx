@@ -8,7 +8,7 @@ import React, {
 
 interface DataPlan {
   [planOption: string]: {
-    [dataAmount: string]: any[];
+    [dataAmount: string]: any;
   };
 }
 

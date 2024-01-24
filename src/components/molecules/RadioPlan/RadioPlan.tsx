@@ -9,6 +9,9 @@ import { usePlanContext } from "@/lib/context/plan";
 import { currentSelectedProps } from "@/lib/context/plan";
 import { addParametersToUrl } from "@/lib/utils/addParamsToUrl";
 import usePlanHook from "@/lib/hooks/usePlanHooks";
+
+import usePlanSelectionHook from "@/lib/hooks/usePlanSelectionHook";
+
 // interfaces
 interface RadioPlanData {
   title: string;
@@ -19,10 +22,22 @@ interface RadioPlanData {
 interface RadioPlanProps {
   title: string;
   name: string;
-  data: RadioPlanData[];
+  data: RadioPlanData[] | undefined;
+  setPlan: any;
+  setType: any;
+  setPlanData: any;
+  setQuota: any;
 }
 
-const RadioPlan = ({ title, name, data }: RadioPlanProps) => {
+const RadioPlan = ({
+  title,
+  name,
+  data,
+  setPlan,
+  setType,
+  setPlanData,
+  setQuota,
+}: RadioPlanProps) => {
   const { selectDataPlan, currentSelected, setCurrentSelect } =
     usePlanContext();
 
@@ -33,6 +48,10 @@ const RadioPlan = ({ title, name, data }: RadioPlanProps) => {
     name: string,
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
+    if (name === "plan") {
+      setPlan(e.target.value);
+    }
+
     if (name === "type") {
       if (currentSelected.type?.value !== e.target.value) {
         setCurrentSelect({
@@ -59,6 +78,11 @@ const RadioPlan = ({ title, name, data }: RadioPlanProps) => {
           },
         });
       }
+      setType(e.target.value);
+    }
+
+    if (name === "quota") {
+      setQuota(e.target.value);
     }
 
     let temp = {
@@ -87,7 +111,7 @@ const RadioPlan = ({ title, name, data }: RadioPlanProps) => {
       </div>
 
       <div className="no-scrollbar flex gap-x-4 overflow-scroll sm:max-w-[559px] sm:flex-wrap sm:gap-y-4">
-        {data.map((data) => (
+        {data?.map((data) => (
           <Radio
             // isDisabled={data.label === "Local"}
             current={currentSelected[name as keyof currentSelectedProps]?.value}
