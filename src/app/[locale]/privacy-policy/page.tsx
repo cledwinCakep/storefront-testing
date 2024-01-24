@@ -715,7 +715,7 @@ const Container = () => {
             </Paragraph>
           </Content>
           <div className="mt-10">
-            <Content title="2023 GADGETKOREA INC.">
+            <Content title={`${new Date().getFullYear()} GADGETKOREA INC.`}>
               <Subtitle title="All rights reserved" />
             </Content>
           </div>
