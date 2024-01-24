@@ -46,8 +46,6 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     isError,
   } = usePlanContext();
 
-  console.log({ parameter });
-
   const t = useTranslations("PlanDetail");
   const router = usePathname();
 
@@ -131,47 +129,55 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     }
   }, [globalCodes, country_code, globalCode, setGlobalCode]);
 
-  useEffect(() => {
-    const type = getPlanDataType();
+  // useEffect(() => {
+  //   const type = getPlanDataType();
 
-    const values = Object.values(type).map((value) => value.value);
+  //   const values = Object.values(type).map((value) => value.value);
 
-    const vvv = data["UNLIMITED"]?.["0UNLIMITED"][0];
+  //   console.log({ parameter });
+  //   console.log("re-render");
 
-    if (values.includes("roaming") && data["UNLIMITED"]["0UNLIMITED"]) {
-      addParametersToUrl([
-        {
-          key: "plan",
-          value: "unlimited-data",
-        },
-        {
-          key: "type",
-          value: "roaming",
-        },
-        {
-          key: "duration",
-          value: 1,
-        },
-      ]);
-    }
+  //   if (
+  //     values.includes("roaming") &&
+  //     parameter.type === "roaming" &&
+  //     data["UNLIMITED"]["0UNLIMITED"]
+  //   ) {
+  //     addParametersToUrl([
+  //       {
+  //         key: "plan",
+  //         value: "unlimited-data",
+  //       },
+  //       {
+  //         key: "type",
+  //         value: "roaming",
+  //       },
+  //       {
+  //         key: "duration",
+  //         value: data.UNLIMITED["0UNLIMITED"][0].duration_in_days,
+  //       },
+  //     ]);
+  //     return;
+  //   }
 
-    // addParametersToUrl([
-    //   {
-    //     key: "type",
-    //     value: "roaming",
-    //   },
-    //   {
-    //     key: "data",
-    //     value: "500",
-    //   },
-    // ]);
-  }, [data]);
+  //   if (values.includes("local") && parameter.type === "local") {
+  //     addParametersToUrl([
+  //       {
+  //         key: "type",
+  //         value: "local",
+  //       },
+  //       {
+  //         key: "data",
+  //         value: "500",
+  //       },
+  //     ]);
+  //   }
+  // }, [data, parameter]);
 
   const lowerCaseSetValue = (text: string) => {
     return text.toLocaleLowerCase();
   };
 
-  const capitalizeSetValue = (text: string) => {
+  const capitalizeSetValue = (text: string | undefined = "") => {
     return (
       String(text).charAt(0).toUpperCase() +
       String(text).toLocaleLowerCase().substring(1)
@@ -201,7 +207,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
       (key, index) => ({
         title: "data",
         label: parameter.plan === "QUOTA" ? key : `${key}/day`,
-        value: key, // Generate a value based on the label
+        value: key,
       })
     );
 
@@ -212,8 +218,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
 
       if (matchingPlans) {
         const localPlan = matchingPlans.find(
-          (plan: any) =>
-            plan.plan_type === parameter.dataType.toLocaleUpperCase()
+          (plan: any) => plan.plan_type === parameter.type.toLocaleUpperCase()
         );
         return localPlan !== undefined;
       }
@@ -233,7 +238,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     const result = planArr[parameter.data]
       ?.filter(
         (planDuration: any) =>
-          planDuration.plan_type === parameter.dataType.toLocaleUpperCase()
+          planDuration.plan_type === parameter.type.toLocaleUpperCase()
       )
       .map((planDuration: any) => ({
         title: "duration",
@@ -243,6 +248,8 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
 
     return result ?? [];
   }, [data, parameter]);
+
+  console.log({ parameter });
 
   return (
     <div className="sm:relative">
@@ -350,12 +357,12 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
               />
 
               <RadioPlan
-                name="dataType"
+                name="type"
                 title="Select type:"
                 data={getPlanDataType()}
               />
 
-              {parameter.dataType === "roaming" && (
+              {parameter.type === "roaming" && (
                 <div>
                   <Text as="body1" className="mb-4 font-bold text-gray-100">
                     How many days are you travelling for?
@@ -365,7 +372,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
                 </div>
               )}
 
-              {parameter.dataType === "local" && (
+              {parameter.type === "local" && (
                 <>
                   <RadioPlan
                     name="data"
@@ -484,7 +491,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
                 {t("planDetail_orderInformation")}
               </Text>
               <Text as="body1" className="font-medium text-[#9CA3AF]">
-                {parameter.dataType === "roaming" ? (
+                {parameter.type === "roaming" ? (
                   <>
                     {`${
                       currentSelected.plan?.value === "UNLIMITED"
@@ -492,7 +499,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
                         : "Quota Plan, "
                     }${
                       currentSelected.type?.id !== "-"
-                        ? capitalizeSetValue(currentSelected.type!.value) + ", "
+                        ? capitalizeSetValue(currentSelected.type?.value) + ", "
                         : ""
                     }
                     ${
@@ -602,11 +609,9 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
                     Please select data duration.
                   </Text>
                 ) : null
-              ) : !parameter.data ||
-                !parameter.duration ||
-                !parameter.dataType ? (
+              ) : !parameter.data || !parameter.duration || !parameter.type ? (
                 <Text className="mt-2 text-red-500">
-                  Please select {!parameter.dataType ? "type," : ""}{" "}
+                  Please select {!parameter.type ? "type," : ""}{" "}
                   {!parameter.data ? "data," : ""} and{" "}
                   {!parameter.duration ? "duration" : ""}.
                 </Text>

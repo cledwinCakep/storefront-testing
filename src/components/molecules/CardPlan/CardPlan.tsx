@@ -217,10 +217,17 @@ const CardPlan = (data: any) => {
   const [currentPlan, setCurrentPlan] = useState(0);
   const { selectDataPlan, currentSelected, setCurrentSelect } =
     usePlanContext();
+  const url = new URL(window.location.href);
 
-  useEffect(() => {
-    setCurrentPlan(data.data[0].id);
-  }, []);
+  // useEffect(() => {
+  //   const durationParams = url.searchParams.get("duration");
+
+  //   const dataBasedOnParams = data.data.filter(
+  //     (plan: any) => plan.duration_in_days === Number(durationParams)
+  //   );
+
+  //   // setCurrentPlan(dataBasedOnParams[0].id);
+  // }, []);
 
   const handleActivePlan = (id: number, duration: number, price: number) => {
     setCurrentPlan(id);
@@ -235,6 +242,7 @@ const CardPlan = (data: any) => {
     };
 
     setCurrentSelect(temp);
+    selectDataPlan("unlimitedPlanDuration", String(duration));
   };
 
   return (

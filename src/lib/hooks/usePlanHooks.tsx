@@ -25,7 +25,7 @@ const usePlanHook = (params: { slug: string }) => {
     plan: "UNLIMITED",
     data: "",
     duration: "",
-    dataType: "",
+    type: "",
     unlimitedPlanDuration: "",
   });
   const [isError, setIsError] = useState(false);
@@ -63,8 +63,8 @@ const usePlanHook = (params: { slug: string }) => {
 
     // const data = urlSearchParams.get("data") || "";
     // const duration = urlSearchParams.get("duration") || "";
-    // const dataType = urlSearchParams.get("dataType") || "";
-    // setParameter({ plan, data, duration, dataType });
+    // const type = urlSearchParams.get("type") || "";
+    // setParameter({ plan, data, duration, type });
 
     setCurrentSelect({
       plan: {
@@ -120,7 +120,33 @@ const usePlanHook = (params: { slug: string }) => {
   useEffect(() => {
     function findSubtotal() {
       if (currentSelected.type?.value === "roaming") {
-        setSubtotal(currentSelected.unlimitedPlanDuration?.price);
+        if (rawData) {
+          for (const person of rawData) {
+            if (
+              person["id"] === Number(currentSelected.unlimitedPlanDuration?.id)
+            ) {
+              const newBod = {
+                country_code: person["country_code"],
+                country_name: person["country_name"],
+                created_at: person["created_at"],
+                data_amount: person["data_amount"],
+                data_unit: person["data_unit"],
+                duration_in_days: person["duration_in_days"],
+                id: person["id"],
+                option_id: person["option_id"],
+                plan_option: person["plan_option"],
+                plan_type: currentSelected.type?.value,
+                price_in_usd: person["price_in_usd"],
+                updated_at: person["updated_at"],
+              };
+
+              setBuy(newBod);
+              setSubtotal(
+                order * Number(currentSelected.unlimitedPlanDuration?.price)
+              );
+            }
+          }
+        }
       }
 
       if (currentSelected.type?.value === "local") {
@@ -194,7 +220,7 @@ const usePlanHook = (params: { slug: string }) => {
         plan: "UNLIMITED",
         data: "",
         duration: "",
-        dataType: "",
+        type: "",
         unlimitedPlanDuration: "",
       };
       setSubtotal(0);
@@ -209,7 +235,7 @@ const usePlanHook = (params: { slug: string }) => {
           id: "-",
           value: "",
         },
-        dataType: {
+        type: {
           id: "-",
           value: "",
         },
@@ -219,7 +245,7 @@ const usePlanHook = (params: { slug: string }) => {
         plan: "QUOTA",
         data: "",
         duration: "",
-        dataType: "",
+        type: "",
         unlimitedPlanDuration: "",
       };
       setSubtotal(0);
@@ -234,7 +260,7 @@ const usePlanHook = (params: { slug: string }) => {
           id: "-",
           value: "",
         },
-        dataType: {
+        type: {
           id: "-",
           value: "",
         },
@@ -263,9 +289,20 @@ const usePlanHook = (params: { slug: string }) => {
       return;
     }
 
-    if (!parameter.data || !parameter.dataType || !parameter.duration) {
-      setIsError(true);
-      return;
+    if (!parameter.type) return;
+
+    if (parameter.type === "roaming") {
+      if (!parameter.unlimitedPlanDuration) {
+        setIsError(true);
+        return;
+      }
+    }
+
+    if (parameter.type === "local") {
+      if (!parameter.data || !parameter.duration) {
+        setIsError(true);
+        return;
+      }
     }
 
     const jsonString = JSON.stringify(buy);

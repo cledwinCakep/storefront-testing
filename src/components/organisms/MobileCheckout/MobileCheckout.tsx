@@ -93,9 +93,9 @@ const MobileCheckout = () => {
         {t("planDetail_buyButton")}
       </Button>
       {isError ? (
-        !parameter.data || !parameter.duration || !parameter.dataType ? (
+        !parameter.data || !parameter.duration || !parameter.type ? (
           <Text className="mt-2 text-red-500">
-            Please select {!parameter.dataType ? "type," : ""}{" "}
+            Please select {!parameter.type ? "type," : ""}{" "}
             {!parameter.data ? "data," : ""} and{" "}
             {!parameter.duration ? "duration" : ""}.
           </Text>

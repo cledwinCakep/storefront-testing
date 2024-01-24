@@ -33,7 +33,7 @@ const RadioPlan = ({ title, name, data }: RadioPlanProps) => {
     name: string,
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    if (name === "dataType") {
+    if (name === "type") {
       if (currentSelected.type?.value !== e.target.value) {
         setCurrentSelect({
           type: {
@@ -66,9 +66,12 @@ const RadioPlan = ({ title, name, data }: RadioPlanProps) => {
       [name]: { id: e.target.id, value: e.target.value },
     };
 
-    if (name === "dataType" && currentSelected.type?.value !== e.target.value) {
+    if (name === "type" && currentSelected.type?.value !== e.target.value) {
       temp = { ...temp, duration: { id: "-", value: "" } };
     }
+
+    console.log({ temp });
+    console.log({ name: e.target.name, value: e.target.value });
 
     setCurrentSelect(temp);
     selectDataPlan(e.target.name, e.target.value);
