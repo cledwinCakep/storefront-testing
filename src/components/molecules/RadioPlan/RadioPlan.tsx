@@ -70,9 +70,6 @@ const RadioPlan = ({ title, name, data }: RadioPlanProps) => {
       temp = { ...temp, duration: { id: "-", value: "" } };
     }
 
-    console.log({ temp });
-    console.log({ name: e.target.name, value: e.target.value });
-
     setCurrentSelect(temp);
     selectDataPlan(e.target.name, e.target.value);
   };

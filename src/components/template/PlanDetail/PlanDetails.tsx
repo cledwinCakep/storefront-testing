@@ -134,9 +134,6 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
 
   //   const values = Object.values(type).map((value) => value.value);
 
-  //   console.log({ parameter });
-  //   console.log("re-render");
-
   //   if (
   //     values.includes("roaming") &&
   //     parameter.type === "roaming" &&
@@ -197,8 +194,6 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
       value: lowerCaseSetValue(value),
     }));
 
-    console.log({ planDataType });
-
     return planDataType;
   }, [data, parameter]);
 
@@ -248,8 +243,6 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
 
     return result ?? [];
   }, [data, parameter]);
-
-  console.log({ parameter });
 
   return (
     <div className="sm:relative">
