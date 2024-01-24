@@ -63,6 +63,10 @@ const RadioPlan = ({
             id: "-",
             value: "",
           },
+          quota: {
+            id: "-",
+            value: "",
+          },
           data: {
             id: "-",
             value: "",

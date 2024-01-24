@@ -39,6 +39,7 @@ export interface currentSelectedProps {
   data?: DataType;
   duration?: DurationType;
   unlimitedPlanDuration?: UnlimitedPlanDurationType;
+  quota: DataType;
 }
 
 export interface PlanHooks {

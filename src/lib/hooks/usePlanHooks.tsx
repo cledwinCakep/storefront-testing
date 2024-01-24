@@ -50,8 +50,12 @@ const usePlanHook = (params: { slug: string }) => {
     },
     unlimitedPlanDuration: {
       id: "-",
-      value: "-",
+      value: "",
       price: 0,
+    },
+    quota: {
+      id: "-",
+      value: "",
     },
   });
 
@@ -66,29 +70,33 @@ const usePlanHook = (params: { slug: string }) => {
     // const type = urlSearchParams.get("type") || "";
     // setParameter({ plan, data, duration, type });
 
-    setCurrentSelect({
-      plan: {
-        id:
-          plan == ""
-            ? "-"
-            : plan == "UNLIMITED"
-            ? "Daily Unlimited Plan"
-            : "Quota Plan", // Set the id to "plan" or any other identifier you prefer
-        value: plan,
-      },
-      type: {
-        id: type == "" ? "" : type,
-        value: type == "" ? "" : type,
-      },
-      //   data: {
-      //     id: data == "" ? "-" : data, // Set the id to "data" or any other identifier you prefer
-      //     value: data,
-      //   },
-      //   duration: {
-      //     id: duration == "" ? "-" : duration + " Day(s)", // Set the id to "duration" or any other identifier you prefer
-      //     value: duration,
-      //   },
-    });
+    // setCurrentSelect({
+    //   plan: {
+    //     id:
+    //       plan == ""
+    //         ? "-"
+    //         : plan == "unlimited"
+    //         ? "Daily Unlimited Plan"
+    //         : "Quota Plan", // Set the id to "plan" or any other identifier you prefer
+    //     value: plan,
+    //   },
+    //   type: {
+    //     id: type == "" ? "" : type,
+    //     value: type == "" ? "" : type,
+    //   },
+    //   // quota: {
+    //   //   id: qouta == "" ? "" : type,
+    //   //   value: quota == "" ? "" : type,
+    //   // },
+    //   //   data: {
+    //   //     id: data == "" ? "-" : data, // Set the id to "data" or any other identifier you prefer
+    //   //     value: data,
+    //   //   },
+    //   //   duration: {
+    //   //     id: duration == "" ? "-" : duration + " Day(s)", // Set the id to "duration" or any other identifier you prefer
+    //   //     value: duration,
+    //   //   },
+    // });
   }, []);
 
   useEffect(() => {
@@ -176,28 +184,54 @@ const usePlanHook = (params: { slug: string }) => {
         (roamingQuotaPlan: any) => roamingQuotaPlan.data_unit !== "UNLIMITED"
       );
 
-      setData({
+      const payload = {
         unlimited: {
-          roaming: {
-            limited: { ...filterPlan(roamingLimited) },
-            unlimited: { ...filterPlan(roamingUnlimited) },
-          },
-          local: {
-            limited: { ...filterPlan(localLimited) },
-            unlimited: { ...filterPlan(localUnlimited) },
-          },
+          ...(isNotEmpty(filterPlan(roamingLimited)) ||
+          isNotEmpty(filterPlan(roamingUnlimited))
+            ? {
+                roaming: {
+                  limited: { ...filterPlan(roamingLimited) },
+                  unlimited: { ...filterPlan(roamingUnlimited) },
+                },
+              }
+            : {}),
+          ...(isNotEmpty(filterPlan(localLimited)) ||
+          isNotEmpty(filterPlan(localUnlimited))
+            ? {
+                local: {
+                  limited: { ...filterPlan(localLimited) },
+                  unlimited: { ...filterPlan(localUnlimited) },
+                },
+              }
+            : {}),
         },
         quota: {
-          roaming: {
-            limited: { ...filterPlan(roamingQuotaLimited) },
-            unlimited: { ...filterPlan(roamingQuotaUnlimited) },
-          },
-          local: {
-            limited: { ...filterPlan(localQuotaLimited) },
-            unlimited: { ...filterPlan(localQuotaUnlimited) },
-          },
+          ...(isNotEmpty(filterPlan(roamingQuotaLimited)) ||
+          isNotEmpty(filterPlan(roamingQuotaUnlimited))
+            ? {
+                roaming: {
+                  limited: { ...filterPlan(roamingQuotaLimited) },
+                  unlimited: { ...filterPlan(roamingQuotaUnlimited) },
+                },
+              }
+            : {}),
+          ...(isNotEmpty(filterPlan(localQuotaLimited)) ||
+          isNotEmpty(filterPlan(localQuotaUnlimited))
+            ? {
+                local: {
+                  limited: { ...filterPlan(localQuotaLimited) },
+                  unlimited: { ...filterPlan(localQuotaUnlimited) },
+                },
+              }
+            : {}),
         },
-      });
+      };
+
+      function isNotEmpty(obj: any) {
+        return Object.keys(obj).length !== 0;
+      }
+
+      setData(payload);
     };
 
     setLoading(false);
@@ -241,9 +275,13 @@ const usePlanHook = (params: { slug: string }) => {
         if (rawData) {
           for (const person of rawData) {
             if (
-              person["plan_option"] == currentSelected["plan"]?.value &&
+              person["plan_option"].toLowerCase() ==
+                currentSelected["plan"]?.value &&
               person["data_amount"] ==
-                currentSelected["data"]?.value.replace(/[^0-9]/g, "") &&
+                currentSelected["quota"]?.value.substring(
+                  0,
+                  currentSelected["quota"].value.length - 2
+                ) &&
               person["duration_in_days"] == currentSelected["duration"]?.value
             ) {
               const newBod = {
@@ -273,10 +311,13 @@ const usePlanHook = (params: { slug: string }) => {
 
     function handleButtonState() {
       for (let i in currentSelected) {
-        if (currentSelected[i as keyof currentSelectedProps]?.value == "") {
-          setIncreaseButton(true);
-        } else {
+        if (
+          currentSelected.duration?.value !== "" ||
+          currentSelected.unlimitedPlanDuration?.value !== ""
+        ) {
           setIncreaseButton(false);
+        } else {
+          setIncreaseButton(true);
         }
       }
     }
@@ -387,7 +428,7 @@ const usePlanHook = (params: { slug: string }) => {
     }
 
     if (parameter.type === "local") {
-      if (!parameter.planData || !parameter.duration) {
+      if (!parameter.plan || !parameter.duration) {
         setIsError(true);
         return;
       }
