@@ -270,7 +270,7 @@ export const BlogFooter = () => {
                     isBlog
                   />
                   <FooterTextLink
-                    text="Terms & Conditions"
+                    text="Terms and Conditions"
                     href="/terms-and-conditions"
                     isBlog
                   />
