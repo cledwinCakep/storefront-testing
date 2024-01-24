@@ -1,7 +1,3 @@
-// utils
-import { capitalizeSentences } from "@/lib/utils/capitalize";
-import Head from "next/head";
-
 const Country: any = {
   WW_146: {
     values: "Global 146 Countries",

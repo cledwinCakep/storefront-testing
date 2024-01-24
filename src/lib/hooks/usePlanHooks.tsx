@@ -17,7 +17,7 @@ const usePlanHook = (params: { slug: string }) => {
   const [increaseButton, setIncreaseButton] = useState<boolean>(true);
   const [rawData, setRawData] = useState<any>();
   const [country, setCountry] = useState<any>();
-  const [subtotal, setSubtotal] = useState<number>(0);
+  const [subtotal, setSubtotal] = useState<number | undefined>(0);
   const [order, setOrder] = useState<number>(1);
   const [history, setHistory] = useState<any>([]);
   const pageOrigins = useRef<Array<string>>([]);
@@ -25,14 +25,14 @@ const usePlanHook = (params: { slug: string }) => {
     plan: "UNLIMITED",
     data: "",
     duration: "",
-    dataType: "",
+    type: "",
+    unlimitedPlanDuration: "",
   });
   const [isError, setIsError] = useState(false);
-
   const [isLoading, setLoading] = useState<boolean>(true);
   const dataPlan: DataPlan = {};
   const [currentSelected, setCurrentSelect] = useState<currentSelectedProps>({
-    dataType: {
+    type: {
       id: "-",
       value: "",
     },
@@ -48,24 +48,25 @@ const usePlanHook = (params: { slug: string }) => {
       id: "-",
       value: "",
     },
+    unlimitedPlanDuration: {
+      id: "-",
+      value: "-",
+      price: 0,
+    },
   });
 
   useEffect(() => {
-    // Parse the query parameters from the URL
     const urlSearchParams = new URLSearchParams(window.location.search);
+
     const plan = urlSearchParams.get("plan") || "";
-    const data = urlSearchParams.get("data") || "";
-    const duration = urlSearchParams.get("duration") || "";
-    const dataType = urlSearchParams.get("dataType") || "";
+    const type = urlSearchParams.get("type") || "";
 
-    setParameter({ plan, data, duration, dataType });
+    // const data = urlSearchParams.get("data") || "";
+    // const duration = urlSearchParams.get("duration") || "";
+    // const type = urlSearchParams.get("type") || "";
+    // setParameter({ plan, data, duration, type });
 
-    // Update the currentSelected state with the parsed parameters
     setCurrentSelect({
-      dataType: {
-        id: dataType == "" ? "" : dataType,
-        value: dataType == "" ? "" : dataType,
-      },
       plan: {
         id:
           plan == ""
@@ -75,20 +76,24 @@ const usePlanHook = (params: { slug: string }) => {
             : "Quota Plan", // Set the id to "plan" or any other identifier you prefer
         value: plan,
       },
-      data: {
-        id: data == "" ? "-" : data, // Set the id to "data" or any other identifier you prefer
-        value: data,
+      type: {
+        id: type == "" ? "" : type,
+        value: type == "" ? "" : type,
       },
-      duration: {
-        id: duration == "" ? "-" : duration + " Day(s)", // Set the id to "duration" or any other identifier you prefer
-        value: duration,
-      },
+      //   data: {
+      //     id: data == "" ? "-" : data, // Set the id to "data" or any other identifier you prefer
+      //     value: data,
+      //   },
+      //   duration: {
+      //     id: duration == "" ? "-" : duration + " Day(s)", // Set the id to "duration" or any other identifier you prefer
+      //     value: duration,
+      //   },
     });
   }, []);
 
   useEffect(() => {
     const getData = async () => {
-      const res = await utilityApi.getProductListByCountry(params.slug);
+      const res = await utilityApi.getProductListByCountry(params.slug[0]);
       setRawData(res.data);
       setCountry(res.data[0].country_name.String);
       res.data.forEach((dt: any) => {
@@ -110,44 +115,77 @@ const usePlanHook = (params: { slug: string }) => {
     };
 
     getData();
-  }, [dataPlan, params.slug]);
+  }, [dataPlan, params.slug]); // removing data plan resolves the infinite request issue, but the data is not updated on change
 
   useEffect(() => {
     function findSubtotal() {
-      if (rawData) {
-        for (const person of rawData) {
-          if (
-            person["plan_option"] == currentSelected["plan"].value &&
-            person["data_amount"] ==
-              currentSelected["data"].value.replace(/[^0-9]/g, "") &&
-            person["duration_in_days"] == currentSelected["duration"].value
-          ) {
-            const newBod = {
-              country_code: person["country_code"],
-              country_name: person["country_name"],
-              created_at: person["created_at"],
-              data_amount: person["data_amount"],
-              data_unit: person["data_unit"],
-              duration_in_days: person["duration_in_days"],
-              id: person["id"],
-              option_id: person["option_id"],
-              plan_option: person["plan_option"],
-              plan_type: currentSelected.dataType.value,
-              price_in_usd: person["price_in_usd"],
-              updated_at: person["updated_at"],
-            };
-            setBuy(newBod);
-            let temp = order * person["price_in_usd"];
-            setSubtotal(temp);
+      if (currentSelected.type?.value === "roaming") {
+        if (rawData) {
+          for (const person of rawData) {
+            if (
+              person["id"] === Number(currentSelected.unlimitedPlanDuration?.id)
+            ) {
+              const newBod = {
+                country_code: person["country_code"],
+                country_name: person["country_name"],
+                created_at: person["created_at"],
+                data_amount: person["data_amount"],
+                data_unit: person["data_unit"],
+                duration_in_days: person["duration_in_days"],
+                id: person["id"],
+                option_id: person["option_id"],
+                plan_option: person["plan_option"],
+                plan_type: currentSelected.type?.value,
+                price_in_usd: person["price_in_usd"],
+                updated_at: person["updated_at"],
+              };
+
+              setBuy(newBod);
+              setSubtotal(
+                order * Number(currentSelected.unlimitedPlanDuration?.price)
+              );
+            }
           }
         }
-        return null;
+      }
+
+      if (currentSelected.type?.value === "local") {
+        if (rawData) {
+          for (const person of rawData) {
+            if (
+              person["plan_option"] == currentSelected["plan"]?.value &&
+              person["data_amount"] ==
+                currentSelected["data"]?.value.replace(/[^0-9]/g, "") &&
+              person["duration_in_days"] == currentSelected["duration"]?.value
+            ) {
+              const newBod = {
+                country_code: person["country_code"],
+                country_name: person["country_name"],
+                created_at: person["created_at"],
+                data_amount: person["data_amount"],
+                data_unit: person["data_unit"],
+                duration_in_days: person["duration_in_days"],
+                id: person["id"],
+                option_id: person["option_id"],
+                plan_option: person["plan_option"],
+                plan_type: currentSelected.type?.value,
+                price_in_usd: person["price_in_usd"],
+                updated_at: person["updated_at"],
+              };
+
+              setBuy(newBod);
+              let temp = order * person["price_in_usd"];
+              setSubtotal(temp);
+            }
+          }
+          return null;
+        }
       }
     }
 
     function handleButtonState() {
       for (let i in currentSelected) {
-        if (currentSelected[i as keyof currentSelectedProps].value == "") {
+        if (currentSelected[i as keyof currentSelectedProps]?.value == "") {
           setIncreaseButton(true);
         } else {
           setIncreaseButton(false);
@@ -155,31 +193,9 @@ const usePlanHook = (params: { slug: string }) => {
       }
     }
 
-    function addParametersToUrl() {
-      // Get the current URL
-      const baseUrl = window.location.origin + window.location.pathname;
-
-      // Construct the query string from the parameters object
-      const queryString = Object.keys(currentSelected)
-        .map(
-          (key: any) =>
-            `${encodeURIComponent(key)}=${encodeURIComponent(
-              currentSelected[key as keyof currentSelectedProps].value
-            )}`
-        )
-        .join("&");
-
-      // Check if the URL already has query parameters
-      // Combine the host URL and query string
-      const newUrl = queryString ? `${baseUrl}?${queryString}` : baseUrl;
-
-      // Update the URL without triggering a page reload
-      window.history.replaceState({ path: newUrl }, "", newUrl);
-    }
-
     findSubtotal();
     handleButtonState();
-    addParametersToUrl();
+    // addParametersToUrl();
   }, [order, currentSelected, parameter, rawData]);
 
   // const handleButtonClick = (locale: string) => {
@@ -204,7 +220,8 @@ const usePlanHook = (params: { slug: string }) => {
         plan: "UNLIMITED",
         data: "",
         duration: "",
-        dataType: "",
+        type: "",
+        unlimitedPlanDuration: "",
       };
       setSubtotal(0);
       setOrder(1);
@@ -218,7 +235,7 @@ const usePlanHook = (params: { slug: string }) => {
           id: "-",
           value: "",
         },
-        dataType: {
+        type: {
           id: "-",
           value: "",
         },
@@ -228,7 +245,8 @@ const usePlanHook = (params: { slug: string }) => {
         plan: "QUOTA",
         data: "",
         duration: "",
-        dataType: "",
+        type: "",
+        unlimitedPlanDuration: "",
       };
       setSubtotal(0);
       setOrder(1);
@@ -242,12 +260,13 @@ const usePlanHook = (params: { slug: string }) => {
           id: "-",
           value: "",
         },
-        dataType: {
+        type: {
           id: "-",
           value: "",
         },
       }));
     }
+
     temp = { ...temp, [options]: value };
 
     setParameter(temp);
@@ -270,9 +289,20 @@ const usePlanHook = (params: { slug: string }) => {
       return;
     }
 
-    if (!parameter.data || !parameter.dataType || !parameter.duration) {
-      setIsError(true);
-      return;
+    if (!parameter.type) return;
+
+    if (parameter.type === "roaming") {
+      if (!parameter.unlimitedPlanDuration) {
+        setIsError(true);
+        return;
+      }
+    }
+
+    if (parameter.type === "local") {
+      if (!parameter.data || !parameter.duration) {
+        setIsError(true);
+        return;
+      }
     }
 
     const jsonString = JSON.stringify(buy);
@@ -297,6 +327,7 @@ const usePlanHook = (params: { slug: string }) => {
     handleBuy,
     country,
     isError,
+    setSubtotal,
   };
 };
 

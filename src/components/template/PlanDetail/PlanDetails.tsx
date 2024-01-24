@@ -21,8 +21,11 @@ import { useTranslations } from "next-intl";
 import { useRouter, usePathname } from "next/navigation";
 import { useCallback } from "react";
 import GlobeIcon from "@/components/atoms/SVG/GlobeIcon";
+import CardPlan from "@/components/molecules/CardPlan/CardPlan";
+import { addParametersToUrl } from "@/lib/utils/addParamsToUrl";
 
 const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
+  const [isUnlimitedPlan, setIsUnlimitedPlan] = useState(false);
   const {
     openSupportedCountry,
     globalCode,
@@ -124,7 +127,62 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     if (globalCodes.includes(country_code)) {
       setGlobalCode(country_code);
     }
-  }, [globalCode, country_code, globalCode, setGlobalCode]);
+  }, [globalCodes, country_code, globalCode, setGlobalCode]);
+
+  // useEffect(() => {
+  //   const type = getPlanDataType();
+
+  //   const values = Object.values(type).map((value) => value.value);
+
+  //   console.log({ parameter });
+  //   console.log("re-render");
+
+  //   if (
+  //     values.includes("roaming") &&
+  //     parameter.type === "roaming" &&
+  //     data["UNLIMITED"]["0UNLIMITED"]
+  //   ) {
+  //     addParametersToUrl([
+  //       {
+  //         key: "plan",
+  //         value: "unlimited-data",
+  //       },
+  //       {
+  //         key: "type",
+  //         value: "roaming",
+  //       },
+  //       {
+  //         key: "duration",
+  //         value: data.UNLIMITED["0UNLIMITED"][0].duration_in_days,
+  //       },
+  //     ]);
+  //     return;
+  //   }
+
+  //   if (values.includes("local") && parameter.type === "local") {
+  //     addParametersToUrl([
+  //       {
+  //         key: "type",
+  //         value: "local",
+  //       },
+  //       {
+  //         key: "data",
+  //         value: "500",
+  //       },
+  //     ]);
+  //   }
+  // }, [data, parameter]);
+
+  const lowerCaseSetValue = (text: string) => {
+    return text.toLocaleLowerCase();
+  };
+
+  const capitalizeSetValue = (text: string | undefined = "") => {
+    return (
+      String(text).charAt(0).toUpperCase() +
+      String(text).toLocaleLowerCase().substring(1)
+    );
+  };
 
   const getPlanDataType = useCallback(() => {
     const planArr: any[][] = Object.values(data[parameter.plan] ?? []);
@@ -133,17 +191,13 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
       type.map((type) => type.plan_type)
     );
 
-    const capitalizeSetValue = (text: string) => {
-      return (
-        String(text).charAt(0).toUpperCase() +
-        String(text).toLocaleLowerCase().substring(1)
-      );
-    };
-
     const planDataType = Array.from(new Set(dataTypeArr), (value) => ({
+      title: "type",
       label: capitalizeSetValue(value),
-      value: capitalizeSetValue(value),
+      value: lowerCaseSetValue(value),
     }));
+
+    console.log({ planDataType });
 
     return planDataType;
   }, [data, parameter]);
@@ -151,19 +205,20 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
   const getQuotaPerDay = () => {
     const check = Object.keys(data[parameter.plan || "UNLIMITED"]).map(
       (key, index) => ({
+        title: "data",
         label: parameter.plan === "QUOTA" ? key : `${key}/day`,
-        value: key, // Generate a value based on the label
+        value: key,
       })
     );
 
     const filteredParams = check.filter((item) => {
       const key = item.value;
+
       const matchingPlans = data[parameter.plan || "UNLIMITED"][key];
 
       if (matchingPlans) {
         const localPlan = matchingPlans.find(
-          (plan: any) =>
-            plan.plan_type === parameter.dataType.toLocaleUpperCase()
+          (plan: any) => plan.plan_type === parameter.type.toLocaleUpperCase()
         );
         return localPlan !== undefined;
       }
@@ -183,15 +238,18 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     const result = planArr[parameter.data]
       ?.filter(
         (planDuration: any) =>
-          planDuration.plan_type === parameter.dataType.toLocaleUpperCase()
+          planDuration.plan_type === parameter.type.toLocaleUpperCase()
       )
       .map((planDuration: any) => ({
+        title: "duration",
         label: planDuration.duration_in_days + " Day(s)",
         value: planDuration.duration_in_days,
       }));
 
     return result ?? [];
   }, [data, parameter]);
+
+  console.log({ parameter });
 
   return (
     <div className="sm:relative">
@@ -285,44 +343,53 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
             )}
           </div>
 
-          {!isLoading && (
+          {!isLoading ? (
             <>
               <RadioPlan
                 name="plan"
                 title={t("planDetail_selectPlanTitle")}
                 data={Object.keys(data).map((key) => ({
+                  title: "plan",
                   label:
                     key == "UNLIMITED" ? "Daily Unlimited Plan" : "Quota Plan",
-                  value: key, // Generate a value based on the label
+                  value: key,
                 }))}
               />
 
               <RadioPlan
-                name="dataType"
-                title="Select Type:"
+                name="type"
+                title="Select type:"
                 data={getPlanDataType()}
-                // data={[{ label: "Roaming", value: "Roaming" }]}
               />
-              <RadioPlan
-                name="data"
-                title={t("planDetail_selectDataTitle")}
-                data={getQuotaPerDay()}
-              />
-              <RadioPlan
-                name="duration"
-                title={t("planDetail_selectDurationTitle")}
-                // data={Object.values(
-                //   data[parameter.plan][parameter.data]
-                //     ? data[parameter.plan][parameter.data]
-                //     : data[parameter.plan]["15GB"]
-                // ).map((key: any) => ({
-                //   label: `${key["duration_in_days"]} Day(s)`,
-                //   value: `${key["duration_in_days"]}`,
-                // }))}
-                data={getPlanDuration()}
-              />
+
+              {parameter.type === "roaming" && (
+                <div>
+                  <Text as="body1" className="mb-4 font-bold text-gray-100">
+                    How many days are you travelling for?
+                  </Text>
+
+                  <CardPlan data={data["UNLIMITED"]["0UNLIMITED"] ?? []} />
+                </div>
+              )}
+
+              {parameter.type === "local" && (
+                <>
+                  <RadioPlan
+                    name="data"
+                    title={t("planDetail_selectDataTitle")}
+                    data={getQuotaPerDay()}
+                  />
+
+                  <RadioPlan
+                    name="duration"
+                    title={t("planDetail_selectDurationTitle")}
+                    data={getPlanDuration()}
+                  />
+                </>
+              )}
             </>
-          )}
+          ) : null}
+
           <Tabs
             data={
               countryName
@@ -424,23 +491,47 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
                 {t("planDetail_orderInformation")}
               </Text>
               <Text as="body1" className="font-medium text-[#9CA3AF]">
-                {`${
-                  currentSelected.plan.value === "UNLIMITED"
-                    ? "Daily Unlimited Plan, "
-                    : "Quota Plan, "
-                }${
-                  currentSelected.dataType.id !== "-"
-                    ? currentSelected.dataType.value + ", "
-                    : ""
-                }${
-                  currentSelected.data.id !== "-"
-                    ? currentSelected.data.value + ", "
-                    : ""
-                }${
-                  currentSelected.duration.id !== "-"
-                    ? currentSelected.duration.value + " " + "Days"
-                    : ""
-                }`}
+                {parameter.type === "roaming" ? (
+                  <>
+                    {`${
+                      currentSelected.plan?.value === "UNLIMITED"
+                        ? "Unlimited Plan, "
+                        : "Quota Plan, "
+                    }${
+                      currentSelected.type?.id !== "-"
+                        ? capitalizeSetValue(currentSelected.type?.value) + ", "
+                        : ""
+                    }
+                    ${
+                      currentSelected.unlimitedPlanDuration?.id !== "-"
+                        ? currentSelected.unlimitedPlanDuration?.value +
+                          " " +
+                          "Day(s)"
+                        : ""
+                    }
+                    `}
+                  </>
+                ) : (
+                  <>
+                    {`${
+                      currentSelected.plan?.value === "UNLIMITED"
+                        ? "Unlimited Plan, "
+                        : "Quota Plan, "
+                    }${
+                      currentSelected.type?.id !== "-"
+                        ? capitalizeSetValue(currentSelected.type!.value) + ", "
+                        : ""
+                    }${
+                      currentSelected.data?.id !== "-"
+                        ? currentSelected.data?.value + ", "
+                        : ""
+                    }${
+                      currentSelected.duration?.id !== "-"
+                        ? currentSelected.duration?.value + " " + "Days"
+                        : ""
+                    }`}
+                  </>
+                )}
               </Text>
             </div>
 
@@ -489,7 +580,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
                   Subtotal
                 </Text>
                 <Text as="body1" className="text-xl font-black text-[#F9F9F9]">
-                  {subtotal.toLocaleString("en-US", {
+                  {subtotal?.toLocaleString("en-US", {
                     style: "currency",
                     currency: "USD",
                   })}
@@ -502,25 +593,25 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
             <Button
               color="orange"
               className={`w-full ${
-                (subtotal <= 0 && currentSelected.data.id == "-") ||
-                currentSelected.duration.id == "-" ||
-                currentSelected.dataType.id == ""
+                subtotal! <= 0
                   ? "bg-neutral-500 font-medium text-neutral-800 hover:border-0 hover:bg-neutral-500"
                   : "bg-orange-500 hover:bg-orange-800"
               }`}
               onClick={handleBuy}
-              disabled={
-                (subtotal <= 0 && currentSelected.data.id == "-") ||
-                currentSelected.duration.id == "-" ||
-                currentSelected.dataType.id == ""
-              }
+              disabled={subtotal! <= 0}
             >
               {t("planDetail_buyButton")}
             </Button>
             {isError ? (
-              !parameter.data || !parameter.duration || !parameter.dataType ? (
+              currentSelected.type?.value === "roaming" ? (
+                !parameter.unlimitedPlanDuration ? (
+                  <Text className="mt-2 text-red-500">
+                    Please select data duration.
+                  </Text>
+                ) : null
+              ) : !parameter.data || !parameter.duration || !parameter.type ? (
                 <Text className="mt-2 text-red-500">
-                  Please select {!parameter.dataType ? "type," : ""}{" "}
+                  Please select {!parameter.type ? "type," : ""}{" "}
                   {!parameter.data ? "data," : ""} and{" "}
                   {!parameter.duration ? "duration" : ""}.
                 </Text>

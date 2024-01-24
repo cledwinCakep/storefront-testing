@@ -21,7 +21,7 @@ class UtilityAPI extends API {
     esim_id: number;
     quantity: number;
     email: string;
-    user_code: string |null,
+    user_code: string | null;
   }): Promise<AxiosResponse<any>> {
     return this.publicRoute<any>({
       url: "orders/",

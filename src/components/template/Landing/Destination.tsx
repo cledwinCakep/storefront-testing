@@ -48,7 +48,8 @@ const Partners = () => {
   };
 
   const handleClickCountry = (name: string) => () => {
-    router.push(`/plans/${name}?plan=UNLIMITED&dataType=&data=&duration=`);
+    // router.push(`/plans/${name}?plan=UNLIMITED&dataType=&data=&duration=`);
+    router.push("/plans");
   };
 
   useEffect(() => {
@@ -130,6 +131,7 @@ const Partners = () => {
             })}
           </div>
         </div>
+
         <div className="flex w-full flex-col gap-4">
           {/* put in here */}
           <Tabs2

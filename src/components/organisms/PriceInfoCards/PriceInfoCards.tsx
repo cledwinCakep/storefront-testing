@@ -31,7 +31,8 @@ const PriceInfoCards = ({ data }: PriceInfoCardsProps) => {
       {data.map((data) => (
         <a
           key={data.code}
-          href={`/plans/${data.code}?plan=UNLIMITED&dataType=&data=&duration=`}
+          // href={`/plans/${data.code}?plan=UNLIMITED&dataType=&data=&duration=`}
+          href={`/plans/${data.code}`}
         >
           <div
             key={data.title}

@@ -7,8 +7,11 @@ import Text from "@/components/atoms/Text/Text";
 import Radio from "@/components/atoms/Radio/Radio";
 import { usePlanContext } from "@/lib/context/plan";
 import { currentSelectedProps } from "@/lib/context/plan";
+import { addParametersToUrl } from "@/lib/utils/addParamsToUrl";
+import usePlanHook from "@/lib/hooks/usePlanHooks";
 // interfaces
 interface RadioPlanData {
+  title: string;
   label: string;
   value: string;
 }
@@ -30,15 +33,46 @@ const RadioPlan = ({ title, name, data }: RadioPlanProps) => {
     name: string,
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
+    if (name === "type") {
+      if (currentSelected.type?.value !== e.target.value) {
+        setCurrentSelect({
+          type: {
+            id: "-",
+            value: "",
+          },
+          plan: {
+            id: "-",
+            value: "",
+          },
+          data: {
+            id: "-",
+            value: "",
+          },
+          duration: {
+            id: "-",
+            value: "",
+          },
+          unlimitedPlanDuration: {
+            id: "-",
+            value: "-",
+            price: 0,
+          },
+        });
+      }
+    }
+
     let temp = {
-      ...currentSelected,      
+      ...currentSelected,
       [name]: { id: e.target.id, value: e.target.value },
     };
 
-    if (name === 'dataType' && currentSelected.dataType.value !== e.target.value) {
-      temp = { ...temp, duration: { id: '-', value: '' } };
+    if (name === "type" && currentSelected.type?.value !== e.target.value) {
+      temp = { ...temp, duration: { id: "-", value: "" } };
     }
-    
+
+    console.log({ temp });
+    console.log({ name: e.target.name, value: e.target.value });
+
     setCurrentSelect(temp);
     selectDataPlan(e.target.name, e.target.value);
   };
@@ -59,7 +93,7 @@ const RadioPlan = ({ title, name, data }: RadioPlanProps) => {
         {data.map((data) => (
           <Radio
             // isDisabled={data.label === "Local"}
-            current={currentSelected[name as keyof currentSelectedProps].value}
+            current={currentSelected[name as keyof currentSelectedProps]?.value}
             key={data.label}
             name={name}
             label={data.label}
