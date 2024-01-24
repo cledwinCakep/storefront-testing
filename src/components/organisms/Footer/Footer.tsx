@@ -270,7 +270,7 @@ const Footer = () => {
                     href="/privacy-policy"
                   />
                   <FooterTextLink
-                    text="Terms & Conditions"
+                    text="Terms and Conditions"
                     href="/terms-and-conditions"
                   />
                 </div>
