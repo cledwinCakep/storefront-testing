@@ -203,8 +203,6 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
   const getType = useCallback(() => {
     const type = data[plan];
 
-    console.log({ type });
-
     if (type) {
       return Object.keys(type).map((type) => ({
         title: "type",
@@ -236,10 +234,6 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     }));
   }, [data, plan, type, planData, quota]);
 
-  console.log({ data });
-  console.log({ currentSelected });
-  console.log({ parameter });
-
   useEffect(() => {
     const quota = data[plan]?.[type] ?? [];
 
@@ -247,8 +241,6 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
       setPlanData(Object.keys(quota.limited).length ? "limited" : "unlimited");
     }
   }, [data, type]);
-
-  console.log({ planData });
 
   return (
     <>
