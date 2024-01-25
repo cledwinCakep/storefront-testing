@@ -245,7 +245,8 @@ export default function Checkout({ params }: { params: { locale: string } }) {
           </Text>
           {!isLoading ? (
             <>
-              {retrievedData.data_amount > 0 ? (
+              {retrievedData.data_unit === "GB" ||
+              retrievedData.data_unit === "MB" ? (
                 <div className="flex w-full flex-col items-center justify-center gap-10 md:flex-row md:items-start">
                   <div className="flex w-full flex-col">
                     <Text as="subHeading2" className="font-bold text-gray-100">
@@ -283,47 +284,42 @@ export default function Checkout({ params }: { params: { locale: string } }) {
                     code={code}
                   />
                 </div>
-              ) : retrievedData.data_amount === 0 ? (
-                retrievedData.data_unit === "UNLIMITED" && (
-                  <div className="flex w-full flex-col items-center justify-center gap-10 md:flex-row md:items-start">
-                    <div className="flex w-full flex-col">
-                      <Text
-                        as="subHeading2"
-                        className="font-bold text-gray-100"
-                      >
-                        {t("checkout_purchasedItems")}
-                      </Text>
-                      <Purchaseinfo
-                        handleDelete={handleDelete}
-                        order={order}
-                        handleOrder={handleOrder}
-                        image={`/destination/${retrievedData.country_name
-                          .toLowerCase()
-                          .replace(/\//g, " ")}.png`}
-                        destination={`${retrievedData.country_name} ${
-                          retrievedData.data_unit === "UNLIMITED"
-                            ? "UNLIMITED"
-                            : ""
-                        } eSim data plans`}
-                        packages={`${
-                          retrievedData!["plan_option"] == "UNLIMITED"
-                            ? "Unlimited"
-                            : "Quota"
-                        }, ${retrievedData!["duration_in_days"]} Day`}
-                        price={subtotal.toLocaleString("en-US", {
-                          style: "currency",
-                          currency: "USD",
-                        })}
-                      />
-                    </div>
-                    <CheckoutCard
-                      isEmpty={emailError}
-                      handlePayment={handlePayment}
-                      handleInputEmail={handleInputEmail}
-                      code={code}
+              ) : retrievedData.data_unit === "UNLIMITED" ? (
+                <div className="flex w-full flex-col items-center justify-center gap-10 md:flex-row md:items-start">
+                  <div className="flex w-full flex-col">
+                    <Text as="subHeading2" className="font-bold text-gray-100">
+                      {t("checkout_purchasedItems")}
+                    </Text>
+                    <Purchaseinfo
+                      handleDelete={handleDelete}
+                      order={order}
+                      handleOrder={handleOrder}
+                      image={`/destination/${retrievedData.country_name
+                        .toLowerCase()
+                        .replace(/\//g, " ")}.png`}
+                      destination={`${retrievedData.country_name} ${
+                        retrievedData.data_unit === "UNLIMITED"
+                          ? "UNLIMITED"
+                          : ""
+                      } eSim data plans`}
+                      packages={`${
+                        retrievedData!["plan_option"] == "UNLIMITED"
+                          ? "Unlimited"
+                          : "Quota"
+                      }, ${retrievedData!["duration_in_days"]} Day`}
+                      price={subtotal.toLocaleString("en-US", {
+                        style: "currency",
+                        currency: "USD",
+                      })}
                     />
                   </div>
-                )
+                  <CheckoutCard
+                    isEmpty={emailError}
+                    handlePayment={handlePayment}
+                    handleInputEmail={handleInputEmail}
+                    code={code}
+                  />
+                </div>
               ) : (
                 <div className="flex flex-col items-center justify-center">
                   <Box />
