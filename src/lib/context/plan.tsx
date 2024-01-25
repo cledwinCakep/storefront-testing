@@ -54,7 +54,7 @@ export interface PlanHooks {
   order: number;
   subtotal: number | undefined;
   increaseButton: boolean;
-  handleBuy: () => void;
+  handleBuy: ({ planData }: { planData: string }) => void;
   country: string;
 }
 

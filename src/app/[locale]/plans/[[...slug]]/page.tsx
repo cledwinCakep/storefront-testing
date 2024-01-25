@@ -96,7 +96,7 @@ const PlanDetail = ({ params }: { params: any }) => {
             </Breadcrumb>
           </Layout>
           <PlanDetails params={params} />
-          <MobileCheckout />
+          {/* <MobileCheckout /> */}
 
           <div>
             <Guide />

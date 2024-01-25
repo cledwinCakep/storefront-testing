@@ -85,6 +85,10 @@ const RadioPlan = ({
       setType(e.target.value);
     }
 
+    if (name === "planData") {
+      setPlanData(e.target.value);
+    }
+
     if (name === "quota") {
       setQuota(e.target.value);
     }
