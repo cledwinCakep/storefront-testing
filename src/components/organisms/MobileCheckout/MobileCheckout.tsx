@@ -4,7 +4,7 @@ import Button from "@/components/atoms/Button/Button";
 import { useTranslations } from "next-intl";
 import { usePlanContext } from "@/lib/context/plan";
 
-const MobileCheckout = () => {
+const MobileCheckout = ({ planData }: { planData: string }) => {
   const {
     isError,
     data,
@@ -88,7 +88,7 @@ const MobileCheckout = () => {
           currentSelected.duration?.id == "-" ||
           currentSelected.type?.id == ""
         }
-        onClick={handleBuy}
+        onClick={() => handleBuy({ planData })}
       >
         {t("planDetail_buyButton")}
       </Button>

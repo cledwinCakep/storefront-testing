@@ -8,7 +8,7 @@ import React, {
 
 interface DataPlan {
   [planOption: string]: {
-    [dataAmount: string]: any[];
+    [dataAmount: string]: any;
   };
 }
 
@@ -39,6 +39,7 @@ export interface currentSelectedProps {
   data?: DataType;
   duration?: DurationType;
   unlimitedPlanDuration?: UnlimitedPlanDurationType;
+  quota: DataType;
 }
 
 export interface PlanHooks {
@@ -53,7 +54,7 @@ export interface PlanHooks {
   order: number;
   subtotal: number | undefined;
   increaseButton: boolean;
-  handleBuy: () => void;
+  handleBuy: ({ planData }: { planData: string }) => void;
   country: string;
 }
 

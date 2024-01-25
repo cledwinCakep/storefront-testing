@@ -23,7 +23,7 @@ const usePlanHook = (params: { slug: string }) => {
   const pageOrigins = useRef<Array<string>>([]);
   const [parameter, setParameter] = useState({
     plan: "UNLIMITED",
-    data: "",
+    planData: "",
     duration: "",
     type: "",
     unlimitedPlanDuration: "",
@@ -50,8 +50,12 @@ const usePlanHook = (params: { slug: string }) => {
     },
     unlimitedPlanDuration: {
       id: "-",
-      value: "-",
+      value: "",
       price: 0,
+    },
+    quota: {
+      id: "-",
+      value: "",
     },
   });
 
@@ -66,62 +70,170 @@ const usePlanHook = (params: { slug: string }) => {
     // const type = urlSearchParams.get("type") || "";
     // setParameter({ plan, data, duration, type });
 
-    setCurrentSelect({
-      plan: {
-        id:
-          plan == ""
-            ? "-"
-            : plan == "UNLIMITED"
-            ? "Daily Unlimited Plan"
-            : "Quota Plan", // Set the id to "plan" or any other identifier you prefer
-        value: plan,
-      },
-      type: {
-        id: type == "" ? "" : type,
-        value: type == "" ? "" : type,
-      },
-      //   data: {
-      //     id: data == "" ? "-" : data, // Set the id to "data" or any other identifier you prefer
-      //     value: data,
-      //   },
-      //   duration: {
-      //     id: duration == "" ? "-" : duration + " Day(s)", // Set the id to "duration" or any other identifier you prefer
-      //     value: duration,
-      //   },
-    });
+    // setCurrentSelect({
+    //   plan: {
+    //     id:
+    //       plan == ""
+    //         ? "-"
+    //         : plan == "unlimited"
+    //         ? "Daily Unlimited Plan"
+    //         : "Quota Plan", // Set the id to "plan" or any other identifier you prefer
+    //     value: plan,
+    //   },
+    //   type: {
+    //     id: type == "" ? "" : type,
+    //     value: type == "" ? "" : type,
+    //   },
+    //   // quota: {
+    //   //   id: qouta == "" ? "" : type,
+    //   //   value: quota == "" ? "" : type,
+    //   // },
+    //   //   data: {
+    //   //     id: data == "" ? "-" : data, // Set the id to "data" or any other identifier you prefer
+    //   //     value: data,
+    //   //   },
+    //   //   duration: {
+    //   //     id: duration == "" ? "-" : duration + " Day(s)", // Set the id to "duration" or any other identifier you prefer
+    //   //     value: duration,
+    //   //   },
+    // });
   }, []);
 
   useEffect(() => {
+    const filterPlan = (plan: any) => {
+      const obj: any = [];
+
+      for (let i = 0; i < plan.length; i++) {
+        const dataKey = plan[i].data_amount + plan[i].data_unit;
+
+        if (!obj[dataKey]) {
+          obj[dataKey] = [];
+        }
+
+        obj[dataKey].push(plan[i]);
+      }
+
+      return obj;
+    };
+
     const getData = async () => {
       const res = await utilityApi.getProductListByCountry(params.slug[0]);
 
       setRawData(res.data);
       setCountry(res.data[0].country_name.String);
 
-      for (let i = 0; i < res.data.length; i++) {
-        const dataKey = res.data[i].data_amount + res.data[i].data_unit;
+      // check if unlimited or quota
+      const unlimitedPlan = res.data.filter(
+        (plan: any) => plan.plan_option === "UNLIMITED"
+      );
 
-        if (!dataPlan[res.data[i].plan_option]) {
-          dataPlan[res.data[i].plan_option] = {};
-        }
+      // local plan
+      const localPlan = unlimitedPlan.filter(
+        (data: any) => data.plan_type !== "ROAMING"
+      );
 
-        if (!dataPlan[res.data[i].plan_option][dataKey]) {
-          dataPlan[res.data[i].plan_option][dataKey] = [];
-        }
+      const localUnlimited = localPlan.filter(
+        (localPlan: any) => localPlan.data_unit === "UNLIMITED"
+      );
 
-        const filterDataPlan = dataPlan[res.data[i].plan_option][
-          dataKey
-        ].filter((dataPlan) => dataPlan.id === res.data[i].id);
+      const localLimited = localPlan.filter(
+        (localPlan: any) => localPlan.data_unit !== "UNLIMITED"
+      );
 
-        if (filterDataPlan.length) {
-          return;
-        }
+      // roaming plan
+      const roamingPlan = unlimitedPlan.filter(
+        (data: any) => data.plan_type === "ROAMING"
+      );
 
-        dataPlan[res.data[i].plan_option][dataKey].push(res.data[i]);
+      const roamingUnlimited = roamingPlan.filter(
+        (roamingPlan: any) => roamingPlan.data_unit === "UNLIMITED"
+      );
+
+      const roamingLimited = roamingPlan.filter(
+        (roamingPlan: any) => roamingPlan.data_unit !== "UNLIMITED"
+      );
+
+      // quota
+      const quotaPlan = res.data.filter(
+        (plan: any) => plan.plan_option === "QUOTA"
+      );
+
+      // local plan
+      const localQuotaPlan = quotaPlan.filter(
+        (data: any) => data.plan_type !== "ROAMING"
+      );
+
+      const localQuotaUnlimited = localQuotaPlan.filter(
+        (localQuotaPlan: any) => localQuotaPlan.data_unit === "UNLIMITED"
+      );
+
+      const localQuotaLimited = localQuotaPlan.filter(
+        (localQuotaPlan: any) => localQuotaPlan.data_unit !== "UNLIMITED"
+      );
+
+      // roaming plan
+      const roamingQuotaPlan = quotaPlan.filter(
+        (data: any) => data.plan_type === "ROAMING"
+      );
+
+      const roamingQuotaUnlimited = roamingQuotaPlan.filter(
+        (roamingQuotaPlan: any) => roamingQuotaPlan.data_unit === "UNLIMITED"
+      );
+
+      const roamingQuotaLimited = roamingQuotaPlan.filter(
+        (roamingQuotaPlan: any) => roamingQuotaPlan.data_unit !== "UNLIMITED"
+      );
+
+      const payload = {
+        unlimited: {
+          ...(isNotEmpty(filterPlan(roamingLimited)) ||
+          isNotEmpty(filterPlan(roamingUnlimited))
+            ? {
+                roaming: {
+                  limited: { ...filterPlan(roamingLimited) },
+                  unlimited: { ...filterPlan(roamingUnlimited) },
+                },
+              }
+            : {}),
+          ...(isNotEmpty(filterPlan(localLimited)) ||
+          isNotEmpty(filterPlan(localUnlimited))
+            ? {
+                local: {
+                  limited: { ...filterPlan(localLimited) },
+                  unlimited: { ...filterPlan(localUnlimited) },
+                },
+              }
+            : {}),
+        },
+        quota: {
+          ...(isNotEmpty(filterPlan(roamingQuotaLimited)) ||
+          isNotEmpty(filterPlan(roamingQuotaUnlimited))
+            ? {
+                roaming: {
+                  limited: { ...filterPlan(roamingQuotaLimited) },
+                  unlimited: { ...filterPlan(roamingQuotaUnlimited) },
+                },
+              }
+            : {}),
+          ...(isNotEmpty(filterPlan(localQuotaLimited)) ||
+          isNotEmpty(filterPlan(localQuotaUnlimited))
+            ? {
+                local: {
+                  limited: { ...filterPlan(localQuotaLimited) },
+                  unlimited: { ...filterPlan(localQuotaUnlimited) },
+                },
+              }
+            : {}),
+        },
+      };
+
+      function isNotEmpty(obj: any) {
+        return Object.keys(obj).length !== 0;
       }
+
+      setData(payload);
     };
 
-    setData(dataPlan);
     setLoading(false);
 
     getData();
@@ -129,76 +241,83 @@ const usePlanHook = (params: { slug: string }) => {
 
   useEffect(() => {
     function findSubtotal() {
-      if (currentSelected.type?.value === "roaming") {
-        if (rawData) {
-          for (const person of rawData) {
-            if (
-              person["id"] === Number(currentSelected.unlimitedPlanDuration?.id)
-            ) {
-              const newBod = {
-                country_code: person["country_code"],
-                country_name: person["country_name"],
-                created_at: person["created_at"],
-                data_amount: person["data_amount"],
-                data_unit: person["data_unit"],
-                duration_in_days: person["duration_in_days"],
-                id: person["id"],
-                option_id: person["option_id"],
-                plan_option: person["plan_option"],
-                plan_type: currentSelected.type?.value,
-                price_in_usd: person["price_in_usd"],
-                updated_at: person["updated_at"],
-              };
+      // if (currentSelected.type?.value === "roaming") {
+      if (rawData) {
+        for (const person of rawData) {
+          if (
+            person["id"] === Number(currentSelected.unlimitedPlanDuration?.id)
+          ) {
+            const newBod = {
+              country_code: person["country_code"],
+              country_name: person["country_name"],
+              created_at: person["created_at"],
+              data_amount: person["data_amount"],
+              data_unit: person["data_unit"],
+              duration_in_days: person["duration_in_days"],
+              id: person["id"],
+              option_id: person["option_id"],
+              plan_option: person["plan_option"],
+              plan_type: currentSelected.type?.value,
+              price_in_usd: person["price_in_usd"],
+              updated_at: person["updated_at"],
+            };
 
-              setBuy(newBod);
-              setSubtotal(
-                order * Number(currentSelected.unlimitedPlanDuration?.price)
-              );
-            }
+            setBuy(newBod);
+            setSubtotal(
+              order * Number(currentSelected.unlimitedPlanDuration?.price)
+            );
           }
         }
       }
+      // }
 
-      if (currentSelected.type?.value === "local") {
-        if (rawData) {
-          for (const person of rawData) {
-            if (
-              person["plan_option"] == currentSelected["plan"]?.value &&
-              person["data_amount"] ==
-                currentSelected["data"]?.value.replace(/[^0-9]/g, "") &&
-              person["duration_in_days"] == currentSelected["duration"]?.value
-            ) {
-              const newBod = {
-                country_code: person["country_code"],
-                country_name: person["country_name"],
-                created_at: person["created_at"],
-                data_amount: person["data_amount"],
-                data_unit: person["data_unit"],
-                duration_in_days: person["duration_in_days"],
-                id: person["id"],
-                option_id: person["option_id"],
-                plan_option: person["plan_option"],
-                plan_type: currentSelected.type?.value,
-                price_in_usd: person["price_in_usd"],
-                updated_at: person["updated_at"],
-              };
+      // if (currentSelected.type?.value === "local") {
+      if (rawData) {
+        for (const person of rawData) {
+          if (
+            person["plan_option"].toLowerCase() ==
+              currentSelected["plan"]?.value &&
+            person["data_amount"] ==
+              currentSelected["quota"]?.value.substring(
+                0,
+                currentSelected["quota"].value.length - 2
+              ) &&
+            person["duration_in_days"] == currentSelected["duration"]?.value
+          ) {
+            const newBod = {
+              country_code: person["country_code"],
+              country_name: person["country_name"],
+              created_at: person["created_at"],
+              data_amount: person["data_amount"],
+              data_unit: person["data_unit"],
+              duration_in_days: person["duration_in_days"],
+              id: person["id"],
+              option_id: person["option_id"],
+              plan_option: person["plan_option"],
+              plan_type: currentSelected.type?.value,
+              price_in_usd: person["price_in_usd"],
+              updated_at: person["updated_at"],
+            };
 
-              setBuy(newBod);
-              let temp = order * person["price_in_usd"];
-              setSubtotal(temp);
-            }
+            setBuy(newBod);
+            let temp = order * person["price_in_usd"];
+            setSubtotal(temp);
           }
-          return null;
         }
+        return null;
       }
+      // }
     }
 
     function handleButtonState() {
       for (let i in currentSelected) {
-        if (currentSelected[i as keyof currentSelectedProps]?.value == "") {
-          setIncreaseButton(true);
-        } else {
+        if (
+          currentSelected.duration?.value !== "" ||
+          currentSelected.unlimitedPlanDuration?.value !== ""
+        ) {
           setIncreaseButton(false);
+        } else {
+          setIncreaseButton(true);
         }
       }
     }
@@ -228,7 +347,7 @@ const usePlanHook = (params: { slug: string }) => {
     if (value == "UNLIMITED") {
       temp = {
         plan: "UNLIMITED",
-        data: "",
+        planData: "",
         duration: "",
         type: "",
         unlimitedPlanDuration: "",
@@ -253,7 +372,7 @@ const usePlanHook = (params: { slug: string }) => {
     } else if (value == "QUOTA") {
       temp = {
         plan: "QUOTA",
-        data: "",
+        planData: "",
         duration: "",
         type: "",
         unlimitedPlanDuration: "",
@@ -293,7 +412,7 @@ const usePlanHook = (params: { slug: string }) => {
     }
   }
 
-  function handleBuy() {
+  function handleBuy({ planData }: { planData: string }) {
     if (order <= 0) {
       setIsError(true);
       return;
@@ -301,15 +420,15 @@ const usePlanHook = (params: { slug: string }) => {
 
     if (!parameter.type) return;
 
-    if (parameter.type === "roaming") {
+    if (planData === "unlimited") {
       if (!parameter.unlimitedPlanDuration) {
         setIsError(true);
         return;
       }
     }
 
-    if (parameter.type === "local") {
-      if (!parameter.data || !parameter.duration) {
+    if (planData === "limited") {
+      if (!parameter.plan || !parameter.duration) {
         setIsError(true);
         return;
       }
