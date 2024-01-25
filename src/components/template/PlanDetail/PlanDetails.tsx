@@ -336,7 +336,8 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
             <div className="sm:mt-8 md:mt-0">
               <div className="flex w-full flex-col gap-2">
                 <Text as="subHeading1" className="font-bold text-gray-100">
-                  {countryName ? countryName : ""} eSim Data Plan
+                  {countryName ? countryName : ""}{" "}
+                  {planData === "unlimited" ? "UNLIMITED" : ""} eSim Data Plan
                 </Text>
                 <Text as="small" className="font-medium text-gray-400">
                   {t("planDetail_detailDesc")}

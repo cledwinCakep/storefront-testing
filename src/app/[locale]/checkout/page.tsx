@@ -300,7 +300,11 @@ export default function Checkout({ params }: { params: { locale: string } }) {
                         image={`/destination/${retrievedData.country_name
                           .toLowerCase()
                           .replace(/\//g, " ")}.png`}
-                        destination={`${retrievedData.country_name} eSim data plans`}
+                        destination={`${retrievedData.country_name} ${
+                          retrievedData.data_unit === "UNLIMITED"
+                            ? "UNLIMITED"
+                            : ""
+                        } eSim data plans`}
                         packages={`${
                           retrievedData!["plan_option"] == "UNLIMITED"
                             ? "Unlimited"
