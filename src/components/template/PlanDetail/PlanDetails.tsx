@@ -467,15 +467,21 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
                     : [
                         {
                           label: t("planDetail_descriptionTitle"),
-                          content: `${t("planDetail_descriptionOne")}${t(
-                            "planDetail_descriptionTwo"
-                          )}${t("planDetail_descriptionThree")}${t(
-                            "planDetail_descriptionFour"
-                          )}${t("planDetail_descriptionFive")}${t(
-                            "planDetail_descriptionSix"
-                          )}`,
+                          content:
+                            planData === "unlimited"
+                              ? `${t("planDetailUnlimited_descriptionOne")}${t(
+                                  "planDetailUnlimited_descriptionTwo"
+                                )}${t(
+                                  "planDetailUnlimited_descriptionThree"
+                                )}${t("planDetailUnlimited_descriptionFour")}`
+                              : `${t("planDetail_descriptionOne")}${t(
+                                  "planDetail_descriptionTwo"
+                                )}${t("planDetail_descriptionThree")}${t(
+                                  "planDetail_descriptionFour"
+                                )}${t("planDetail_descriptionFive")}${t(
+                                  "planDetail_descriptionSix"
+                                )}`,
                         },
-
                         {
                           label: t("planDetail_howtouseTitle"),
                           content: `${t("planDetail_howtouseOne")}${t(
@@ -496,15 +502,21 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
                   : [
                       {
                         label: t("planDetail_descriptionTitle"),
-                        content: `${t("planDetail_descriptionOne")}${t(
-                          "planDetail_descriptionTwo"
-                        )}${t("planDetail_descriptionThree")}${t(
-                          "planDetail_descriptionFour"
-                        )}${t("planDetail_descriptionFive")}${t(
-                          "planDetail_descriptionSix"
-                        )}`,
+                        content:
+                          planData === "unlimited"
+                            ? `${t("planDetailUnlimited_descriptionOne")}${t(
+                                "planDetailUnlimited_descriptionTwo"
+                              )}${t("planDetailUnlimited_descriptionThree")}${t(
+                                "planDetailUnlimited_descriptionFour"
+                              )}`
+                            : `${t("planDetail_descriptionOne")}${t(
+                                "planDetail_descriptionTwo"
+                              )}${t("planDetail_descriptionThree")}${t(
+                                "planDetail_descriptionFour"
+                              )}${t("planDetail_descriptionFive")}${t(
+                                "planDetail_descriptionSix"
+                              )}`,
                       },
-
                       {
                         label: t("planDetail_howtouseTitle"),
                         content: `${t("planDetail_howtouseOne")}${t(
