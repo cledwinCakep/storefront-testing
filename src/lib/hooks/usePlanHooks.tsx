@@ -262,6 +262,10 @@ const usePlanHook = (params: { slug: string }) => {
               updated_at: person["updated_at"],
             };
 
+            console.log({
+              price: currentSelected.unlimitedPlanDuration?.price,
+            });
+
             setBuy(newBod);
             setSubtotal(
               order * Number(currentSelected.unlimitedPlanDuration?.price)
@@ -282,8 +286,12 @@ const usePlanHook = (params: { slug: string }) => {
                 0,
                 currentSelected["quota"].value.length - 2
               ) &&
-            person["duration_in_days"] == currentSelected["duration"]?.value
+            person["duration_in_days"] == currentSelected["duration"]?.value &&
+            person["plan_type"].toLowerCase() == currentSelected["type"]?.value
           ) {
+            console.log({ person });
+            console.log({ currentSelected });
+
             const newBod = {
               country_code: person["country_code"],
               country_name: person["country_name"],
@@ -344,7 +352,7 @@ const usePlanHook = (params: { slug: string }) => {
   function selectDataPlan(options: string, value: string) {
     let temp = { ...parameter };
 
-    if (value == "UNLIMITED") {
+    if (value == "unlimited") {
       temp = {
         plan: "UNLIMITED",
         planData: "",
@@ -369,7 +377,7 @@ const usePlanHook = (params: { slug: string }) => {
           value: "",
         },
       }));
-    } else if (value == "QUOTA") {
+    } else if (value == "quota") {
       temp = {
         plan: "QUOTA",
         planData: "",
@@ -394,6 +402,8 @@ const usePlanHook = (params: { slug: string }) => {
           value: "",
         },
       }));
+    } else if (options === "subtotal") {
+      setSubtotal(0);
     }
 
     temp = { ...temp, [options]: value };

@@ -46,9 +46,11 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     subtotal,
     increaseButton,
     currentSelected,
+    setCurrentSelect,
     handleBuy,
     country,
     isError,
+    selectDataPlan,
   } = usePlanContext();
 
   const t = useTranslations("PlanDetail");
@@ -132,7 +134,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     if (globalCodes.includes(country_code)) {
       setGlobalCode(country_code);
     }
-  }, [globalCodes, country_code, globalCode, setGlobalCode]);
+  }, [country_code]);
 
   // useEffect(() => {
   //   const type = getPlanDataType();
@@ -241,6 +243,42 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
       setPlanData(Object.keys(quota.limited).length ? "limited" : "unlimited");
     }
   }, [data, type]);
+
+  useEffect(() => {
+    setCurrentSelect({
+      ...currentSelected,
+      type: {
+        id: "-",
+        value: "",
+      },
+      data: {
+        id: "-",
+        value: "",
+      },
+      duration: {
+        id: "-",
+        value: "",
+      },
+      unlimitedPlanDuration: {
+        id: "-",
+        value: "",
+        price: 0,
+      },
+      quota: {
+        id: "-",
+        value: "",
+      },
+    });
+
+    console.log({ plan: currentSelected.plan?.value });
+
+    selectDataPlan("plan", "");
+    selectDataPlan("planData", "");
+    selectDataPlan("duration", "");
+    selectDataPlan("type", "");
+    selectDataPlan("unlimitedPlanDuration", "");
+    selectDataPlan("subtotal", "0");
+  }, [currentSelected.plan?.value]);
 
   return (
     <>
@@ -357,28 +395,24 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
                   setQuota={setQuota}
                 />
 
-                {type === "roaming" &&
-                  data?.unlimited?.roaming?.unlimited["0UNLIMITED"] && (
-                    <>
-                      <div>
-                        <Text
-                          as="body1"
-                          className="mb-4 font-bold text-gray-100"
-                        >
-                          How many days are you travelling for?
-                        </Text>
+                {plan === "unlimited" && planData === "unlimited" && (
+                  <>
+                    <div>
+                      <Text as="body1" className="mb-4 font-bold text-gray-100">
+                        How many days are you travelling for?
+                      </Text>
 
-                        <CardPlan
-                          data={
-                            data?.unlimited?.roaming?.unlimited["0UNLIMITED"] ??
-                            []
-                          }
-                        />
-                      </div>
-                    </>
-                  )}
+                      <CardPlan
+                        data={
+                          data?.unlimited?.roaming?.unlimited["0UNLIMITED"] ??
+                          []
+                        }
+                      />
+                    </div>
+                  </>
+                )}
 
-                {type === "roaming" || type === "local" ? (
+                {planData === "limited" ? (
                   <>
                     <RadioPlan
                       name="quota"

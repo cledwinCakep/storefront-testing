@@ -49,7 +49,7 @@ const Partners = () => {
 
   const handleClickCountry = (name: string) => () => {
     // router.push(`/plans/${name}?plan=UNLIMITED&dataType=&data=&duration=`);
-    router.push("/plans");
+    router.push(`/plans/${name}`);
   };
 
   useEffect(() => {
