@@ -13,13 +13,6 @@ class PayPalApi extends API {
     email: string;
     user_code?: string | null;
   }): Promise<string> {
-    console.log({
-      esim_id,
-      quantity,
-      email,
-      user_code,
-    });
-
     try {
       const result = this.publicRoute<any>({
         url: "orders/",
@@ -33,8 +26,6 @@ class PayPalApi extends API {
       });
 
       const res = result.then((response) => response.data.order_id);
-
-      console.log({ res });
 
       return Promise.resolve(result.then((response) => response.data.order_id));
     } catch (error) {

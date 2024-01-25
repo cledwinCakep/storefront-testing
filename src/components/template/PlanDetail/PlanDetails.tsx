@@ -247,10 +247,6 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
   useEffect(() => {
     setCurrentSelect({
       ...currentSelected,
-      type: {
-        id: "-",
-        value: "",
-      },
       data: {
         id: "-",
         value: "",
@@ -270,15 +266,12 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
       },
     });
 
-    console.log({ plan: currentSelected.plan?.value });
-
     selectDataPlan("plan", "");
     selectDataPlan("planData", "");
     selectDataPlan("duration", "");
     selectDataPlan("type", "");
     selectDataPlan("unlimitedPlanDuration", "");
-    selectDataPlan("subtotal", "0");
-  }, [currentSelected.plan?.value]);
+  }, [currentSelected.type?.value]);
 
   return (
     <>

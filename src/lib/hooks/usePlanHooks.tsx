@@ -241,7 +241,6 @@ const usePlanHook = (params: { slug: string }) => {
 
   useEffect(() => {
     function findSubtotal() {
-      // if (currentSelected.type?.value === "roaming") {
       if (rawData) {
         for (const person of rawData) {
           if (
@@ -262,22 +261,14 @@ const usePlanHook = (params: { slug: string }) => {
               updated_at: person["updated_at"],
             };
 
-            console.log({
-              price: currentSelected.unlimitedPlanDuration?.price,
-            });
-
             setBuy(newBod);
             setSubtotal(
               order * Number(currentSelected.unlimitedPlanDuration?.price)
             );
-          }
-        }
-      }
-      // }
 
-      // if (currentSelected.type?.value === "local") {
-      if (rawData) {
-        for (const person of rawData) {
+            return;
+          }
+
           if (
             person["plan_option"].toLowerCase() ==
               currentSelected["plan"]?.value &&
@@ -289,9 +280,6 @@ const usePlanHook = (params: { slug: string }) => {
             person["duration_in_days"] == currentSelected["duration"]?.value &&
             person["plan_type"].toLowerCase() == currentSelected["type"]?.value
           ) {
-            console.log({ person });
-            console.log({ currentSelected });
-
             const newBod = {
               country_code: person["country_code"],
               country_name: person["country_name"],
@@ -310,11 +298,14 @@ const usePlanHook = (params: { slug: string }) => {
             setBuy(newBod);
             let temp = order * person["price_in_usd"];
             setSubtotal(temp);
+
+            return;
           }
         }
+
+        setSubtotal(0);
         return null;
       }
-      // }
     }
 
     function handleButtonState() {
