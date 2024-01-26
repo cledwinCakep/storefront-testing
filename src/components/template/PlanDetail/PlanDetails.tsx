@@ -136,47 +136,6 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     }
   }, [country_code]);
 
-  // useEffect(() => {
-  //   const type = getPlanDataType();
-
-  //   const values = Object.values(type).map((value) => value.value);
-
-  //   if (
-  //     values.includes("roaming") &&
-  //     parameter.type === "roaming" &&
-  //     data["UNLIMITED"]["0UNLIMITED"]
-  //   ) {
-  //     addParametersToUrl([
-  //       {
-  //         key: "plan",
-  //         value: "unlimited-data",
-  //       },
-  //       {
-  //         key: "type",
-  //         value: "roaming",
-  //       },
-  //       {
-  //         key: "duration",
-  //         value: data.UNLIMITED["0UNLIMITED"][0].duration_in_days,
-  //       },
-  //     ]);
-  //     return;
-  //   }
-
-  //   if (values.includes("local") && parameter.type === "local") {
-  //     addParametersToUrl([
-  //       {
-  //         key: "type",
-  //         value: "local",
-  //       },
-  //       {
-  //         key: "data",
-  //         value: "500",
-  //       },
-  //     ]);
-  //   }
-  // }, [data, parameter]);
-
   const lowerCaseSetValue = (text: string) => {
     return text.toLocaleLowerCase();
   };
@@ -192,7 +151,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     const plan: any = Object.keys(data);
 
     const planPayload = plan.filter(
-      (plan: any, index: number) => Object.keys(data[plan]).length > 0
+      (plan: any) => Object.keys(data[plan]).length > 0
     );
 
     return planPayload.map((plan: any) => ({
@@ -218,6 +177,12 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     const quota = data[plan]?.[type];
 
     if (Object.keys(quota?.[planData] || []).length) {
+      // window.history.replaceState(
+      //   null,
+      //   "",
+      //   window.location.href + `&data=${Object.keys(quota?.[planData])[0]}`
+      // );
+
       return Object.keys(quota?.[planData]).map((quota: any) => ({
         title: "quota",
         label: quota.toString().toUpperCase(),
@@ -228,6 +193,14 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
 
   const getPlanDuration = useCallback(() => {
     const duration = data[plan]?.[type]?.[planData]?.[quota];
+
+    // if (duration) {
+    //   window.history.replaceState(
+    //     null,
+    //     "",
+    //     window.location.href + `&duration=${duration[0].duration_in_days}`
+    //   );
+    // }
 
     return duration?.map((duration: any) => ({
       title: "duration",
@@ -242,7 +215,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     if (Object.keys(quota).length) {
       setPlanData(Object.keys(quota.limited).length ? "limited" : "unlimited");
     }
-  }, [data, type]);
+  }, [data, type, plan]);
 
   useEffect(() => {
     setCurrentSelect({
@@ -381,7 +354,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
 
                 <RadioPlan
                   name="type"
-                  title="Select type:"
+                  title="Step 2 - Select type:"
                   data={getType()}
                   setPlan={setPlan}
                   setType={setType}
@@ -393,7 +366,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
                   <>
                     <div>
                       <Text as="body1" className="mb-4 font-bold text-gray-100">
-                        How many days are you travelling for?
+                        Step 3 - How many days are you travelling for?
                       </Text>
 
                       <CardPlan
@@ -406,7 +379,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
                   </>
                 )}
 
-                {planData === "limited" ? (
+                {plan === "quota" || planData === "limited" ? (
                   <>
                     <RadioPlan
                       name="quota"
@@ -416,6 +389,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
                       setType={setType}
                       setPlanData={setPlanData}
                       setQuota={setQuota}
+                      isDisabled={currentSelected.type?.value ? false : true}
                     />
 
                     <RadioPlan
@@ -426,6 +400,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
                       setType={setType}
                       setPlanData={setPlanData}
                       setQuota={setQuota}
+                      isDisabled={currentSelected.quota?.value ? false : true}
                     />
                   </>
                 ) : null}

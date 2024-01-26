@@ -24,8 +24,10 @@ const CallToAction = () => {
         </Text>
         <a
           href={
-            "mailto:support@superalink.com?subject=Support%20to%20buy%20eSIM"
+            "https://api.whatsapp.com/send?phone=821089850158&text=Hello,%20%20I%20want%20to%20buy%20eSIM%20for%20traveling!"
           }
+          target="_blank"
+          rel="noopener noreferrer"
         >
           <Button color="transparent" size="xs" iconLeft={<Email />}>
             {t("cta_ctaButton")}
