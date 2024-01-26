@@ -76,19 +76,13 @@ const MobileCheckout = ({ planData }: { planData: string }) => {
 
       <Button
         color="orange"
-        className={`h-12 w-full ${
-          (subtotal! <= 0 && currentSelected.data?.id == "-") ||
-          currentSelected.duration?.id == "-" ||
-          currentSelected.type?.id == ""
+        className={`w-full ${
+          subtotal! <= 0
             ? "bg-neutral-500 font-medium text-neutral-800 hover:border-0 hover:bg-neutral-500"
             : "bg-orange-500 hover:bg-orange-800"
         }`}
-        disabled={
-          (subtotal! <= 0 && currentSelected.data?.id == "-") ||
-          currentSelected.duration?.id == "-" ||
-          currentSelected.type?.id == ""
-        }
         onClick={() => handleBuy({ planData })}
+        disabled={subtotal! <= 0}
       >
         {t("planDetail_buyButton")}
       </Button>
