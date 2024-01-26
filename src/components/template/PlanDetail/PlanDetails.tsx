@@ -192,8 +192,16 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     const plan: any = Object.keys(data);
 
     const planPayload = plan.filter(
-      (plan: any, index: number) => Object.keys(data[plan]).length > 0
+      (plan: any) => Object.keys(data[plan]).length > 0
     );
+
+    // if (planPayload.length) {
+    //   if (planPayload.includes("unlimited")) {
+    //     window.history.replaceState(null, "", "?plan=unlimited");
+    //   } else {
+    //     window.history.replaceState(null, "", "?plan=quota");
+    //   }
+    // }
 
     return planPayload.map((plan: any) => ({
       title: "plan",
@@ -204,8 +212,25 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
 
   const getType = useCallback(() => {
     const type = data[plan];
+    let typeKeys;
 
     if (type) {
+      typeKeys = Object.keys(type);
+
+      // if (typeKeys.includes("roaming")) {
+      //   window.history.replaceState(
+      //     null,
+      //     "",
+      //     window.location.href + "&type=roaming"
+      //   );
+      // } else {
+      //   window.history.replaceState(
+      //     null,
+      //     "",
+      //     window.location.href + "&type=local"
+      //   );
+      // }
+
       return Object.keys(type).map((type) => ({
         title: "type",
         label: capitalizeSetValue(type),
@@ -218,6 +243,12 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     const quota = data[plan]?.[type];
 
     if (Object.keys(quota?.[planData] || []).length) {
+      // window.history.replaceState(
+      //   null,
+      //   "",
+      //   window.location.href + `&data=${Object.keys(quota?.[planData])[0]}`
+      // );
+
       return Object.keys(quota?.[planData]).map((quota: any) => ({
         title: "quota",
         label: quota.toString().toUpperCase(),
@@ -228,6 +259,14 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
 
   const getPlanDuration = useCallback(() => {
     const duration = data[plan]?.[type]?.[planData]?.[quota];
+
+    // if (duration) {
+    //   window.history.replaceState(
+    //     null,
+    //     "",
+    //     window.location.href + `&duration=${duration[0].duration_in_days}`
+    //   );
+    // }
 
     return duration?.map((duration: any) => ({
       title: "duration",

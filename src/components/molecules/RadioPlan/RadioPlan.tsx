@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 // components
 import Text from "@/components/atoms/Text/Text";
@@ -119,15 +119,18 @@ const RadioPlan = ({
       </div>
 
       <div className="no-scrollbar flex gap-x-4 overflow-scroll sm:max-w-[559px] sm:flex-wrap sm:gap-y-4">
-        {data?.map((data) => (
+        {data?.map((plan) => (
           <Radio
             // isDisabled={data.label === "Local"}
-            current={currentSelected[name as keyof currentSelectedProps]?.value}
-            key={data.label}
+            current={
+              currentSelected[name as keyof currentSelectedProps]?.value
+              // || String(data[0].value)
+            }
+            key={plan.label}
             name={name}
-            label={data.label}
-            value={String(data.value)}
-            onChange={(e) => handleSelectRadio(data.label, name, e)}
+            label={plan.label}
+            value={String(plan.value)}
+            onChange={(e) => handleSelectRadio(plan.label, name, e)}
           />
         ))}
       </div>
