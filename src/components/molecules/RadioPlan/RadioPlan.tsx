@@ -27,6 +27,7 @@ interface RadioPlanProps {
   setType: any;
   setPlanData: any;
   setQuota: any;
+  isDisabled?: boolean;
 }
 
 const RadioPlan = ({
@@ -37,6 +38,7 @@ const RadioPlan = ({
   setType,
   setPlanData,
   setQuota,
+  isDisabled,
 }: RadioPlanProps) => {
   const { selectDataPlan, currentSelected, setCurrentSelect } =
     usePlanContext();
@@ -121,11 +123,8 @@ const RadioPlan = ({
       <div className="no-scrollbar flex gap-x-4 overflow-scroll sm:max-w-[559px] sm:flex-wrap sm:gap-y-4">
         {data?.map((plan) => (
           <Radio
-            // isDisabled={data.label === "Local"}
-            current={
-              currentSelected[name as keyof currentSelectedProps]?.value
-              // || String(data[0].value)
-            }
+            isDisabled={isDisabled}
+            current={currentSelected[name as keyof currentSelectedProps]?.value}
             key={plan.label}
             name={name}
             label={plan.label}

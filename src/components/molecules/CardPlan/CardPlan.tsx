@@ -257,8 +257,11 @@ const CardPlan = (data: any) => {
           index: number
         ) => (
           <button
+            disabled={!currentSelected.type?.value ? true : false}
             key={arr.id}
-            className={`cursor-pointer rounded-md border px-5 py-4 text-left ${
+            className={`cursor-pointer rounded-md border  px-5 py-4 ${
+              currentSelected.type?.value ? "" : "cursor-auto bg-[#121417]"
+            } ${
               currentPlan === arr.id
                 ? // || data.data[0].id === arr.id
                   "border-[#9A3412] bg-[#431407]"
@@ -271,9 +274,10 @@ const CardPlan = (data: any) => {
             <Text
               as="body1"
               className={`font-bold ${
-                currentPlan === arr.id
-                  ? // || data.data[0].id === arr.id
-                    "text-orange-500"
+                !currentSelected.type?.value
+                  ? "text-gray-500"
+                  : currentPlan === arr.id
+                  ? "text-orange-500"
                   : "text-[#F9F9F9]"
               }`}
             >
@@ -282,10 +286,11 @@ const CardPlan = (data: any) => {
             <Text
               as="body2"
               className={`${
-                currentPlan === arr.id
-                  ? // || data.data[0].id === arr.id
-                    "text-orange-600"
-                  : "text-[#BDBDBD]"
+                !currentSelected.type?.value
+                  ? "text-gray-500"
+                  : currentPlan === arr.id
+                  ? "text-orange-500"
+                  : "text-[#bdbdbd]"
               }`}
             >
               Unlimited Data
