@@ -33,7 +33,12 @@
     "hero_destinationTitle": "Your next destination awaits",
     "hero_destinationDesc": "Choose the perfect data plan for your upcoming journey.",
     "hero_destinationStart": "Start from",
-    "hero_paymentMethodTitle": "Secure payment options"
+    "hero_paymentMethodTitle": "Secure payment options",
+    "hero_search_destination": "Search destination...",
+    "hero_destination_local": "Local eSIMs",
+    "hero_destination_global": "Global eSIMs",
+    "hero_less": "Show Less",
+    "hero_all_countries": "Show All Countries"
   },
   "Compatibility": {
     "compatibility_title": "eSim support device",
@@ -46,6 +51,8 @@
     "planDetail_destination": "Destination",
     "planDetail_detailDesc": "  Your eSIM QR code will be sent to your email address!",
     "planDetail_selectPlanTitle": "Step 1 - Select plan:",
+    "planDetail_selectPlanType": "Step 2 - Select type:",
+    "planDetail_selectPlanUnlimitedPlan": "Step 3 - How many days are you travelling for?",
     "planDetail_selectDataTitle": "Step 3 - Select data:",
     "planDetail_selectDurationTitle": "Step 4 - Select duration:",
     "planDetail_descriptionTitle": "Description",
@@ -96,7 +103,9 @@
     "checkout_orderEmptyDesc": "It appears your order is currently empty. Don't worry; let's find a package that suits you.",
     "checkout_findPlanButton": "Find Package",
     "checkout_errorEmailIncorrect": "*The email you entered is incorrect",
-    "checkout_errorEmailEmpty": "Email cannot be empty"
+    "checkout_errorEmailEmpty": "Email cannot be empty",
+    "checkout_destination": "Destination",
+    "checkout_affiliate_code": "Affiliate Code:"
   },
   "Payment": {
     "payment_paymentSuccessTitle": "Payment Successful",

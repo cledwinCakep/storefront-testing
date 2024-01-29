@@ -26,12 +26,6 @@ const NavbarDesktop = ({ params }: { params: { locale: string } }) => {
   function handleChangeLanguage() {
     setOpen(!isOpen);
   }
-  // const url = new URL(location.href);
-  // const test = new URLSearchParams(url.search);
-
-  // const plan = test.get("plan");
-  // const data = test.get("data");
-  // const duration = test.get("duration");
 
   return (
     <div className="hidden w-full items-center justify-center border-b-[1px] border-[#222222] bg-black px-4 py-3 lg:flex ">
@@ -88,7 +82,7 @@ const NavbarDesktop = ({ params }: { params: { locale: string } }) => {
         </div>
         <div className="hidden w-1/4 flex-row items-center gap-6 lg:flex">
           <div className="relative w-1/4">
-            {/* <div
+            <div
               className="flex w-full cursor-pointer flex-row justify-between"
               onClick={handleChangeLanguage}
             >
@@ -97,40 +91,22 @@ const NavbarDesktop = ({ params }: { params: { locale: string } }) => {
                 {params.locale.toUpperCase()}
               </Text>
               {isOpen ? <ChevronDown /> : <ChevronUp />}
-            </div> */}
+            </div>
             <div
               className={`absolute flex-col ${
                 isOpen ? "flex" : "hidden"
               } left-0 top-[40px] z-50 rounded-[4px] bg-gray-100 transition-all ease-in-out`}
             >
-              {/* <Link
-                locale="en"
-                href={`${
-                  pathname.split("/").includes("plans")
-                    ? pathname +
-                      "?" +
-                      `plan=${plan}&data=${data}&duration=${duration}`
-                    : pathname
-                }`}
-              >
+              <Link locale="en" href={pathname}>
                 <div className="w-full cursor-pointer p-[20px] hover:bg-[#DDDDDE]">
                   English
                 </div>
-              </Link> */}
-              {/* <Link
-                locale="id"
-                href={`${
-                  pathname.split("/").includes("plans")
-                    ? pathname +
-                      "?" +
-                      `plan=${plan}&data=${data}&duration=${duration}`
-                    : pathname
-                }`}
-              >
+              </Link>
+              <Link locale="ko" href={pathname}>
                 <div className="w-full cursor-pointer p-[20px] hover:bg-[#DDDDDE]">
-                  Indonesia
+                  한글
                 </div>
-              </Link> */}
+              </Link>
             </div>
           </div>
           <a
