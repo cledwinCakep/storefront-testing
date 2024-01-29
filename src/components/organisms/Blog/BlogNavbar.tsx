@@ -8,8 +8,7 @@ interface BlogNavbarProps {
   params?: any;
 }
 
-const BlogNavbar = ({ params }: BlogNavbarProps) =>{
-
+const BlogNavbar = ({ params }: BlogNavbarProps) => {
   return (
     <div
       className={
@@ -23,7 +22,7 @@ const BlogNavbar = ({ params }: BlogNavbarProps) =>{
             width={175}
             height={26}
             alt="logo superalink"
-            className={`hidden xs:block sm:block min-w-[135px]`}
+            className={`hidden min-w-[135px] xs:block sm:block`}
           />
         </Link>
         <div className="h-auto w-full">
@@ -43,11 +42,8 @@ const BlogNavbar = ({ params }: BlogNavbarProps) =>{
             size="xs"
             className="w-full min-w-[160px]"
           >
-            Visit Storefront
+            Buy eSim
           </Button>
-          {/* <Button className="border-tremor-brand min-w-full border bg-transparent text-[15px]">
-            Visit Storefront
-          </Button> */}
         </Link>
       </div>
     </div>

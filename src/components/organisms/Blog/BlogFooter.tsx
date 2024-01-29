@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import FooterTextLink from "@/components/atoms/FooterLink/FooterTextLink";
@@ -219,7 +219,12 @@ export const BlogFooter = () => {
                   ABOUT
                 </Text>
                 <div className="mt-4 flex flex-col gap-2">
-                  <FooterTextLink text="Destination" href="/#destination" hash isBlog/>
+                  <FooterTextLink
+                    text="Destination"
+                    href="/#destination"
+                    hash
+                    isBlog
+                  />
                   <FooterTextLink
                     text="How it works"
                     href="/#how-it-works"
@@ -257,7 +262,7 @@ export const BlogFooter = () => {
                 </div>
                 <div className="mt-4 flex flex-col gap-2">
                   <a
-                    href="mailto:support@superalink.com"
+                    href="https://api.whatsapp.com/send?phone=821089850158&text=Hello,%20%20I%20want%20to%20buy%20eSIM%20for%20traveling!"
                     className="text-base font-normal leading-normal tracking-tighter text-stone-50 opacity-80  hover:opacity-100"
                     rel="noopener noreferrer"
                     target="_blank"
@@ -315,7 +320,7 @@ export const BlogFooter = () => {
               </div>
             </div>
           </div>
-          <Text className="flex w-full items-center justify-center border-t-[1px] border-gray-400 pb-7 pt-7 opacity-80 text-center text-neutral-500 text-sm font-normal leading-[18px]">
+          <Text className="flex w-full items-center justify-center border-t-[1px] border-gray-400 pb-7 pt-7 text-center text-sm font-normal leading-[18px] text-neutral-500 opacity-80">
             &copy; Copyright {new Date().getFullYear()}. All Rights Reserved
             Supera link
           </Text>
