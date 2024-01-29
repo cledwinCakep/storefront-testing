@@ -56,7 +56,8 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
   const t = useTranslations("PlanDetail");
   const router = usePathname();
 
-  const country_code = router.split("/")[2];
+  const parts = router.split("/");
+  const country_code = parts.length > 3 ? parts[3] : parts[2];
 
   const z: any = {
     WW_146: "Global 146 Countries",

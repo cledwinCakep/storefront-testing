@@ -15,6 +15,7 @@ import { Dialog } from "@headlessui/react";
 import { useTranslations } from "next-intl";
 import { X } from "react-feather";
 import Device from "@/components/atoms/Tabs/Device";
+import { usePathname } from "next/navigation";
 
 const Apple = [
   "iPhone 15 Pro & Pro Max",
@@ -71,6 +72,9 @@ const Oppo = ["Oppo Find X5", "Oppo Find X5 Pro"];
 const Huawei = ["Huawei P40", "Huawei P40 Pro", "Huawei Mate P40 Pro"];
 
 const Footer = () => {
+  const router = usePathname();
+  const language = router.split("/")[1];
+
   let [isOpen, setIsOpen] = React.useState(false);
   const f = useTranslations("CTA");
   const c = useTranslations("Compatibility");
@@ -315,14 +319,31 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="w-full border-t-[1px] border-gray-400">
-            <Text className="flex w-full max-w-[680px] items-start  justify-start pt-7 text-left text-base font-normal leading-[18px] text-[#f9f9f9] opacity-80">
-              가제트코리아 주식회사 | 대표이사: 유상혁 | 서울특별시 마포구
-              월드컵북로6길 79 B1~4F (연남동, 가제트코리아 빌딩) 사업자등록번호:
-              786-87-01837 | 통신판매업 신고 제2023-서울마포-1422호 고객센터:
-              1661-0158 | 개인정보관리 책임자: 윤재환 | cx@usimsa.com
-            </Text>
-          </div>
+          {language === `ko` && (
+            <div className="w-full border-t-[1px] border-gray-400">
+              <Text className="flex w-full max-w-[800px] items-start  justify-start pt-7 text-left text-base font-normal leading-6 text-stone-50 opacity-80">
+                가제트코리아 주식회사 | 대표이사: 유상혁 | 서울특별시 마포구
+                월드컵북로6길 79 B1~4F (연남동, 가제트코리아 빌딩)
+              </Text>
+              <Text className="flex w-full max-w-[800px] items-start  justify-start pt-2 text-left text-base font-normal leading-6 text-stone-50 opacity-80">
+                사업자등록번호: 786-87-01837 | 통신판매업 신고
+                제2023-서울마포-1422호
+              </Text>
+              <div className="flex w-full max-w-[800px] items-start  justify-start pt-2 text-left text-base font-normal leading-6 text-stone-50 opacity-80">
+                <p>
+                  고객센터: 1661-0158 | 개인정보관리 책임자: 윤재환 |&nbsp;
+                  <a
+                    href="mailto:support@superalink.com"
+                    className="text-stone-50 opacity-80  hover:opacity-100"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    cx@usimsa.com
+                  </a>
+                </p>
+              </div>
+            </div>
+          )}
 
           <Text className="flex w-full items-center justify-center border-t-[1px] border-gray-400 pb-7 pt-7 text-center text-sm font-normal leading-[18px] text-neutral-500 opacity-80">
             &copy; Copyright {new Date().getFullYear()}. All Rights Reserved
