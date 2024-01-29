@@ -116,5 +116,21 @@
     "payment_contactUs": "Contact Us",
     "payment_paymentFailedTitle": "Payment Failed",
     "payment_paymentFailedDesc": "We apologize, but it seems your payment was not successful. However, don't worry; we are ready to assist you promptly."
+  },
+  "Footer": {
+    "footer_desc": "Supera link provide electronic SIM (eSIM) for customers who want to travel around the world with super hassle-free & affordable connectivity",
+    "footer_about_title": "ABOUT",
+    "footer_about_destination": "Destination",
+    "footer_about_how_it_works": "How it works",
+    "footer_about_device_compatibility": "Device compatibility",
+    "footer_about_become_affiliate": "Become affiliate",
+    "footer_about_blog": "Blog",
+
+    "footer_help_support_title": "HELP & SUPPORT",
+    "footer_help_support_contact_us": "Contact us",
+    "footer_help_support_privacy_policy": "Privacy policy",
+    "footer_help_support_terms_and_conditions": "Terms and conditions",
+
+    "footer_social_media_title": "SOCIAl MEDIA"
   }
 }

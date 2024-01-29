@@ -82,51 +82,33 @@ export const NavbarMobileMenu = ({
               <X onClick={handleHamburgerMenuState} className="text-white" />
             </div>
             <div className="flex flex-col gap-3  border-gray-200  px-6 py-6">
-              {/* <div
-              className="flex w-full cursor-pointer flex-row justify-between rounded-[124px] border-[1px] border-gray-300 p-4 text-white "
-              onClick={handleChangeLanguage}
-            >
-              <div className="flex max-w-[179px] flex-row items-center justify-center">
-                <Translation />
-                <Text as="body2" className="mx-2 font-bold">
-                  {params.locale == "id" ? "Indonesia" : "English"}
-                </Text>
+              <div
+                className="flex w-full cursor-pointer flex-row justify-between rounded-[124px] border-[1px] border-gray-300 p-4 text-white "
+                onClick={handleChangeLanguage}
+              >
+                <div className="flex max-w-[179px] flex-row items-center justify-center">
+                  <Translation />
+                  <Text as="body2" className="mx-2 font-bold">
+                    {params.locale == "id" ? "Indonesia" : "English"}
+                  </Text>
+                </div>
+                {isOpen ? <ChevronDown /> : <ChevronUp />}
               </div>
-              {isOpen ? <ChevronDown /> : <ChevronUp />}
-            </div> */}
               <div
                 className={`h-full flex-col ${
                   isOpen ? "flex" : "hidden"
                 } left-0 top-[50px] z-50 rounded-[4px] bg-[#555] text-white transition-all ease-in-out`}
               >
-                {/* <Link
-                locale="en"
-                href={`${
-                  pathname.split("/").includes("plans")
-                    ? pathname +
-                      "?" +
-                      `plan=${plan}&data=${data}&duration=${duration}`
-                    : pathname
-                }`}
-              >
-                <div className="w-full cursor-pointer p-[20px] hover:bg-[#DDDDDE] hover:text-black">
-                  English
-                </div>
-              </Link> */}
-                {/* <Link
-                locale="id"
-                href={`${
-                  pathname.split("/").includes("plans")
-                    ? pathname +
-                      "?" +
-                      `plan=${plan}&data=${data}&duration=${duration}`
-                    : pathname
-                }`}
-              >
-                <div className="w-full cursor-pointer p-[20px] hover:bg-[#DDDDDE] hover:text-black">
-                  Indonesia
-                </div>
-              </Link> */}
+                <Link locale="en" href={pathname}>
+                  <div className="w-full cursor-pointer p-[20px] hover:bg-[#DDDDDE] hover:text-black">
+                    English
+                  </div>
+                </Link>
+                <Link locale="ko" href={pathname}>
+                  <div className="w-full cursor-pointer p-[20px] hover:bg-[#DDDDDE] hover:text-black">
+                    한글
+                  </div>
+                </Link>
               </div>
             </div>
             <div
