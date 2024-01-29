@@ -9,13 +9,9 @@ import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import Smartlook from "smartlook-client";
-import ReactGA from "react-ga";
+import GoogleAnalytics from "../../../GoogleAnalytics";
 
 export const dynamic = "force-dynamic";
-
-// export async function generateStaticParams() {
-//   return ["en"].map((locale) => ({ locale }));
-// }
 
 let cache: { [key: string]: typeof en } = {};
 
@@ -53,7 +49,6 @@ export default function RootLayout({
   useEffect(() => {
     if (process.env.NODE_ENV === "production") {
       Smartlook.init(process.env.NEXT_PUBLIC_SMARTLOOK!);
-      ReactGA.initialize(process.env.NEXT_PUBLIC_GA!);
     }
   }, []);
 
@@ -90,7 +85,9 @@ export default function RootLayout({
       </head>
 
       <body className="bg-black">
-        {/* <GoogleAnalytics keys={process.env.NEXT_PUBLIC_GOOGLE_ID} /> */}
+        {process.env.NODE_ENV === "production" && (
+          <GoogleAnalytics keys={process.env.NEXT_PUBLIC_GA} />
+        )}
         <PayPalScriptProvider
           options={{
             // disableFunding: ["credit", "card"],
