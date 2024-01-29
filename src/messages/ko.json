@@ -112,5 +112,21 @@
     "payment_contactUs": "문의하기",
     "payment_paymentFailedTitle": "결제 실패",
     "payment_paymentFailedDesc": "죄송합니다만, 결제가 성공적이지 않은 것으로 보입니다. 그러나 걱정하지 마세요. 빠르게 도움을 드릴 준비가 되어 있습니다."
+  },
+  "Footer": {
+    "footer_desc": "Supera link은 세계 일주를 원하는 고객들에게 초 간편하고 저렴한 연결성을 제공하는 전자 SIM (eSIM)을 제공합니다.",
+    "footer_about_title": "소개",
+    "footer_about_destination": "목적지",
+    "footer_about_how_it_works": "작동 방식",
+    "footer_about_device_compatibility": "장치 호환성",
+    "footer_about_become_affiliate": "제휴사 되기",
+    "footer_about_blog": "블로그",
+
+    "footer_help_support_title": "도움말 및 지원",
+    "footer_help_support_contact_us": "문의하기",
+    "footer_help_support_privacy_policy": "개인정보 처리방침",
+    "footer_help_support_terms_and_conditions": "이용약관",
+
+    "footer_social_media_title": "소셜 미디어"
   }
 }
