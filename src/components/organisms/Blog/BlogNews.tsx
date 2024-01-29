@@ -6,6 +6,14 @@ function BlogNews() {
   const news = [
     {
       id: 1,
+      link: "/blog/South Korea's LG U+ Launches Innovative eSIM Promotion",
+      topic: "Trending",
+      date: "30 May 2023",
+      title: "South Korea's LG U+ Launches Innovative eSIM Promotion",
+      desc: "LG U+, a leading telecommunications enterprise in South Korea, is launching a marketing campaign featuring a complimentary T-Money card for all travelers in South Korea who obtain a prepaid eSIM via its official web portal. The eSIM is a downloadable service that enables dual numbering without the hassle of replacing the current SIM card. LG U+ eSIM, a data product of unparalleled convenience, can be swiftly utilized in Korea by scanning the QR code delivered via email upon purchase, eliminating the need to visit physical retail outlets such as airport counters.",
+    },
+    {
+      id: 2,
       link: "/blog/South Korea introduces 2 numbers in 1 phone service with eSIM",
       topic: "Trending",
       date: "31 August 2022",
@@ -13,7 +21,7 @@ function BlogNews() {
       desc: "South Korea will begin embedded subscriber identity module, known as eSIM, services from Thursday, allowing Koreans to have two different numbers in one mobile device, the Ministry of Science and ICT said Wednesday.",
     },
     {
-      id: 2,
+      id: 3,
       link: "/blog/China's Xiaomi unveils its first EV as it looks to compete with Porsche, Tesla",
       topic: "Technology",
       date: "22 November 2023",
@@ -22,7 +30,7 @@ function BlogNews() {
       desc: "Chinese consumer electronics company Xiaomi on Thursday detailed plans to enter China's oversaturated electric vehicle market and compete with automaker giants Tesla and Porsche with a car model it says it spent more than 10 billion yuan ($1.4 billion) to develop.",
     },
     {
-      id: 3,
+      id: 4,
       link: "/blog/Ooredoo Launches eSIM Service in Myanmar",
       topic: "Market",
       date: "17 January 2024",
@@ -32,7 +40,7 @@ function BlogNews() {
   ];
 
   return (
-    <div className="h-full w-full bg-white px-5 pb-20 pt-9 md:px-[30px]">
+    <div className="h-full w-full bg-white px-5 pb-20 pt-32 md:px-[30px]">
       <div className="h-full w-full">
         <div className="mx-auto w-full max-w-[1180px]">
           <motion.div
@@ -76,13 +84,12 @@ function BlogNews() {
                 <div className="mb-2 h-auto w-full">
                   <div className="flex w-full items-center gap-4">
                     <p className="text-base font-medium text-gray-400">
-                      30 May 2023
+                      {news[0].date}
                     </p>
                   </div>
                   <div className="mt-4 flex w-full flex-col gap-4">
                     <p className="line-clamp-3 text-[32px] font-semibold leading-[42px] text-gray-700">
-                      South Korea&apos;s LG U+ Launches Innovative eSIM
-                      Promotion
+                      {news[0].title}
                     </p>
                     <p className="line-clamp-3 text-ellipsis break-words text-base font-normal text-[#424242] sm:line-clamp-2 md:sm:line-clamp-3">
                       {`
@@ -95,7 +102,7 @@ function BlogNews() {
                 </div>
                 <a
                   className="max-w-[120px] border-b border-[#374151] bg-transparent text-start text-[15px] font-normal text-[#374151]"
-                  href="/blog/South Korea's LG U+ Launches Innovative eSIM Promotion"
+                  href={news[0].link}
                 >
                   Continue Reading
                 </a>
@@ -106,10 +113,10 @@ function BlogNews() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ ease: "easeOut", duration: 1.8 }}
-              className="h-auto w-full -mt-20 md:mt-0"
+              className="-mt-20 h-auto w-full md:mt-0"
             >
               <div className="w-full">
-                {news.map((dt, index) => {
+                {news.slice(1).map((dt, index) => {
                   return (
                     <motion.div
                       key={index}

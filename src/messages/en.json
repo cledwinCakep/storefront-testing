@@ -3,7 +3,8 @@
     "navbar_destination": "Destination",
     "navbar_payment": "Payment",
     "navbar_howItWorks": "How it works",
-    "navbar_contactUs": "Contact us"
+    "navbar_contactUs": "Contact us",
+    "navbar_buyEsim": "Buy eSIM"
   },
   "CTA": {
     "cta_howToUseTitle": "How our eSIM works",
@@ -52,9 +53,10 @@
     "planDetail_detailDesc": "  Your eSIM QR code will be sent to your email address!",
     "planDetail_selectPlanTitle": "Step 1 - Select plan:",
     "planDetail_selectPlanType": "Step 2 - Select type:",
-    "planDetail_selectPlanUnlimitedPlan": "Step 3 - How many days are you travelling for?",
+    "planDetail_selectPlanUnlimitedPlan": "Step 3 - How many days are you traveling for?",
     "planDetail_selectDataTitle": "Step 3 - Select data:",
     "planDetail_selectDurationTitle": "Step 4 - Select duration:",
+    "planDetail_unlimitedDataDesc": "Unlimited Data",
     "planDetail_descriptionTitle": "Description",
     "planDetail_descriptionCNOne": "- After you use up all of your daily allowance, you can use it at unlimited speeds.\n\n",
     "planDetail_descriptionCNTwo": "- **You can use all social media throughout China without a VPN**.\n\n",
