@@ -354,7 +354,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
 
                 <RadioPlan
                   name="type"
-                  title="Step 2 - Select type:"
+                  title={t("planDetail_selectPlanType")}
                   data={getType()}
                   setPlan={setPlan}
                   setType={setType}
@@ -366,7 +366,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
                   <>
                     <div>
                       <Text as="body1" className="mb-4 font-bold text-gray-100">
-                        Step 3 - How many days are you travelling for?
+                        {t("planDetail_selectPlanUnlimitedPlan")}
                       </Text>
 
                       <CardPlan
