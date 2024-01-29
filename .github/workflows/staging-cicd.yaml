@@ -1,0 +1,41 @@
+name: Staging
+run-name: ${{ github.actor }} pushed new commit.
+on:
+  push:
+    branches:
+      - staging
+env:
+  DOCKER_IMAGE: usimsa-front-store
+  DOCKER_CONTAINER: usimsa-front-store_staging
+jobs:
+  Login-To-Azure:
+    name: Login To Azure
+    runs-on: self-hosted
+    steps:
+      - run: az login --service-principal -u ${{ secrets.AZURE_APP_ID }} -p ${{ secrets.AZURE_PASSWORD }} -t ${{ secrets.AZURE_TENANT }}
+      - run: az account set -s ${{ secrets.AZURE_SUB_ID }}
+      - run: az group list
+  Build-Staging:
+    name: Build Staging
+    runs-on: self-hosted
+    needs: Login-To-Azure
+    steps:
+      - uses: actions/checkout@v3
+      - run: docker context use development
+      - run: docker build --build-arg NEXT_PUBLIC_HOST_API=${{ vars.STAGING__NEXT_PUBLIC_HOST_API }} -t ${{ env.DOCKER_IMAGE }}:staging .
+  Deploy-Staging:
+    name: Deploy Staging
+    runs-on: self-hosted
+    needs: Build-Staging
+    steps:
+      - uses: actions/checkout@v3
+      - run: docker context use development
+      - run: docker container rm ${{ env.DOCKER_CONTAINER }} -f
+      - run: >
+          docker --context development run -d -p 1339:3000
+          --name=${{ env.DOCKER_CONTAINER }}
+          --hostname=${{ env.DOCKER_CONTAINER }}
+          -e NEXT_PUBLIC_HOST_API="${{ vars.STAGING__NEXT_PUBLIC_HOST_API }}"
+          -e NEXT_PUBLIC_PAYPAL_CLIENT_ID="${{ vars.NEXT_PUBLIC_PAYPAL_CLIENT_ID }}"
+          ${{ env.DOCKER_IMAGE }}:staging
+      - run: docker image prune --force
