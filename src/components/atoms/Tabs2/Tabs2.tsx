@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import PriceInfoCards from "@/components/organisms/PriceInfoCards/PriceInfoCards";
 import Shimmer from "../Shimmer/Shimmer";
 import Button from "../Button/Button";
+import { useTranslations } from "next-intl";
 
 interface PriceInfo {
   code: string;
@@ -16,6 +17,7 @@ interface Tabs2Props {
 }
 
 const Tabs2: React.FC<Tabs2Props> = ({ data, onShowLessClicked }) => {
+  const t = useTranslations("Homepage");
   const [activeTab, setActiveTab] = useState<"local" | "global">("local");
   const [showAllLocal, setShowAllLocal] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -90,7 +92,7 @@ const Tabs2: React.FC<Tabs2Props> = ({ data, onShowLessClicked }) => {
             }`}
             onClick={() => setActiveTab("local")}
           >
-            Local eSIMs
+            {t("hero_destination_local")}
           </button>
           <button
             className={`rounded-full px-4 py-2 text-[#9CA3AF] hover:bg-black/40 ${
@@ -100,7 +102,7 @@ const Tabs2: React.FC<Tabs2Props> = ({ data, onShowLessClicked }) => {
             }`}
             onClick={() => setActiveTab("global")}
           >
-            Global eSIMs
+            {t("hero_destination_global")}
           </button>
         </div>
       </div>
@@ -115,7 +117,7 @@ const Tabs2: React.FC<Tabs2Props> = ({ data, onShowLessClicked }) => {
             className=" max-w-fit md:w-full"
             onClick={toggleShowAllLocal}
           >
-            {showAllLocal ? "Show Less" : "Show All Countries"}
+            {showAllLocal ? `${t("hero_less")}` : `${t("hero_all_countries")}`}
           </Button>
         </div>
       )}

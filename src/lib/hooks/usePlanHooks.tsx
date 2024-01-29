@@ -231,9 +231,6 @@ const usePlanHook = (params: { slug: string }) => {
         return Object.keys(obj).length !== 0;
       }
 
-      console.log({ payload });
-      console.log({ currentSelected });
-
       if (payload.unlimited) {
         setCurrentSelect({
           ...currentSelected,
