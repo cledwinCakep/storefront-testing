@@ -3,7 +3,8 @@
     "navbar_destination": "Destination",
     "navbar_payment": "Payment",
     "navbar_howItWorks": "How it works",
-    "navbar_contactUs": "Contact us"
+    "navbar_contactUs": "Contact us",
+    "navbar_buyEsim": "Buy eSIM"
   },
   "CTA": {
     "cta_howToUseTitle": "How our eSIM works",

@@ -32,7 +32,7 @@ function BlogNews() {
   ];
 
   return (
-    <div className="h-full w-full bg-white px-5 pb-20 pt-9 md:px-[30px]">
+    <div className="h-full w-full bg-white px-5 pb-20 pt-32 md:px-[30px]">
       <div className="h-full w-full">
         <div className="mx-auto w-full max-w-[1180px]">
           <motion.div
@@ -106,7 +106,7 @@ function BlogNews() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ ease: "easeOut", duration: 1.8 }}
-              className="h-auto w-full -mt-20 md:mt-0"
+              className="-mt-20 h-auto w-full md:mt-0"
             >
               <div className="w-full">
                 {news.map((dt, index) => {

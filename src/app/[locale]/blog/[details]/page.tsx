@@ -1,7 +1,7 @@
 "use client";
 
 import { BlogFooter } from "@/components/organisms/Blog/BlogFooter";
-import BlogNavbar from "@/components/organisms/Blog/BlogNavbar";
+import BlogNavbarDetails from "@/components/organisms/Blog/BlogNavbarDetails";
 // tremor
 import { Button, Divider, Text, Title } from "@tremor/react";
 import Image from "next/image";
@@ -86,7 +86,7 @@ const BlogDetails = ({ params }: { params: { details: string } }) => {
   return (
     <>
       <Toaster />
-      <BlogNavbar params={params} />
+      <BlogNavbarDetails />
       <div className="h-full w-full bg-white px-5 pb-20 pt-9 md:px-[30px]">
         <div className="h-full w-full">
           <div className="mx-auto w-full max-w-[1180px]">
@@ -107,7 +107,7 @@ const BlogDetails = ({ params }: { params: { details: string } }) => {
                       {news.filter((news) => news.title === title)[0].author ||
                         "-"}
                     </p>
-                    <div className="xs:flex-row flex w-full flex-col justify-start gap-2">
+                    <div className="flex w-full flex-col justify-start gap-2 xs:flex-row">
                       <div className="flex gap-2">
                         <Text className="text-sm font-normal text-[#767676]">
                           Publised in

@@ -3,7 +3,8 @@
     "navbar_destination": "목적지",
     "navbar_payment": "결제",
     "navbar_howItWorks": "작동 방식",
-    "navbar_contactUs": "문의하기"
+    "navbar_contactUs": "문의하기",
+    "navbar_buyEsim": "eSIM 구매"
   },
   "CTA": {
     "cta_howToUseTitle": "우리의 eSIM 사용 방법",
