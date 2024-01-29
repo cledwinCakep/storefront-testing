@@ -81,30 +81,30 @@ function BlogNews() {
                 transition={{ ease: "easeOut", duration: 1.2 }}
                 className="mt-20 h-auto w-full"
               >
-                <div className="mb-2 h-auto w-full">
-                  <div className="flex w-full items-center gap-4">
-                    <p className="text-base font-medium text-gray-400">
-                      {news[0].date}
-                    </p>
-                  </div>
-                  <div className="mt-4 flex w-full flex-col gap-4">
-                    <p className="line-clamp-3 text-[32px] font-semibold leading-[42px] text-gray-700">
-                      {news[0].title}
-                    </p>
-                    <p className="line-clamp-3 text-ellipsis break-words text-base font-normal text-[#424242] sm:line-clamp-2 md:sm:line-clamp-3">
-                      {`
+                <a href={news[0].link}>
+                  <div className="mb-2 h-auto w-full">
+                    <div className="flex w-full items-center gap-4">
+                      <p className="text-base font-medium text-gray-400">
+                        {news[0].date}
+                      </p>
+                    </div>
+
+                    <div className="mt-4 flex w-full flex-col gap-4">
+                      <p className="line-clamp-3 text-[32px] font-semibold leading-[42px] text-gray-700">
+                        {news[0].title}
+                      </p>
+                      <p className="line-clamp-3 text-ellipsis break-words text-base font-normal text-[#424242] sm:line-clamp-2 md:sm:line-clamp-3">
+                        {`
                     LG U+, a leading telecommunications enterprise in South Korea, is launching a marketing campaign featuring a complimentary T-Money card for all travelers in South Korea who obtain a prepaid eSIM via its official web portal.
                     The eSIM is a downloadable service that enables dual numbering without the hassle of replacing the current SIM card.
                     LG U+&apos;s eSIM, a data product of unparalleled convenience, can be swiftly utilized in Korea by scanning the QR code delivered via email upon purchase, eliminating the need to visit physical retail outlets such as airport counters.
-                   `}
-                    </p>
+                    `}
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <a
-                  className="max-w-[120px] border-b border-[#374151] bg-transparent text-start text-[15px] font-normal text-[#374151]"
-                  href={news[0].link}
-                >
-                  Continue Reading
+                  <p className="max-w-[120px] border-b border-[#374151] bg-transparent text-start text-[15px] font-normal text-[#374151]">
+                    Continue Reading
+                  </p>
                 </a>
               </motion.div>
             </div>
