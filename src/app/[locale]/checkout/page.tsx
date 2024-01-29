@@ -30,6 +30,7 @@ import {
   OnApproveData,
 } from "@paypal/paypal-js";
 import { PayPalButtons } from "@paypal/react-paypal-js";
+import { usePlanContext } from "@/lib/context/plan";
 
 const i: any = {
   CN: "CN",
@@ -212,7 +213,8 @@ export default function Checkout({ params }: { params: { locale: string } }) {
       <Navbar params={params} />
       <div className="flex h-screen flex-col">
         <Layout className="mb-20 mt-20 flex h-fit w-full grow flex-col py-4 md:h-full">
-          {retrievedData.data_amount > 0 ? (
+          {retrievedData.data_amount > 0 ||
+          retrievedData.data_unit === "UNLIMITED" ? (
             <Breadcrumb>
               <BreadcrumbItem isHome />
 
@@ -242,65 +244,104 @@ export default function Checkout({ params }: { params: { locale: string } }) {
             {t("checkout_checkoutTitle")}
           </Text>
           {!isLoading ? (
-            retrievedData.data_amount > 0 ? (
-              <div className="flex w-full flex-col items-center justify-center gap-10 md:flex-row md:items-start">
-                <div className="flex w-full flex-col">
-                  <Text as="subHeading2" className="font-bold text-gray-100">
-                    {t("checkout_purchasedItems")}
-                  </Text>
-                  <Purchaseinfo
-                    handleDelete={handleDelete}
-                    order={order}
-                    handleOrder={handleOrder}
-                    image={`/destination/${retrievedData.country_name
-                      .toLowerCase()
-                      .replace(/\//g, " ")}.png`}
-                    destination={`${retrievedData.country_name} eSim data plans`}
-                    packages={`${
-                      retrievedData!["plan_option"] == "UNLIMITED"
-                        ? "Daily Unlimited"
-                        : "Quota"
-                    },
+            <>
+              {retrievedData.data_unit === "GB" ||
+              retrievedData.data_unit === "MB" ? (
+                <div className="flex w-full flex-col items-center justify-center gap-10 md:flex-row md:items-start">
+                  <div className="flex w-full flex-col">
+                    <Text as="subHeading2" className="font-bold text-gray-100">
+                      {t("checkout_purchasedItems")}
+                    </Text>
+                    <Purchaseinfo
+                      handleDelete={handleDelete}
+                      order={order}
+                      handleOrder={handleOrder}
+                      image={`/destination/${retrievedData.country_name
+                        .toLowerCase()
+                        .replace(/\//g, " ")}.png`}
+                      destination={`${retrievedData.country_name} eSim data plans`}
+                      packages={`${
+                        retrievedData!["plan_option"] == "UNLIMITED"
+                          ? "Unlimited"
+                          : "Quota"
+                      },
                      ${capitalizeFirstLetter(retrievedData!["plan_type"])}
                     ,
                     ${
                       retrievedData!["data_amount"] +
                       retrievedData!["data_unit"]
                     }, ${retrievedData!["duration_in_days"]} Day`}
-                    price={subtotal.toLocaleString("en-US", {
-                      style: "currency",
-                      currency: "USD",
-                    })}
+                      price={subtotal.toLocaleString("en-US", {
+                        style: "currency",
+                        currency: "USD",
+                      })}
+                    />
+                  </div>
+                  <CheckoutCard
+                    isEmpty={emailError}
+                    handlePayment={handlePayment}
+                    handleInputEmail={handleInputEmail}
+                    code={code}
                   />
                 </div>
-                <CheckoutCard
-                  isEmpty={emailError}
-                  handlePayment={handlePayment}
-                  handleInputEmail={handleInputEmail}
-                  code={code}
-                />
-              </div>
-            ) : (
-              <div className="flex flex-col items-center justify-center">
-                <Box />
-                <Text as="body1" className="mb-3 mt-6 font-bold">
-                  {t("checkout_orderEmptyTitle")}
-                </Text>
-                <Text as="body2" className="mb-8 text-center text-gray-500">
-                  {t("checkout_orderEmptyDesc")}
-                </Text>
-                <Button
-                  color="black"
-                  size="sm"
-                  className="my-8 w-full max-w-[290px]"
-                  onClick={() => {
-                    router.push("/");
-                  }}
-                >
-                  {t("checkout_findPlanButton")}
-                </Button>
-              </div>
-            )
+              ) : retrievedData.data_unit === "UNLIMITED" ? (
+                <div className="flex w-full flex-col items-center justify-center gap-10 md:flex-row md:items-start">
+                  <div className="flex w-full flex-col">
+                    <Text as="subHeading2" className="font-bold text-gray-100">
+                      {t("checkout_purchasedItems")}
+                    </Text>
+                    <Purchaseinfo
+                      handleDelete={handleDelete}
+                      order={order}
+                      handleOrder={handleOrder}
+                      image={`/destination/${retrievedData.country_name
+                        .toLowerCase()
+                        .replace(/\//g, " ")}.png`}
+                      destination={`${retrievedData.country_name} ${
+                        retrievedData.data_unit === "UNLIMITED"
+                          ? "UNLIMITED"
+                          : ""
+                      } eSim data plans`}
+                      packages={`${
+                        retrievedData!["plan_option"] == "UNLIMITED"
+                          ? "Unlimited"
+                          : "Quota"
+                      }, ${retrievedData!["duration_in_days"]} Day`}
+                      price={subtotal.toLocaleString("en-US", {
+                        style: "currency",
+                        currency: "USD",
+                      })}
+                    />
+                  </div>
+                  <CheckoutCard
+                    isEmpty={emailError}
+                    handlePayment={handlePayment}
+                    handleInputEmail={handleInputEmail}
+                    code={code}
+                  />
+                </div>
+              ) : (
+                <div className="flex flex-col items-center justify-center">
+                  <Box />
+                  <Text as="body1" className="mb-3 mt-6 font-bold">
+                    {t("checkout_orderEmptyTitle")}
+                  </Text>
+                  <Text as="body2" className="mb-8 text-center text-gray-500">
+                    {t("checkout_orderEmptyDesc")}
+                  </Text>
+                  <Button
+                    color="black"
+                    size="sm"
+                    className="my-8 w-full max-w-[290px]"
+                    onClick={() => {
+                      router.push("/");
+                    }}
+                  >
+                    {t("checkout_findPlanButton")}
+                  </Button>
+                </div>
+              )}
+            </>
           ) : (
             <ProgressBar
               height="4px"

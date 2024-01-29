@@ -25,6 +25,8 @@ class PayPalApi extends API {
         },
       });
 
+      const res = result.then((response) => response.data.order_id);
+
       return Promise.resolve(result.then((response) => response.data.order_id));
     } catch (error) {
       return Promise.reject(error);

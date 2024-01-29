@@ -45,8 +45,8 @@
   "PlanDetail": {
     "planDetail_destination": "Destinasi",
     "planDetail_detailDesc": "Setelah melakukan pembelian eSIM, kami akan mengirimkan QR Code ke e-mailmu.",
-    "planDetail_selectPlanTitle": "Pilih Paket:",
-    "planDetail_selectDataTitle": "Pilih Kuota:",
+    "planDetail_selectPlanTitle": "Pilih paket:",
+    "planDetail_selectDataTitle": "Pilih kuota:",
     "planDetail_selectDurationTitle": "Pilih masa aktif:",
     "planDetail_descriptionTitle": "Deskripsi",
     "planDetail_descriptionCNOne": "- Setelah Anda menggunakan semua kuota harian Anda, Anda dapat menggunakannya dengan kecepatan tanpa batas.\n\n",
@@ -56,6 +56,10 @@
     "planDetail_descriptionCNFive": "- eSIM tidak dapat digunakan untuk Telepon & Pesan Teks\n\n",
     "planDetail_descriptionCNSix": "- (1 hari = 24 jam) Periode kevalidan dan penggunaan data dimulai sejak waktu aktivasi setelah registrasi",
     "planDetail_descriptionCNSeven": "\n\neSIM perjalanan mudah diatur: Anda akan menerima kode QR segera di email Anda. Pindai dengan kamera ponsel Anda, dan dalam beberapa menit",
+    "planDetailUnlimited_descriptionOne": "- Nikmati perjalananmu dengan data tak terbatas.\n\n",
+    "planDetailUnlimited_descriptionTwo": "- Setelah Anda menggunakan semua tunjangan harian Anda, Anda dapat menggunakannya dengan kecepatan tak terbatas.\n\n",
+    "planDetailUnlimited_descriptionThree": "- Hanya eSIM Data (Tidak termasuk telepon).\n\n",
+    "planDetailUnlimited_descriptionFour": "\n\neSIM perjalanan mudah diatur: Anda akan segera menerima kode QR di email Anda. Pindai dengan kamera ponsel Anda, dan dalam hitungan menit\n\n",
     "planDetail_descriptionOne": "- Setelah Anda menggunakan semua kuota harian Anda, Anda dapat menggunakannya dengan kecepatan tanpa batas.\n\n",
     "planDetail_descriptionTwo": "- QoS (kecepatan rendah): 384kbps.\n\n",
     "planDetail_descriptionThree": "- Hanya Internet eSIM\n\n",
@@ -68,14 +72,13 @@
     "planDetail_orderInformation": "Informasi Pesanan",
     "planDetail_buyButton": "Beli",
     "planDetail_howtouseTitle": "Petunjuk Pemakaian",
-  "planDetail_howtouseOne": "- Sebelum melakukan pembelian, pastikan perangkatmu mendukung layanan eSIM dan memiliki fitur 5G.\n\n",
-  "planDetail_howtouseTwo": "- Pastikan kamu memiliki koneksi internet yang tersedia, baik melalui Wi-Fi atau melalui SIM fisikmu.\n\n",
-  "planDetail_howtouseThree": "\n\n- Petunjuk pemakaian untuk perangkatmu:\n\n",
-  "planDetail_howtouseFour": "- Untuk iPhone: Buka Pengaturan -> Seluler -> Tambahkan eSIM.\n\n",
-  "planDetail_howtouseFive": "- Untuk Android: Buka Pengaturan -> Koneksi -> Manajer SIM -> Tambahkan eSIM.\n\n",
-  "planDetail_howtouseSix": "- Tunggu proses instalasi hingga notifikasi diterima.\n\n",
-  "planDetail_howtouseSeven": "Nikmati kecepatan internet yang lebih baik dan lebih cepat dengan e-SIM 5G! Segera aktifkan dan rasakan kenyamanannya."
-
+    "planDetail_howtouseOne": "- Sebelum melakukan pembelian, pastikan perangkatmu mendukung layanan eSIM dan memiliki fitur 5G.\n\n",
+    "planDetail_howtouseTwo": "- Pastikan kamu memiliki koneksi internet yang tersedia, baik melalui Wi-Fi atau melalui SIM fisikmu.\n\n",
+    "planDetail_howtouseThree": "\n\n- Petunjuk pemakaian untuk perangkatmu:\n\n",
+    "planDetail_howtouseFour": "- Untuk iPhone: Buka Pengaturan -> Seluler -> Tambahkan eSIM.\n\n",
+    "planDetail_howtouseFive": "- Untuk Android: Buka Pengaturan -> Koneksi -> Manajer SIM -> Tambahkan eSIM.\n\n",
+    "planDetail_howtouseSix": "- Tunggu proses instalasi hingga notifikasi diterima.\n\n",
+    "planDetail_howtouseSeven": "Nikmati kecepatan internet yang lebih baik dan lebih cepat dengan e-SIM 5G! Segera aktifkan dan rasakan kenyamanannya."
   },
   "Checkout": {
     "checkout_checkoutTitle": "Checkout",

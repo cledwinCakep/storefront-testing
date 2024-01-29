@@ -4,6 +4,14 @@ import { X } from "react-feather";
 import { useModalStore } from "@/lib/stores/useModalStore";
 import Image from "next/image";
 import { globalData } from "@/lib/utils/globalData";
+import { globalProvider } from "@/lib/utils/globalProvider";
+
+interface CountryData {
+  [key: string]: string;
+}
+
+let temp: CountryData;
+let tempProvider: CountryData;  
 
 export default function SupportedCountryModal() {
   const { openSupportedCountry, globalCode, setOpenSupportedCountry } =
@@ -12,30 +20,59 @@ export default function SupportedCountryModal() {
   const [country, setCountry] = useState("");
   const [visible, setVisible] = useState(false);
 
-  interface CountryData {
-    [key: string]: string;
-  }
-
   const handleClick = (name: string) => {
     setVisible(false);
     setCountry(name);
   };
 
-  let temp: CountryData;
-  if (globalCode == "WW_146") temp = globalData["WW_146"];
-  else if (globalCode == "WW_54") temp = globalData["WW_54"];
-  else if (globalCode == "AP") temp = globalData["AP"];
-  else if (globalCode == "EU_42") temp = globalData["EU_42"];
-  else if (globalCode == "EU_33") temp = globalData["EU_33"];
-  else if (globalCode == "AU_NZ") temp = globalData["AU_NZ"];
-  else if (globalCode == "US_CA") temp = globalData["US_CA"];
-  else if (globalCode == "HK_MO") temp = globalData["HK_MO"];
-  else if (globalCode == "GU_MP") temp = globalData["GU_MP"];
-  else temp = globalData["WW_146"];
+  switch (globalCode) {
+    case "WW_146":
+      temp = globalData["WW_146"];
+      tempProvider = globalProvider["WW_146"];
+      break;
+    case "WW_54":
+      temp = globalData["WW_54"];
+      tempProvider = globalProvider["WW_54"];
+      break;
+    case "EU_42":
+      temp = globalData["EU_42"];
+      tempProvider = globalProvider["EU_42"];
+      break;
+    case "EU_33":
+      temp = globalData["EU_33"];
+      tempProvider = globalProvider["EU_33"];
+      break;
+    case "AP":
+      temp = globalData["AP"];
+      tempProvider = globalProvider["AP"];
+      break;
+    case "AU_NZ":
+      temp = globalData["AU_NZ"];
+      break;
+    case "US_CA":
+      temp = globalData["US_CA"];
+      break;
+    case "HK_MO":
+      temp = globalData["HK_MO"];
+      break;
+    case "GU_MP":
+      temp = globalData["GU_MP"];
+      break;
+    default:
+      temp = globalData["WW_146"];
+      tempProvider = globalProvider["WW_146"];
+      break;
+  }
 
   const dataArray = Object.entries(temp).map(([key, name]) => {
     return { key, name };
   });
+
+  const dataArrayProvider = Object.entries(tempProvider).map(
+    ([key, name]) => {
+      return { key, name };
+    }
+  );
 
   const filteredCountries = dataArray.filter((destination) =>
     destination.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -43,6 +80,10 @@ export default function SupportedCountryModal() {
 
   const filteredAfterClick = dataArray.filter((destination) =>
     destination.name.toLowerCase().includes(country.toLowerCase())
+  );
+
+  const filteredProviders = dataArrayProvider.filter((destination) =>
+    destination.name.toLowerCase()
   );
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -64,6 +105,12 @@ export default function SupportedCountryModal() {
     };
   }, []);
 
+  useEffect(() => {
+    return () => {
+      setOpenSupportedCountry(false);
+    };
+  }, [setOpenSupportedCountry]);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const term = e.target.value;
     setSearchTerm(term);
@@ -71,11 +118,20 @@ export default function SupportedCountryModal() {
     if (!term) setCountry("");
   };
 
-  useEffect(() => {
-    return () => {
-      setOpenSupportedCountry(false);
-    };
-  }, [setOpenSupportedCountry]);
+  const handleCheckProvider = (key: string) => {
+    const sample = filteredProviders.filter((dt) => {
+      if (dt.key == key) return dt.name;
+    });
+
+    return (
+      <div className="self-stretch text-sm font-normal leading-normal text-gray-300">
+        {sample.length > 0 ? sample[0].name : "-"}
+      </div>
+    );
+  };
+
+  console.log({filteredAfterClick});
+  console.log({filteredProviders  });
 
   return (
     <Transition.Root show={openSupportedCountry} as={Fragment}>
@@ -119,6 +175,7 @@ export default function SupportedCountryModal() {
                   <div className="w-full text-2xl font-semibold leading-loose text-white sm:font-medium sm:leading-[30px]">
                     Supported country
                   </div>
+
                   <div className="relative mb-8 h-auto w-full rounded-lg bg-[#374151] px-5 py-2">
                     <input
                       className="min-w-full bg-transparent pl-8 text-white outline-none "
@@ -181,10 +238,11 @@ export default function SupportedCountryModal() {
                             alt={destination.name}
                             className="rounded border border-zinc-100"
                           />
-                          <div className="inline-flex shrink grow basis-0 flex-col items-start justify-center gap-4">
+                          <div className="inline-flex shrink grow basis-0 flex-col items-start justify-center">
                             <div className="self-stretch text-base font-semibold leading-normal text-stone-50">
                               {destination.name}
                             </div>
+                            {handleCheckProvider(destination.key)}
                           </div>
                         </div>
                       </div>

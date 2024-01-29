@@ -45,9 +45,9 @@
   "PlanDetail": {
     "planDetail_destination": "Destination",
     "planDetail_detailDesc": "  Your eSIM QR code will be sent to your email address!",
-    "planDetail_selectPlanTitle": "Select Plan:",
-    "planDetail_selectDataTitle": "Select Data:",
-    "planDetail_selectDurationTitle": "Select Duration:",
+    "planDetail_selectPlanTitle": "Step 1 - Select plan:",
+    "planDetail_selectDataTitle": "Step 3 - Select data:",
+    "planDetail_selectDurationTitle": "Step 4 - Select duration:",
     "planDetail_descriptionTitle": "Description",
     "planDetail_descriptionCNOne": "- After you use up all of your daily allowance, you can use it at unlimited speeds.\n\n",
     "planDetail_descriptionCNTwo": "- **You can use all social media throughout China without a VPN**.\n\n",
@@ -56,6 +56,10 @@
     "planDetail_descriptionCNFive": "- eSIM cannot be used for Phone & Text\n\n",
     "planDetail_descriptionCNSix": "- (1 day = 24 hours) Validity period and data start from the time of activation after registration",
     "planDetail_descriptionCNSeven": "\n\nTravel eSIMs are effortless to set up: You will receive a QR code immediately in your email. Scan it with your cellphone camera, and in a matter of minutes",
+    "planDetailUnlimited_descriptionOne": "- Enjoy your trip with Unlimited data.\n\n",
+    "planDetailUnlimited_descriptionTwo": "- After you use up all of your daily allowance, you can use it at unlimited speeds.\n\n",
+    "planDetailUnlimited_descriptionThree": "- eSIM Data only (No Calls).\n\n",
+    "planDetailUnlimited_descriptionFour": "\n\nTravel eSIMs are effortless to set up: You will receive a QR code immediately in your email. Scan it with your cellphone camera, and in a matter of minutes\n\n",
     "planDetail_descriptionOne": "- After you use up all of your daily allowance, you can use it at unlimited speeds.\n\n",
     "planDetail_descriptionTwo": "- QoS (low speed): 384kbps.\n\n",
     "planDetail_descriptionThree": "- eSIM Internet Only\n\n",
@@ -75,7 +79,6 @@
     "planDetail_howtouseFive": "- For Android: Open Settings -> Connections -> SIM Manager -> Add eSIM.\n\n",
     "planDetail_howtouseSix": "- Wait for the installation process to complete and the notification to be received.\n\n",
     "planDetail_howtouseSeven": "Experience better and faster internet speeds with 5G e-SIM! Activate it now and enjoy the convenience."
-  
   },
 
   "Checkout": {

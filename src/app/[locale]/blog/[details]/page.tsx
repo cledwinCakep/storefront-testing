@@ -5,6 +5,7 @@ import BlogNavbar from "@/components/organisms/Blog/BlogNavbar";
 // tremor
 import { Button, Divider, Text, Title } from "@tremor/react";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
 
 const BlogDetails = ({ params }: { params: { details: string } }) => {
@@ -53,17 +54,24 @@ const BlogDetails = ({ params }: { params: { details: string } }) => {
   ];
 
   const title = decodeURIComponent(params.details);
+  const [url, seturl] = useState("");
+
+  useEffect(() => {
+    if (window) {
+      seturl(window.location.href);
+    }
+  }, []);
 
   const copyToClipboard = async () => {
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText("");
+      navigator.clipboard.writeText(url);
       toast("Link copied!", {
         position: "top-right",
         style: { background: "#374151", color: "white" },
       }); // hide the toast after 3 seconds
     } else {
       const textarea = document.createElement("textarea");
-      textarea.value = "";
+      textarea.value = url;
       document.body.appendChild(textarea);
       textarea.select();
       document.execCommand("copy");
@@ -99,17 +107,17 @@ const BlogDetails = ({ params }: { params: { details: string } }) => {
                       {news.filter((news) => news.title === title)[0].author ||
                         "-"}
                     </p>
-                    <div className="flex w-full flex-col gap-0 sm:flex-row sm:gap-2">
-                      <div className="flex w-auto flex-col gap-0 sm:flex-row sm:gap-2">
-                        <Text className="font-normal text-[#767676]">
+                    <div className="xs:flex-row flex w-full flex-col justify-start gap-2">
+                      <div className="flex gap-2">
+                        <Text className="text-sm font-normal text-[#767676]">
                           Publised in
                         </Text>
-                        <Text className="font-normal text-[#121417]">
+                        <Text className="text-sm font-normal text-[#121417]">
                           {news.filter((news) => news.title === title)[0].date}
                         </Text>
                       </div>
-                      <div className="ml-2 flex w-auto gap-2">
-                        <div className="flex min-h-full w-2 flex-col justify-center">
+                      <div className="flex gap-2">
+                        <div className="flex items-center">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="4"
@@ -120,7 +128,7 @@ const BlogDetails = ({ params }: { params: { details: string } }) => {
                             <circle cx="2" cy="2" r="2" fill="#BDBDBD" />
                           </svg>
                         </div>
-                        <Text className="font-normal text-[#121417]">
+                        <Text className="text-sm font-normal text-[#121417]">
                           Hot Topics
                         </Text>
                       </div>
@@ -128,9 +136,11 @@ const BlogDetails = ({ params }: { params: { details: string } }) => {
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div
+                  <a
                     className="cursor-pointer rounded-md bg-[#F3F4F6] p-2"
-                    onClick={copyToClipboard}
+                    href={`https://twitter.com/intent/tweet?url=${url}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <Image
                       width={20}
@@ -139,7 +149,20 @@ const BlogDetails = ({ params }: { params: { details: string } }) => {
                       src="/assets/twitterx-icon.svg"
                       alt=""
                     />
-                  </div>
+                  </a>
+                  <a
+                    className="cursor-pointer rounded-md bg-[#F3F4F6] p-2"
+                    href={`https://www.facebook.com/share.php?u=${url}`}
+                    target="_blank"
+                  >
+                    <Image
+                      width={20}
+                      height={20}
+                      className="inline-block h-5 w-5"
+                      src="/assets/facebook-icon.svg"
+                      alt=""
+                    />
+                  </a>
                   <div
                     className="cursor-pointer rounded-md bg-[#F3F4F6] p-2"
                     onClick={copyToClipboard}
@@ -149,18 +172,6 @@ const BlogDetails = ({ params }: { params: { details: string } }) => {
                       height={20}
                       className="inline-block h-5 w-5"
                       src="/assets/sharelink-icon.svg"
-                      alt=""
-                    />
-                  </div>
-                  <div
-                    className="cursor-pointer rounded-md bg-[#F3F4F6] p-2"
-                    onClick={copyToClipboard}
-                  >
-                    <Image
-                      width={20}
-                      height={20}
-                      className="inline-block h-5 w-5"
-                      src="/assets/facebook-icon.svg"
                       alt=""
                     />
                   </div>
@@ -210,9 +221,9 @@ const BlogDetails = ({ params }: { params: { details: string } }) => {
                                 {dt.date}
                               </Text>
                             </div>
-                            <p className="line-clamp-3 break-words text-[18px] font-bold text-[#121417]">
+                            <Text className="line-clamp-3 break-words text-[18px] font-medium text-[#121417]">
                               {dt.title}
-                            </p>
+                            </Text>
                           </div>
 
                           <div

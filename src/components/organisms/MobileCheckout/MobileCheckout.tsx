@@ -4,7 +4,7 @@ import Button from "@/components/atoms/Button/Button";
 import { useTranslations } from "next-intl";
 import { usePlanContext } from "@/lib/context/plan";
 
-const MobileCheckout = () => {
+const MobileCheckout = ({ planData }: { planData: string }) => {
   const {
     isError,
     data,
@@ -23,27 +23,27 @@ const MobileCheckout = () => {
       <div className="mb-4 flex items-end justify-between">
         <div>
           <Text as="subHeading2" className="font-black text-white">
-            {subtotal.toLocaleString("en-US", {
+            {subtotal?.toLocaleString("en-US", {
               style: "currency",
               currency: "USD",
             })}
           </Text>
           <Text as="small" className="font-medium text-gray-500">
             {`${
-              currentSelected.plan.value === "UNLIMITED"
-                ? "Daily Unlimited Plan, "
+              currentSelected.plan?.value === "UNLIMITED"
+                ? "Unlimited Plan, "
                 : "Quota Plan, "
             }${
-              currentSelected.dataType.id !== "-"
-                ? currentSelected.dataType.value + ", "
+              currentSelected.type?.id !== "-"
+                ? currentSelected.type?.value + ", "
                 : ""
             }${
-              currentSelected.data.id !== "-"
-                ? currentSelected.data.value + ", "
+              currentSelected.data?.id !== "-"
+                ? currentSelected.data?.value + ", "
                 : ""
             }${
-              currentSelected.duration.id !== "-"
-                ? currentSelected.duration.value + " " + "Days"
+              currentSelected.duration?.id !== "-"
+                ? currentSelected.duration?.value + " " + "Days"
                 : ""
             }`}
           </Text>
@@ -76,26 +76,20 @@ const MobileCheckout = () => {
 
       <Button
         color="orange"
-        className={`h-12 w-full ${
-          (subtotal <= 0 && currentSelected.data.id == "-") ||
-          currentSelected.duration.id == "-" ||
-          currentSelected.dataType.id == ""
+        className={`w-full ${
+          subtotal! <= 0
             ? "bg-neutral-500 font-medium text-neutral-800 hover:border-0 hover:bg-neutral-500"
             : "bg-orange-500 hover:bg-orange-800"
         }`}
-        disabled={
-          (subtotal <= 0 && currentSelected.data.id == "-") ||
-          currentSelected.duration.id == "-" ||
-          currentSelected.dataType.id == ""
-        }
-        onClick={handleBuy}
+        onClick={() => handleBuy({ planData })}
+        disabled={subtotal! <= 0}
       >
         {t("planDetail_buyButton")}
       </Button>
       {isError ? (
-        !parameter.data || !parameter.duration || !parameter.dataType ? (
+        !parameter.data || !parameter.duration || !parameter.type ? (
           <Text className="mt-2 text-red-500">
-            Please select {!parameter.dataType ? "type," : ""}{" "}
+            Please select {!parameter.type ? "type," : ""}{" "}
             {!parameter.data ? "data," : ""} and{" "}
             {!parameter.duration ? "duration" : ""}.
           </Text>
