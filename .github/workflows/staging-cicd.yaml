@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - staging
+
+  # Allow manual trigger 
+  workflow_dispatch:
+
 env:
   DOCKER_IMAGE: usimsa-front-store
   DOCKER_CONTAINER: usimsa-front-store_staging
