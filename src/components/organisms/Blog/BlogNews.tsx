@@ -88,7 +88,6 @@ function BlogNews() {
                         {news[0].date}
                       </p>
                     </div>
-
                     <div className="mt-4 flex w-full flex-col gap-4">
                       <p className="line-clamp-3 text-[32px] font-semibold leading-[42px] text-gray-700">
                         {news[0].title}
@@ -98,13 +97,13 @@ function BlogNews() {
                     LG U+, a leading telecommunications enterprise in South Korea, is launching a marketing campaign featuring a complimentary T-Money card for all travelers in South Korea who obtain a prepaid eSIM via its official web portal.
                     The eSIM is a downloadable service that enables dual numbering without the hassle of replacing the current SIM card.
                     LG U+&apos;s eSIM, a data product of unparalleled convenience, can be swiftly utilized in Korea by scanning the QR code delivered via email upon purchase, eliminating the need to visit physical retail outlets such as airport counters.
-                    `}
+                   `}
                       </p>
                     </div>
                   </div>
-                  <p className="max-w-[120px] border-b border-[#374151] bg-transparent text-start text-[15px] font-normal text-[#374151]">
+                  <div className="max-w-[128px] border-b border-[#374151] bg-transparent text-start text-[15px] font-normal text-[#374151]">
                     Continue Reading
-                  </p>
+                  </div>
                 </a>
               </motion.div>
             </div>

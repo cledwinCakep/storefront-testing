@@ -43,7 +43,7 @@ export const NavbarMobileMenu = ({
   return (
     <div className="relative z-50 flex min-h-[78px] w-full items-center justify-center overflow-hidden border-b border-[#222222] bg-black px-4 py-3 lg:hidden">
       <div className="flex h-full w-full flex-row items-center justify-between md:max-w-[1180px]">
-        <Anchor
+        <a
           href="/blog"
           className="px-[0px] py-[0px]"
           aria-label="go to blog"
@@ -55,7 +55,7 @@ export const NavbarMobileMenu = ({
             height={21.95}
             priority
           />
-        </Anchor>
+        </a>
 
         <button
           aria-label="hamburger menu"
