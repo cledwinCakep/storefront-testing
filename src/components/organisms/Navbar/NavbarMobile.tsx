@@ -92,7 +92,7 @@ export const NavbarMobileMenu = ({
                     {params.locale == "id" ? "Indonesia" : "English"}
                   </Text>
                 </div>
-                {isOpen ? <ChevronDown /> : <ChevronUp />}
+                {isOpen ? <ChevronDown className="text-white" /> : <ChevronUp className="text-white" />}
               </div>
               <div
                 className={`h-full flex-col ${

@@ -90,7 +90,7 @@ const NavbarDesktop = ({ params }: { params: { locale: string } }) => {
               <Text as="body2" className="mx-2 font-bold text-white">
                 {params.locale.toUpperCase()}
               </Text>
-              {isOpen ? <ChevronDown /> : <ChevronUp />}
+              {isOpen ? <ChevronDown className="text-white" /> : <ChevronUp className="text-white" />}
             </div>
             <div
               className={`absolute flex-col ${

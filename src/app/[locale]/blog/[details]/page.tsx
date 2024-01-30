@@ -1,14 +1,15 @@
 "use client";
 
-import { BlogFooter } from "@/components/organisms/Blog/BlogFooter";
-import BlogNavbarDetails from "@/components/organisms/Blog/BlogNavbarDetails";
+import BlogNavbar from "@/components/organisms/Blog/BlogNavbar";
+import Footer from "@/components/organisms/Footer/Footer";
+
 // tremor
 import { Button, Divider, Text, Title } from "@tremor/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
 
-const BlogDetails = ({ params }: { params: { details: string } }) => {
+const BlogDetails = ({ params }: { params: { details: string, locale:string } }) => {
   const news = [
     {
       id: 0,
@@ -83,11 +84,13 @@ const BlogDetails = ({ params }: { params: { details: string } }) => {
     }
   };
 
+  
+
   return (
     <>
       <Toaster />
-      <BlogNavbarDetails />
-      <div className="h-full w-full bg-white px-5 pb-20 pt-9 md:px-[30px]">
+      <BlogNavbar params={params} />
+      <div className="h-full w-full bg-white px-5 pb-20 pt-32 md:px-[30px]">
         <div className="h-full w-full">
           <div className="mx-auto w-full max-w-[1180px]">
             <p className="text-[42px] font-bold leading-[56px]">{title}</p>
@@ -249,7 +252,7 @@ const BlogDetails = ({ params }: { params: { details: string } }) => {
           </div>
         </div>
       </div>
-      <BlogFooter />
+      <Footer />
       {/* <div className="py-9 px-[30px] min-h-full">
         <Title>Blog Post</Title>
       </div> */}
