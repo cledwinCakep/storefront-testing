@@ -36,7 +36,7 @@ jobs:
       - run: docker context use development
       - run: docker container rm ${{ env.DOCKER_CONTAINER }} -f
       - run: >
-          docker --context development run -d -p 1339:3000
+          docker --context development run -d -p 2339:3000
           --name=${{ env.DOCKER_CONTAINER }}
           --hostname=${{ env.DOCKER_CONTAINER }}
           -e NEXT_PUBLIC_HOST_API="${{ vars.STAGING__NEXT_PUBLIC_HOST_API }}"
