@@ -253,9 +253,6 @@ const BlogDetails = ({ params }: { params: { details: string, locale:string } })
         </div>
       </div>
       <Footer />
-      {/* <div className="py-9 px-[30px] min-h-full">
-        <Title>Blog Post</Title>
-      </div> */}
     </>
   );
 };
