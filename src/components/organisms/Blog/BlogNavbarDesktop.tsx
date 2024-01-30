@@ -55,23 +55,27 @@ const BlogNavbarDesktop = ({ params }: { params: { locale: string } }) => {
               <Text as="body2" className="mx-2 font-bold text-white">
                 {params.locale.toUpperCase()}
               </Text>
-              {isOpen ? <ChevronDown className="text-white" /> : <ChevronUp className="text-white" />}
+              {isOpen ? (
+                <ChevronDown className="text-white" />
+              ) : (
+                <ChevronUp className="text-white" />
+              )}
             </div>
             <div
               className={`absolute flex-col ${
                 isOpen ? "flex" : "hidden"
               } left-0 top-[40px] z-50 rounded-[4px] bg-gray-100 transition-all ease-in-out`}
             >
-              <Link locale="en" href={pathname}>
+              <a href={`/en/${pathname}`}>
                 <div className="w-full cursor-pointer p-[20px] hover:bg-[#DDDDDE]">
                   English
                 </div>
-              </Link>
-              <Link locale="ko" href={pathname}>
+              </a>
+              <a href={`/ko/${pathname}`}>
                 <div className="w-full cursor-pointer p-[20px] hover:bg-[#DDDDDE]">
                   한글
                 </div>
-              </Link>
+              </a>
             </div>
           </div>
           <Anchor
