@@ -11,7 +11,7 @@ import { useTranslations } from "next-intl";
 import { usePathname } from "next-intl/client";
 import { Translation } from "@/components/icons/Translation";
 import Link from "next-intl/link";
-import Email from "@/components/icons/Email";
+import Esim from "@/components/icons/esim";
 
 export const NavbarMobileMenu = ({
   params,
@@ -43,10 +43,10 @@ export const NavbarMobileMenu = ({
   return (
     <div className="relative z-50 flex min-h-[78px] w-full items-center justify-center overflow-hidden border-b border-[#222222] bg-black px-4 py-3 lg:hidden">
       <div className="flex h-full w-full flex-row items-center justify-between md:max-w-[1180px]">
-        <Anchor
-          href="/"
+        <a
+          href="/blog"
           className="px-[0px] py-[0px]"
-          aria-label="logo link that goes to home page"
+          aria-label="go to blog"
         >
           <Image
             src="/logo-superalink.svg"
@@ -55,7 +55,7 @@ export const NavbarMobileMenu = ({
             height={21.95}
             priority
           />
-        </Anchor>
+        </a>
 
         <button
           aria-label="hamburger menu"
@@ -89,10 +89,14 @@ export const NavbarMobileMenu = ({
                 <div className="flex max-w-[179px] flex-row items-center justify-center">
                   <Translation />
                   <Text as="body2" className="mx-2 font-bold">
-                    {params.locale == "id" ? "Indonesia" : "English"}
+                    {params.locale == "ko" ? "한글" : "English"}
                   </Text>
                 </div>
-                {isOpen ? <ChevronDown className="text-white" /> : <ChevronUp className="text-white" />}
+                {isOpen ? (
+                  <ChevronDown className="text-white" />
+                ) : (
+                  <ChevronUp className="text-white" />
+                )}
               </div>
               <div
                 className={`h-full flex-col ${
@@ -111,58 +115,26 @@ export const NavbarMobileMenu = ({
                 </Link>
               </div>
             </div>
-            <div
-              className="flex flex-col border-b-[1px] border-gray-200 px-3 text-2xl font-bold"
-              onClick={handleHamburgerMenuState}
-            >
-              <Anchor
-                href={pathname.split("/")[1] != "" ? "/" : "#destination"}
-              >
-                {t("navbar_destination")}
-              </Anchor>
-            </div>
-            <div
-              className="flex flex-col border-b-[1px] border-gray-200 px-3 text-2xl font-bold "
-              onClick={handleHamburgerMenuState}
-            >
-              <Anchor href={pathname.split("/")[1] != "" ? "/" : "#payment"}>
-                {t("navbar_payment")}
-              </Anchor>
-            </div>
-            <div
-              className="flex flex-col border-b-[1px] border-gray-200 px-3 text-2xl font-bold"
-              onClick={handleHamburgerMenuState}
-            >
-              <Anchor
-                href={pathname.split("/")[1] != "" ? "/" : "#how-it-works"}
-              >
-                {t("navbar_howItWorks")}
-              </Anchor>
-            </div>
-            <a
-              href={
-                "https://api.whatsapp.com/send?phone=821089850158&text=Hello,%20%20I%20want%20to%20buy%20eSIM%20for%20traveling!"
-              }
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full"
+            <Anchor
+              href="/"
+              className="flex px-[0px] py-[0px]"
+              aria-label="go to blog"
             >
               <div className="mt-6 px-5">
                 <Button
                   color="transparent"
                   size="xs"
-                  iconLeft={<Email />}
+                  iconLeft={<Esim />}
                   className="w-full"
                 >
-                  {t("navbar_contactUs")}
+                  {t("navbar_buyEsim")}
                 </Button>
               </div>
-            </a>
+            </Anchor>
           </div>
         </div>
         <div className="bottom-0 h-auto flex-none pb-5 text-center text-[13px] text-[#6B7280]">
-          &copy; {new Date().getFullYear()}. Gadgetkorea INC. ALL RIGHTS
-          RESERVED
+          &copy; Copyright {new Date().getFullYear()}. All Rights Reserved Supera link
         </div>
       </div>
     </div>

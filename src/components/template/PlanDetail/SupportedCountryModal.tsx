@@ -11,7 +11,7 @@ interface CountryData {
 }
 
 let temp: CountryData;
-let tempProvider: CountryData;  
+let tempProvider: CountryData;
 
 export default function SupportedCountryModal() {
   const { openSupportedCountry, globalCode, setOpenSupportedCountry } =
@@ -68,11 +68,9 @@ export default function SupportedCountryModal() {
     return { key, name };
   });
 
-  const dataArrayProvider = Object.entries(tempProvider).map(
-    ([key, name]) => {
-      return { key, name };
-    }
-  );
+  const dataArrayProvider = Object.entries(tempProvider).map(([key, name]) => {
+    return { key, name };
+  });
 
   const filteredCountries = dataArray.filter((destination) =>
     destination.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -129,9 +127,6 @@ export default function SupportedCountryModal() {
       </div>
     );
   };
-
-  console.log({filteredAfterClick});
-  console.log({filteredProviders  });
 
   return (
     <Transition.Root show={openSupportedCountry} as={Fragment}>

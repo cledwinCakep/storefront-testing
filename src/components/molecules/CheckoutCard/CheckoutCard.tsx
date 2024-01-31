@@ -43,7 +43,8 @@ const CheckoutCard = ({
       {isEmpty && <div className="px-2 text-red-500">{isEmpty}</div>}
       {code && (
         <Text as="body2" className="mt-4 px-2 text-[#BDBDBD]">
-          Affiliate Code: <span className="font-bold uppercase">{code}</span>
+          {t("checkout_affiliate_code")}{" "}
+          <span className="font-bold uppercase">{code}</span>
         </Text>
       )}
       <Text as="body2" className="mt-4 px-2 text-[#BDBDBD]">

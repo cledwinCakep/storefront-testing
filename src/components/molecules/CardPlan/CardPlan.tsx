@@ -5,6 +5,7 @@ import { usePlanContext } from "@/lib/context/plan";
 import usePlanHook from "@/lib/hooks/usePlanHooks";
 
 import { addParametersToUrl } from "@/lib/utils/addParamsToUrl";
+import { useTranslations } from "next-intl";
 
 const PLAN = [
   {
@@ -214,6 +215,7 @@ const PLAN = [
 ];
 
 const CardPlan = (data: any) => {
+  const t = useTranslations("PlanDetail");
   const [currentPlan, setCurrentPlan] = useState(0);
   const { selectDataPlan, currentSelected, setCurrentSelect } =
     usePlanContext();
@@ -293,7 +295,7 @@ const CardPlan = (data: any) => {
                   : "text-[#bdbdbd]"
               }`}
             >
-              Unlimited Data
+              {t("planDetail_unlimitedDataDesc")}
             </Text>
           </button>
         )

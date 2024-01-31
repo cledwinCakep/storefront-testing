@@ -192,7 +192,7 @@ export default function Checkout({ params }: { params: { locale: string } }) {
                   Select Payment Method
                 </Text>
                 <div
-                  className=" h-8 w-8  hover:cursor-pointer"
+                  className="h-8 w-8 hover:cursor-pointer"
                   onClick={() => setIsOpen(false)}
                 >
                   <X />
@@ -218,7 +218,9 @@ export default function Checkout({ params }: { params: { locale: string } }) {
             <Breadcrumb>
               <BreadcrumbItem isHome />
 
-              <BreadcrumbItem href="/#destination">Destination</BreadcrumbItem>
+              <BreadcrumbItem href="/#destination">
+                {t("checkout_destination")}
+              </BreadcrumbItem>
 
               <BreadcrumbItem
                 href={`/plans/${retrievedData.country_code}?plan=${retrievedData.plan_option}&data=${retrievedData.data_amount}${retrievedData.data_unit}&duration=${retrievedData.duration_in_days}`}
@@ -226,15 +228,22 @@ export default function Checkout({ params }: { params: { locale: string } }) {
                 {retrievedData.country_name}
               </BreadcrumbItem>
 
-              <BreadcrumbItem isCurrentlyActive>Checkout</BreadcrumbItem>
+              <BreadcrumbItem isCurrentlyActive>
+                {t("checkout_checkoutTitle")}
+              </BreadcrumbItem>
             </Breadcrumb>
           ) : (
             <Breadcrumb>
               <BreadcrumbItem isHome />
 
-              <BreadcrumbItem href="/#destination">Destination</BreadcrumbItem>
+              <BreadcrumbItem href="/#destination">
+                {t("checkout_destination")}
+              </BreadcrumbItem>
 
-              <BreadcrumbItem isCurrentlyActive>Checkout</BreadcrumbItem>
+              <BreadcrumbItem isCurrentlyActive>
+                {" "}
+                {t("checkout_checkoutTitle")}
+              </BreadcrumbItem>
             </Breadcrumb>
           )}
           <Text
