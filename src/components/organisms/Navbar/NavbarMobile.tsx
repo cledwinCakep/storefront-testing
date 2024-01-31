@@ -89,10 +89,14 @@ export const NavbarMobileMenu = ({
                 <div className="flex max-w-[179px] flex-row items-center justify-center">
                   <Translation />
                   <Text as="body2" className="mx-2 font-bold">
-                    {params.locale == "id" ? "Indonesia" : "English"}
+                    {params.locale == "ko" ? "한글" : "English"}
                   </Text>
                 </div>
-                {isOpen ? <ChevronDown className="text-white" /> : <ChevronUp className="text-white" />}
+                {isOpen ? (
+                  <ChevronDown className="text-white" />
+                ) : (
+                  <ChevronUp className="text-white" />
+                )}
               </div>
               <div
                 className={`h-full flex-col ${

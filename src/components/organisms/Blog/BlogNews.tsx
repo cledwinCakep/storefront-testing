@@ -6,19 +6,19 @@ function BlogNews() {
   const news = [
     {
       id: 1,
-      link: "/blog/South Korea's LG U+ Launches Innovative eSIM Promotion",
-      topic: "Trending",
-      date: "30 May 2023",
-      title: "South Korea's LG U+ Launches Innovative eSIM Promotion",
-      desc: "LG U+, a leading telecommunications enterprise in South Korea, is launching a marketing campaign featuring a complimentary T-Money card for all travelers in South Korea who obtain a prepaid eSIM via its official web portal. The eSIM is a downloadable service that enables dual numbering without the hassle of replacing the current SIM card. LG U+ eSIM, a data product of unparalleled convenience, can be swiftly utilized in Korea by scanning the QR code delivered via email upon purchase, eliminating the need to visit physical retail outlets such as airport counters.",
-    },
-    {
-      id: 2,
       link: "/blog/South Korea introduces 2 numbers in 1 phone service with eSIM",
       topic: "Trending",
       date: "31 August 2022",
       title: "South Korea introduces 2 numbers in 1 phone service with eSIM",
       desc: "South Korea will begin embedded subscriber identity module, known as eSIM, services from Thursday, allowing Koreans to have two different numbers in one mobile device, the Ministry of Science and ICT said Wednesday.",
+    },
+    {
+      id: 2,
+      link: "/blog/South Korea's LG U+ Launches Innovative eSIM Promotion",
+      topic: "Trending",
+      date: "30 May 2023",
+      title: "South Korea's LG U+ Launches Innovative eSIM Promotion",
+      desc: "LG U+, a leading telecommunications enterprise in South Korea, is launching a marketing campaign featuring a complimentary T-Money card for all travelers in South Korea who obtain a prepaid eSIM via its official web portal. The eSIM is a downloadable service that enables dual numbering without the hassle of replacing the current SIM card. LG U+ eSIM, a data product of unparalleled convenience, can be swiftly utilized in Korea by scanning the QR code delivered via email upon purchase, eliminating the need to visit physical retail outlets such as airport counters.",
     },
     {
       id: 3,
@@ -63,7 +63,7 @@ function BlogNews() {
                 }}
               >
                 <motion.img
-                  src={"/assets/korean-esim-news.jpeg"}
+                  src={"/assets/introduces.jpeg"}
                   width={580}
                   height={255}
                   initial={{ opacity: 0, y: "-100%" }}
