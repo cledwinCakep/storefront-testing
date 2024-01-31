@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
 import en from "@/messages/en.json";
 import id from "@/messages/id.json";
+import ko from "@/messages/ko.json";
 import "./globals.css";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -13,11 +14,16 @@ import GoogleAnalytics from "../../../GoogleAnalytics";
 
 export const dynamic = "force-dynamic";
 
-let cache: { [key: string]: typeof en } = {};
+let cache: { [key: string]: typeof en | typeof ko } = {};
+
+// export async function generateStaticParams() {
+//   return ["id", "en"].map((locale) => ({ locale }));
+// }
 
 const dictionaries: {
-  [key: string]: typeof en;
+  [key: string]: typeof en | typeof ko;
 } = {
+  ko,
   en,
 };
 
@@ -53,8 +59,9 @@ export default function RootLayout({
   }, []);
 
   const [messages, setMessages] = useState(getMessages(params.locale));
+
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang={params.locale} className="scroll-smooth">
       <head>
         <title>Superalink – Local eSIM for Traveler</title>
         <meta

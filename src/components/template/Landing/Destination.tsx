@@ -48,7 +48,6 @@ const Partners = () => {
   };
 
   const handleClickCountry = (name: string) => () => {
-    // router.push(`/plans/${name}?plan=UNLIMITED&dataType=&data=&duration=`);
     router.push(`/plans/${name}`);
   };
 
@@ -92,7 +91,7 @@ const Partners = () => {
         <div className="relative mb-8 h-auto w-full rounded-lg bg-[#374151] px-5 py-2">
           <input
             className="min-w-full bg-transparent pl-8 text-white outline-none "
-            placeholder="Search destination..."
+            placeholder={t("hero_search_destination")}
             onChange={handleSearch}
           />
           <svg
