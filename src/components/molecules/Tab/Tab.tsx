@@ -8,6 +8,7 @@ import Image from "next/image";
 import { Button } from "@tremor/react";
 import { useModalStore } from "@/lib/stores/useModalStore";
 import { useTranslations } from "next-intl";
+import { usePathname } from "next/navigation";
 
 // interfaces
 interface TabsDataProps {
@@ -20,19 +21,32 @@ interface TabsProps {
 }
 
 const Tab = ({ data }: TabsProps) => {
-  const [currentlySelected, setCurrentlySelected] = useState<string | number | any>(0);
-  const {
-      setOpenSupportedCountry,
-      openSupportedCountry
-  } = useModalStore();
+  const router = usePathname();
+  const parts = router.split("/");
+  const country_code = parts.length > 3 ? parts[3] : parts[2];
+  let notification = false;
+
+  const [currentlySelected, setCurrentlySelected] = useState<
+    string | number | any
+  >(0);
+  const { setOpenSupportedCountry, openSupportedCountry } = useModalStore();
   const t = useTranslations("PlanDetail");
 
   const handleCurrentlyActiveTab = (id: string | number) => {
     setCurrentlySelected(id);
   };
 
-  const handleOpenModal = ()=>{
-    setOpenSupportedCountry(!openSupportedCountry)
+  const handleOpenModal = () => {
+    setOpenSupportedCountry(!openSupportedCountry);
+  };
+
+  if (
+    country_code === "TW" ||
+    country_code === "HK_MO" ||
+    country_code === "MO" ||
+    country_code === "HK"
+  ) {
+    notification = true;
   }
 
   return (
@@ -54,6 +68,28 @@ const Tab = ({ data }: TabsProps) => {
       </div>
 
       <div className="w-full px-6 py-4 text-gray-100 [&>ul>li]:mb-1 [&>ul>li]:list-disc [&>ul]:mb-4 [&>ul]:pl-5">
+        {currentlySelected == 0 && notification == true && (
+          <div className="mb-4 flex w-full gap-2 rounded-md bg-[#121417] p-4">
+            <div className="w-fit">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="h-6 w-6 text-blue-500"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </div>
+
+            <Text as="body1" className="text-gray-300">
+              {t("planDetail_warn")}
+            </Text>
+          </div>
+        )}
         {data[currentlySelected] && (
           <div>
             {typeof data[currentlySelected].content === "object" ? (
@@ -75,7 +111,10 @@ const Tab = ({ data }: TabsProps) => {
                           <Text as="body1">{key}</Text>
                           {data[currentlySelected].content[key] ==
                           "See available provider" ? (
-                            <button onClick={handleOpenModal} className="border-b border-[#F47325] bg-transparent text-[#F47325]">
+                            <button
+                              onClick={handleOpenModal}
+                              className="border-b border-[#F47325] bg-transparent text-[#F47325]"
+                            >
                               {data[currentlySelected].content[key]}
                             </button>
                           ) : (
@@ -105,10 +144,10 @@ const Tab = ({ data }: TabsProps) => {
         {currentlySelected == 0 && (
           <div className="mt-4 w-fit">
             <Text as="body1" className="text-[#BDBDBD]">
-              {t('planDetail_notification')}
+              {t("planDetail_notification")}
             </Text>
           </div>
-        )}       
+        )}
       </div>
     </div>
   );

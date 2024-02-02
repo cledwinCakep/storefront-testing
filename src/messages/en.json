@@ -88,7 +88,8 @@
     "planDetail_howtouseFive": "- For Android: Open Settings -> Connections -> SIM Manager -> Add eSIM.\n\n",
     "planDetail_howtouseSix": "- Wait for the installation process to complete and the notification to be received.\n\n",
     "planDetail_howtouseSeven": "Experience better and faster internet speeds with 5G e-SIM! Activate it now and enjoy the convenience.",
-    "planDetail_notification": "*You will receive a QR code immediately after you make a purchase using your registered email address. To activate it, you can scan the QR code with your smartphone and it will be ready in a matter of minutes."
+    "planDetail_notification": "*You will receive a QR code immediately after you make a purchase using your registered email address. To activate it, you can scan the QR code with your smartphone and it will be ready in a matter of minutes.",
+    "planDetail_warn": "In Taiwan, Hong Kong, and Hong Kong/Macau When using eSIM Traveler, authentication is required"
   },
 
   "Checkout": {
