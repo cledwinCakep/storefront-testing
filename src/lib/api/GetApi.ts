@@ -8,6 +8,7 @@ class UtilityAPI extends API {
       method: "GET",
     });
   };
+
   getProductListByCountry(countryCode: string): Promise<AxiosResponse<any>> {
     return this.publicRoute<any>({
       url: "esims/",
@@ -15,6 +16,13 @@ class UtilityAPI extends API {
       params: {
         country_code: countryCode,
       },
+    });
+  };
+  
+  getProductListById(id: string): Promise<AxiosResponse<any>> {
+    return this.publicRoute<any>({
+      url: `esims/${id}`,
+      method: "GET",
     });
   }
   postBuyesim(body: {

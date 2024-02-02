@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 
@@ -12,6 +12,7 @@ const Tabs2 = dynamic(() => import("@/components/atoms/Tabs2/Tabs2"));
 //API
 import { utilityApi } from "@/lib/api/GetApi";
 import { useTranslations } from "next-intl";
+import { Loader, LoaderIcon } from "lucide-react";
 
 const Partners = () => {
   const router = useRouter();
@@ -19,7 +20,7 @@ const Partners = () => {
 
   const [data, setData] = useState<any>([]);
   const [searched, setSearched] = useState<any>([]);
-  const [loading, setLoading] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
 
   const t = useTranslations("Homepage");
 
@@ -34,21 +35,27 @@ const Partners = () => {
     const body = {
       name: e.target.value,
     };
-    setLoading(true);
 
     if (body.name !== "") {
       const res = await utilityApi.searchCountry(body);
-      if (res.status >= 200) {
-        setLoading(false);
+
+      if (res.status >= 200 && res.data.length > 0) {
         setSearched(res.data);
       } else {
-        setLoading(false);
+        setSearched([
+          {
+            code: "404",
+            name: "Not items found.",
+          },
+        ]);
       }
+    } else {
+      setSearched([]);
     }
   };
 
   const handleClickCountry = (name: string) => () => {
-    router.push(`/plans/${name}`);
+    if (name !== "404") router.push(`/plans/${name}`);
   };
 
   useEffect(() => {
@@ -59,6 +66,20 @@ const Partners = () => {
     };
 
     getData();
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        setSearched([]);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
   }, []);
 
   function capitalizeFirstLetter(word: string) {
@@ -111,7 +132,7 @@ const Partners = () => {
           </svg>
 
           <div
-            className={`absolute left-0 top-full mt-1 w-full rounded-md bg-[#374151] shadow-lg`}
+            className={`absolute left-0 top-full mt-1 w-full rounded-lg bg-[#374151] shadow-lg`}
           >
             {searched.map((dt: any, index: number) => {
               return (
@@ -120,8 +141,8 @@ const Partners = () => {
                   onClick={handleClickCountry(dt.code)}
                   className={`cursor-pointer px-4 py-2 text-base text-white hover:bg-slate-600 ${
                     index !== searched.length - 1
-                      ? "border-b border-[#52525B]"
-                      : "border-none"
+                      ? "rounded-none border-b border-[#52525B]"
+                      : "rounded-b-md border-none"
                   }`}
                 >
                   {dt.name}

@@ -78,7 +78,8 @@
     "planDetail_howtouseFour": "- Untuk iPhone: Buka Pengaturan -> Seluler -> Tambahkan eSIM.\n\n",
     "planDetail_howtouseFive": "- Untuk Android: Buka Pengaturan -> Koneksi -> Manajer SIM -> Tambahkan eSIM.\n\n",
     "planDetail_howtouseSix": "- Tunggu proses instalasi hingga notifikasi diterima.\n\n",
-    "planDetail_howtouseSeven": "Nikmati kecepatan internet yang lebih baik dan lebih cepat dengan e-SIM 5G! Segera aktifkan dan rasakan kenyamanannya."
+    "planDetail_howtouseSeven": "Nikmati kecepatan internet yang lebih baik dan lebih cepat dengan e-SIM 5G! Segera aktifkan dan rasakan kenyamanannya.",
+    "planDetail_notification": "*Anda akan segera menerima kode QR setelah melakukan pembelian menggunakan alamat email terdaftar Anda. Untuk mengaktifkannya, Anda bisa memindai kode QR dengan smartphone Anda dan akan siap dalam hitungan menit."
   },
   "Checkout": {
     "checkout_checkoutTitle": "Checkout",

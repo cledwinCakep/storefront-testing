@@ -87,7 +87,8 @@
     "planDetail_howtouseFour": "- iPhone 사용자: 설정 열기 -> 휴대폰 -> eSIM 추가.\n\n",
     "planDetail_howtouseFive": "- Android 사용자: 설정 열기 -> 연결 -> SIM 관리자 -> eSIM 추가.\n\n",
     "planDetail_howtouseSix": "- 설치 프로세스 완료 및 알림 수신까지 기다려 주세요.\n\n",
-    "planDetail_howtouseSeven": "5G e-SIM으로 더 나은 및 빠른 인터넷 속도를 체험하세요! 지금 활성화하고 편리함을 즐기세요."
+    "planDetail_howtouseSeven": "5G e-SIM으로 더 나은 및 빠른 인터넷 속도를 체험하세요! 지금 활성화하고 편리함을 즐기세요.",
+    "planDetail_notification": "*등록하신 이메일 주소로 구매하시면 바로 QR코드를 받으실 수 있습니다. 활성화를 위해 스마트폰으로 QR코드를 스캔하시면 몇 분 안에 준비됩니다."
   },
   "Checkout": {
     "checkout_checkoutTitle": "체크아웃",
