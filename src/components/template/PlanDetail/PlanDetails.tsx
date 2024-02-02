@@ -24,6 +24,8 @@ import GlobeIcon from "@/components/atoms/SVG/GlobeIcon";
 import CardPlan from "@/components/molecules/CardPlan/CardPlan";
 import { addParametersToUrl } from "@/lib/utils/addParamsToUrl";
 import MobileCheckout from "@/components/organisms/MobileCheckout/MobileCheckout";
+import { usePlanDetailsStore } from "@/lib/stores/usePlanDetailsStore";
+import Tab from "@/components/molecules/Tab/Tab";
 
 const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
   const [plan, setPlan] = useState("unlimited");
@@ -52,6 +54,8 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     isError,
     selectDataPlan,
   } = usePlanContext();
+
+  const { planDescription } = usePlanDetailsStore();
 
   const t = useTranslations("PlanDetail");
   const router = usePathname();
@@ -408,7 +412,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
               </>
             ) : null}
 
-            <Tabs
+            {/* <Tabs
               data={
                 countryName
                   ? countryName.toLowerCase() == "china"
@@ -511,7 +515,32 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
                       },
                     ]
               }
+            /> */}
+            <Tab
+              data={[
+                {
+                  label: t("planDetail_descriptionTitle"),
+                  content: planDescription.description.Description,
+                },
+                {
+                  label: t("planDetail_howtouseTitle"),
+                  content: `${t("planDetail_howtouseOne")}${t(
+                    "planDetail_howtouseTwo"
+                  )}${t("planDetail_howtouseThree")}${t(
+                    "planDetail_howtouseFour"
+                  )}${t("planDetail_howtouseFive")}${t(
+                    "planDetail_howtouseSix"
+                  )}${t("planDetail_howtouseSeven")}
+                
+                `,
+                },
+                {
+                  label: t("planDetail_policyTitle"),
+                  content: `${planDescription.description.Policy}`,
+                },
+              ]}
             />
+            
           </div>
 
           <div className="sticky top-0 hidden h-full sm:col-start-3 sm:row-start-1 sm:block md:col-start-4   ">

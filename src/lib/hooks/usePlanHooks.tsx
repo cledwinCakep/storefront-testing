@@ -4,6 +4,7 @@ import { utilityApi } from "@/lib/api/GetApi";
 
 import { currentSelectedProps } from "@/lib/context/plan";
 import { useRouter } from "next/navigation";
+import { usePlanDetailsStore } from "../stores/usePlanDetailsStore";
 
 interface DataPlan {
   [planOption: string]: {
@@ -16,6 +17,7 @@ const usePlanHook = (params: { slug: string }) => {
   const [buy, setBuy] = useState<any>();
   const [increaseButton, setIncreaseButton] = useState<boolean>(true);
   const [rawData, setRawData] = useState<any>();
+  const [rawDataDetails, setRawDataDetails] = useState<any>();
   const [country, setCountry] = useState<any>();
   const [subtotal, setSubtotal] = useState<number | undefined>(0);
   const [order, setOrder] = useState<number>(1);
@@ -58,6 +60,8 @@ const usePlanHook = (params: { slug: string }) => {
       value: "",
     },
   });
+  const [plansId, setPlansId] = useState<any>(null);
+  const { setPlanDescription } = usePlanDetailsStore();
 
   useEffect(() => {
     const urlSearchParams = new URLSearchParams(window.location.search);
@@ -250,6 +254,18 @@ const usePlanHook = (params: { slug: string }) => {
   }, [params.slug]); // removing data plan resolves the infinite request issue, but the data is not updated on change
 
   useEffect(() => {
+    const fetch = async () => {
+      if (rawData) {
+        const resDetail = await utilityApi.getProductListById(
+          plansId == null ? rawData[0].id : plansId
+        );
+        setPlanDescription(resDetail.data);
+      }
+    };
+    fetch();
+  }, [plansId, rawData]);
+
+  useEffect(() => {
     function findSubtotal() {
       if (rawData) {
         for (const person of rawData) {
@@ -270,7 +286,7 @@ const usePlanHook = (params: { slug: string }) => {
               price_in_usd: person["price_in_usd"],
               updated_at: person["updated_at"],
             };
-
+            setPlansId(person["id"]);
             setBuy(newBod);
             setSubtotal(
               order * Number(currentSelected.unlimitedPlanDuration?.price)
@@ -304,7 +320,7 @@ const usePlanHook = (params: { slug: string }) => {
               price_in_usd: person["price_in_usd"],
               updated_at: person["updated_at"],
             };
-
+            setPlansId(person["id"]);
             setBuy(newBod);
             let temp = order * person["price_in_usd"];
             setSubtotal(temp);
@@ -334,7 +350,7 @@ const usePlanHook = (params: { slug: string }) => {
     findSubtotal();
     handleButtonState();
     // addParametersToUrl();
-  }, [order, currentSelected, parameter, rawData]);
+  }, [order, currentSelected, parameter, rawData, plansId]);
 
   // const handleButtonClick = (locale: string) => {
   //   let baseUrl;
