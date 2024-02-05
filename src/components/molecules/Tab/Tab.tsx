@@ -9,6 +9,7 @@ import { Button } from "@tremor/react";
 import { useModalStore } from "@/lib/stores/useModalStore";
 import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
+import { convertTextToList } from "@/lib/utils/convertToList";
 
 // interfaces
 interface TabsDataProps {
@@ -51,11 +52,12 @@ const Tab = ({ data }: TabsProps) => {
 
   return (
     <div className="w-full">
+      {/* Head menu */}
       <div className="flex w-full overflow-x-auto border-b-[1px] border-b-zinc-500 text-gray-100">
         {data.map((data, i) => (
           <button
             key={i}
-            className={`w-full px-6 py-4 font-bold ${
+            className={`w-full px-4 py-4 font-bold ${
               i === currentlySelected
                 ? "border-b-2 border-b-gray-200 text-gray-100"
                 : "text-[#BDBDBD]"
@@ -67,7 +69,8 @@ const Tab = ({ data }: TabsProps) => {
         ))}
       </div>
 
-      <div className="w-full px-6 py-4 text-gray-100 [&>ul>li]:mb-1 [&>ul>li]:list-disc [&>ul]:mb-4 [&>ul]:pl-5">
+      <div className="w-full py-4 text-gray-100 [&>ul>li]:mb-1 [&>ul>li]:list-disc [&>ul]:mb-4 [&>ul]:pl-5">
+        {/* Notification */}
         {currentlySelected == 0 && notification == true && (
           <div className="mb-4 flex w-full gap-2 rounded-md bg-[#121417] p-4">
             <div className="w-fit">
@@ -90,7 +93,96 @@ const Tab = ({ data }: TabsProps) => {
             </Text>
           </div>
         )}
-        {data[currentlySelected] && (
+
+        {/* Description */}
+        {data[currentlySelected].label == "Description" && (
+          <div className="flex w-full flex-col gap-4">
+            {typeof data[currentlySelected].content === "object" &&
+              Object.keys(data[currentlySelected].content).map(
+                (key: string, i: number) => {
+                  return (
+                    <div key={i} className="flex h-full w-full gap-4">
+                      {key !== "Description" && (
+                        <>
+                          <div className="w-8">
+                            <Image
+                              src={`/assets/${
+                                key == "eKYC (Identity Verification)"
+                                  ? "ekyc"
+                                  : key.toLocaleLowerCase()
+                              }-icon.png`}
+                              alt={"provider-icon.png"}
+                              width={32}
+                              height={32}
+                              className="h-8 w-8"
+                            />
+                          </div>
+                          <div className="w-fit">
+                            <Text as="body1">{key}</Text>
+                            {data[currentlySelected].content[key] ==
+                            "See available provider" ? (
+                              <button
+                                onClick={handleOpenModal}
+                                className="border-b border-[#F47325] bg-transparent text-[#F47325]"
+                              >
+                                {data[currentlySelected].content[key]}
+                              </button>
+                            ) : (
+                              <Text as="body1" className="text-[#BDBDBD]">
+                                {data[currentlySelected].content[key]}
+                              </Text>
+                            )}
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  );
+                }
+              )}
+          </div>
+        )}
+
+        {/* Instructions */}
+        {data[currentlySelected].label == "Instructions" && (
+          <div className="flex w-full flex-col gap-4">
+            {convertTextToList(data[currentlySelected].content)}
+          </div>
+        )}
+
+        {/* Policy */}
+        {Array.isArray(data[currentlySelected].content) &&
+          data[currentlySelected].label == "Policy" && (
+            <div className="flex w-full flex-col gap-4">
+              <ul>
+                {data[currentlySelected].content.map((text: string, i:number) => {
+                  return (
+                    <li key={i} className="flex w-full gap-2">
+                      <span>&#8226;</span>
+                      <span>{text}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          )}
+
+        {/* Bottom Notification */}
+        {data[currentlySelected].label == "Description" && (
+          <div className="mt-4 w-fit">
+            <Text as="body1" className="text-[#BDBDBD]">
+              {t("planDetail_notification")}
+            </Text>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default Tab;
+
+{
+  /* {data[currentlySelected] && (
           <div>
             {typeof data[currentlySelected].content === "object" ? (
               <div className="flex w-full flex-col gap-4">
@@ -100,8 +192,12 @@ const Tab = ({ data }: TabsProps) => {
                       <>
                         <div className="w-8">
                           <Image
-                            src={`/assets/${key.toLowerCase()}-icon.png`}
-                            alt={"country.png"}
+                            src={`/assets/${
+                              key == "eKYC (Identity Verification)"
+                                ? "ekyc"
+                                : key.toLocaleLowerCase()
+                            }-icon.png`}
+                            alt={"provider-icon.png"}
                             width={32}
                             height={32}
                             className="h-8 w-8"
@@ -136,21 +232,12 @@ const Tab = ({ data }: TabsProps) => {
               </div>
             ) : (
               // Render string content
-              <div>{data[currentlySelected].content}</div>
+              <div>
+                {data[currentlySelected].label == "Instructions"
+                  ? convertTextToList(data[currentlySelected].content)
+                  : data[currentlySelected].content}
+              </div>
             )}
           </div>
-        )}
-
-        {currentlySelected == 0 && (
-          <div className="mt-4 w-fit">
-            <Text as="body1" className="text-[#BDBDBD]">
-              {t("planDetail_notification")}
-            </Text>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-};
-
-export default Tab;
+        )} */
+}
