@@ -111,8 +111,7 @@ const BlogDetails = ({
                   />
                   <div className="w-full">
                     <p className="text-base font-bold text-[#121417]">
-                      {news.filter((news) => news.title === title)[0].author ||
-                        "-"}
+                      {news.filter((news) => news.title === title)[0].author || "-"}
                     </p>
                     <div className="flex w-full flex-col justify-start gap-2 xs:flex-row">
                       <div className="flex gap-2">

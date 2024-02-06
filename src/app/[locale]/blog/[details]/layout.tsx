@@ -1,3 +1,5 @@
+import { headers } from "next/headers";
+
 const news = [
   {
     id: 0,
@@ -47,9 +49,13 @@ export function generateMetadata({
 }: {
   params: { details: string; locale: string };
 }) {
+  const heads = headers()
+  const domain = heads.get("host")
   const title = (news.find((item) => item.title === decodeURI(params.details)) || {}).title
   const description = (news.find((item) => item.title === decodeURI(params.details)) || {}).desc
-  const imageUrl = (news.find((item) => item.title === decodeURI(params.details)) || {}).image
+  const image = (news.find((item) => item.title === decodeURI(params.details)) || {image:"/assets/introduces.jpeg"}).image
+
+  const imageUrl = domain+image;
 
   return {
     title,
