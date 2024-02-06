@@ -133,7 +133,7 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
     KR: "Korea",
   };
 
-  const countryName = z[country_code];  
+  const countryName = z[country_code];
 
   useEffect(() => {
     if (globalCodes.includes(country_code)) {
@@ -540,7 +540,6 @@ const PlanDetails = ({ params }: { params: { [x: string]: string } }) => {
                 },
               ]}
             />
-            
           </div>
 
           <div className="sticky top-0 hidden h-full sm:col-start-3 sm:row-start-1 sm:block md:col-start-4   ">
