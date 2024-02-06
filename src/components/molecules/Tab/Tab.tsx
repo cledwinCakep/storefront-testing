@@ -50,6 +50,8 @@ const Tab = ({ data }: TabsProps) => {
     notification = true;
   }
 
+  console.log(data);
+
   return (
     <div className="w-full">
       {/* Head menu */}
@@ -135,6 +137,22 @@ const Tab = ({ data }: TabsProps) => {
                           </div>
                         </>
                       )}
+                      {key == "Description" && (
+                        <div className="flex w-full flex-col gap-4 ml-2.5">
+                          <ul>
+                            {data[currentlySelected].content[key].map(
+                              (text: string, i: number) => {
+                                return (
+                                  <li key={i} className="flex w-full gap-2">
+                                    <span>&#8226;</span>
+                                    <span>{text}</span>
+                                  </li>
+                                );
+                              }
+                            )}
+                          </ul>
+                        </div>
+                      )}
                     </div>
                   );
                 }
@@ -154,14 +172,16 @@ const Tab = ({ data }: TabsProps) => {
           data[currentlySelected].label == "Policy" && (
             <div className="flex w-full flex-col gap-4">
               <ul>
-                {data[currentlySelected].content.map((text: string, i:number) => {
-                  return (
-                    <li key={i} className="flex w-full gap-2">
-                      <span>&#8226;</span>
-                      <span>{text}</span>
-                    </li>
-                  );
-                })}
+                {data[currentlySelected].content.map(
+                  (text: string, i: number) => {
+                    return (
+                      <li key={i} className="flex w-full gap-2">
+                        <span>&#8226;</span>
+                        <span>{text}</span>
+                      </li>
+                    );
+                  }
+                )}
               </ul>
             </div>
           )}

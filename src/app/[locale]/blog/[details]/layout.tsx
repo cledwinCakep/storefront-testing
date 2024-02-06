@@ -49,19 +49,27 @@ export function generateMetadata({
 }: {
   params: { details: string; locale: string };
 }) {
-  const heads = headers()
-  const domain = heads.get("host")
-  const title = (news.find((item) => item.title === decodeURI(params.details)) || {}).title
-  const description = (news.find((item) => item.title === decodeURI(params.details)) || {}).desc
-  const image = (news.find((item) => item.title === decodeURI(params.details)) || {image:"/assets/introduces.jpeg"}).image
+  const heads = headers();
+  const domain = heads.get("host");
+  const title = (
+    news.find((item) => item.title === decodeURIComponent(params.details)) || {}
+  ).title;
+  const description = (
+    news.find((item) => item.title === decodeURIComponent(params.details)) || {}
+  ).desc;
+  const image = (
+    news.find((item) => item.title === decodeURIComponent(params.details)) || {
+      image: "/assets/introduces.jpeg",
+    }
+  ).image;
 
-  const imageUrl = domain+image;
+  const imageUrl = domain + image;
 
   return {
     title,
     description,
     openGraph: {
-      images: [imageUrl],
+      images: [{ url: imageUrl, width: 1800, height: 1600 }],
     },
   };
 }
