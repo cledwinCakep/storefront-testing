@@ -45,7 +45,7 @@ const Partners = () => {
         setSearched([
           {
             code: "404",
-            name: "Not items found.",
+            name: "No items found.",
           },
         ]);
       }

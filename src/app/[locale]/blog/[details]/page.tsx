@@ -1,15 +1,21 @@
 "use client";
 
+// components
 import BlogNavbar from "@/components/organisms/Blog/BlogNavbar";
 import Footer from "@/components/organisms/Footer/Footer";
+import { usePlanDetailsStore } from "@/lib/stores/usePlanDetailsStore";
 
 // tremor
-import { Button, Divider, Text, Title } from "@tremor/react";
+import { Text } from "@tremor/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
 
-const BlogDetails = ({ params }: { params: { details: string, locale:string } }) => {
+const BlogDetails = ({
+  params,
+}: {
+  params: { details: string; locale: string };
+}) => {
   const news = [
     {
       id: 0,
@@ -55,24 +61,24 @@ const BlogDetails = ({ params }: { params: { details: string, locale:string } })
   ];
 
   const title = decodeURIComponent(params.details);
-  const [url, seturl] = useState("");
+  const [url, seturl] = useState({ origin: "", href: "" });
 
   useEffect(() => {
     if (window) {
-      seturl(window.location.href);
+      seturl({ origin: window.location.origin, href: window.location.href });      
     }
   }, []);
 
   const copyToClipboard = async () => {
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(url);
+      navigator.clipboard.writeText(url.href);
       toast("Link copied!", {
         position: "top-right",
         style: { background: "#374151", color: "white" },
       }); // hide the toast after 3 seconds
     } else {
       const textarea = document.createElement("textarea");
-      textarea.value = url;
+      textarea.value = url.href;
       document.body.appendChild(textarea);
       textarea.select();
       document.execCommand("copy");
@@ -83,8 +89,6 @@ const BlogDetails = ({ params }: { params: { details: string, locale:string } })
       }); // hide the toast after 3 seconds
     }
   };
-
-  
 
   return (
     <>
@@ -141,7 +145,9 @@ const BlogDetails = ({ params }: { params: { details: string, locale:string } })
                 <div className="flex items-center gap-2">
                   <a
                     className="cursor-pointer rounded-md bg-[#F3F4F6] p-2"
-                    href={`https://twitter.com/intent/tweet?url=${url}`}
+                    href={`https://twitter.com/intent/tweet?url=${
+                      url.origin + "/blog/" + encodeURIComponent(params.details)
+                    }`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -155,7 +161,7 @@ const BlogDetails = ({ params }: { params: { details: string, locale:string } })
                   </a>
                   <a
                     className="cursor-pointer rounded-md bg-[#F3F4F6] p-2"
-                    href={`https://www.facebook.com/share.php?u=${url}`}
+                    href={`https://www.facebook.com/share.php?u=${url.href}`}
                     target="_blank"
                   >
                     <Image
