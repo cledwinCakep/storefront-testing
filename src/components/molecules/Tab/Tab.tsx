@@ -21,12 +21,25 @@ interface TabsProps {
   data: TabsDataProps[];
 }
 
+const globalCodes = [
+  "WW_146",
+  "WW_54",
+  "AP",
+  "EU_42",
+  "EU_33",
+  "US_CA",
+  "GU_MP",
+  "HK_MO",
+  "AU_NZ",
+  "TW",
+  "MO",
+  "HK",
+];
+
 const Tab = ({ data }: TabsProps) => {
   const router = usePathname();
   const parts = router.split("/");
   const country_code = parts.length > 3 ? parts[3] : parts[2];
-  let notification = false;
-
   const [currentlySelected, setCurrentlySelected] = useState<
     string | number | any
   >(0);
@@ -41,16 +54,7 @@ const Tab = ({ data }: TabsProps) => {
     setOpenSupportedCountry(!openSupportedCountry);
   };
 
-  if (
-    country_code === "TW" ||
-    country_code === "HK_MO" ||
-    country_code === "MO" ||
-    country_code === "HK"
-  ) {
-    notification = true;
-  }
-
-  console.log(data);
+  const notification = globalCodes.includes(country_code)
 
   return (
     <div className="w-full">
@@ -138,7 +142,7 @@ const Tab = ({ data }: TabsProps) => {
                         </>
                       )}
                       {key == "Description" && (
-                        <div className="flex w-full flex-col gap-4 ml-2.5">
+                        <div className="ml-2.5 flex w-full flex-col gap-4">
                           <ul>
                             {data[currentlySelected].content[key].map(
                               (text: string, i: number) => {
