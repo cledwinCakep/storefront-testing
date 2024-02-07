@@ -25,6 +25,21 @@ class UtilityAPI extends API {
       method: "GET",
     });
   }
+
+  getBlog(): Promise<AxiosResponse<any>> {
+    return this.publicRoute<any>({
+      url: "http://usimsa-dev.koreacentral.cloudapp.azure.com:1337/blogs?page=1&limit=8&sort=id-asc",
+      method: "GET",     
+    });
+  };
+  
+  getBlogById(id: number): Promise<AxiosResponse<any>> {
+    return this.publicRoute<any>({
+      url: `http://usimsa-dev.koreacentral.cloudapp.azure.com:1337/blogs/${id}`,
+      method: "GET",
+    });
+  }
+
   postBuyesim(body: {
     esim_id: number;
     quantity: number;
