@@ -14,7 +14,34 @@ import { Text } from "@tremor/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
-import RenderHtmlFromString from "@/lib/utils/htmlFormatter";
+
+// react share
+import {
+  EmailShareButton,
+  FacebookShareButton,
+  GabShareButton,
+  HatenaShareButton,
+  InstapaperShareButton,
+  LineShareButton,
+  LinkedinShareButton,
+  LivejournalShareButton,
+  MailruShareButton,
+  OKShareButton,
+  PinterestShareButton,
+  PocketShareButton,
+  RedditShareButton,
+  TelegramShareButton,
+  TumblrShareButton,
+  TwitterShareButton,
+  ViberShareButton,
+  VKShareButton,
+  WhatsappShareButton,
+  WorkplaceShareButton,
+} from "react-share";
+import {
+  RemoveHtmlTags,
+  RenderHtmlFromString,
+} from "@/lib/utils/htmlFormatter";
 
 const BlogDetails = ({
   params,
@@ -105,7 +132,7 @@ const BlogDetails = ({
         style: { background: "#374151", color: "white" },
       }); // hide the toast after 3 seconds
     }
-  };  
+  };
 
   return (
     <>
@@ -158,23 +185,28 @@ const BlogDetails = ({
                     </div>
                   </div>
                 </div>
+                {/* twitter */}
                 <div className="flex items-center gap-2">
-                  <a
-                    className="cursor-pointer rounded-md bg-[#F3F4F6] p-2"
-                    href={`https://twitter.com/intent/tweet?url=${
-                      url.origin + "/blog/" + encodeURIComponent(params.details)
+                  <TwitterShareButton
+                    url={`${url.href}`}
+                    title={`${title}: \n\n${
+                      newsDetail.blog_content
+                        ? RemoveHtmlTags(newsDetail.blog_content)
+                        : "-"
                     }`}
-                    target="_blank"
-                    rel="noopener noreferrer"
                   >
-                    <Image
-                      width={20}
-                      height={20}
-                      className="inline-block h-5 w-5"
-                      src="/assets/twitterx-icon.svg"
-                      alt=""
-                    />
-                  </a>
+                    <div className="cursor-pointer rounded-md bg-[#F3F4F6] p-2">
+                      <Image
+                        width={20}
+                        height={20}
+                        className="inline-block h-5 w-5"
+                        src="/assets/twitterx-icon.svg"
+                        alt=""
+                      />
+                    </div>
+                  </TwitterShareButton>
+                  
+                  {/* facebook */}
                   <a
                     className="cursor-pointer rounded-md bg-[#F3F4F6] p-2"
                     href={`https://www.facebook.com/share.php?u=${url.href}`}
@@ -188,6 +220,8 @@ const BlogDetails = ({
                       alt=""
                     />
                   </a>
+
+                  {/*copy link  */}
                   <div
                     className="cursor-pointer rounded-md bg-[#F3F4F6] p-2"
                     onClick={copyToClipboard}
@@ -217,7 +251,9 @@ const BlogDetails = ({
               <div className="flex h-auto w-full flex-col gap-6">
                 <div className="h-auto w-full">
                   <div className="flex w-full flex-col gap-4">
-                       {RenderHtmlFromString(newsDetail ? newsDetail.blog_content : "<div>-</div>")}
+                    {RenderHtmlFromString(
+                      newsDetail ? newsDetail.blog_content : "<div>-</div>"
+                    )}
                   </div>
                 </div>
               </div>
@@ -229,10 +265,7 @@ const BlogDetails = ({
                 {news.map((dt: any, index: number) => (
                   <>
                     {dt.title === title ? null : (
-                      <a
-                        href={`/blog/${dt.id}/${dt.title}`}
-                        key={index}
-                      >
+                      <a href={`/blog/${dt.id}/${dt.title}`} key={index}>
                         <div className="mt-4 flex w-full flex-col justify-between gap-4 sm:flex-row">
                           <div className="flex w-full flex-col gap-4">
                             <div
