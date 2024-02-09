@@ -10,6 +10,9 @@ import { useModalStore } from "@/lib/stores/useModalStore";
 import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 import { convertTextToList } from "@/lib/utils/convertToList";
+import NotificationTab from "./NotificationTab";
+import DescriptionTab from "./DescriptionTab";
+import PolicyTab from "./PolicyTab";
 
 // interfaces
 interface TabsDataProps {
@@ -21,19 +24,10 @@ interface TabsProps {
   data: TabsDataProps[];
 }
 
-const globalCodes = [
+const notifiedCountry = [
   "WW_146",
   "WW_54",
   "AP",
-  "EU_42",
-  "EU_33",
-  "US_CA",
-  "GU_MP",
-  "HK_MO",
-  "AU_NZ",
-  "TW",
-  "MO",
-  "HK",
 ];
 
 const Tab = ({ data }: TabsProps) => {
@@ -54,8 +48,9 @@ const Tab = ({ data }: TabsProps) => {
     setOpenSupportedCountry(!openSupportedCountry);
   };
 
-  const notification = globalCodes.includes(country_code)
-
+  // check if the notification includes the country code in url params
+  const notification = notifiedCountry.includes(country_code)
+  
   return (
     <div className="w-full">
       {/* Head menu */}
@@ -76,92 +71,15 @@ const Tab = ({ data }: TabsProps) => {
       </div>
 
       <div className="w-full py-4 text-gray-100 [&>ul>li]:mb-1 [&>ul>li]:list-disc [&>ul]:mb-4 [&>ul]:pl-5">
+
         {/* Notification */}
         {currentlySelected == 0 && notification == true && (
-          <div className="mb-4 flex w-full gap-2 rounded-md bg-[#121417] p-4">
-            <div className="w-fit">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="h-6 w-6 text-blue-500"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </div>
-
-            <Text as="body1" className="text-gray-300">
-              {t("planDetail_warn")}
-            </Text>
-          </div>
+          <NotificationTab text={`${t("planDetail_warn")}`}/>
         )}
 
         {/* Description */}
         {data[currentlySelected].label == "Description" && (
-          <div className="flex w-full flex-col gap-4">
-            {typeof data[currentlySelected].content === "object" &&
-              Object.keys(data[currentlySelected].content).map(
-                (key: string, i: number) => {
-                  return (
-                    <div key={i} className="flex h-full w-full gap-4">
-                      {key !== "Description" && (
-                        <>
-                          <div className="w-8">
-                            <Image
-                              src={`/assets/${
-                                key == "eKYC (Identity Verification)"
-                                  ? "ekyc"
-                                  : key.toLocaleLowerCase()
-                              }-icon.png`}
-                              alt={"provider-icon.png"}
-                              width={32}
-                              height={32}
-                              className="h-8 w-8"
-                            />
-                          </div>
-                          <div className="w-fit">
-                            <Text as="body1">{key}</Text>
-                            {data[currentlySelected].content[key] ==
-                            "See available provider" ? (
-                              <button
-                                onClick={handleOpenModal}
-                                className="border-b border-[#F47325] bg-transparent text-[#F47325]"
-                              >
-                                {data[currentlySelected].content[key]}
-                              </button>
-                            ) : (
-                              <Text as="body1" className="text-[#BDBDBD]">
-                                {data[currentlySelected].content[key]}
-                              </Text>
-                            )}
-                          </div>
-                        </>
-                      )}
-                      {key == "Description" && (
-                        <div className="ml-2.5 flex w-full flex-col gap-4">
-                          <ul>
-                            {data[currentlySelected].content[key].map(
-                              (text: string, i: number) => {
-                                return (
-                                  <li key={i} className="flex w-full gap-2">
-                                    <span>&#8226;</span>
-                                    <span>{text}</span>
-                                  </li>
-                                );
-                              }
-                            )}
-                          </ul>
-                        </div>
-                      )}
-                    </div>
-                  );
-                }
-              )}
-          </div>
+          <DescriptionTab description={data[currentlySelected]} handleOpenModal={handleOpenModal}/>
         )}
 
         {/* Instructions */}
@@ -172,23 +90,7 @@ const Tab = ({ data }: TabsProps) => {
         )}
 
         {/* Policy */}
-        {Array.isArray(data[currentlySelected].content) &&
-          data[currentlySelected].label == "Policy" && (
-            <div className="flex w-full flex-col gap-4">
-              <ul>
-                {data[currentlySelected].content.map(
-                  (text: string, i: number) => {
-                    return (
-                      <li key={i} className="flex w-full gap-2">
-                        <span>&#8226;</span>
-                        <span>{text}</span>
-                      </li>
-                    );
-                  }
-                )}
-              </ul>
-            </div>
-          )}
+        <PolicyTab policy={data[currentlySelected]}/>
 
         {/* Bottom Notification */}
         {data[currentlySelected].label == "Description" && (
