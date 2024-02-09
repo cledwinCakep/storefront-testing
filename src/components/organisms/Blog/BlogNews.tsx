@@ -3,7 +3,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import useBlogHook from "@/lib/hooks/useBlogHook";
 import formatDate from "@/lib/utils/dateFormatter";
-import RenderHtmlFromString from "@/lib/utils/htmlFormatter";
+import { RenderHtmlFromString } from "@/lib/utils/htmlFormatter";
 import Link from "next/link";
 
 function BlogNews() {
@@ -99,7 +99,7 @@ function BlogNews() {
                       <p className="line-clamp-3 text-[32px] font-semibold leading-[42px] text-gray-700">
                         {news[0]?.title}
                       </p>
-                      
+
                       <div className="line-clamp-3 text-ellipsis break-words text-base font-normal text-[#424242] sm:line-clamp-2 md:sm:line-clamp-3">
                         {RenderHtmlFromString(news[0]?.blog_content)}
                       </div>
@@ -132,9 +132,7 @@ function BlogNews() {
                         className={`ml-20 h-auto w-full`}
                       >
                         <Link href={`/blog/${dt.id}/${dt.title}`}>
-                          <div
-                            className="flex w-full items-center gap-4"
-                          >
+                          <div className="flex w-full items-center gap-4">
                             <div className="rounded-md border border-[#BDBDBD] bg-transparent px-[0.5rem] py-[0.3rem] text-[14px] font-medium text-[#121417]">
                               {dt?.topic}
                             </div>
