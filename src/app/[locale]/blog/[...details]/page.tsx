@@ -70,6 +70,7 @@ const BlogDetails = ({
       }); // hide the toast after 3 seconds
     }
   };
+  
   // const sharedImage = GenerateImageUrl(newsDetail?.file?.file_url);
 
   return (

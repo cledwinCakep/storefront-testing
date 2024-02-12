@@ -11,7 +11,7 @@ export async function generateMetadata({
 
   const title = decodeURIComponent(params.details[1]);
   const description = RemoveHtmlTags(res.data.data.topic);
-  const image = res.data.data.file.file_url;
+  const image = res.data.data.resized_file.thumbnail_url;
 
   return {
     title,
