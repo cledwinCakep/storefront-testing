@@ -29,6 +29,7 @@
     "eslint": "8.48.0",
     "eslint-config-next": "13.4.19",
     "framer-motion": "^10.18.0",
+    "imgbb-image-uploader": "^1.0.6",
     "lucide-react": "^0.294.0",
     "next": "^14.1.0",
     "next-intl": "3.0.0-beta.19",
