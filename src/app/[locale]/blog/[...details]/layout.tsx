@@ -9,7 +9,7 @@ export async function generateMetadata({
   const id = decodeURIComponent(params.details[0]);
   const res = await utilityApi.getBlogById(Number(id));
 
-  const title = decodeURIComponent(params.details);
+  const title = decodeURIComponent(params.details[1]);
   const description = RemoveHtmlTags(res.data.data.topic);
   const image = res.data.data.file.file_url;
 
