@@ -21,7 +21,6 @@ import {
   RemoveHtmlTags,
   RenderHtmlFromString,
 } from "@/lib/utils/htmlFormatter";
-import GenerateImageUrl from "@/lib/utils/generateImageUrl";
 
 const BlogDetails = ({
   params,
@@ -42,7 +41,6 @@ const BlogDetails = ({
 
   const title = decodeURIComponent(params.details[1]);
   const [url, seturl] = useState({ origin: "", href: "" });
-  // const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     if (window) {
@@ -71,8 +69,6 @@ const BlogDetails = ({
     }
   };
   
-  // const sharedImage = GenerateImageUrl(newsDetail?.file?.file_url);
-
   return (
     <>
       <Toaster />
@@ -134,9 +130,7 @@ const BlogDetails = ({
                 <div className="flex items-center gap-2">
                   <TwitterShareButton
                     url={`${url.href}`}
-                    title={`${title}\n`}
-                    // title={`Image from:\n${sharedImage}\n\n${title}`}
-                    // openShareDialogOnClick={sharedImage !== "generating..."}
+                    title={`${title}\n\n`}
                   >
                     <div className="cursor-pointer rounded-md bg-[#F3F4F6] p-2">
                       <Image
@@ -263,5 +257,6 @@ const BlogDetails = ({
     </>
   );
 };
+
 
 export default BlogDetails;
