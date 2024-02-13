@@ -42,7 +42,7 @@ const BlogDetails = ({
 
   const title = decodeURIComponent(params.details[1]);
   const [url, seturl] = useState({ origin: "", href: "" });
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     if (window) {
