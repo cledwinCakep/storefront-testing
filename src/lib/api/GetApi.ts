@@ -28,14 +28,14 @@ class UtilityAPI extends API {
 
   getBlog(): Promise<AxiosResponse<any>> {
     return this.publicRoute<any>({
-      url: "http://usimsa-dev.koreacentral.cloudapp.azure.com:1337/blogs?page=1&limit=8&sort=id-asc",
+      url: "https://usimsa-api.orangesmoke-f55331e7.koreacentral.azurecontainerapps.io/blogs",
       method: "GET",     
     });
   };
   
   getBlogById(id: number): Promise<AxiosResponse<any>> {
     return this.publicRoute<any>({
-      url: `http://usimsa-dev.koreacentral.cloudapp.azure.com:1337/blogs/${id}`,
+      url: `https://usimsa-api.orangesmoke-f55331e7.koreacentral.azurecontainerapps.io/blogs/${id}`,
       method: "GET",
     });
   }
