@@ -68,10 +68,10 @@ export default function RootLayout({
           name="description"
           content="Data packs with local rates. Buy affordable eSIM packages in Superalink."
         />
-        {/* <meta
+        <meta
           property="og:image"
           content="https://i.ibb.co/RY2Gz3H/Base-Thumbnail.jpg"
-        /> */}
+        />
         <link
           rel="apple-touch-icon"
           sizes="180x180"

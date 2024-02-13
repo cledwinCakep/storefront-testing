@@ -17,7 +17,7 @@ export async function generateMetadata({
     title,
     description,
     openGraph: {
-      images: [{ url: image, width: 1200, height: 630 }],
+      images: [ image, { url: image, width: 1200, height: 630 }],
     },
   };
 }
