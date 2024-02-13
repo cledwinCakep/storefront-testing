@@ -134,7 +134,7 @@ const BlogDetails = ({
                 <div className="flex items-center gap-2">
                   <TwitterShareButton
                     url={`${url.href}`}
-                    title={`${title}`}
+                    title={`${title}\n`}
                     // title={`Image from:\n${sharedImage}\n\n${title}`}
                     // openShareDialogOnClick={sharedImage !== "generating..."}
                   >
